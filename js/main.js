@@ -6,7 +6,7 @@ AFRAME.registerComponent('kalman-smooth', {
       y: { x: 0, p: 1, k: 0 },
       z: { x: 0, p: 1, k: 0 }
     };
-    this.Q = 0.001; // Process noise (lower = smoother)
+    this.Q = 0.01; // Process noise (lower = smoother)
     this.R = 0.01;  // Measurement noise (lower = more responsive)
   },
   
