@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const target2Entity = document.getElementById('target2'); // ✅ ONLY DECLARE ONCE
     const arVideo2 = document.getElementById('ar-video-2');
     
-    console.log("target2Entity:", target2Entity); // Debug check
+    debugLog("target2Entity:", target2Entity); // Debug check
     
     // 1. Check if button exists to prevent errors
     if (!startBtn) {
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     startBtn.addEventListener('click', () => {
-        console.log("Button clicked! Starting AR...");
+        debugLog("Button clicked! Starting AR...");
         // 2. Hide Landing UI
         uiLayer.style.display = 'none';
         
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. 3D Model Event Listeners
     targetEntity.addEventListener("targetFound", () => {
         scannerLayer.style.display = 'none';
-        console.log("3D Model Target Found");
+        debugLog("3D Model Target Found");
     });
     
     targetEntity.addEventListener("targetLost", () => {
@@ -103,14 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Listener for the second target
     target2Entity.addEventListener("targetFound", () => {
-        console.log("🎯 TARGET 2 FOUND!");
+        debugLog("🎯 TARGET 2 FOUND!");
         scannerLayer.style.display = 'none';
         
         arVideo2.setAttribute('src', 'assets/video1.mp4'); 
-        console.log("📹 Video source set");
+        debugLog("📹 Video source set");
         arVideo2.load();
         arVideo2.play().then(() => {
-            console.log("✅ Video playing");
+            debugLog("✅ Video playing");
         }).catch(err => {
             console.error("❌ Video error:", err);
         });
