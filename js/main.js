@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         arVideo2.play().then(() => {
             debugLog("✅ Video playing");
         }).catch(err => {
-            console.error("❌ Video error:", err);
+            debugError("❌ Video error:", err);
         });
     });
     
