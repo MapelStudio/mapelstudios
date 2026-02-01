@@ -1,3 +1,34 @@
+// ADD THIS ENTIRE SECTION AT THE TOP OF YOUR FILE
+AFRAME.registerComponent('kalman-smooth', {
+  init: function() {
+    this.kalmanPos = {
+      x: { x: 0, p: 1, k: 0 },
+      y: { x: 0, p: 1, k: 0 },
+      z: { x: 0, p: 1, k: 0 }
+    };
+    this.Q = 0.001; // Process noise (lower = smoother)
+    this.R = 0.01;  // Measurement noise (lower = more responsive)
+  },
+  
+  tick: function() {
+    const pos = this.el.object3D.position;
+    
+    ['x', 'y', 'z'].forEach(axis => {
+      const k = this.kalmanPos[axis];
+      
+      // Prediction
+      k.p = k.p + this.Q;
+      
+      // Update
+      k.k = k.p / (k.p + this.R);
+      k.x = k.x + k.k * (pos[axis] - k.x);
+      k.p = (1 - k.k) * k.p;
+      
+      pos[axis] = k.x;
+    });
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
