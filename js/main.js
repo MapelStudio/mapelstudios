@@ -36,20 +36,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconLayer = document.getElementById('icon-layer');
     const sceneEl = document.getElementById('sceneEl');
     const targetEntity = document.getElementById('target');
-    const target2Entity = document.getElementById('target2');
+    const target2Entity = document.getElementById('target2'); // ✅ ONLY DECLARE ONCE
     const arVideo2 = document.getElementById('ar-video-2');
-    const target2Entity = document.getElementById('target2');
-console.log("target2Entity:", target2Entity); // Debug check
-
+    
+    console.log("target2Entity:", target2Entity); // Debug check
+    
     // 1. Check if button exists to prevent errors
     if (!startBtn) {
         console.error("Could not find start-btn! Check your HTML id.");
         return;
     }
-
+    
     startBtn.addEventListener('click', () => {
-        console.log("Button clicked! Starting AR..."); // Check your console for this!
-
+        console.log("Button clicked! Starting AR...");
         // 2. Hide Landing UI
         uiLayer.style.display = 'none';
         
@@ -58,11 +57,9 @@ console.log("target2Entity:", target2Entity); // Debug check
             bgVideo.pause();
             bgVideo.style.display = 'none';
         }
-
         // 3. Show AR UI
         scannerLayer.style.display = 'flex';
         iconLayer.style.display = 'flex';
-
         // 4. Start AR Engine
         if (sceneEl.hasLoaded) {
             startAR();
@@ -70,7 +67,7 @@ console.log("target2Entity:", target2Entity); // Debug check
             sceneEl.addEventListener('loaded', startAR);
         }
     });
-
+    
     function startAR() {
         const arSystem = sceneEl.systems['mindar-image-system'];
         if (arSystem) {
@@ -83,34 +80,35 @@ console.log("target2Entity:", target2Entity); // Debug check
             }, 500);
         }
     }
-
+    
     // 5. 3D Model Event Listeners
     targetEntity.addEventListener("targetFound", () => {
         scannerLayer.style.display = 'none';
         console.log("3D Model Target Found");
     });
-
+    
     targetEntity.addEventListener("targetLost", () => {
         scannerLayer.style.display = 'flex';
     });
-    // Listener for the second target
-target2Entity.addEventListener("targetFound", () => {
-    console.log("🎯 TARGET 2 FOUND!"); // Does this appear?
-    scannerLayer.style.display = 'none';
     
-    arVideo2.setAttribute('src', 'assets/video1.mp4'); 
-    console.log("📹 Video source set"); // Does this appear?
-    arVideo2.load();
-    arVideo2.play().then(() => {
-        console.log("✅ Video playing");
-    }).catch(err => {
-        console.error("❌ Video error:", err);
+    // Listener for the second target
+    target2Entity.addEventListener("targetFound", () => {
+        console.log("🎯 TARGET 2 FOUND!");
+        scannerLayer.style.display = 'none';
+        
+        arVideo2.setAttribute('src', 'assets/video1.mp4'); 
+        console.log("📹 Video source set");
+        arVideo2.load();
+        arVideo2.play().then(() => {
+            console.log("✅ Video playing");
+        }).catch(err => {
+            console.error("❌ Video error:", err);
+        });
     });
-});
-
-target2Entity.addEventListener("targetLost", () => {
-    scannerLayer.style.display = 'flex';
-    arVideo2.pause();
-    arVideo2.currentTime = 0;
-});
+    
+    target2Entity.addEventListener("targetLost", () => {
+        scannerLayer.style.display = 'flex';
+        arVideo2.pause();
+        arVideo2.currentTime = 0;
+    });
 });
