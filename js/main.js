@@ -29,6 +29,16 @@ AFRAME.registerComponent('kalman-smooth', {
   }
 });
 
+// Debug function for on-screen display
+function debugLog(msg) {
+    console.log(msg);
+    const debugDiv = document.getElementById('debug');
+    if (debugDiv) {
+        debugDiv.innerHTML += msg + '<br>';
+        debugDiv.scrollTop = debugDiv.scrollHeight;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
