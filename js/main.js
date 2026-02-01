@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const targetEntity = document.getElementById('target');
     const target2Entity = document.getElementById('target2');
     const arVideo2 = document.getElementById('ar-video-2');
+    const target2Entity = document.getElementById('target2');
+console.log("target2Entity:", target2Entity); // Debug check
 
     // 1. Check if button exists to prevent errors
     if (!startBtn) {
@@ -93,17 +95,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     // Listener for the second target
 target2Entity.addEventListener("targetFound", () => {
+    console.log("🎯 TARGET 2 FOUND!"); // Does this appear?
     scannerLayer.style.display = 'none';
     
-    // Set the source and play
     arVideo2.setAttribute('src', 'assets/video1.mp4'); 
-    arVideo2.load(); // Important to refresh the video data
-    arVideo2.play();
+    console.log("📹 Video source set"); // Does this appear?
+    arVideo2.load();
+    arVideo2.play().then(() => {
+        console.log("✅ Video playing");
+    }).catch(err => {
+        console.error("❌ Video error:", err);
+    });
 });
 
 target2Entity.addEventListener("targetLost", () => {
     scannerLayer.style.display = 'flex';
     arVideo2.pause();
-    arVideo2.currentTime = 0; // Reset for next time
+    arVideo2.currentTime = 0;
 });
 });
