@@ -633,8 +633,3 @@ video:not(#ar-video):not(#bg-video) {
 #icon-layer, #scanner-container {
     z-index: 10 !important;
 }
-
-#video-display-2 {
-    border-radius: 20px !important;
-    overflow: hidden;
-}
