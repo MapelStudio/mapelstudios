@@ -29,6 +29,40 @@ AFRAME.registerComponent('kalman-smooth', {
   }
 });
 
+AFRAME.registerShader('chromakey', {
+  schema: {
+    src: {type: 'map'},
+    color: {type: 'color', default: 'white'},
+    threshold: {type: 'number', default: 0.4}
+  },
+  
+  vertexShader: `
+    varying vec2 vUV;
+    void main(void) {
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      vUV = uv;
+    }
+  `,
+  
+  fragmentShader: `
+    uniform sampler2D src;
+    uniform vec3 color;
+    uniform float threshold;
+    varying vec2 vUV;
+    
+    void main(void) {
+      vec4 texColor = texture2D(src, vUV);
+      float dist = distance(texColor.rgb, color);
+      
+      if (dist < threshold) {
+        gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+      } else {
+        gl_FragColor = texColor;
+      }
+    }
+  `
+});
+
 // Debug function for on-screen display
 function debugLog(msg) {
     console.log(msg);
