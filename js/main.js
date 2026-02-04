@@ -29,6 +29,28 @@ AFRAME.registerComponent('kalman-smooth', {
   }
 });
 
+AFRAME.registerComponent('rounded-corners-shader', {
+  init: function () {
+    let mesh = this.el.getObject3D('mesh');
+    if (!mesh) return;
+
+    // This script modifies the material to 'hide' the corners
+    mesh.material.onBeforeCompile = (shader) => {
+      shader.fragmentShader = shader.fragmentShader.replace(
+        `gl_FragColor = vec4( color, opacity );`,
+        `
+        // Calculate distance from center to create rounded effect
+        vec2 uv = vUv - 0.5;
+        float radius = 0.45; // Adjust this to change how round the corners are
+        float dist = length(max(abs(uv) - 0.5 + radius, 0.0)) - radius;
+        
+        if (dist > 0.0) discard; // This 'cuts' the corners off
+        gl_FragColor = vec4( color, opacity );
+        `
+      );
+    };
+  }
+});
 
 // Debug function for on-screen display
 function debugLog(msg) {
