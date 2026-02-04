@@ -31,16 +31,20 @@ AFRAME.registerComponent('kalman-smooth', {
 
 AFRAME.registerComponent('rounded-video', {
   schema: {
-    radius: {type: 'number', default: 0.05} // Increase this for rounder corners
+    radius: {type: 'number', default: 0.15} // Increase this to 0.25 if still sharp
   },
   init: function () {
-    this.el.addEventListener('model-loaded', () => this.updateShader());
-    this.updateShader();
+    // Wait for the mesh to be ready
+    this.el.addEventListener('loaded', () => {
+      this.applyShader();
+    });
   },
-  updateShader: function () {
+  applyShader: function () {
     const mesh = this.el.getObject3D('mesh');
     if (!mesh) return;
 
+    // Use a flat shader to avoid lighting interference
+    mesh.material.transparent = true;
     mesh.material.onBeforeCompile = (shader) => {
       shader.uniforms.radius = { value: this.data.radius };
       shader.fragmentShader = `
@@ -49,16 +53,20 @@ AFRAME.registerComponent('rounded-video', {
       `.replace(
         `gl_FragColor = vec4( color, opacity );`,
         `
-        // Calculate the distance from the edges
-        vec2 center = vec2(0.5, 0.5);
-        vec2 q = abs(vUv - center) - (center - radius);
+        // Map UVs to -0.5 to 0.5 range
+        vec2 uv = vUv - 0.5;
+        // Rounded Box SDF (Signed Distance Field)
+        vec2 q = abs(uv) - 0.5 + radius;
         float dist = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
-
-        if (dist > 0.0) discard; // This removes the sharp corner pixels
+        
+        // Discard pixels outside the radius
+        if (dist > 0.0) discard;
+        
         gl_FragColor = vec4( color, opacity );
         `
       );
     };
+    mesh.material.needsUpdate = true;
   }
 });
 
