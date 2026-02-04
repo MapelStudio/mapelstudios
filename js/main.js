@@ -29,22 +29,32 @@ AFRAME.registerComponent('kalman-smooth', {
   }
 });
 
-AFRAME.registerComponent('rounded-corners-shader', {
+AFRAME.registerComponent('rounded-video', {
+  schema: {
+    radius: {type: 'number', default: 0.05} // Increase this for rounder corners
+  },
   init: function () {
-    let mesh = this.el.getObject3D('mesh');
+    this.el.addEventListener('model-loaded', () => this.updateShader());
+    this.updateShader();
+  },
+  updateShader: function () {
+    const mesh = this.el.getObject3D('mesh');
     if (!mesh) return;
 
-    // This script modifies the material to 'hide' the corners
     mesh.material.onBeforeCompile = (shader) => {
-      shader.fragmentShader = shader.fragmentShader.replace(
+      shader.uniforms.radius = { value: this.data.radius };
+      shader.fragmentShader = `
+        uniform float radius;
+        ${shader.fragmentShader}
+      `.replace(
         `gl_FragColor = vec4( color, opacity );`,
         `
-        // Calculate distance from center to create rounded effect
-        vec2 uv = vUv - 0.5;
-        float radius = 0.45; // Adjust this to change how round the corners are
-        float dist = length(max(abs(uv) - 0.5 + radius, 0.0)) - radius;
-        
-        if (dist > 0.0) discard; // This 'cuts' the corners off
+        // Calculate the distance from the edges
+        vec2 center = vec2(0.5, 0.5);
+        vec2 q = abs(vUv - center) - (center - radius);
+        float dist = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
+
+        if (dist > 0.0) discard; // This removes the sharp corner pixels
         gl_FragColor = vec4( color, opacity );
         `
       );
