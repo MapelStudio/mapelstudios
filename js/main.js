@@ -29,41 +29,6 @@ AFRAME.registerComponent('kalman-smooth', {
   }
 });
 
-AFRAME.registerShader('rounded-video-shader', {
-  schema: {
-    src: {type: 'map', is: 'uniform'},
-    radius: {type: 'float', is: 'uniform', default: 0.15},
-    opacity: {type: 'float', is: 'uniform', default: 1.0}
-  },
-  
-  vertexShader: `
-    varying vec2 vUv;
-    void main() {
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-  
-  fragmentShader: `
-    varying vec2 vUv;
-    uniform sampler2D src;
-    uniform float radius;
-    uniform float opacity;
-
-    void main() {
-      vec2 uv = vUv - 0.5;
-      // SDF for a rounded rectangle
-      vec2 q = abs(uv) - 0.5 + radius;
-      float dist = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
-      
-      if (dist > 0.0) discard; // The magic line that 'cuts' the corners
-      
-      gl_FragColor = texture2D(src, vUv);
-      gl_FragColor.a *= opacity;
-    }
-  `
-});
-
 // Debug function for on-screen display
 function debugLog(msg) {
     console.log(msg);
