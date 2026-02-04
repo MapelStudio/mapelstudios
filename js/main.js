@@ -29,45 +29,39 @@ AFRAME.registerComponent('kalman-smooth', {
   }
 });
 
-AFRAME.registerComponent('rounded-video', {
+AFRAME.registerShader('rounded-video-shader', {
   schema: {
-    radius: {type: 'number', default: 0.15} // Increase this to 0.25 if still sharp
+    src: {type: 'map', is: 'uniform'},
+    radius: {type: 'float', is: 'uniform', default: 0.15},
+    opacity: {type: 'float', is: 'uniform', default: 1.0}
   },
-  init: function () {
-    // Wait for the mesh to be ready
-    this.el.addEventListener('loaded', () => {
-      this.applyShader();
-    });
-  },
-  applyShader: function () {
-    const mesh = this.el.getObject3D('mesh');
-    if (!mesh) return;
+  
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  
+  fragmentShader: `
+    varying vec2 vUv;
+    uniform sampler2D src;
+    uniform float radius;
+    uniform float opacity;
 
-    // Use a flat shader to avoid lighting interference
-    mesh.material.transparent = true;
-    mesh.material.onBeforeCompile = (shader) => {
-      shader.uniforms.radius = { value: this.data.radius };
-      shader.fragmentShader = `
-        uniform float radius;
-        ${shader.fragmentShader}
-      `.replace(
-        `gl_FragColor = vec4( color, opacity );`,
-        `
-        // Map UVs to -0.5 to 0.5 range
-        vec2 uv = vUv - 0.5;
-        // Rounded Box SDF (Signed Distance Field)
-        vec2 q = abs(uv) - 0.5 + radius;
-        float dist = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
-        
-        // Discard pixels outside the radius
-        if (dist > 0.0) discard;
-        
-        gl_FragColor = vec4( color, opacity );
-        `
-      );
-    };
-    mesh.material.needsUpdate = true;
-  }
+    void main() {
+      vec2 uv = vUv - 0.5;
+      // SDF for a rounded rectangle
+      vec2 q = abs(uv) - 0.5 + radius;
+      float dist = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
+      
+      if (dist > 0.0) discard; // The magic line that 'cuts' the corners
+      
+      gl_FragColor = texture2D(src, vUv);
+      gl_FragColor.a *= opacity;
+    }
+  `
 });
 
 // Debug function for on-screen display
