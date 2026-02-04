@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         debugLog("🎯 TARGET 2 FOUND!");
         scannerLayer.style.display = 'none';
         
-        arVideo2.setAttribute('src', 'assets/video1.webm'); 
+        arVideo2.setAttribute('src', 'assets/video1.mp4'); 
         debugLog("📹 Video source set");
         arVideo2.load();
         arVideo2.play().then(() => {
