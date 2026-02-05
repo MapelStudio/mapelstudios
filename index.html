@@ -74,32 +74,21 @@ device-orientation-permission-ui="enabled: false">
     <video id="ar-video" preload="auto" loop="true" crossorigin="anonymous" playsinline webkit-playsinline></video>
     <a-asset-item id="shoe-model" src="assets/procedural_shoe_test_2.glb"></a-asset-item>
     <video id="ar-video-2" preload="auto" loop="true" crossorigin="anonymous" playsinline></video>
+    <a-asset-item id="horse-model" src="assets/horse_anime.glb"></a-asset-item>
 </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
         <a-entity id="target" mindar-image-target="targetIndex: 0">
-    <a-video 
-        id="video-display" 
-        src="#ar-video" 
-        width="1.0" 
-        height="0.67"
-        position="0 0 0"
-        rotation="0 0 0"
-        material="shader: flat; transparent: true; depthTest: false;"
-        visible="false"
-    ></a-video>
     
-    <a-gltf-model 
-        id="model-display"
-        src="#shoe-model"
-        position="0 0 0.1"
-        scale="0.5 0.5 0.5"
-        rotation="90 0 0"
-        visible="true"
-        class="clickable" gesture-handler="rotationFactor: 1"
-        kalman-smooth
-    ></a-gltf-model>
+            <a-gltf-model 
+      src="#horse-model" 
+      rotation="90 0 0" 
+      position="0 0 0" 
+      scale="0.5 0.5 0.5"
+      animation-mixer
+      kalman-smooth>
+            </a-gltf-model>
 </a-entity>
         <a-entity id="target2" mindar-image-target="targetIndex: 1">
     <a-video 
