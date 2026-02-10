@@ -60,7 +60,15 @@
         </div>
         <div class="status-label">ALIGN TARGET WITHIN CORNERS</div>
     </div>
-
+    <div id="custom-loader" class="loading-wrapper">
+  <div class="loading">
+    <svg width="64px" height="48px">
+      <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="back"></polyline>
+      <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="front"></polyline>
+    </svg>
+    <p style="color: white; font-family: sans-serif; margin-top: 10px;">Loading Magic...</p>
+  </div>
+    </div>
     <a-scene 
     id="sceneEl"
 mindar-image="imageTargetSrc: ./data/targets (1).mind; autoStart: false; uiScanning: no; uiLoading: no; filterMinCF: 0.001; filterBeta: 0.01;"
