@@ -121,10 +121,46 @@ document.addEventListener('DOMContentLoaded', () => {
         arVideo2.pause();
         arVideo2.currentTime = 0;
     });
-  window.addEventListener("load", () => {
-  const sceneEl = document.querySelector('a-scene');
-  const loader = document.querySelector('#custom-loader');
+ // --- Tutorial System Logic ---
 
+function changeSlide(slideIndex) {
+    // Hide all slides
+    document.querySelectorAll('.tutorial-slide').forEach(slide => {
+        slide.classList.remove('active');
+    });
+    
+    // Update dots to show which page we are on
+    document.querySelectorAll('.dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === (slideIndex - 1));
+    });
+
+    // Show the requested slide
+    const targetSlide = document.getElementById(`slide-${slideIndex}`);
+    if (targetSlide) {
+        targetSlide.classList.add('active');
+    }
+}
+
+// Function to smoothly hide the tutorial
+function closeTutorial() {
+    const modal = document.getElementById('tutorial-modal');
+    if (modal) {
+        modal.style.transition = 'opacity 0.4s ease';
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 400);
+    }
+}
+
+// Wait for the HTML to load, then attach the click events
+window.addEventListener('DOMContentLoaded', () => {
+    const xButton = document.getElementById('close-x');
+    const startButton = document.getElementById('final-start');
+
+    if (xButton) xButton.addEventListener('click', closeTutorial);
+    if (startButton) startButton.addEventListener('click', closeTutorial);
+});
 
 });
 
