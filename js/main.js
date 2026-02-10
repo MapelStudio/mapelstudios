@@ -126,14 +126,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const loader = document.querySelector('#custom-loader');
 
   // MindAR emits 'arReady' when the camera and targets are loaded
-  sceneEl.addEventListener("arReady", (event) => {
-    console.log("MindAR is ready!");
-    // Fade out and remove the loader
+  window.addEventListener("load", () => {
+  const sceneEl = document.querySelector('a-scene');
+  const loader = document.querySelector('#custom-loader');
+
+  // Function to hide the loader smoothly
+  const hideLoader = () => {
+    console.log("Hiding Loader...");
     loader.style.opacity = "0";
     setTimeout(() => {
       loader.style.display = "none";
-    }, 500); // Matches the 0.5s transition in CSS
+    }, 500);
+  };
+
+  // 1. Success: MindAR is ready
+  sceneEl.addEventListener("arReady", hideLoader);
+
+  // 2. Success: The camera has officially started streaming
+  sceneEl.addEventListener("arStatus", (event) => {
+    if (event.detail.status === "ready") {
+      hideLoader();
+    }
   });
+
+  // 3. Safety Timeout: If it takes more than 10 seconds, force it to hide
+  // This prevents the user from being stuck forever if there's a camera error
+  setTimeout(() => {
+    if (loader.style.display !== "none") {
+      console.warn("AR took too long. Forcing loader to hide.");
+      hideLoader();
+    }
+  }, 10000); 
 });
 });
 
