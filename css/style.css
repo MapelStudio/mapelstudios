@@ -646,3 +646,61 @@ video:not(#ar-video):not(#bg-video) {
   z-index: 9999; /* Ensures it stays above the AR camera */
   transition: opacity 0.5s ease; /* Smooth fade out */
 }
+.tutorial-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.tutorial-card {
+  position: relative;
+  width: 320px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 40px;
+  padding: 40px 20px;
+  text-align: center;
+  color: white;
+}
+
+.exit-button {
+  position: absolute;
+  top: 25px; left: 25px;
+  background: transparent;
+  border: none;
+  color: #a24857;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.tutorial-slide { display: none; animation: fadeIn 0.4s ease; }
+.tutorial-slide.active { display: block; }
+
+.category { color: #a24857; font-size: 22px; margin-bottom: 8px; }
+.instruction { color: #888; font-size: 14px; margin-bottom: 30px; line-height: 1.4; }
+
+/* Illustrations */
+.illustration { height: 160px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+.book-mockup, .phone-mockup { width: 120px; height: 80px; border: 2px solid #333; border-radius: 10px; position: relative; }
+.floating-photo { position: absolute; top: -20px; left: 10px; width: 100px; height: 70px; background: #a24857; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: white; }
+.qr-box { width: 40px; height: 40px; border: 2px dashed #a24857; margin: 20px auto; }
+.ar-active-mockup { font-size: 50px; color: #a24857; text-shadow: 0 0 15px rgba(162, 72, 87, 0.6); }
+
+/* Navigation */
+.pagination { margin-top: 20px; }
+.dot { display: inline-block; width: 8px; height: 8px; background: #333; border-radius: 50%; margin: 0 5px; }
+.dot.active { background: #a24857; }
+
+.next-btn {
+  width: 100%; padding: 16px; border-radius: 50px;
+  border: 2px solid #a24857; background: transparent;
+  color: white; font-weight: 600; cursor: pointer; transition: 0.3s;
+}
+.start-btn { background: #a24857; color: #fff; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
