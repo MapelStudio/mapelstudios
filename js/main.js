@@ -121,4 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
         arVideo2.pause();
         arVideo2.currentTime = 0;
     });
+  window.addEventListener("load", () => {
+  const sceneEl = document.querySelector('a-scene');
+  const loader = document.querySelector('#custom-loader');
+
+  // MindAR emits 'arReady' when the camera and targets are loaded
+  sceneEl.addEventListener("arReady", (event) => {
+    console.log("MindAR is ready!");
+    // Fade out and remove the loader
+    loader.style.opacity = "0";
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 500); // Matches the 0.5s transition in CSS
+  });
 });
+});
+
