@@ -655,6 +655,7 @@ video:not(#ar-video):not(#bg-video) {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  display: none
 }
 
 .tutorial-card {
