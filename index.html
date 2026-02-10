@@ -60,44 +60,6 @@
         </div>
         <div class="status-label">ALIGN TARGET WITHIN CORNERS</div>
     </div>
-    <div id="tutorial-modal" class="tutorial-overlay">
-  <div class="tutorial-card">
-    <button class="exit-button" id="close-x">&times;</button>
-
-    <div class="tutorial-slide active" id="slide-1">
-      <div class="illustration">
-        <div class="book-mockup"><div class="floating-photo">▶</div></div>
-      </div>
-      <h2 class="category">Welcome</h2>
-      <p class="instruction">How to see AR-photo?</p>
-      <button class="next-btn" onclick="changeSlide(2)">Next</button>
-    </div>
-
-    <div class="tutorial-slide" id="slide-2">
-      <div class="illustration">
-        <div class="phone-mockup"><div class="qr-box"></div></div>
-      </div>
-      <h2 class="category">QR-code</h2>
-      <p class="instruction">Point the camera at the QR code<br>to add your photos</p>
-      <button class="next-btn" onclick="changeSlide(3)">Next</button>
-    </div>
-
-    <div class="tutorial-slide" id="slide-3">
-      <div class="illustration">
-        <div class="ar-active-mockup">✨</div>
-      </div>
-      <h2 class="category">AR-photo</h2>
-      <p class="instruction">Now point the camera at the photo.<br>It becomes alive!</p>
-      <button class="next-btn start-btn" id="final-start">Start</button>
-    </div>
-
-    <div class="pagination">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-  </div>
-</div>
     <a-scene 
     id="sceneEl"
 mindar-image="imageTargetSrc: ./data/targets (1).mind; autoStart: false; uiScanning: no; uiLoading: no; filterMinCF: 0.001; filterBeta: 0.01;"
