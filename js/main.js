@@ -75,28 +75,20 @@ function playAnim(type) {
     const horse = document.getElementById('horse-mesh');
     if (!horse) return;
 
-    let assetID = "";
-    if (type === 'idle') assetID = "#horse-model";
-    if (type === 'run')  assetID = "#horse-run";
-    if (type === 'walk') assetID = "#horse-walk";
+    let fileURL = "";
+    // Replace 'Mohandhasss' with your actual GitHub username if different
+    if (type === 'idle') fileURL = "./assets/horse_anime.glb";
+    if (type === 'run')  fileURL = "./assets/animation1.glb";
+    if (type === 'walk') fileURL = "./assets/animation2.glb";
 
-    debugLog("🔄 Requesting: " + assetID);
+    debugLog("🔄 Loading File: " + fileURL);
 
-    // Briefly hide the horse to prevent a "ghost" frozen frame
-    horse.setAttribute('visible', false);
-
-    // Swap the model
-    horse.setAttribute('gltf-model', assetID);
+    // Swap using the path instead of the #ID
+    horse.setAttribute('gltf-model', fileURL);
 
     horse.addEventListener('model-loaded', () => {
-        debugLog("✅ Loaded: " + type);
-        horse.setAttribute('visible', true);
+        debugLog("✅ SUCCESS: " + type + " loaded");
         horse.setAttribute('animation-mixer', {clip: '*', loop: 'repeat'});
-    }, { once: true });
-
-    horse.addEventListener('model-error', (e) => {
-        debugLog("❌ FATAL: Could not load " + assetID);
-        console.error(e);
     }, { once: true });
 }
 
