@@ -67,6 +67,29 @@ function debugLog(msg) {
     }
 }
 
+// 1. MUST BE AT THE TOP (Global Scope)
+function playAnim(type) {
+    debugLog("🔄 Swapping model to: " + type);
+    const horse = document.getElementById('horse-mesh');
+    
+    if (!horse) {
+        debugLog("❌ Error: Horse mesh not found");
+        return;
+    }
+
+    let modelSource = "";
+    if (type === 'idle') modelSource = "#horse-model";
+    if (type === 'walk') modelSource = "#horse-walk";
+    if (type === 'run')  modelSource = "#horse-run";
+    if (type === 'eat')  modelSource = "#horse-eat";
+
+    if (modelSource) {
+        horse.setAttribute('gltf-model', modelSource);
+        // Refresh the animation mixer for the new file
+        horse.setAttribute('animation-mixer', {clip: '*', loop: 'repeat'});
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
@@ -160,36 +183,5 @@ if (btnRight) {
         if (typeof changeSlide === "function") changeSlide(1);
     });
 }
-  function playAnim(type) {
-    const horse = document.getElementById('horse-mesh');
-    if (!horse) {
-        debugLog("❌ Error: Horse mesh not found");
-        return;
-    }
-
-    let modelSource = "";
-
-    // Determine which file to load
-    switch(type) {
-        case 'idle': modelSource = "#horse-model"; break;
-        case 'walk': modelSource = "#horse-walk"; break;
-        case 'run':  modelSource = "#horse-run"; break;
-        case 'eat':  modelSource = "#horse-eat"; break;
-    }
-
-    if (modelSource) {
-        debugLog("🔄 Swapping model to: " + type);
-        
-        // Change the source file
-        horse.setAttribute('gltf-model', modelSource);
-        
-        /* Crucial: When the new model loads, we must ensure 
-           it starts its animation immediately.
-        */
-        horse.setAttribute('animation-mixer', {
-            clip: '*', // This plays the first animation found in the new file
-            loop: 'repeat'
-        });
-    }
-}
+  
 });
