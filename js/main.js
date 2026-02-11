@@ -73,31 +73,30 @@ function debugLog(msg) {
 // 1. MUST BE AT THE TOP (Global Scope)
 function playAnim(type) {
     const horse = document.getElementById('horse-mesh');
-    if (!horse) {
-        debugLog("❌ Error: Cannot find #horse-mesh in HTML");
-        return;
-    }
+    if (!horse) return;
 
     let assetID = "";
-    // Use the EXACT IDs from your <a-asset-item id="...">
     if (type === 'idle') assetID = "#horse-model";
     if (type === 'run')  assetID = "#horse-run";
     if (type === 'walk') assetID = "#horse-walk";
 
-    debugLog("🔄 Requesting Asset ID: " + assetID);
+    debugLog("🔄 Requesting: " + assetID);
 
-    // Apply the change
+    // Briefly hide the horse to prevent a "ghost" frozen frame
+    horse.setAttribute('visible', false);
+
+    // Swap the model
     horse.setAttribute('gltf-model', assetID);
 
-    // Force it to play the animation once loaded
     horse.addEventListener('model-loaded', () => {
-        debugLog("✅ Success: " + type + " is now visible");
+        debugLog("✅ Loaded: " + type);
+        horse.setAttribute('visible', true);
         horse.setAttribute('animation-mixer', {clip: '*', loop: 'repeat'});
     }, { once: true });
 
-    // Detect if the file path is broken
-    horse.addEventListener('model-error', () => {
-        debugLog("❌ FATAL: Could not load " + assetID + ". Check file path!");
+    horse.addEventListener('model-error', (e) => {
+        debugLog("❌ FATAL: Could not load " + assetID);
+        console.error(e);
     }, { once: true });
 }
 
