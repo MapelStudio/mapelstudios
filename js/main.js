@@ -160,16 +160,16 @@ if (btnRight) {
         if (typeof changeSlide === "function") changeSlide(1);
     });
 }
-  function playAnim(clipName) {
-    const horse = document.querySelector('#horse-mesh'); // Make sure your model has this ID
-    if (horse) {
-        // We tell the mixer to switch to the new clip
-        horse.setAttribute('animation-mixer', {
-            clip: clipName,
-            loop: 'repeat',
-            crossFadeDuration: 0.4 // This makes the transition smooth!
-        });
-        debugLog("Playing: " + clipName);
-    }
+  function playAnim(type) {
+    const horse = document.querySelector('#horse-mesh');
+    if (!horse) return;
+
+    // Switch the model file based on which button was clicked
+    if (type === 'idle') horse.setAttribute('gltf-model', '#horse-idle');
+    if (type === 'walk') horse.setAttribute('gltf-model', '#horse-walk');
+    if (type === 'run') horse.setAttribute('gltf-model', '#horse-run');
+    if (type === 'eat') horse.setAttribute('gltf-model', '#horse-eat');
+
+    debugLog("Switched to: " + type);
 }
 });
