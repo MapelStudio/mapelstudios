@@ -167,8 +167,6 @@ if (btnRight) {
     // Switch the model file based on which button was clicked
     if (type === 'idle') horse.setAttribute('gltf-model', '#horse-idle');
     if (type === 'walk') horse.setAttribute('gltf-model', '#horse-walk');
-    if (type === 'run') horse.setAttribute('gltf-model', '#horse-run');
-    if (type === 'eat') horse.setAttribute('gltf-model', '#horse-eat');
 
     debugLog("Switched to: " + type);
 }
