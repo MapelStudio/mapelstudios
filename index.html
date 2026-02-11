@@ -79,16 +79,14 @@ device-orientation-permission-ui="enabled: false">
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
         <a-entity id="target" mindar-image-target="targetIndex: 0">
-    
-            <a-gltf-model 
-      src="#horse-model" 
-      rotation="90 0 0" 
-      position="0 0 0" 
-      scale="0.5 0.5 0.5"
-      animation-mixer
-      kalman-smooth
-      touch-rotate">
-            </a-gltf-model>
+    <a-entity rotation="90 0 0" position="0 0 0">
+        <a-gltf-model 
+            id="horse-mesh"
+            src="#horse-model" 
+            scale="0.5 0.5 0.5"
+            animation-mixer
+            touch-rotate> </a-gltf-model>
+    </a-entity>
 </a-entity>
         <a-entity id="target2" mindar-image-target="targetIndex: 1">
     <a-video 
