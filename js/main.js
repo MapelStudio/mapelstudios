@@ -31,6 +31,9 @@ AFRAME.registerComponent('touch-rotate', {
     
     // Bind listeners to the window to ensure we catch the touch anywhere
     window.addEventListener('touchstart', (e) => {
+        if (e.target.tagName === 'BUTTON' || e.target.closest('.anim-btn')) {
+        return; 
+    }
         if (e.touches.length > 0) {
             this.isMoving = true;
             this.lastX = e.touches[0].clientX;
