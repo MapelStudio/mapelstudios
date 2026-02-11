@@ -146,4 +146,15 @@ document.addEventListener('DOMContentLoaded', () => {
         arVideo2.pause();
         arVideo2.currentTime = 0;
     });
+  const btnRight = document.getElementById('btn-right');
+const tutorialModal = document.getElementById('tutorial-modal');
+
+if (btnRight) {
+    btnRight.addEventListener('click', () => {
+        debugLog("Opening Tutorial...");
+        tutorialModal.style.display = 'flex';
+        // If you have the changeSlide function, reset to slide 1
+        if (typeof changeSlide === "function") changeSlide(1);
+    });
+}
 });
