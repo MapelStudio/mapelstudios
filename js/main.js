@@ -73,13 +73,14 @@ function debugLog(msg) {
 // 1. MUST BE AT THE TOP (Global Scope)
 function playAnim(type) {
     debugLog("🔄 Swapping model to: " + type);
-    const horse = document.getElementById('horse-mesh');
+    let horse = document.getElementById('horse-mesh');
     
     if (!horse) {
-        debugLog("❌ Error: Horse mesh not found");
+        debugLog("❌ Error: horse-mesh ID not found!");
         return;
     }
 
+    // Map the button click to the Asset ID
     let modelSource = "";
     if (type === 'idle') modelSource = "#horse-model";
     if (type === 'walk') modelSource = "#horse-walk";
@@ -87,9 +88,29 @@ function playAnim(type) {
     if (type === 'eat')  modelSource = "#horse-eat";
 
     if (modelSource) {
+        // Change the source
         horse.setAttribute('gltf-model', modelSource);
-        // Refresh the animation mixer for the new file
-        horse.setAttribute('animation-mixer', {clip: '*', loop: 'repeat'});
+        
+        // This listener waits for the new file to actually finish downloading
+        horse.addEventListener('model-loaded', () => {
+            debugLog("✅ Model loaded: " + type);
+            
+            // 1. Force scale and visibility in case the new file is different
+            horse.setAttribute('visible', true);
+            
+            // 2. Re-trigger the animation mixer for the new file
+            // clip: * tells it to play the first animation it finds in the new GLB
+            horse.setAttribute('animation-mixer', {
+                clip: '*', 
+                loop: 'repeat',
+                timeScale: 1
+            });
+        }, { once: true });
+
+        // If it still doesn't show, check if the file exists at the path
+        horse.addEventListener('model-error', (ev) => {
+            debugLog("❌ ERROR loading file: " + type);
+        });
     }
 }
 
