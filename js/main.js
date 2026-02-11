@@ -1,4 +1,4 @@
-// ADD THIS ENTIRE SECTION AT THE TOP OF YOUR FILE
+// Kalman filter component
 AFRAME.registerComponent('kalman-smooth', {
   init: function() {
     this.kalmanPos = {
@@ -6,8 +6,8 @@ AFRAME.registerComponent('kalman-smooth', {
       y: { x: 0, p: 1, k: 0 },
       z: { x: 0, p: 1, k: 0 }
     };
-    this.Q = 0.01; // Process noise (lower = smoother)
-    this.R = 0.01;  // Measurement noise (lower = more responsive)
+    this.Q = 0.01;
+    this.R = 0.01;
   },
   
   tick: function() {
@@ -15,65 +15,51 @@ AFRAME.registerComponent('kalman-smooth', {
     
     ['x', 'y', 'z'].forEach(axis => {
       const k = this.kalmanPos[axis];
-      
-      // Prediction
       k.p = k.p + this.Q;
-      
-      // Update
       k.k = k.p / (k.p + this.R);
       k.x = k.x + k.k * (pos[axis] - k.x);
       k.p = (1 - k.k) * k.p;
-      
       pos[axis] = k.x;
     });
   }
 });
 
-// ADD THIS RIGHT AFTER KALMAN FILTER - SIMPLER GESTURE HANDLER
-AFRAME.registerComponent('drag-rotate-component', {
-  schema: {},
-  
-  init: function () {
-    this.isDragging = false;
-    this.previousMouseX = 0;
+// Touch rotation component - X-axis only
+AFRAME.registerComponent('touch-rotate', {
+  init: function() {
+    this.rotating = false;
+    this.lastX = 0;
     
-    this.el.addEventListener('mousedown', (e) => {
-      this.isDragging = true;
-      this.previousMouseX = e.clientX;
-    });
+    const canvas = document.querySelector('a-scene').canvas;
     
-    this.el.addEventListener('touchstart', (e) => {
-      this.isDragging = true;
-      this.previousMouseX = e.touches[0].clientX;
-    });
+    canvas.addEventListener('touchstart', (e) => {
+      // Check if touch is on the model
+      const touch = e.touches[0];
+      this.rotating = true;
+      this.lastX = touch.clientX;
+      e.preventDefault();
+    }, { passive: false });
     
-    window.addEventListener('mousemove', (e) => {
-      if (this.isDragging) {
-        const deltaX = e.clientX - this.previousMouseX;
-        this.el.object3D.rotation.z += deltaX * 0.01;
-        this.previousMouseX = e.clientX;
+    canvas.addEventListener('touchmove', (e) => {
+      if (this.rotating) {
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - this.lastX;
+        
+        // Rotate around Z-axis (appears as X-axis rotation when model is rotated 90°)
+        this.el.object3D.rotation.z += deltaX * 0.005;
+        
+        this.lastX = touch.clientX;
+        e.preventDefault();
       }
-    });
+    }, { passive: false });
     
-    window.addEventListener('touchmove', (e) => {
-      if (this.isDragging) {
-        const deltaX = e.touches[0].clientX - this.previousMouseX;
-        this.el.object3D.rotation.z += deltaX * 0.01;
-        this.previousMouseX = e.touches[0].clientX;
-      }
-    });
-    
-    window.addEventListener('mouseup', () => {
-      this.isDragging = false;
-    });
-    
-    window.addEventListener('touchend', () => {
-      this.isDragging = false;
+    canvas.addEventListener('touchend', () => {
+      this.rotating = false;
     });
   }
 });
 
-// Debug function for on-screen display
+// Debug function
 function debugLog(msg) {
     console.log(msg);
     const debugDiv = document.getElementById('debug');
@@ -90,20 +76,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconLayer = document.getElementById('icon-layer');
     const sceneEl = document.getElementById('sceneEl');
     const targetEntity = document.getElementById('target');
-    const target2Entity = document.getElementById('target2'); // ✅ ONLY DECLARE ONCE
+    const target2Entity = document.getElementById('target2');
     const arVideo2 = document.getElementById('ar-video-2');
     
-    debugLog("target2Entity:", target2Entity); // Debug check
+    debugLog("Initialized");
     
-    // 1. Check if button exists to prevent errors
     if (!startBtn) {
-        console.error("Could not find start-btn! Check your HTML id.");
+        console.error("Could not find start-btn!");
         return;
     }
     
     startBtn.addEventListener('click', () => {
         debugLog("Button clicked! Starting AR...");
-        // 2. Hide Landing UI
+        
         uiLayer.style.display = 'none';
         
         const bgVideo = document.getElementById('bg-video');
@@ -111,10 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
             bgVideo.pause();
             bgVideo.style.display = 'none';
         }
-        // 3. Show AR UI
+        
         scannerLayer.style.display = 'flex';
         iconLayer.style.display = 'flex';
-        // 4. Start AR Engine
+        
         if (sceneEl.hasLoaded) {
             startAR();
         } else {
@@ -127,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (arSystem) {
             arSystem.start(); 
             
-            // Fixes the 75% crop issue
             window.dispatchEvent(new Event('resize'));
             setTimeout(() => {
                 window.dispatchEvent(new Event('resize'));
@@ -135,17 +119,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // 5. 3D Model Event Listeners
+    // Target 1 - 3D Model
     targetEntity.addEventListener("targetFound", () => {
         scannerLayer.style.display = 'none';
-        debugLog("3D Model Target Found");
+        debugLog("✅ 3D Model Target Found - Swipe to rotate!");
     });
     
     targetEntity.addEventListener("targetLost", () => {
         scannerLayer.style.display = 'flex';
     });
     
-    // Listener for the second target
+    // Target 2 - Video
     target2Entity.addEventListener("targetFound", () => {
         debugLog("🎯 TARGET 2 FOUND!");
         scannerLayer.style.display = 'none';
@@ -165,37 +149,4 @@ document.addEventListener('DOMContentLoaded', () => {
         arVideo2.pause();
         arVideo2.currentTime = 0;
     });
-  // Add this at the END of your DOMContentLoaded function, before the closing });
-
-// Touch rotation for target 1 model
-let isRotating = false;
-let lastTouchX = 0;
-
-targetEntity.addEventListener("targetFound", () => {
-    scannerLayer.style.display = 'none';
-    debugLog("3D Model Target Found");
-    
-    // Enable touch rotation
-    const model = document.querySelector('#target a-gltf-model');
-    
-    model.addEventListener('touchstart', (e) => {
-        isRotating = true;
-        lastTouchX = e.touches[0].clientX;
-        e.preventDefault();
-    });
-    
-    document.addEventListener('touchmove', (e) => {
-        if (isRotating && model) {
-            const deltaX = e.touches[0].clientX - lastTouchX;
-            model.object3D.rotation.z += deltaX * 0.01;
-            lastTouchX = e.touches[0].clientX;
-        }
-    });
-    
-    document.addEventListener('touchend', () => {
-        isRotating = false;
-    });
 });
-
-});
-
