@@ -72,31 +72,33 @@ function debugLog(msg) {
 
 // 1. MUST BE AT THE TOP (Global Scope)
 function playAnim(type) {
-    debugLog("🔄 Swapping model to: " + type);
-    let horse = document.getElementById('horse-mesh');
-    
+    const horse = document.getElementById('horse-mesh');
     if (!horse) {
-        debugLog("❌ Error: horse-mesh ID not found!");
+        debugLog("❌ Error: Cannot find #horse-mesh in HTML");
         return;
     }
 
-    // MAP THE BUTTONS TO YOUR EXACT ASSET IDs
-    let modelSource = "";
-    if (type === 'idle') modelSource = "#horse-model"; // Matches your first asset
-    if (type === 'run')  modelSource = "#horse-run";   // Matches assets/animation 1.glb
-    if (type === 'walk') modelSource = "#horse-walk";  // Matches assets/animation 2.glb
+    let assetID = "";
+    // Use the EXACT IDs from your <a-asset-item id="...">
+    if (type === 'idle') assetID = "#horse-model";
+    if (type === 'run')  assetID = "#horse-run";
+    if (type === 'walk') assetID = "#horse-walk";
 
-    if (modelSource) {
-        horse.setAttribute('gltf-model', modelSource);
-        
-        horse.addEventListener('model-loaded', () => {
-            debugLog("✅ Loaded: " + modelSource);
-            horse.setAttribute('animation-mixer', {
-                clip: '*', 
-                loop: 'repeat'
-            });
-        }, { once: true });
-    }
+    debugLog("🔄 Requesting Asset ID: " + assetID);
+
+    // Apply the change
+    horse.setAttribute('gltf-model', assetID);
+
+    // Force it to play the animation once loaded
+    horse.addEventListener('model-loaded', () => {
+        debugLog("✅ Success: " + type + " is now visible");
+        horse.setAttribute('animation-mixer', {clip: '*', loop: 'repeat'});
+    }, { once: true });
+
+    // Detect if the file path is broken
+    horse.addEventListener('model-error', () => {
+        debugLog("❌ FATAL: Could not load " + assetID + ". Check file path!");
+    }, { once: true });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
