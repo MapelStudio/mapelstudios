@@ -24,34 +24,31 @@ AFRAME.registerComponent('kalman-smooth', {
   }
 });
 
-// Touch rotation component - X-axis only
 AFRAME.registerComponent('touch-rotate', {
   init: function() {
     this.rotating = false;
     this.lastX = 0;
     
+    // Bind the canvas for touch events
     const canvas = document.querySelector('a-scene').canvas;
     
     canvas.addEventListener('touchstart', (e) => {
-      // Check if touch is on the model
-      const touch = e.touches[0];
       this.rotating = true;
-      this.lastX = touch.clientX;
-      e.preventDefault();
-    }, { passive: false });
+      this.lastX = e.touches[0].clientX;
+    });
     
     canvas.addEventListener('touchmove', (e) => {
       if (this.rotating) {
         const touch = e.touches[0];
         const deltaX = touch.clientX - this.lastX;
         
-        // Rotate around Z-axis (appears as X-axis rotation when model is rotated 90°)
-        this.el.object3D.rotation.z += deltaX * 0.005;
+        // We rotate the Y-axis for a natural "turntable" spin
+        // If the model is laying flat, change 'y' to 'z'
+        this.el.object3D.rotation.y += deltaX * 0.01;
         
         this.lastX = touch.clientX;
-        e.preventDefault();
       }
-    }, { passive: false });
+    });
     
     canvas.addEventListener('touchend', () => {
       this.rotating = false;
