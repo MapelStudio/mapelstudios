@@ -161,13 +161,35 @@ if (btnRight) {
     });
 }
   function playAnim(type) {
-    const horse = document.querySelector('#horse-mesh');
-    if (!horse) return;
+    const horse = document.getElementById('horse-mesh');
+    if (!horse) {
+        debugLog("❌ Error: Horse mesh not found");
+        return;
+    }
 
-    // Switch the model file based on which button was clicked
-    if (type === 'idle') horse.setAttribute('gltf-model', '#horse-idle');
-    if (type === 'walk') horse.setAttribute('gltf-model', '#horse-walk');
+    let modelSource = "";
 
-    debugLog("Switched to: " + type);
+    // Determine which file to load
+    switch(type) {
+        case 'idle': modelSource = "#horse-model"; break;
+        case 'walk': modelSource = "#horse-walk"; break;
+        case 'run':  modelSource = "#horse-run"; break;
+        case 'eat':  modelSource = "#horse-eat"; break;
+    }
+
+    if (modelSource) {
+        debugLog("🔄 Swapping model to: " + type);
+        
+        // Change the source file
+        horse.setAttribute('gltf-model', modelSource);
+        
+        /* Crucial: When the new model loads, we must ensure 
+           it starts its animation immediately.
+        */
+        horse.setAttribute('animation-mixer', {
+            clip: '*', // This plays the first animation found in the new file
+            loop: 'repeat'
+        });
+    }
 }
 });
