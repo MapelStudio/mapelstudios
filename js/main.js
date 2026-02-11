@@ -80,37 +80,22 @@ function playAnim(type) {
         return;
     }
 
-    // Map the button click to the Asset ID
+    // MAP THE BUTTONS TO YOUR EXACT ASSET IDs
     let modelSource = "";
-    if (type === 'idle') modelSource = "#horse-model";
-    if (type === 'walk') modelSource = "#horse-walk";
-    if (type === 'run')  modelSource = "#horse-run";
-    if (type === 'eat')  modelSource = "#horse-eat";
+    if (type === 'idle') modelSource = "#horse-model"; // Matches your first asset
+    if (type === 'run')  modelSource = "#horse-run";   // Matches assets/animation 1.glb
+    if (type === 'walk') modelSource = "#horse-walk";  // Matches assets/animation 2.glb
 
     if (modelSource) {
-        // Change the source
         horse.setAttribute('gltf-model', modelSource);
         
-        // This listener waits for the new file to actually finish downloading
         horse.addEventListener('model-loaded', () => {
-            debugLog("✅ Model loaded: " + type);
-            
-            // 1. Force scale and visibility in case the new file is different
-            horse.setAttribute('visible', true);
-            
-            // 2. Re-trigger the animation mixer for the new file
-            // clip: * tells it to play the first animation it finds in the new GLB
+            debugLog("✅ Loaded: " + modelSource);
             horse.setAttribute('animation-mixer', {
                 clip: '*', 
-                loop: 'repeat',
-                timeScale: 1
+                loop: 'repeat'
             });
         }, { once: true });
-
-        // If it still doesn't show, check if the file exists at the path
-        horse.addEventListener('model-error', (ev) => {
-            debugLog("❌ ERROR loading file: " + type);
-        });
     }
 }
 
