@@ -165,6 +165,37 @@ document.addEventListener('DOMContentLoaded', () => {
         arVideo2.pause();
         arVideo2.currentTime = 0;
     });
+  // Add this at the END of your DOMContentLoaded function, before the closing });
+
+// Touch rotation for target 1 model
+let isRotating = false;
+let lastTouchX = 0;
+
+targetEntity.addEventListener("targetFound", () => {
+    scannerLayer.style.display = 'none';
+    debugLog("3D Model Target Found");
+    
+    // Enable touch rotation
+    const model = document.querySelector('#target a-gltf-model');
+    
+    model.addEventListener('touchstart', (e) => {
+        isRotating = true;
+        lastTouchX = e.touches[0].clientX;
+        e.preventDefault();
+    });
+    
+    document.addEventListener('touchmove', (e) => {
+        if (isRotating && model) {
+            const deltaX = e.touches[0].clientX - lastTouchX;
+            model.object3D.rotation.z += deltaX * 0.01;
+            lastTouchX = e.touches[0].clientX;
+        }
+    });
+    
+    document.addEventListener('touchend', () => {
+        isRotating = false;
+    });
+});
 
 });
 
