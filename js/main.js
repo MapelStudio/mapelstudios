@@ -26,36 +26,37 @@ AFRAME.registerComponent('kalman-smooth', {
 
 AFRAME.registerComponent('touch-rotate', {
   init: function() {
-    this.rotating = false;
     this.lastX = 0;
+    this.isMoving = false;
     
-    // Bind the canvas for touch events
-    const canvas = document.querySelector('a-scene').canvas;
-    
-    canvas.addEventListener('touchstart', (e) => {
-      this.rotating = true;
-      this.lastX = e.touches[0].clientX;
+    // Bind listeners to the window to ensure we catch the touch anywhere
+    window.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 0) {
+            this.isMoving = true;
+            this.lastX = e.touches[0].clientX;
+            debugLog("Touch Started"); // This will show in your green debug box
+        }
     });
-    
-    canvas.addEventListener('touchmove', (e) => {
-      if (this.rotating) {
+
+    window.addEventListener('touchmove', (e) => {
+        if (!this.isMoving || e.touches.length === 0) return;
+        
         const touch = e.touches[0];
         const deltaX = touch.clientX - this.lastX;
         
-        // We rotate the Y-axis for a natural "turntable" spin
-        // If the model is laying flat, change 'y' to 'z'
+        // Since the model is rotated 90 on X, we rotate around its LOCAL Y 
+        // to make it spin like a bottle.
         this.el.object3D.rotation.y += deltaX * 0.01;
         
         this.lastX = touch.clientX;
-      }
     });
-    
-    canvas.addEventListener('touchend', () => {
-      this.rotating = false;
+
+    window.addEventListener('touchend', () => {
+        this.isMoving = false;
+        debugLog("Touch Ended");
     });
   }
 });
-
 // Debug function
 function debugLog(msg) {
     console.log(msg);
