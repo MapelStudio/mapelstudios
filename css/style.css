@@ -629,5 +629,32 @@ video:not(#ar-video):not(#bg-video) {
     pointer-events: none; /* Let's you click through to UI if needed */
 }
 
-/* 3. Your UI Icons (The top layer) */
+
+.horse-ui {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 9999;
+    pointer-events: auto;
+}
+
+.anim-btn {
+    background: rgba(26, 26, 26, 0.8);
+    border: 2px solid #a24857;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+}
+
+.anim-btn:active {
+    background: #a24857;
+    color: white;
+}
 
