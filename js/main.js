@@ -119,13 +119,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Target 1 - 3D Model
     targetEntity.addEventListener("targetFound", () => {
-        scannerLayer.style.display = 'none';
-        debugLog("✅ 3D Model Target Found - Swipe to rotate!");
-    });
-    
-    targetEntity.addEventListener("targetLost", () => {
-        scannerLayer.style.display = 'flex';
-    });
+    scannerLayer.style.display = 'none';
+    document.getElementById('horse-menu').style.display = 'flex'; // Show Menu
+    debugLog("✅ Horse Found - Select Animation");
+});
+
+targetEntity.addEventListener("targetLost", () => {
+    scannerLayer.style.display = 'flex';
+    document.getElementById('horse-menu').style.display = 'none'; // Hide Menu
+});
     
     // Target 2 - Video
     target2Entity.addEventListener("targetFound", () => {
@@ -157,5 +159,17 @@ if (btnRight) {
         // If you have the changeSlide function, reset to slide 1
         if (typeof changeSlide === "function") changeSlide(1);
     });
+}
+  function playAnim(clipName) {
+    const horse = document.querySelector('#horse-mesh'); // Make sure your model has this ID
+    if (horse) {
+        // We tell the mixer to switch to the new clip
+        horse.setAttribute('animation-mixer', {
+            clip: clipName,
+            loop: 'repeat',
+            crossFadeDuration: 0.4 // This makes the transition smooth!
+        });
+        debugLog("Playing: " + clipName);
+    }
 }
 });
