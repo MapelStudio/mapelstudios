@@ -29,6 +29,63 @@ AFRAME.registerComponent('kalman-smooth', {
   }
 });
 
+// X-axis only rotation component
+AFRAME.registerComponent('gesture-handler', {
+  schema: {
+    enabled: { default: true },
+    rotationFactor: { default: 5 },
+    minScale: { default: 0.3 },
+    maxScale: { default: 8 },
+  },
+
+  init: function () {
+    this.handleScale = this.handleScale.bind(this);
+    this.handleRotation = this.handleRotation.bind(this);
+
+    this.isVisible = false;
+    this.initialScale = this.el.object3D.scale.clone();
+    this.scaleFactor = 1;
+
+    this.el.sceneEl.addEventListener('onefingermove', this.handleRotation);
+    this.el.sceneEl.addEventListener('twofingermove', this.handleScale);
+  },
+
+  handleRotation: function (event) {
+    if (this.isVisible) {
+      // Only rotate around Y-axis (horizontal swipe = rotation around Y-axis in world space)
+      // Since model is rotated 90 degrees, we adjust accordingly
+      this.el.object3D.rotation.z += event.detail.positionChange.x * this.data.rotationFactor;
+    }
+  },
+
+  handleScale: function (event) {
+    if (this.isVisible) {
+      this.scaleFactor *=
+        1 + event.detail.spreadChange / event.detail.startSpread;
+
+      this.scaleFactor = Math.min(
+        Math.max(this.scaleFactor, this.data.minScale),
+        this.data.maxScale
+      );
+
+      this.el.object3D.scale.x = this.scaleFactor * this.initialScale.x;
+      this.el.object3D.scale.y = this.scaleFactor * this.initialScale.y;
+      this.el.object3D.scale.z = this.scaleFactor * this.initialScale.z;
+    }
+  },
+
+  update: function () {
+    if (this.data.enabled) {
+      this.isVisible = true;
+    }
+  },
+
+  remove: function () {
+    this.el.sceneEl.removeEventListener('onefingermove', this.handleRotation);
+    this.el.sceneEl.removeEventListener('twofingermove', this.handleScale);
+  },
+});
+
 // Debug function for on-screen display
 function debugLog(msg) {
     console.log(msg);
