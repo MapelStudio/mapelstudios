@@ -667,12 +667,12 @@ video:not(#ar-video):not(#bg-video) {
 
 /* Hover & Active States */
 .anim-btn:hover {
-    background: rgba(162, 72, 87, 0.4); /* Faint maroon tint on hover */
+    background: rgba(255, 255, 255, 0.15); /* Faint maroon tint on hover */
     border: 1px solid rgba(162, 72, 87, 0.6);
 }
 
 .anim-btn:active {
     transform: scale(0.95); /* Little 'click' animation */
-    background: rgba(162, 72, 87, 0.8);
+    background: rgba(255, 255, 255, 0.15);
 }
 
