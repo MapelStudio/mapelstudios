@@ -92,6 +92,34 @@ function playAnim(type) {
     }, { once: true });
 }
 
+  // --- Tutorial System Logic ---
+
+// Function to cycle through the 3 pages
+function nextPage(pageNumber) {
+    // Hide all pages
+    document.querySelectorAll('.tutorial-page').forEach(p => p.classList.remove('active'));
+    // Deactivate all dots
+    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+    
+    // Show the selected page and dot
+    const targetPage = document.getElementById(`page-${pageNumber}`);
+    const targetDot = document.querySelectorAll('.dot')[pageNumber - 1];
+    
+    if (targetPage) targetPage.classList.add('active');
+    if (targetDot) targetDot.classList.add('active');
+}
+
+// Function to open/close the main overlay
+function toggleTutorial(show) {
+    const modal = document.getElementById('tutorial-modal');
+    if (modal) {
+        modal.style.display = show ? 'flex' : 'none';
+        // Always reset to Page 1 when opening
+        if (show) nextPage(1);
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
@@ -184,32 +212,6 @@ if (btnRight) {
         // If you have the changeSlide function, reset to slide 1
         if (typeof changeSlide === "function") changeSlide(1);
     });
-}
-  // --- Tutorial System Logic ---
-
-// Function to cycle through the 3 pages
-function nextPage(pageNumber) {
-    // Hide all pages
-    document.querySelectorAll('.tutorial-page').forEach(p => p.classList.remove('active'));
-    // Deactivate all dots
-    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-    
-    // Show the selected page and dot
-    const targetPage = document.getElementById(`page-${pageNumber}`);
-    const targetDot = document.querySelectorAll('.dot')[pageNumber - 1];
-    
-    if (targetPage) targetPage.classList.add('active');
-    if (targetDot) targetDot.classList.add('active');
-}
-
-// Function to open/close the main overlay
-function toggleTutorial(show) {
-    const modal = document.getElementById('tutorial-modal');
-    if (modal) {
-        modal.style.display = show ? 'flex' : 'none';
-        // Always reset to Page 1 when opening
-        if (show) nextPage(1);
-    }
 }
 
 // Attach the logic to your buttons
