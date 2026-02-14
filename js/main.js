@@ -185,5 +185,52 @@ if (btnRight) {
         if (typeof changeSlide === "function") changeSlide(1);
     });
 }
+  // --- Tutorial System Logic ---
+
+// Function to cycle through the 3 pages
+function nextPage(pageNumber) {
+    // Hide all pages
+    document.querySelectorAll('.tutorial-page').forEach(p => p.classList.remove('active'));
+    // Deactivate all dots
+    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+    
+    // Show the selected page and dot
+    const targetPage = document.getElementById(`page-${pageNumber}`);
+    const targetDot = document.querySelectorAll('.dot')[pageNumber - 1];
+    
+    if (targetPage) targetPage.classList.add('active');
+    if (targetDot) targetDot.classList.add('active');
+}
+
+// Function to open/close the main overlay
+function toggleTutorial(show) {
+    const modal = document.getElementById('tutorial-modal');
+    if (modal) {
+        modal.style.display = show ? 'flex' : 'none';
+        // Always reset to Page 1 when opening
+        if (show) nextPage(1);
+    }
+}
+
+// Attach the logic to your buttons
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Top Right Button Trigger (id="btn-right")
+    const tutorialTrigger = document.getElementById('btn-right');
+    if (tutorialTrigger) {
+        tutorialTrigger.addEventListener('click', () => toggleTutorial(true));
+    }
+
+    // 2. Close 'X' Button
+    const closeBtn = document.getElementById('close-tutorial-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => toggleTutorial(false));
+    }
+
+    // 3. Final 'Start' Button
+    const finalStart = document.getElementById('close-tutorial-final');
+    if (finalStart) {
+        finalStart.addEventListener('click', () => toggleTutorial(false));
+    }
+});
   
 });
