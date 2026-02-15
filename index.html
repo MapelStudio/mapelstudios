@@ -52,9 +52,15 @@
         <div class="round-btn" id="btn-left"><img src="assets/left-button.png" alt="Menu"></div>
         <div class="round-btn" id="btn-right"><img src="assets/right-button.png" alt="Settings"></div>
         <div id="horse-menu" class="horse-ui" style="display: none;">
-    <button class="anim-btn" onclick="playAnim('idle')">Reset/Idle</button>
-    <button class="anim-btn" onclick="playAnim('run')">Run</button>
-    <button class="anim-btn" onclick="playAnim('walk')">Walk</button>
+    <div id="anim-drawer" class="anim-drawer">
+        <button class="anim-btn sub-btn" onclick="playAnim('idle')">Reset/Idle</button>
+        <button class="anim-btn sub-btn" onclick="playAnim('run')">Run</button>
+        <button class="anim-btn sub-btn" onclick="playAnim('walk')">Walk</button>
+    </div>
+    
+    <button class="anim-btn main-trigger" onclick="toggleAnimMenu()">
+        Animations
+    </button>
 </div>
     </div>
 
