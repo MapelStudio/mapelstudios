@@ -269,6 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
     targetEntity.addEventListener("targetLost", () => {
         scannerLayer.style.display = 'flex';
         document.getElementById('horse-menu').style.display = 'none';
+        document.getElementById('anim-drawer').style.display = 'none';
     });
     
     // Target 2 - Video
