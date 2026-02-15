@@ -784,3 +784,29 @@ video:not(#ar-video):not(#bg-video) {
     background: #ff8a8a;
     color: white;
 }
+
+/* Container for the menu */
+.horse-ui {
+    flex-direction: column-reverse !important; /* Stack drawer above the button */
+    align-items: center;
+}
+
+/* The sub-menu drawer */
+.anim-drawer {
+    display: none; /* Hidden until main button is clicked */
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px; /* Gap between drawer and main button */
+}
+
+/* Optional: Make sub-buttons look slightly different */
+.sub-btn {
+    padding: 10px 15px !important;
+    font-size: 12px !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+
+.main-trigger {
+    background: rgba(227, 78, 78, 0.8) !important; /* Stand-out color for main button */
+    border: 2px solid white !important;
+}
