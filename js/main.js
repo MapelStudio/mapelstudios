@@ -122,13 +122,20 @@ function toggleTutorial(show) {
     modal.style.display = show ? 'flex' : 'none';
 
     if (show) {
-        // 1. CLEAR: Remove 'active' from every page and dot
-        document.querySelectorAll('.tutorial-page').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+        debugLog("🧹 Wiping old page states...");
 
-        // 2. RESET: Force Page 1 to show
+        // 1. Physically remove 'active' from EVERY page
+        document.querySelectorAll('.tutorial-page').forEach(page => {
+            page.classList.remove('active');
+        });
+
+        // 2. Physically remove 'active' from EVERY dot
+        document.querySelectorAll('.dot').forEach(dot => {
+            dot.classList.remove('active');
+        });
+
+        // 3. Now that the slate is clean, show Page 1
         nextPage(1); 
-        debugLog("📖 Opening Tutorial... Reset to Page 1");
     }
 }
 
