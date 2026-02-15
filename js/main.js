@@ -120,7 +120,17 @@ function toggleTutorial(show) {
         modal.style.display = show ? 'flex' : 'none';
         
         if (show) {
-            // This is the critical line that resets the UI every time you open it
+            // 1. CLEAR EVERYTHING: Manually remove active from all pages
+            document.querySelectorAll('.tutorial-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // 2. Clear all dots
+            document.querySelectorAll('.dot').forEach(dot => {
+                dot.classList.remove('active');
+            });
+
+            // 3. Now force Page 1 to be the only active one
             nextPage(1); 
         }
     }
