@@ -755,3 +755,32 @@ video:not(#ar-video):not(#bg-video) {
 .page-indicator { display: flex; gap: 8px; margin-top: 10px; }
 .dot { width: 8px; height: 8px; background: rgba(227, 78, 78, 0.24)); border-radius: 50%; }
 .dot.active { background: white; width: 20px; border-radius: 10px; }
+
+/* Container for buttons outside the card */
+.tutorial-nav {
+    position: absolute;
+    /* This places the nav about 40px below where the glass card ends */
+    top: calc(15vh + 60vh + 30px); 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 30001; /* Higher than the glass card */
+}
+
+/* Style for the button when it's outside */
+#nav-btn-next {
+    background: white;
+    color: #e34e4e;
+    border: none;
+    padding: 12px 80px;
+    font-size: 18px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* Change button color when it says 'Start' */
+#nav-btn-next.start-btn-active {
+    background: #ff8a8a;
+    color: white;
+}
