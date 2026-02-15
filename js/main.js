@@ -122,27 +122,22 @@ function toggleTutorial(show) {
     modal.style.display = show ? 'flex' : 'none';
 
     if (show) {
-        debugLog("🔄 Forcing Tutorial Reset...");
+        debugLog("🧹 Forcing Total Page Reset...");
 
-        // 1. Manually hide every page using direct styles
-        document.querySelectorAll('.tutorial-page').forEach(page => {
-            page.classList.remove('active');
-            page.style.setProperty('display', 'none', 'important'); 
+        // 1. Manually force every single page to hide
+        const p1 = document.getElementById('page-1');
+        const p2 = document.getElementById('page-2');
+        const p3 = document.getElementById('page-3');
+
+        if (p1) { p1.style.display = 'flex'; p1.classList.add('active'); }
+        if (p2) { p2.style.display = 'none'; p2.classList.remove('active'); }
+        if (p3) { p3.style.display = 'none'; p3.classList.remove('active'); }
+
+        // 2. Reset the dots
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            if (index === 0) dot.classList.add('active');
+            else dot.classList.remove('active');
         });
-
-        // 2. Clear all dots
-        document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
-
-        // 3. Manually force Page 1 to show
-        const page1 = document.getElementById('page-1');
-        const dot1 = document.querySelectorAll('.dot')[0];
-
-        if (page1) {
-            page1.classList.add('active');
-            page1.style.setProperty('display', 'flex', 'important');
-            page1.style.setProperty('flex-direction', 'column', 'important');
-        }
-        if (dot1) dot1.classList.add('active');
     }
 }
 
