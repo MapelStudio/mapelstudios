@@ -719,17 +719,16 @@ video:not(#ar-video):not(#bg-video) {
 /* This hides every page that isn't active */
 /* Hide all pages by default and set them to stack vertically */
 .tutorial-page { 
-    display: none !important; /* Forces hidden pages to stay away */
+    display: none !important; /* Hide everything by default */
     width: 100%; 
     height: 100%; 
-    flex-direction: column !important; 
-    justify-content: space-around !important; 
-    align-items: center !important;
 }
 
-/* Show ONLY the one with the active class */
 .tutorial-page.active { 
-    display: flex !important; 
+    display: flex !important; /* Only show the active one */
+    flex-direction: column !important; 
+    justify-content: space-around !important; /* This creates the gaps */
+    align-items: center !important;
 }
 .tutorial-title { font-size: 24px; color: #ff8a8a; margin: 0; }
 .tutorial-text { font-size: 16px; opacity: 0.9; line-height: 1.4; }
