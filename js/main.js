@@ -155,6 +155,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const arVideo2 = document.getElementById('ar-video-2');
     
     debugLog("Initialized");
+
+  const btnRight = document.getElementById('btn-right');
+    if (btnRight) {
+        btnRight.addEventListener('click', () => {
+            debugLog("🎯 Tutorial button clicked");
+            toggleTutorial(true);
+        });
+    }
+    
+    const closeBtn = document.getElementById('close-tutorial-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => toggleTutorial(false));
+    }
+    
+    const finalStart = document.getElementById('close-tutorial-final');
+    if (finalStart) {
+        finalStart.addEventListener('click', () => toggleTutorial(false));
+    }
     
     if (!startBtn) {
         console.error("Could not find start-btn!");
@@ -238,25 +256,5 @@ if (btnRight) {
     });
 }
 
-// Attach the logic to your buttons
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Top Right Button Trigger (id="btn-right")
-    const tutorialTrigger = document.getElementById('btn-right');
-    if (tutorialTrigger) {
-        tutorialTrigger.addEventListener('click', () => toggleTutorial(true));
-    }
-
-    // 2. Close 'X' Button
-    const closeBtn = document.getElementById('close-tutorial-btn');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => toggleTutorial(false));
-    }
-
-    // 3. Final 'Start' Button
-    const finalStart = document.getElementById('close-tutorial-final');
-    if (finalStart) {
-        finalStart.addEventListener('click', () => toggleTutorial(false));
-    }
-});
   
 });
