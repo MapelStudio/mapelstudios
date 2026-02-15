@@ -96,42 +96,39 @@ function playAnim(type) {
 
 // Function to cycle through the 3 pages
 function nextPage(pageNumber) {
-    // 1. Hide every single tutorial page first
-    document.querySelectorAll('.tutorial-page').forEach(p => {
-        p.classList.remove('active');
-        p.style.display = 'none'; 
-    });
-
-    // 2. Remove active state from all dots
-    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+    debugLog("Switching to tutorial page: " + pageNumber);
     
-    // 3. Show ONLY the requested page
+    // 1. Remove 'active' from ALL pages and ALL dots first
+    document.querySelectorAll('.tutorial-page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+
+    // 2. Find the specific page and dot we want
     const targetPage = document.getElementById(`page-${pageNumber}`);
     const targetDot = document.querySelectorAll('.dot')[pageNumber - 1];
     
+    // 3. Apply the 'active' class only to the new ones
     if (targetPage) {
         targetPage.classList.add('active');
-        targetPage.style.display = 'flex'; // Use flex for the glass card layout
+    } else {
+        debugLog("❌ Error: Could not find page-" + pageNumber);
     }
+    
     if (targetDot) {
         targetDot.classList.add('active');
     }
 }
 
-// Function to open/close the main overlay
 function toggleTutorial(show) {
     const modal = document.getElementById('tutorial-modal');
     if (modal) {
         modal.style.display = show ? 'flex' : 'none';
         
         if (show) {
-            // Force a reset to page 1
+            // This is the critical line that resets the UI every time you open it
             nextPage(1); 
-            debugLog("📖 Opening Tutorial - Page 1");
         }
     }
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
