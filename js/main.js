@@ -96,26 +96,18 @@ function playAnim(type) {
 
 // Function to cycle through the 3 pages
 function nextPage(pageNumber) {
-    debugLog("Switching to tutorial page: " + pageNumber);
-    
-    // 1. Remove 'active' from ALL pages and ALL dots first
+    // 1. Remove 'active' class from ALL pages first
     document.querySelectorAll('.tutorial-page').forEach(p => p.classList.remove('active'));
+    
+    // 2. Remove 'active' from all dots
     document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
 
-    // 2. Find the specific page and dot we want
+    // 3. Only now add 'active' to the ONE page you want
     const targetPage = document.getElementById(`page-${pageNumber}`);
+    if (targetPage) targetPage.classList.add('active');
+    
     const targetDot = document.querySelectorAll('.dot')[pageNumber - 1];
-    
-    // 3. Apply the 'active' class only to the new ones
-    if (targetPage) {
-        targetPage.classList.add('active');
-    } else {
-        debugLog("❌ Error: Could not find page-" + pageNumber);
-    }
-    
-    if (targetDot) {
-        targetDot.classList.add('active');
-    }
+    if (targetDot) targetDot.classList.add('active');
 }
 
 function toggleTutorial(show) {
