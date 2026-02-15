@@ -96,43 +96,53 @@ function playAnim(type) {
 
 // Function to cycle through the 3 pages
 function nextPage(pageNumber) {
-    // Clean the slate: Remove 'active' from all pages
-    document.querySelectorAll('.tutorial-page').forEach(p => {
-        p.classList.remove('active');
+    // Hide all
+    document.querySelectorAll('.tutorial-page').forEach(page => {
+        page.style.setProperty('display', 'none', 'important');
+        page.classList.remove('active');
     });
+    document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
 
-    // Clean the dots
-    document.querySelectorAll('.dot').forEach(d => {
-        d.classList.remove('active');
-    });
-
-    // Show the specific page
+    // Show target
     const targetPage = document.getElementById(`page-${pageNumber}`);
-    if (targetPage) targetPage.classList.add('active');
-
     const targetDot = document.querySelectorAll('.dot')[pageNumber - 1];
+
+    if (targetPage) {
+        targetPage.style.setProperty('display', 'flex', 'important');
+        targetPage.style.setProperty('flex-direction', 'column', 'important');
+        targetPage.classList.add('active');
+    }
     if (targetDot) targetDot.classList.add('active');
 }
 
 function toggleTutorial(show) {
     const modal = document.getElementById('tutorial-modal');
-    if (modal) {
-        modal.style.display = show ? 'flex' : 'none';
-        
-        if (show) {
-            // 1. CLEAR EVERYTHING: Manually remove active from all pages
-            document.querySelectorAll('.tutorial-page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // 2. Clear all dots
-            document.querySelectorAll('.dot').forEach(dot => {
-                dot.classList.remove('active');
-            });
+    if (!modal) return;
 
-            // 3. Now force Page 1 to be the only active one
-            nextPage(1); 
+    modal.style.display = show ? 'flex' : 'none';
+
+    if (show) {
+        debugLog("🔄 Forcing Tutorial Reset...");
+
+        // 1. Manually hide every page using direct styles
+        document.querySelectorAll('.tutorial-page').forEach(page => {
+            page.classList.remove('active');
+            page.style.setProperty('display', 'none', 'important'); 
+        });
+
+        // 2. Clear all dots
+        document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+
+        // 3. Manually force Page 1 to show
+        const page1 = document.getElementById('page-1');
+        const dot1 = document.querySelectorAll('.dot')[0];
+
+        if (page1) {
+            page1.classList.add('active');
+            page1.style.setProperty('display', 'flex', 'important');
+            page1.style.setProperty('flex-direction', 'column', 'important');
         }
+        if (dot1) dot1.classList.add('active');
     }
 }
 
