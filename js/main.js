@@ -167,6 +167,27 @@ function toggleTutorial(show) {
     }
 }
 
+function toggleAnimMenu() {
+    const drawer = document.getElementById('anim-drawer');
+    if (!drawer) return;
+
+    // Toggle display between 'none' and 'flex'
+    if (drawer.style.display === 'none' || drawer.style.display === '') {
+        drawer.style.display = 'flex';
+        debugLog("📂 Animation menu opened");
+    } else {
+        drawer.style.display = 'none';
+        debugLog("📁 Animation menu closed");
+    }
+}
+
+// Update your playAnim function to close the menu after a selection is made
+const originalPlayAnim = playAnim;
+playAnim = function(type) {
+    originalPlayAnim(type);
+    document.getElementById('anim-drawer').style.display = 'none'; // Auto-hide menu
+};
+
 // SINGLE DOMContentLoaded - Everything goes here
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
