@@ -86,8 +86,12 @@ function playAnim(type) {
     }, { once: true });
 }
 
-// Tutorial System Logic
+// 1. New variable to track the current page globally
+let tutorialStep = 1;
+
+// 2. Updated nextPage to sync with our global step
 function nextPage(pageNumber) {
+    tutorialStep = pageNumber; // Keep track of which page we are on
     debugLog("📄 Going to page " + pageNumber);
     
     const allPages = document.querySelectorAll('.tutorial-page');
@@ -111,8 +115,35 @@ function nextPage(pageNumber) {
     if (targetDot) {
         targetDot.classList.add('active');
     }
+
+    // Update the button text (Next vs Start) every time the page changes
+    updateButtonText();
 }
 
+// 3. New function to handle the click on the external button
+function handleNext() {
+    if (tutorialStep < 3) {
+        nextPage(tutorialStep + 1);
+    } else {
+        toggleTutorial(false); // Close if we are on the last page
+    }
+}
+
+// 4. New function to swap button text
+function updateButtonText() {
+    const btn = document.getElementById('nav-btn-next');
+    if (!btn) return;
+
+    if (tutorialStep === 3) {
+        btn.innerText = "Start";
+        btn.classList.add('start-btn-active');
+    } else {
+        btn.innerText = "Next";
+        btn.classList.remove('start-btn-active');
+    }
+}
+
+// 5. Your existing toggleTutorial (remains mostly the same, but resets step)
 function toggleTutorial(show) {
     const modal = document.getElementById('tutorial-modal');
     if (!modal) {
@@ -124,6 +155,9 @@ function toggleTutorial(show) {
         modal.style.display = 'flex';
         debugLog("🔓 Opening tutorial...");
         
+        // Reset step to 1 whenever opening
+        tutorialStep = 1; 
+
         setTimeout(() => {
             nextPage(1);
         }, 50);
