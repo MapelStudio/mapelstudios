@@ -716,13 +716,18 @@ video:not(#ar-video):not(#bg-video) {
 }
 
 /* Page Control */
-/* Force only the active page to show */
+/* This hides every page that isn't active */
 .tutorial-page {
     display: none !important; 
 }
 
+/* This shows only the active page and stacks content vertically */
 .tutorial-page.active {
     display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+    height: 100% !important;
 }
 .tutorial-title { font-size: 24px; color: #ff8a8a; margin: 0; }
 .tutorial-text { font-size: 16px; opacity: 0.9; line-height: 1.4; }
