@@ -96,16 +96,20 @@ function playAnim(type) {
 
 // Function to cycle through the 3 pages
 function nextPage(pageNumber) {
-    // 1. Remove 'active' class from ALL pages first
-    document.querySelectorAll('.tutorial-page').forEach(p => p.classList.remove('active'));
-    
-    // 2. Remove 'active' from all dots
-    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+    // Clean the slate: Remove 'active' from all pages
+    document.querySelectorAll('.tutorial-page').forEach(p => {
+        p.classList.remove('active');
+    });
 
-    // 3. Only now add 'active' to the ONE page you want
+    // Clean the dots
+    document.querySelectorAll('.dot').forEach(d => {
+        d.classList.remove('active');
+    });
+
+    // Show the specific page
     const targetPage = document.getElementById(`page-${pageNumber}`);
     if (targetPage) targetPage.classList.add('active');
-    
+
     const targetDot = document.querySelectorAll('.dot')[pageNumber - 1];
     if (targetDot) targetDot.classList.add('active');
 }
