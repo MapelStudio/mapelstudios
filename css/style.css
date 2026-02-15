@@ -724,10 +724,9 @@ video:not(#ar-video):not(#bg-video) {
 /* This shows only the active page and stacks content vertically */
 .tutorial-page.active {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: column !important; /* Forces top-to-bottom layout */
     align-items: center !important;
-    justify-content: space-around !important;
-    height: 100% !important;
+    justify-content: center !important;
 }
 .tutorial-title { font-size: 24px; color: #ff8a8a; margin: 0; }
 .tutorial-text { font-size: 16px; opacity: 0.9; line-height: 1.4; }
