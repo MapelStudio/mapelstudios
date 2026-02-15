@@ -92,60 +92,56 @@ function playAnim(type) {
     }, { once: true });
 }
 
-  // --- Tutorial System Logic ---
+// --- Tutorial System Logic ---
 
 // Function to cycle through the 3 pages
 function nextPage(pageNumber) {
-    // Hide all
-    document.querySelectorAll('.tutorial-page').forEach(page => {
-        page.style.setProperty('display', 'none', 'important');
+    debugLog("📄 Going to page " + pageNumber);
+    
+    // Hide ALL pages
+    const allPages = document.querySelectorAll('.tutorial-page');
+    allPages.forEach(page => {
         page.classList.remove('active');
     });
-    document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+    
+    // Clear all dots
+    const allDots = document.querySelectorAll('.dot');
+    allDots.forEach(dot => {
+        dot.classList.remove('active');
+    });
 
-    // Show target
+    // Show the target page
     const targetPage = document.getElementById(`page-${pageNumber}`);
-    const targetDot = document.querySelectorAll('.dot')[pageNumber - 1];
+    const targetDot = allDots[pageNumber - 1];
 
     if (targetPage) {
-        targetPage.style.setProperty('display', 'flex', 'important');
-        targetPage.style.setProperty('flex-direction', 'column', 'important');
         targetPage.classList.add('active');
+        debugLog("✅ Page " + pageNumber + " is now active");
     }
-    if (targetDot) targetDot.classList.add('active');
+    
+    if (targetDot) {
+        targetDot.classList.add('active');
+    }
 }
+
 function toggleTutorial(show) {
     const modal = document.getElementById('tutorial-modal');
-    if (!modal) return;
-
-    modal.style.display = show ? 'flex' : 'none';
+    if (!modal) {
+        debugLog("❌ Tutorial modal not found!");
+        return;
+    }
 
     if (show) {
-        // FORCE RESET: Hide ALL pages first
-        document.querySelectorAll('.tutorial-page').forEach(page => {
-            page.classList.remove('active');
-            page.style.display = 'none';
-        });
-
-        // CLEAR all dots
-        document.querySelectorAll('.dot').forEach(dot => {
-            dot.classList.remove('active');
-        });
-
-        // NOW show ONLY page 1
-        const page1 = document.getElementById('page-1');
-        const dot1 = document.querySelectorAll('.dot')[0];
+        modal.style.display = 'flex';
+        debugLog("🔓 Opening tutorial...");
         
-        if (page1) {
-            page1.classList.add('active');
-            page1.style.display = 'flex';
-        }
-        
-        if (dot1) {
-            dot1.classList.add('active');
-        }
-        
-        debugLog("✅ Tutorial Reset to Page 1");
+        // Small delay to ensure DOM is ready
+        setTimeout(() => {
+            nextPage(1); // Force reset to page 1
+        }, 50);
+    } else {
+        modal.style.display = 'none';
+        debugLog("🔒 Closing tutorial");
     }
 }
 document.addEventListener('DOMContentLoaded', () => {
