@@ -96,17 +96,26 @@ function playAnim(type) {
 
 // Function to cycle through the 3 pages
 function nextPage(pageNumber) {
-    // Hide all pages
-    document.querySelectorAll('.tutorial-page').forEach(p => p.classList.remove('active'));
-    // Deactivate all dots
+    // 1. Hide every single tutorial page first
+    document.querySelectorAll('.tutorial-page').forEach(p => {
+        p.classList.remove('active');
+        p.style.display = 'none'; 
+    });
+
+    // 2. Remove active state from all dots
     document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
     
-    // Show the selected page and dot
+    // 3. Show ONLY the requested page
     const targetPage = document.getElementById(`page-${pageNumber}`);
     const targetDot = document.querySelectorAll('.dot')[pageNumber - 1];
     
-    if (targetPage) targetPage.classList.add('active');
-    if (targetDot) targetDot.classList.add('active');
+    if (targetPage) {
+        targetPage.classList.add('active');
+        targetPage.style.display = 'flex'; // Use flex for the glass card layout
+    }
+    if (targetDot) {
+        targetDot.classList.add('active');
+    }
 }
 
 // Function to open/close the main overlay
@@ -115,11 +124,10 @@ function toggleTutorial(show) {
     if (modal) {
         modal.style.display = show ? 'flex' : 'none';
         
-        // If closing, ensure the next time it opens, it's on page 1
         if (show) {
-            nextPage(1);
-        } else {
-            debugLog("🚀 Tutorial Closed - AR Active");
+            // Force a reset to page 1
+            nextPage(1); 
+            debugLog("📖 Opening Tutorial - Page 1");
         }
     }
 }
