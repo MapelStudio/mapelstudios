@@ -121,28 +121,33 @@ function toggleTutorial(show) {
     modal.style.display = show ? 'flex' : 'none';
 
     if (show) {
-        // 1. CLEAR: Specifically target page-3 to remove active
-        const p1 = document.getElementById('page-1');
-        const p2 = document.getElementById('page-2');
-        const p3 = document.getElementById('page-3');
+        // FORCE RESET: Hide ALL pages first
+        document.querySelectorAll('.tutorial-page').forEach(page => {
+            page.classList.remove('active');
+            page.style.display = 'none';
+        });
 
-        if (p3) p3.classList.remove('active');
-        if (p2) p2.classList.remove('active');
+        // CLEAR all dots
+        document.querySelectorAll('.dot').forEach(dot => {
+            dot.classList.remove('active');
+        });
 
-        // 2. CLEAR DOTS:
-        document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
-
-        // 3. RESET: Force Page 1 to be the only active one
-        if (p1) {
-            p1.classList.add('active');
-            // Trigger nextPage(1) just to be safe and update dots
-            nextPage(1);
+        // NOW show ONLY page 1
+        const page1 = document.getElementById('page-1');
+        const dot1 = document.querySelectorAll('.dot')[0];
+        
+        if (page1) {
+            page1.classList.add('active');
+            page1.style.display = 'flex';
         }
         
-        debugLog("🔄 Forced Reset to Welcome Page");
+        if (dot1) {
+            dot1.classList.add('active');
+        }
+        
+        debugLog("✅ Tutorial Reset to Page 1");
     }
 }
-
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
