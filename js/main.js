@@ -114,8 +114,13 @@ function toggleTutorial(show) {
     const modal = document.getElementById('tutorial-modal');
     if (modal) {
         modal.style.display = show ? 'flex' : 'none';
-        // Always reset to Page 1 when opening
-        if (show) nextPage(1);
+        
+        // If closing, ensure the next time it opens, it's on page 1
+        if (show) {
+            nextPage(1);
+        } else {
+            debugLog("🚀 Tutorial Closed - AR Active");
+        }
     }
 }
 
