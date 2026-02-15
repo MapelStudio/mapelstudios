@@ -122,21 +122,24 @@ function toggleTutorial(show) {
     modal.style.display = show ? 'flex' : 'none';
 
     if (show) {
-        debugLog("🧹 Forcing Total Page Reset...");
+        debugLog("🧹 Resetting Layout and Pages...");
 
-        // 1. Manually force every single page to hide
+        // 1. Force Page 1 to show and others to hide
         const p1 = document.getElementById('page-1');
         const p2 = document.getElementById('page-2');
         const p3 = document.getElementById('page-3');
 
-        if (p1) { p1.style.display = 'flex'; p1.classList.add('active'); }
+        // Reset Page 1 to be the only visible one
+        if (p1) { 
+            p1.style.setProperty('display', 'flex', 'important'); 
+            p1.classList.add('active'); 
+        }
         if (p2) { p2.style.display = 'none'; p2.classList.remove('active'); }
         if (p3) { p3.style.display = 'none'; p3.classList.remove('active'); }
 
         // 2. Reset the dots
         document.querySelectorAll('.dot').forEach((dot, index) => {
-            if (index === 0) dot.classList.add('active');
-            else dot.classList.remove('active');
+            dot.classList.toggle('active', index === 0);
         });
     }
 }
