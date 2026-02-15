@@ -65,33 +65,38 @@
         </div>
         <div class="status-label">ALIGN TARGET WITHIN CORNERS</div>
     </div>
-    <div id="tutorial-modal" class="tutorial-overlay">
+<div id="tutorial-modal" class="tutorial-overlay">
   <div class="tutorial-glass-card">
     <button class="close-x" id="close-tutorial-btn">&times;</button>
 
     <div class="tutorial-page active" id="page-1">
-      <div class="tutorial-art">
-        <img src="assets/welcome-illustration.png" alt="Welcome"> </div>
+      <div class="tutorial-art"><img src="assets/welcome-illustration.png" alt="Welcome"></div>
       <h2 class="tutorial-title">Welcome</h2>
       <p class="tutorial-text">How to see AR-photo?</p>
-      <button class="tutorial-btn" onclick="nextPage(2)">Next</button>
     </div>
 
     <div class="tutorial-page" id="page-2">
-      <div class="tutorial-art">
-        <img src="assets/qr-illustration.png" alt="QR Code"> </div>
+      <div class="tutorial-art"><img src="assets/qr-illustration.png" alt="QR Code"></div>
       <h2 class="tutorial-title">QR-code</h2>
       <p class="tutorial-text">Point the camera at the QR code<br>to add your photos</p>
-      <button class="tutorial-btn" onclick="nextPage(3)">Next</button>
     </div>
 
     <div class="tutorial-page" id="page-3">
-      <div class="tutorial-art">
-        <img src="assets/ar-illustration.png" alt="AR Photo"> </div>
+      <div class="tutorial-art"><img src="assets/ar-illustration.png" alt="AR Photo"></div>
       <h2 class="tutorial-title">AR-photo</h2>
       <p class="tutorial-text">Now point the camera at the photo.<br>It becomes alive!</p>
-      <button class="tutorial-btn start-trigger" id="close-tutorial-final" onclick="toggleTutorial(false)">Start</button>
     </div>
+  </div>
+
+  <div class="tutorial-nav">
+    <button class="tutorial-btn" id="nav-btn-next" onclick="handleNext()">Next</button>
+    <div class="page-indicator">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</div>
 
     <div class="page-indicator">
       <span class="dot active"></span>
