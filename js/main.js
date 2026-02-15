@@ -131,17 +131,15 @@ function handleNext() {
 
 // 4. New function to swap button text
 function updateButtonText() {
-    // Target the label inside the rotating container
-    const label = document.querySelector('.btn-label');
-    if (!label) return;
+    const btn = document.getElementById('nav-btn-next');
+    if (!btn) return;
 
     if (tutorialStep === 3) {
-        label.innerText = "Start";
-        // Optional: Change the label color to show it's the final step
-        label.style.color = "#e34e4e"; 
+        btn.innerText = "Start";
+        btn.classList.add('start-btn-active');
     } else {
-        label.innerText = "Next";
-        label.style.color = "#9b59b6";
+        btn.innerText = "Next";
+        btn.classList.remove('start-btn-active');
     }
 }
 
