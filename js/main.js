@@ -122,25 +122,13 @@ function toggleTutorial(show) {
     modal.style.display = show ? 'flex' : 'none';
 
     if (show) {
-        debugLog("🧹 Resetting Layout and Pages...");
+        // 1. CLEAR: Remove 'active' from every page and dot
+        document.querySelectorAll('.tutorial-page').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
 
-        // 1. Force Page 1 to show and others to hide
-        const p1 = document.getElementById('page-1');
-        const p2 = document.getElementById('page-2');
-        const p3 = document.getElementById('page-3');
-
-        // Reset Page 1 to be the only visible one
-        if (p1) { 
-            p1.style.setProperty('display', 'flex', 'important'); 
-            p1.classList.add('active'); 
-        }
-        if (p2) { p2.style.display = 'none'; p2.classList.remove('active'); }
-        if (p3) { p3.style.display = 'none'; p3.classList.remove('active'); }
-
-        // 2. Reset the dots
-        document.querySelectorAll('.dot').forEach((dot, index) => {
-            dot.classList.toggle('active', index === 0);
-        });
+        // 2. RESET: Force Page 1 to show
+        nextPage(1); 
+        debugLog("📖 Opening Tutorial... Reset to Page 1");
     }
 }
 
