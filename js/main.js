@@ -122,20 +122,27 @@ function toggleTutorial(show) {
     modal.style.display = show ? 'flex' : 'none';
 
     if (show) {
-        debugLog("🧹 Wiping old page states...");
+        debugLog("🧹 FORCING RESET...");
 
-        // 1. Physically remove 'active' from EVERY page
-        document.querySelectorAll('.tutorial-page').forEach(page => {
-            page.classList.remove('active');
+        // 1. Manually hide Page 2 and Page 3 first
+        const p2 = document.getElementById('page-2');
+        const p3 = document.getElementById('page-3');
+        if (p2) { p2.classList.remove('active'); p2.style.display = 'none'; }
+        if (p3) { p3.classList.remove('active'); p3.style.display = 'none'; }
+
+        // 2. Force Page 1 to show
+        const p1 = document.getElementById('page-1');
+        if (p1) {
+            p1.classList.add('active');
+            p1.style.display = 'flex';
+            p1.style.flexDirection = 'column';
+        }
+
+        // 3. Reset Dots
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            if (index === 0) dot.classList.add('active');
+            else dot.classList.remove('active');
         });
-
-        // 2. Physically remove 'active' from EVERY dot
-        document.querySelectorAll('.dot').forEach(dot => {
-            dot.classList.remove('active');
-        });
-
-        // 3. Now that the slate is clean, show Page 1
-        nextPage(1); 
     }
 }
 
