@@ -114,7 +114,6 @@ function nextPage(pageNumber) {
     }
     if (targetDot) targetDot.classList.add('active');
 }
-
 function toggleTutorial(show) {
     const modal = document.getElementById('tutorial-modal');
     if (!modal) return;
@@ -122,24 +121,25 @@ function toggleTutorial(show) {
     modal.style.display = show ? 'flex' : 'none';
 
     if (show) {
-        // 1. CLEAR: Remove 'active' from EVERY tutorial page
-        document.querySelectorAll('.tutorial-page').forEach(page => {
-            page.classList.remove('active');
-        });
-
-        // 2. CLEAR: Remove 'active' from EVERY dot
-        document.querySelectorAll('.dot').forEach(dot => {
-            dot.classList.remove('active');
-        });
-
-        // 3. RESET: Put the 'active' class back on Page 1 and Dot 1
+        // 1. CLEAR: Specifically target page-3 to remove active
         const p1 = document.getElementById('page-1');
-        const d1 = document.querySelectorAll('.dot')[0];
+        const p2 = document.getElementById('page-2');
+        const p3 = document.getElementById('page-3');
+
+        if (p3) p3.classList.remove('active');
+        if (p2) p2.classList.remove('active');
+
+        // 2. CLEAR DOTS:
+        document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+
+        // 3. RESET: Force Page 1 to be the only active one
+        if (p1) {
+            p1.classList.add('active');
+            // Trigger nextPage(1) just to be safe and update dots
+            nextPage(1);
+        }
         
-        if (p1) p1.classList.add('active');
-        if (d1) d1.classList.add('active');
-        
-        debugLog("🔄 Resetting to Welcome Page...");
+        debugLog("🔄 Forced Reset to Welcome Page");
     }
 }
 
