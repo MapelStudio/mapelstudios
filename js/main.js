@@ -122,27 +122,24 @@ function toggleTutorial(show) {
     modal.style.display = show ? 'flex' : 'none';
 
     if (show) {
-        debugLog("🧹 FORCING RESET...");
-
-        // 1. Manually hide Page 2 and Page 3 first
-        const p2 = document.getElementById('page-2');
-        const p3 = document.getElementById('page-3');
-        if (p2) { p2.classList.remove('active'); p2.style.display = 'none'; }
-        if (p3) { p3.classList.remove('active'); p3.style.display = 'none'; }
-
-        // 2. Force Page 1 to show
-        const p1 = document.getElementById('page-1');
-        if (p1) {
-            p1.classList.add('active');
-            p1.style.display = 'flex';
-            p1.style.flexDirection = 'column';
-        }
-
-        // 3. Reset Dots
-        document.querySelectorAll('.dot').forEach((dot, index) => {
-            if (index === 0) dot.classList.add('active');
-            else dot.classList.remove('active');
+        // 1. CLEAR: Remove 'active' from EVERY tutorial page
+        document.querySelectorAll('.tutorial-page').forEach(page => {
+            page.classList.remove('active');
         });
+
+        // 2. CLEAR: Remove 'active' from EVERY dot
+        document.querySelectorAll('.dot').forEach(dot => {
+            dot.classList.remove('active');
+        });
+
+        // 3. RESET: Put the 'active' class back on Page 1 and Dot 1
+        const p1 = document.getElementById('page-1');
+        const d1 = document.querySelectorAll('.dot')[0];
+        
+        if (p1) p1.classList.add('active');
+        if (d1) d1.classList.add('active');
+        
+        debugLog("🔄 Resetting to Welcome Page...");
     }
 }
 
