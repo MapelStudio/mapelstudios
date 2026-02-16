@@ -171,9 +171,8 @@ function toggleAnimMenu() {
     const drawer = document.getElementById('anim-drawer');
     if (!drawer) return;
 
-    // Toggle using 'flex' to maintain the horizontal row
     if (drawer.style.display === 'none' || drawer.style.display === '') {
-        drawer.style.display = 'flex';
+        drawer.style.display = 'flex'; // This must be 'flex' for horizontal layout
     } else {
         drawer.style.display = 'none';
     }
