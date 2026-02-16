@@ -704,28 +704,27 @@ video:not(#ar-video):not(#bg-video) {
 
 /* The Glass Card */
 .tutorial-glass-card {
-    margin-top: 10vh; /* 15% top gap */
+    margin-top: 8vh !important; /* Kept your preferred 'up' position */
     width: 85%;
     max-width: 400px;
-    height: 60vh; /* 60% screen height */
+    height: 60vh; /* Covers 60% of the screen height */
     position: relative;
     
-    /* Your requested Glass Style */
-    background: rgba(255, 255, 255, 1);
+    /* --- NEW GLASS UI FROM CSS.GLASS --- */
+    background: rgba(255, 255, 255, 0.32);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5.3px);
-    -webkit-backdrop-filter: blur(5.3px);
-    border: 1px solid rgba(227, 78, 78, 0.3);
+    backdrop-filter: blur(4.4px);
+    -webkit-backdrop-filter: blur(4.4px);
+    border: 1px solid rgba(255, 255, 255, 0.38);
     
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     text-align: center;
-    color: white;
+    color: white; /* Keeps text readable on the white glass */
 }
-
 /* Page Control */
 /* This hides every page that isn't active */
 /* Hide all pages by default and set them to stack vertically */
@@ -741,8 +740,14 @@ video:not(#ar-video):not(#bg-video) {
     justify-content: space-around !important; /* This creates the gaps */
     align-items: center !important;
 }
-.tutorial-title { font-size: 24px; color: #ff8a8a; margin: 0; }
-.tutorial-text { font-size: 16px; opacity: 0.9; line-height: 1.4; }
+.tutorial-title {
+    color: #ffffff !important; /* Pure white for the glass */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Soft shadow to help it 'pop' */
+}
+
+.tutorial-text {
+    color: #f0f0f0 !important;
+}
 
 .tutorial-btn {
     background: transparent;
