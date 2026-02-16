@@ -837,11 +837,6 @@ video:not(#ar-video):not(#bg-video) {
     z-index: 9999;
 }
 
-.anim-drawer {
-    display: none; /* Hidden by default */
-    flex-direction: row; /* Horizontal row */
-    gap: 10px;
-}
 
 .anim-btn {
     /* Your Glass UI */
@@ -863,16 +858,29 @@ video:not(#ar-video):not(#bg-video) {
     cursor: pointer;
 }
 
+/* Force the main button to lose the red color */
 .main-trigger {
-    min-width: 160px;
-    background: rgba(255, 255, 255, 0.45); /* Slightly clearer for visibility */
+    min-width: 180px !important;
+    background: rgba(255, 255, 255, 0.32) !important; /* Forces it to match the glass */
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
 }
 
+/* Make 'Idle', 'Run', and 'Walk' bigger */
 .sub-btn {
-    padding: 8px 15px !important;
-    font-size: 11px !important;
+    padding: 12px 25px !important; /* Increased padding for a larger look */
+    font-size: 14px !important;    /* Larger text */
+    min-width: 90px !important;
+    border-radius: 14px !important;
 }
 
+/* Ensure the drawer stays horizontal and spaced out */
+.anim-drawer {
+    display: none; 
+    flex-direction: row !important;
+    gap: 15px !important; /* More space between the larger buttons */
+    justify-content: center;
+}
 /* Hover Glow Effect */
 .anim-btn:hover {
     border: 1px solid rgba(255, 255, 255, 1);
