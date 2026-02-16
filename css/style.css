@@ -711,7 +711,7 @@ video:not(#ar-video):not(#bg-video) {
     position: relative;
     
     /* Your requested Glass Style */
-    background: rgba(227, 78, 78, 0.24);
+    background: rgba(255, 255, 255, 1);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5.3px);
