@@ -171,22 +171,31 @@ function toggleAnimMenu() {
     const drawer = document.getElementById('anim-drawer');
     if (!drawer) return;
 
-    // Toggle display between 'none' and 'flex'
+    // Toggle using 'flex' to maintain the horizontal row
     if (drawer.style.display === 'none' || drawer.style.display === '') {
         drawer.style.display = 'flex';
-        debugLog("📂 Animation menu opened");
     } else {
         drawer.style.display = 'none';
-        debugLog("📁 Animation menu closed");
     }
 }
 
-// Update your playAnim function to close the menu after a selection is made
-const originalPlayAnim = playAnim;
-playAnim = function(type) {
-    originalPlayAnim(type);
-    document.getElementById('anim-drawer').style.display = 'none'; // Auto-hide menu
-};
+// Ensure the drawer closes when a selection is made
+function playAnim(type) {
+    const horse = document.getElementById('horse-mesh');
+    if (!horse) return;
+
+    let fileURL = "";
+    if (type === 'idle') fileURL = "./assets/horse_anime.glb";
+    if (type === 'run')  fileURL = "./assets/animation1.glb";
+    if (type === 'walk') fileURL = "./assets/animation2.glb";
+
+    horse.setAttribute('gltf-model', fileURL);
+    
+    // Hide the drawer after clicking an option
+    document.getElementById('anim-drawer').style.display = 'none';
+    
+    debugLog("✅ Playing: " + type);
+}
 
 // SINGLE DOMContentLoaded - Everything goes here
 document.addEventListener('DOMContentLoaded', () => {
