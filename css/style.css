@@ -678,17 +678,28 @@ video:not(#ar-video):not(#bg-video) {
     transform: scale(0.95);
 }
 
-/* Full screen blur layer */
+/* Full screen background image layer */
 .tutorial-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px); /* Blurs the 40% outside the card */
-    -webkit-backdrop-filter: blur(8px);
     z-index: 30000;
     display: none; /* Hidden by default */
     justify-content: center;
-    align-items: flex-start; /* Aligns to top so we can set the 15% margin */
+    align-items: flex-start;
+
+    /* Background Image Setup */
+    background: url('../assets/tutorial-bg.jpeg') no-repeat center center;
+    background-size: cover;
+}
+
+/* Add a blur effect to the background image only */
+.tutorial-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit; /* Inherits the tutorial-bg.jpg */
+    filter: blur(15px) brightness(0.7); /* Adjust blur and brightness here */
+    z-index: -1; /* Keeps it behind the glass card */
 }
 
 /* The Glass Card */
