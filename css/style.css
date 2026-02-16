@@ -785,28 +785,40 @@ video:not(#ar-video):not(#bg-video) {
     color: white;
 }
 
-/* Container for the menu */
+/* The main container */
 .horse-ui {
-    flex-direction: column-reverse !important; /* Stack drawer above the button */
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column; /* Stack drawer on top of button */
     align-items: center;
+    gap: 15px; /* Space between the row of options and the main button */
+    z-index: 9999;
 }
 
-/* The sub-menu drawer */
+/* The Horizontal Drawer */
 .anim-drawer {
-    display: none; /* Hidden until main button is clicked */
-    flex-direction: column;
+    display: none; /* Hidden by default */
+    flex-direction: row; /* Horizontal row */
     gap: 10px;
-    margin-bottom: 15px; /* Gap between drawer and main button */
+    justify-content: center;
+    width: max-content;
 }
 
-/* Optional: Make sub-buttons look slightly different */
+/* Sub-buttons styling */
 .sub-btn {
-    padding: 10px 15px !important;
-    font-size: 12px !important;
-    background: rgba(0, 0, 0, 0.6) !important;
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+    min-width: 70px;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
 }
 
+/* The fixed Animations button */
 .main-trigger {
-    background: rgba(227, 78, 78, 0.8) !important; /* Stand-out color for main button */
+    min-width: 150px;
+    background: rgba(227, 78, 78, 0.8) !important;
     border: 2px solid white !important;
 }
