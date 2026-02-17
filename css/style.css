@@ -922,4 +922,12 @@ video:not(#ar-video):not(#bg-video) {
     justify-content: center;
 }
 
+/* Hide the default Mind-AR blue loading overlay */
+.mindar-ui-loading {
+    display: none !important;
+}
 
+/* Hide the default scanning overlay if it appears */
+.mindar-ui-scanning {
+    display: none !important;
+}
