@@ -11,6 +11,12 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
 </head>
 <body>
+    <div id="loading-screen">
+    <div class="loader-content">
+        <div class="spinner"></div>
+        <p>Loading Magic...</p>
+    </div>
+</div>
 
     <div id="ui">
     
@@ -113,7 +119,7 @@
 </div>
     <a-scene 
     id="sceneEl"
-mindar-image="imageTargetSrc: ./data/targets (1).mind; autoStart: false; uiScanning: no; uiLoading: no; filterMinCF: 0.001; filterBeta: 0.01;"
+mindar-image="imageTargetSrc: ./data/targets (1).mind; autoStart: false; uiScanning: no; ui: no; filterMinCF: 0.001; filterBeta: 0.01;"
 embedded 
 color-space="sRGB" 
 renderer="colorManagement: true;"
