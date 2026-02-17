@@ -880,9 +880,9 @@ video:not(#ar-video):not(#bg-video) {
 
 .anim-btn {
     /* Your Glass UI */
-    background: rgba(255, 255, 255, 0.32);
-    backdrop-filter: blur(4.4px);
-    -webkit-backdrop-filter: blur(4.4px);
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(7.1px);
+    -webkit-backdrop-filter: blur(7.1px);
     border-radius: 16px;
     
     /* White Glowing Outline */
