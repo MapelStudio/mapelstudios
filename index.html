@@ -121,38 +121,24 @@ xr-mode-ui="enabled: false"
 device-orientation-permission-ui="enabled: false">
         
         <a-assets>
-    <video id="ar-video" preload="auto" loop="true" crossorigin="anonymous" playsinline webkit-playsinline></video>
-    <a-asset-item id="shoe-model" src="assets/procedural_shoe_test_2.glb"></a-asset-item>
-    <video id="ar-video-2" preload="auto" loop="true" crossorigin="anonymous" playsinline></video>
-    <a-asset-item id="horse-model" src="./assets/horse_anime.glb"></a-asset-item>
-    <a-asset-item id="horse-run" src="./assets/animation1.glb"></a-asset-item>
-    <a-asset-item id="horse-walk" src="./assets/animation2.glb"></a-asset-item>
-</a-assets>
+        <a-asset-item id="model-a" src="assets/apple.glb"></a-asset-item>
+        <a-asset-item id="model-b" src="assets/ball.glb"></a-asset-item>
+        <a-asset-item id="model-c" src="assets/cat.glb"></a-asset-item>
+    </a-assets>
 
-        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-        <a-entity id="target" mindar-image-target="targetIndex: 0">
-    <a-entity rotation="90 0 0">
-        <a-gltf-model 
-            id="horse-mesh"
-            src="#horse-model" 
-            position="0 0 0"
-            scale="0.5 0.5 0.5"
-            animation-mixer
-            touch-rotate> 
-        </a-gltf-model>
+    <a-entity id="target-a" class="alphabet-target" mindar-image-target="targetIndex: 0">
+        <a-gltf-model src="#model-a" rotation="90 0 0" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
     </a-entity>
-</a-entity>
-        <a-entity id="target2" mindar-image-target="targetIndex: 1">
-    <a-video 
-        id="video-display-2" 
-        src="#ar-video-2" 
-        width="0.9" 
-        height="0.902" 
-        position="0 0 0"
-        material="shader: flat; transparent: true;  opacity: 1; side: double;">
-    </a-video>
-</a-entity>
+
+    <a-entity id="target-b" class="alphabet-target" mindar-image-target="targetIndex: 1">
+        <a-gltf-model src="#model-b" rotation="90 0 0" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+
+    <a-entity id="target-c" class="alphabet-target" mindar-image-target="targetIndex: 2">
+        <a-gltf-model src="#model-c" rotation="90 0 0" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
     </a-scene>
 
     <video autoplay muted loop playsinline id="bg-video" oncontextmenu="return false;" disablePictureInPicture>
