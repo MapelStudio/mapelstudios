@@ -300,4 +300,24 @@ document.addEventListener('DOMContentLoaded', () => {
         arVideo2.pause();
         arVideo2.currentTime = 0;
     });
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loading-screen');
+    const sceneEl = document.querySelector('a-scene');
+
+    // Wait for the AR scene to be fully loaded
+    if (sceneEl.hasLoaded) {
+        hideLoader();
+    } else {
+        sceneEl.addEventListener('loaded', hideLoader);
+    }
+
+    function hideLoader() {
+        setTimeout(() => {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500); // Wait for fade-out to finish
+        }, 1000); // Give kids a second to see the 'magic' text
+    }
+});
 });
