@@ -268,36 +268,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Target 1 - 3D Model
-    targetEntity.addEventListener("targetFound", () => {
+    // This loop handles A, B, and C automatically
+const alphabetTargets = document.querySelectorAll('.alphabet-target');
+
+alphabetTargets.forEach(target => {
+    target.addEventListener("targetFound", () => {
+        debugLog("🎯 Found: " + target.id);
         scannerLayer.style.display = 'none';
         document.getElementById('horse-menu').style.display = 'flex';
-        debugLog("✅ Horse Found - Select Animation");
     });
 
-    targetEntity.addEventListener("targetLost", () => {
+    target.addEventListener("targetLost", () => {
+        debugLog("❌ Lost: " + target.id);
         scannerLayer.style.display = 'flex';
         document.getElementById('horse-menu').style.display = 'none';
         document.getElementById('anim-drawer').style.display = 'none';
     });
-    
-    // Target 2 - Video
-    target2Entity.addEventListener("targetFound", () => {
-        debugLog("🎯 TARGET 2 FOUND!");
-        scannerLayer.style.display = 'none';
-        
-        arVideo2.setAttribute('src', 'assets/video1.mp4'); 
-        debugLog("📹 Video source set");
-        arVideo2.load();
-        arVideo2.play().then(() => {
-            debugLog("✅ Video playing");
-        }).catch(err => {
-            console.error("❌ Video error:", err);
-        });
-    });
-    
-    target2Entity.addEventListener("targetLost", () => {
-        scannerLayer.style.display = 'flex';
-        arVideo2.pause();
-        arVideo2.currentTime = 0;
-    });
+});
 });
