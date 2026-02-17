@@ -921,9 +921,5 @@ video:not(#ar-video):not(#bg-video) {
     gap: 15px !important; /* More space between the larger buttons */
     justify-content: center;
 }
-/* Hover Glow Effect */
-.anim-btn:hover {
-    border: 1px solid rgba(255, 255, 255, 1);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-    transform: translateY(-2px);
+
 
