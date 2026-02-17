@@ -203,38 +203,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const scannerLayer = document.getElementById('scanner-container');
     const iconLayer = document.getElementById('icon-layer');
     const sceneEl = document.getElementById('sceneEl');
-    const targetEntity = document.getElementById('target');
-    const target2Entity = document.getElementById('target2');
-    const arVideo2 = document.getElementById('ar-video-2');
     
-    debugLog("Initialized");
+    // Select all alphabet targets instead of specific IDs
+    const alphabetTargets = document.querySelectorAll('.alphabet-target');
+    const animMenu = document.getElementById('horse-menu');
+    const animDrawer = document.getElementById('anim-drawer');
 
-    // Hide loading screen when page is ready
-const loadingScreen = document.getElementById('loading-screen');
+    debugLog("Initialized Alphabet AR Book");
 
-// Hide loading screen when MindAR assets are loaded
-sceneEl.addEventListener('loaded', () => {
-    debugLog("✅ Scene loaded - hiding loading screen");
-    if (loadingScreen) {
-        loadingScreen.style.opacity = '0';
-        loadingScreen.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => {
+    // --- LOADING SCREEN LOGIC ---
+    const loadingScreen = document.getElementById('loading-screen');
+
+    sceneEl.addEventListener('loaded', () => {
+        debugLog("✅ Scene loaded - hiding loading screen");
+        if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }
+    });
+
+    setTimeout(() => {
+        if (loadingScreen && loadingScreen.style.display !== 'none') {
+            loadingScreen.style.opacity = '0';
             loadingScreen.style.display = 'none';
-        }, 500);
-    }
-});
+        }
+    }, 5000);
 
-// Fallback: hide after 5 seconds no matter what
-setTimeout(() => {
-    if (loadingScreen && loadingScreen.style.display !== 'none') {
-        loadingScreen.style.opacity = '0';
-        loadingScreen.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 500);
-    }
-}, 5000);
-    // Tutorial button listeners
+    // --- UI BUTTON LISTENERS ---
     const btnRight = document.getElementById('btn-right');
     if (btnRight) {
         btnRight.addEventListener('click', () => {
@@ -242,87 +240,73 @@ setTimeout(() => {
             toggleTutorial(true);
         });
     }
-    
+
     const closeBtn = document.getElementById('close-tutorial-btn');
     if (closeBtn) {
         closeBtn.addEventListener('click', () => toggleTutorial(false));
     }
-    
+
     const finalStart = document.getElementById('close-tutorial-final');
     if (finalStart) {
         finalStart.addEventListener('click', () => toggleTutorial(false));
     }
-    
-    // Experience AR button
+
+    // --- START EXPERIENCE ---
     if (!startBtn) {
         console.error("Could not find start-btn!");
         return;
     }
-    
+
     startBtn.addEventListener('click', () => {
         debugLog("Button clicked! Starting AR...");
-        
         uiLayer.style.display = 'none';
-        
+
         const bgVideo = document.getElementById('bg-video');
         if (bgVideo) {
             bgVideo.pause();
             bgVideo.style.display = 'none';
         }
-        
+
         scannerLayer.style.display = 'flex';
         iconLayer.style.display = 'flex';
-        
+
         if (sceneEl.hasLoaded) {
             startAR();
         } else {
             sceneEl.addEventListener('loaded', startAR);
         }
     });
-    
+
     function startAR() {
         const arSystem = sceneEl.systems['mindar-image-system'];
         if (arSystem) {
-            arSystem.start(); 
-            
+            arSystem.start();
             window.dispatchEvent(new Event('resize'));
             setTimeout(() => {
                 window.dispatchEvent(new Event('resize'));
             }, 500);
         }
     }
-    
-    // Target 1 - 3D Model
-    targetEntity.addEventListener("targetFound", () => {
-        scannerLayer.style.display = 'none';
-        document.getElementById('horse-menu').style.display = 'flex';
-        debugLog("✅ Horse Found - Select Animation");
-    });
 
-    targetEntity.addEventListener("targetLost", () => {
-        scannerLayer.style.display = 'flex';
-        document.getElementById('horse-menu').style.display = 'none';
-        document.getElementById('anim-drawer').style.display = 'none';
-    });
-    
-    // Target 2 - Video
-    target2Entity.addEventListener("targetFound", () => {
-        debugLog("🎯 TARGET 2 FOUND!");
-        scannerLayer.style.display = 'none';
-        
-        arVideo2.setAttribute('src', 'assets/video1.mp4'); 
-        debugLog("📹 Video source set");
-        arVideo2.load();
-        arVideo2.play().then(() => {
-            debugLog("✅ Video playing");
-        }).catch(err => {
-            console.error("❌ Video error:", err);
+    // --- NEW SCALABLE ALPHABET TARGET LOGIC ---
+    // This loop handles A, B, C, and any future letters you add
+    alphabetTargets.forEach(target => {
+        target.addEventListener("targetFound", () => {
+            debugLog(`🎯 Target Found: ${target.id}`);
+            scannerLayer.style.display = 'none';
+
+            // Show animation menu only for specific targets if needed
+            // If all models have animations, just show it.
+            // If only some have them, use: if(target.id === 'target-a') { ... }
+            if (animMenu) animMenu.style.display = 'flex';
         });
-    });
-    
-    target2Entity.addEventListener("targetLost", () => {
-        scannerLayer.style.display = 'flex';
-        arVideo2.pause();
-        arVideo2.currentTime = 0;
+
+        target.addEventListener("targetLost", () => {
+            debugLog("❌ Target Lost");
+            scannerLayer.style.display = 'flex';
+            
+            if (animMenu) animMenu.style.display = 'none';
+            if (animDrawer) animDrawer.style.display = 'none';
+        });
     });
 });
