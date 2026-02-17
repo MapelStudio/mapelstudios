@@ -1,49 +1,62 @@
 // Kalman filter component
 AFRAME.registerComponent('kalman-smooth', {
-    init: function() {
-        this.kalmanPos = {
-            x: { x: 0, p: 1, k: 0 },
-            y: { x: 0, p: 1, k: 0 },
-            z: { x: 0, p: 1, k: 0 }
-        };
-        this.Q = 0.01;
-        this.R = 0.01;
-    },
-    tick: function() {
-        const pos = this.el.object3D.position;
-        ['x', 'y', 'z'].forEach(axis => {
-            const k = this.kalmanPos[axis];
-            k.p = k.p + this.Q;
-            k.k = k.p / (k.p + this.R);
-            k.x = k.x + k.k * (pos[axis] - k.x);
-            k.p = (1 - k.k) * k.p;
-            pos[axis] = k.x;
-        });
-    }
+  init: function() {
+    this.kalmanPos = {
+      x: { x: 0, p: 1, k: 0 },
+      y: { x: 0, p: 1, k: 0 },
+      z: { x: 0, p: 1, k: 0 }
+    };
+    this.Q = 0.01;
+    this.R = 0.01;
+  },
+  
+  tick: function() {
+    const pos = this.el.object3D.position;
+    
+    ['x', 'y', 'z'].forEach(axis => {
+      const k = this.kalmanPos[axis];
+      k.p = k.p + this.Q;
+      k.k = k.p / (k.p + this.R);
+      k.x = k.x + k.k * (pos[axis] - k.x);
+      k.p = (1 - k.k) * k.p;
+      pos[axis] = k.x;
+    });
+  }
 });
 
 AFRAME.registerComponent('touch-rotate', {
-    init: function() {
-        this.lastX = 0;
+  init: function() {
+    this.lastX = 0;
+    this.isMoving = false;
+    
+    window.addEventListener('touchstart', (e) => {
+        if (e.target.tagName === 'BUTTON' || e.target.closest('.anim-btn')) {
+            return; 
+        }
+        if (e.touches.length > 0) {
+            this.isMoving = true;
+            this.lastX = e.touches[0].clientX;
+            debugLog("Touch Started");
+        }
+    });
+
+    window.addEventListener('touchmove', (e) => {
+        if (!this.isMoving || e.touches.length === 0) return;
+        
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - this.lastX;
+        this.el.object3D.rotation.y += deltaX * 0.01;
+        this.lastX = touch.clientX;
+    });
+
+    window.addEventListener('touchend', () => {
         this.isMoving = false;
-        window.addEventListener('touchstart', (e) => {
-            if (e.target.tagName === 'BUTTON' || e.target.closest('.anim-btn')) return;
-            if (e.touches.length > 0) {
-                this.isMoving = true;
-                this.lastX = e.touches[0].clientX;
-            }
-        });
-        window.addEventListener('touchmove', (e) => {
-            if (!this.isMoving || e.touches.length === 0) return;
-            const touch = e.touches[0];
-            const deltaX = touch.clientX - this.lastX;
-            this.el.object3D.rotation.y += deltaX * 0.01;
-            this.lastX = touch.clientX;
-        });
-        window.addEventListener('touchend', () => { this.isMoving = false; });
-    }
+        debugLog("Touch Ended");
+    });
+  }
 });
 
+// Debug function
 function debugLog(msg) {
     console.log(msg);
     const debugDiv = document.getElementById('debug');
@@ -53,146 +66,238 @@ function debugLog(msg) {
     }
 }
 
-// Variables for Tutorial and Animation tracking
-let tutorialStep = 1;
-let activeTargetId = null; 
-
 // Global function for animation switching
 function playAnim(type) {
-    // Dynamically find the model inside the currently scanned target
-    if (!activeTargetId) return;
-    const targetEl = document.getElementById(activeTargetId);
-    const model = targetEl ? targetEl.querySelector('a-gltf-model') : null;
+    const horse = document.getElementById('horse-mesh');
+    if (!horse) return;
 
-    if (!model) {
-        debugLog("❌ No model found to animate");
-        return;
-    }
-
-    // Since your friend is sending files, we define what animations exist here
-    // Note: If you have different animation files for Apple, update these paths
     let fileURL = "";
-    if (type === 'idle') fileURL = "./assets/apple.glb"; // Example: default apple
+    if (type === 'idle') fileURL = "./assets/horse_anime.glb";
     if (type === 'run')  fileURL = "./assets/animation1.glb";
     if (type === 'walk') fileURL = "./assets/animation2.glb";
 
-    debugLog("🔄 Switching Animation: " + type);
-    model.setAttribute('gltf-model', fileURL);
+    debugLog("🔄 Loading File: " + fileURL);
 
-    // Hide drawer after selection
-    const drawer = document.getElementById('anim-drawer');
-    if (drawer) drawer.style.display = 'none';
+    horse.setAttribute('gltf-model', fileURL);
+
+    horse.addEventListener('model-loaded', () => {
+        debugLog("✅ SUCCESS: " + type + " loaded");
+        horse.setAttribute('animation-mixer', {clip: '*', loop: 'repeat'});
+    }, { once: true });
+}
+
+// 1. New variable to track the current page globally
+let tutorialStep = 1;
+
+// 2. Updated nextPage to sync with our global step
+function nextPage(pageNumber) {
+    tutorialStep = pageNumber; // Keep track of which page we are on
+    debugLog("📄 Going to page " + pageNumber);
+    
+    const allPages = document.querySelectorAll('.tutorial-page');
+    allPages.forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    const allDots = document.querySelectorAll('.dot');
+    allDots.forEach(dot => {
+        dot.classList.remove('active');
+    });
+
+    const targetPage = document.getElementById(`page-${pageNumber}`);
+    const targetDot = allDots[pageNumber - 1];
+
+    if (targetPage) {
+        targetPage.classList.add('active');
+        debugLog("✅ Page " + pageNumber + " is now active");
+    }
+    
+    if (targetDot) {
+        targetDot.classList.add('active');
+    }
+
+    // Update the button text (Next vs Start) every time the page changes
+    updateButtonText();
+}
+
+// 3. New function to handle the click on the external button
+function handleNext() {
+    if (tutorialStep < 3) {
+        nextPage(tutorialStep + 1);
+    } else {
+        toggleTutorial(false); // Close if we are on the last page
+    }
+}
+
+// 4. New function to swap button text
+function updateButtonText() {
+    const btn = document.getElementById('nav-btn-next');
+    if (!btn) return;
+
+    if (tutorialStep === 3) {
+        btn.innerText = "Start";
+        btn.classList.add('start-btn-active');
+    } else {
+        btn.innerText = "Next";
+        btn.classList.remove('start-btn-active');
+    }
+}
+
+// 5. Your existing toggleTutorial (remains mostly the same, but resets step)
+function toggleTutorial(show) {
+    const modal = document.getElementById('tutorial-modal');
+    if (!modal) {
+        debugLog("❌ Tutorial modal not found!");
+        return;
+    }
+
+    if (show) {
+        modal.style.display = 'flex';
+        debugLog("🔓 Opening tutorial...");
+        
+        // Reset step to 1 whenever opening
+        tutorialStep = 1; 
+
+        setTimeout(() => {
+            nextPage(1);
+        }, 50);
+    } else {
+        modal.style.display = 'none';
+        debugLog("🔒 Closing tutorial");
+    }
 }
 
 function toggleAnimMenu() {
     const drawer = document.getElementById('anim-drawer');
     if (!drawer) return;
-    drawer.style.display = (drawer.style.display === 'none' || drawer.style.display === '') ? 'flex' : 'none';
-}
 
-// Tutorial Navigation
-function nextPage(pageNumber) {
-    tutorialStep = pageNumber;
-    const allPages = document.querySelectorAll('.tutorial-page');
-    const allDots = document.querySelectorAll('.dot');
-    
-    allPages.forEach(p => p.classList.remove('active'));
-    allDots.forEach(d => d.classList.remove('active'));
-
-    const targetPage = document.getElementById(`page-${pageNumber}`);
-    const targetDot = allDots[pageNumber - 1];
-
-    if (targetPage) targetPage.classList.add('active');
-    if (targetDot) targetDot.classList.add('active');
-    
-    updateButtonText();
-}
-
-function handleNext() {
-    if (tutorialStep < 3) nextPage(tutorialStep + 1);
-    else toggleTutorial(false);
-}
-
-function updateButtonText() {
-    const btn = document.getElementById('nav-btn-next');
-    if (!btn) return;
-    btn.innerText = (tutorialStep === 3) ? "Start" : "Next";
-    if (tutorialStep === 3) btn.classList.add('start-btn-active');
-    else btn.classList.remove('start-btn-active');
-}
-
-function toggleTutorial(show) {
-    const modal = document.getElementById('tutorial-modal');
-    if (!modal) return;
-    if (show) {
-        modal.style.display = 'flex';
-        tutorialStep = 1;
-        setTimeout(() => nextPage(1), 50);
+    if (drawer.style.display === 'none' || drawer.style.display === '') {
+        drawer.style.display = 'flex'; // This must be 'flex' for horizontal layout
     } else {
-        modal.style.display = 'none';
+        drawer.style.display = 'none';
     }
 }
 
-// Main Initialization
+// Ensure the drawer closes when a selection is made
+function playAnim(type) {
+    const horse = document.getElementById('horse-mesh');
+    if (!horse) return;
+
+    let fileURL = "";
+    if (type === 'idle') fileURL = "./assets/horse_anime.glb";
+    if (type === 'run')  fileURL = "./assets/animation1.glb";
+    if (type === 'walk') fileURL = "./assets/animation2.glb";
+
+    horse.setAttribute('gltf-model', fileURL);
+    
+    // Hide the drawer after clicking an option
+    document.getElementById('anim-drawer').style.display = 'none';
+    
+    debugLog("✅ Playing: " + type);
+}
+
+// SINGLE DOMContentLoaded - Everything goes here
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
     const scannerLayer = document.getElementById('scanner-container');
+    const iconLayer = document.getElementById('icon-layer');
     const sceneEl = document.getElementById('sceneEl');
-    const alphabetTargets = document.querySelectorAll('.alphabet-target');
-    const animMenu = document.getElementById('horse-menu');
-    const loadingScreen = document.getElementById('loading-screen');
-
-    // --- HIDE LOADERS ---
-    sceneEl.addEventListener('loaded', () => {
-        if (loadingScreen) {
-            loadingScreen.style.opacity = '0';
-            setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
+    const targetEntity = document.getElementById('target');
+    const target2Entity = document.getElementById('target2');
+    const arVideo2 = document.getElementById('ar-video-2');
+    
+    debugLog("Initialized");
+    
+    // Tutorial button listeners
+    const btnRight = document.getElementById('btn-right');
+    if (btnRight) {
+        btnRight.addEventListener('click', () => {
+            debugLog("🎯 Tutorial button clicked");
+            toggleTutorial(true);
+        });
+    }
+    
+    const closeBtn = document.getElementById('close-tutorial-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => toggleTutorial(false));
+    }
+    
+    const finalStart = document.getElementById('close-tutorial-final');
+    if (finalStart) {
+        finalStart.addEventListener('click', () => toggleTutorial(false));
+    }
+    
+    // Experience AR button
+    if (!startBtn) {
+        console.error("Could not find start-btn!");
+        return;
+    }
+    
+    startBtn.addEventListener('click', () => {
+        debugLog("Button clicked! Starting AR...");
+        
+        uiLayer.style.display = 'none';
+        
+        const bgVideo = document.getElementById('bg-video');
+        if (bgVideo) {
+            bgVideo.pause();
+            bgVideo.style.display = 'none';
+        }
+        
+        scannerLayer.style.display = 'flex';
+        iconLayer.style.display = 'flex';
+        
+        if (sceneEl.hasLoaded) {
+            startAR();
+        } else {
+            sceneEl.addEventListener('loaded', startAR);
         }
     });
-
-    // --- START EXPERIENCE ---
-    startBtn.addEventListener('click', () => {
-        uiLayer.style.display = 'none';
-        scannerLayer.style.display = 'flex';
-        
-        if (sceneEl.hasLoaded) startAR();
-        else sceneEl.addEventListener('loaded', startAR);
-    });
-
+    
     function startAR() {
         const arSystem = sceneEl.systems['mindar-image-system'];
         if (arSystem) {
-            // KILL DEFAULT BLUE LOADER
-            const blueLoader = document.querySelector('.mindar-ui-loading');
-            if (blueLoader) blueLoader.style.display = 'none';
-
-            arSystem.start();
+            arSystem.start(); 
+            
             window.dispatchEvent(new Event('resize'));
+            setTimeout(() => {
+                window.dispatchEvent(new Event('resize'));
+            }, 500);
         }
     }
-
-    // --- ALPHABET TARGET TRACKING ---
-    alphabetTargets.forEach(target => {
-        target.addEventListener("targetFound", () => {
-            activeTargetId = target.id; // Store which letter we are looking at
-            scannerLayer.style.display = 'none';
-            if (animMenu) animMenu.style.display = 'flex';
-            debugLog("🎯 Found: " + activeTargetId);
-        });
-
-        target.addEventListener("targetLost", () => {
-            activeTargetId = null;
-            scannerLayer.style.display = 'flex';
-            if (animMenu) animMenu.style.display = 'none';
-            document.getElementById('anim-drawer').style.display = 'none';
-        });
+    
+    // Target 1 - 3D Model
+    targetEntity.addEventListener("targetFound", () => {
+        scannerLayer.style.display = 'none';
+        document.getElementById('horse-menu').style.display = 'flex';
+        debugLog("✅ Horse Found - Select Animation");
     });
 
-    // Link tutorial buttons
-    const btnRight = document.getElementById('btn-right');
-    if (btnRight) btnRight.addEventListener('click', () => toggleTutorial(true));
+    targetEntity.addEventListener("targetLost", () => {
+        scannerLayer.style.display = 'flex';
+        document.getElementById('horse-menu').style.display = 'none';
+        document.getElementById('anim-drawer').style.display = 'none';
+    });
     
-    const navNext = document.getElementById('nav-btn-next');
-    if (navNext) navNext.addEventListener('click', handleNext);
+    // Target 2 - Video
+    target2Entity.addEventListener("targetFound", () => {
+        debugLog("🎯 TARGET 2 FOUND!");
+        scannerLayer.style.display = 'none';
+        
+        arVideo2.setAttribute('src', 'assets/video1.mp4'); 
+        debugLog("📹 Video source set");
+        arVideo2.load();
+        arVideo2.play().then(() => {
+            debugLog("✅ Video playing");
+        }).catch(err => {
+            console.error("❌ Video error:", err);
+        });
+    });
+    
+    target2Entity.addEventListener("targetLost", () => {
+        scannerLayer.style.display = 'flex';
+        arVideo2.pause();
+        arVideo2.currentTime = 0;
+    });
 });
