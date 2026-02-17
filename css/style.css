@@ -698,7 +698,7 @@ video:not(#ar-video):not(#bg-video) {
     position: absolute;
     inset: 0;
     background: inherit; /* Inherits the tutorial-bg.jpg */
-    filter: blur(15px) brightness(0.7); /* Adjust blur and brightness here */
+    filter: blur(2px) brightness(0.7); /* Adjust blur and brightness here */
     z-index: -1; /* Keeps it behind the glass card */
 }
 
