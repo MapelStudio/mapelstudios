@@ -9,7 +9,9 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/fcor/arjs-gestures@master/dist/gestures.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 </head>
+    
 <body>
 
     <div id="ui">
@@ -113,7 +115,7 @@
 </div>
     <a-scene 
     id="sceneEl"
-mindar-image="imageTargetSrc: ./data/targets (1).mind; autoStart: false; uiScanning: no; ui: no; filterMinCF: 0.001; filterBeta: 0.01;"
+mindar-image="imageTargetSrc: ./data/targets (1).mind; autoStart: false; uiScanning: no; uiLoading: no; filterMinCF: 0.001; filterBeta: 0.01;"
 embedded 
 color-space="sRGB" 
 renderer="colorManagement: true;"
@@ -160,6 +162,28 @@ device-orientation-permission-ui="enabled: false">
 </video>
     <div id="debug" style="position:fixed; top:70px; left:10px; background:rgba(0,0,0,0.8); color:lime; padding:10px; z-index:99999; font-size:11px; max-width:90%; overflow:auto; max-height:200px;"></div>
     <script src="js/main.js"></script>
+
+    <!-- Custom Loading Screen -->
+<div id="loading-screen" style="
+    position: fixed;
+    inset: 0;
+    z-index: 99998;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+">
+    <model-viewer
+        id="loading-model"
+        src="assets/YOUR-MODEL.glb"
+        auto-rotate
+        camera-controls
+        style="width: 250px; height: 250px; background: transparent;"
+    ></model-viewer>
+    <p style="color: white; font-family: Arial; letter-spacing: 3px; font-size: 12px; margin-top: 20px; opacity: 0.8;">LOADING...</p>
+</div>
 
     
 </body>
