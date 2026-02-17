@@ -922,3 +922,7 @@ video:not(#ar-video):not(#bg-video) {
     justify-content: center;
 }
 
+/* Force hide the MindAR default blue loader */
+.mindar-ui-loading, .mindar-ui-scanning {
+    display: none !important;
+}
