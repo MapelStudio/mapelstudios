@@ -695,7 +695,7 @@ video:not(#ar-video):not(#bg-video) {
 
 /* The Glass Card */
 .tutorial-glass-card {
-    margin-top: 4vh !important;
+    margin-top: 8vh !important;
     width: 85%;
     max-width: 400px;
     height: 60vh;
@@ -763,7 +763,7 @@ video:not(#ar-video):not(#bg-video) {
 
 .tutorial-nav {
     position: fixed;
-    bottom: 12vh;
+    bottom: 6vh;
     left: 0;
     right: 0;
     width: 100%;
