@@ -934,3 +934,12 @@ video:not(#ar-video):not(#bg-video) {
 .mindar-ui-loading, .mindar-ui-scanning {
     display: none !important;
 }
+
+.tutorial-img {
+    width: 80%;            /* Adjust size as needed */
+    max-height: 180px;     /* Keeps it from pushing the text off-screen */
+    object-fit: contain;   /* Prevents stretching */
+    margin: 15px 0;        /* Space above and below the image */
+    border-radius: 12px;   /* Matches your glass card corners */
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); /* Gives it some depth */
+}
