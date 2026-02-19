@@ -446,7 +446,7 @@ a-scene {
     align-items: center !important;
     justify-content: center !important;
     padding: 15px 40px !important; /* Slightly more padding for the bigger text */
-    gap: 20px !important;         /* More space between stars and text */
+    gap: 50px !important;         /* More space between stars and text */
 }
 
 /* Increases the size of both the stars and the text together */
