@@ -678,19 +678,6 @@ video:not(#ar-video):not(#bg-video) {
     transform: scale(0.95);
 }
 
-/* Full screen background image layer */
-.tutorial-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 30000;
-    display: none; /* Hidden by default */
-    justify-content: center;
-    align-items: flex-start;
-
-    /* Background Image Setup */
-    background: url('../assets/tutorial-bg.jpeg') no-repeat center center;
-    background-size: cover;
-}
 
 /* Add a blur effect to the background image only */
 .tutorial-overlay {
@@ -702,13 +689,13 @@ video:not(#ar-video):not(#bg-video) {
     align-items: flex-start; /* Changed from center to flex-start */
 
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
 }
 
 /* The Glass Card */
 .tutorial-glass-card {
-    margin-top: 2vh !important;
+    margin-top: 4vh !important;
     width: 85%;
     max-width: 400px;
     height: 60vh;
@@ -788,9 +775,9 @@ video:not(#ar-video):not(#bg-video) {
 }
 
 #nav-btn-next {
-    background: rgba(255, 255, 255, 0.32) !important;
+    background: rgba(255, 255, 255, 0) !important;
     border-radius: 16px !important;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 15px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 15px rgba(255, 255, 255, 0);
     backdrop-filter: blur(4.4px);
     -webkit-backdrop-filter: blur(4.4px);
     border: 1px solid rgba(255, 255, 255, 0.5) !important;
@@ -804,20 +791,13 @@ video:not(#ar-video):not(#bg-video) {
     transition: all 0.3s ease;
 }
 
-#nav-btn-next:hover {
-    background: rgba(255, 255, 255, 0.45) !important;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-    transform: scale(1.05);
-}
 
 #nav-btn-next:active {
     transform: scale(0.95);
     background: rgba(255, 255, 255, 0.2) !important;
 }
 
-#nav-btn-next.start-btn-active {
-    border: 1px solid #ffffff !important;
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+
 }
 /* The main container */
 .horse-ui {
