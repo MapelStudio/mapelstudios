@@ -695,43 +695,38 @@ video:not(#ar-video):not(#bg-video) {
 /* Add a blur effect to the background image only */
 .tutorial-overlay {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none; /* Controlled by JS */
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
     z-index: 30000;
-    display: none; 
-    justify-content: center;
-    align-items: flex-start;
-
-    /* REVERTED: Remove the image and use a dark tint + blur */
-    background: rgba(0, 0, 0, 0.4); /* Dark tint so the camera feed is visible but dim */
-    backdrop-filter: blur(12px); /* This blurs the live camera feed behind the tutorial */
-    -webkit-backdrop-filter: blur(12px);
 }
 
-/* Delete or comment out the .tutorial-overlay::before block if you still have it, 
-   as it was only for the static image blur. */
-
-/* The Glass Card */
 .tutorial-glass-card {
-    margin-top: 8vh !important; /* Kept your preferred 'up' position */
+    margin-top: 8vh !important;
     width: 85%;
     max-width: 400px;
-    height: 60vh; /* Covers 60% of the screen height */
+    height: 60vh;
     position: relative;
     
-    /* --- NEW GLASS UI FROM CSS.GLASS --- */
-    background: rgba(255, 255, 255, 0);
-    border-radius: 30px;
+    /* Glass UI */
+    background: rgba(255, 255, 255, 0.32);
+    border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(7.1px);
-    -webkit-backdrop-filter: blur(7.1px);
+    backdrop-filter: blur(4.4px);
+    -webkit-backdrop-filter: blur(4.4px);
     border: 1px solid rgba(255, 255, 255, 0.38);
     
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    text-align: center;
-    color: white; /* Keeps text readable on the white glass */
+    box-sizing: border-box; /* Ensures padding doesn't push the card to the side */
 }
 /* Page Control */
 /* This hides every page that isn't active */
@@ -783,19 +778,22 @@ video:not(#ar-video):not(#bg-video) {
 /* Container for buttons outside the card */
 .tutorial-nav {
     position: absolute;
-    top: calc(8vh + 60vh + 40px); /* 8vh margin + 60vh card + 40px gap */
-    width: 100%;
+    /* Keeps the button 40px below your 8vh margin + 60vh card */
+    top: calc(8vh + 60vh + 40px); 
+    left: 0;                    /* CRITICAL: Ensures the 100% width starts from the edge */
+    width: 100%;                /* Spans full width to allow centering */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center;        /* Centers the button horizontally */
+    justify-content: center;
     gap: 20px;
     z-index: 30001;
-}
+    pointer-events: none;       /* Allows clicks to pass through the container */
 }
 
-/* Style for the button when it's outside */
-/* Apply the Glass UI to the navigation buttons */
 #nav-btn-next {
+    pointer-events: auto;       /* Re-enables clicks specifically for the button */
+    
     /* Your Glass UI properties */
     background: rgba(255, 255, 255, 0.32) !important;
     border-radius: 16px !important;
@@ -806,6 +804,7 @@ video:not(#ar-video):not(#bg-video) {
 
     /* Sizing and Text */
     padding: 12px 60px !important;
+    min-width: 200px;           /* Prevents the button from shrinking too much */
     font-size: 18px !important;
     font-weight: 700 !important;
     color: white !important;
@@ -815,6 +814,12 @@ video:not(#ar-video):not(#bg-video) {
     transition: all 0.3s ease;
 }
 
+/* Hover effect to make it feel interactive */
+#nav-btn-next:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
 /* Hover and Active states for the glass button */
 #nav-btn-next:hover {
     background: rgba(255, 255, 255, 0.45) !important;
@@ -822,10 +827,6 @@ video:not(#ar-video):not(#bg-video) {
     transform: scale(1.05);
 }
 
-#nav-btn-next:active {
-    transform: scale(0.95);
-    background: rgba(255, 255, 255, 0.2) !important;
-}
 
 /* Style for when the button becomes 'Start' */
 #nav-btn-next.start-btn-active {
@@ -943,3 +944,5 @@ video:not(#ar-video):not(#bg-video) {
     border-radius: 12px;
     filter: drop-shadow(0 6px 12px rgba(255, 255, 255, 0.2)); /* Subtle glow to match the theme */
 }
+
+
