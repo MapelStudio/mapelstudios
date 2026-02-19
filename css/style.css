@@ -943,3 +943,7 @@ video:not(#ar-video):not(#bg-video) {
     border-radius: 12px;   /* Matches your glass card corners */
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); /* Gives it some depth */
 }
+
+#debug {
+    display: none !important; /* Temporarily hide this to check centering */
+}
