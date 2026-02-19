@@ -783,8 +783,8 @@ video:not(#ar-video):not(#bg-video) {
 /* Container for buttons outside the card */
 /* Container for buttons outside the card */
 .tutorial-nav {
-    position: absolute;
-    bottom: 15vh;
+    position: fixed;
+    bottom: 12vh;
     left: 0;
     right: 0;
     width: 100%;
@@ -794,7 +794,6 @@ video:not(#ar-video):not(#bg-video) {
     gap: 20px;
     z-index: 30001;
 }
-
 /* Style for the button when it's outside */
 /* Apply the Glass UI to the navigation buttons */
 #nav-btn-next {
