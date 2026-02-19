@@ -693,14 +693,22 @@ video:not(#ar-video):not(#bg-video) {
 }
 
 /* Add a blur effect to the background image only */
-.tutorial-overlay::before {
-    content: "";
-    position: absolute;
+.tutorial-overlay {
+    position: fixed;
     inset: 0;
-    background: inherit; /* Inherits the tutorial-bg.jpg */
-    filter: blur(2px) brightness(0.7); /* Adjust blur and brightness here */
-    z-index: -1; /* Keeps it behind the glass card */
+    z-index: 30000;
+    display: none; 
+    justify-content: center;
+    align-items: flex-start;
+
+    /* REVERTED: Remove the image and use a dark tint + blur */
+    background: rgba(0, 0, 0, 0.4); /* Dark tint so the camera feed is visible but dim */
+    backdrop-filter: blur(12px); /* This blurs the live camera feed behind the tutorial */
+    -webkit-backdrop-filter: blur(12px);
 }
+
+/* Delete or comment out the .tutorial-overlay::before block if you still have it, 
+   as it was only for the static image blur. */
 
 /* The Glass Card */
 .tutorial-glass-card {
