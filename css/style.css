@@ -712,7 +712,7 @@ video:not(#ar-video):not(#bg-video) {
 
 /* The Glass Card */
 .tutorial-glass-card {
-    margin-top: 4vh !important; /* Kept your preferred 'up' position */ /* Kept your preferred 'up' position */
+    margin-top: 2vh !important; /* Kept your preferred 'up' position */ /* Kept your preferred 'up' position */
     width: 85%;
     max-width: 400px;
     height: 60vh; /* Covers 60% of the screen height */
@@ -783,12 +783,11 @@ video:not(#ar-video):not(#bg-video) {
 /* Container for buttons outside the card */
 /* Container for buttons outside the card */
 .tutorial-nav {
-    position: fixed; /* ← CHANGED FROM absolute */
-    bottom: 50px; /* ← CHANGED FROM top: calc(...) */
-    left: 50%;
-    transform: translateX(-50%);
+    position: absolute;
+    bottom: 15vh;
+    left: 0;
+    right: 0;
     width: 100%;
-    max-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
