@@ -10,7 +10,7 @@ body { background: #000; overflow: hidden; font-family: sans-serif; }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 50px;
+    gap: 25px;
 }
 
 /* This stays to make sure the A-Frame scene doesn't block the camera */
