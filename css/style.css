@@ -712,7 +712,7 @@ video:not(#ar-video):not(#bg-video) {
 
 /* The Glass Card */
 .tutorial-glass-card {
-    margin-top: 0 !important; /* Kept your preferred 'up' position */
+    margin-top: 8vh !important; /* Kept your preferred 'up' position */ /* Kept your preferred 'up' position */
     width: 85%;
     max-width: 400px;
     height: 60vh; /* Covers 60% of the screen height */
