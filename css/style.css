@@ -936,10 +936,10 @@ video:not(#ar-video):not(#bg-video) {
 }
 
 .tutorial-img {
-    width: 80%;            /* Adjust size as needed */
-    max-height: 180px;     /* Keeps it from pushing the text off-screen */
-    object-fit: contain;   /* Prevents stretching */
-    margin: 15px 0;        /* Space above and below the image */
-    border-radius: 12px;   /* Matches your glass card corners */
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); /* Gives it some depth */
+    width: 85%;            /* Fits nicely within the glass card */
+    max-height: 160px;     /* Keeps space for the text below */
+    object-fit: contain;   /* No stretching */
+    margin: 10px 0;
+    border-radius: 12px;
+    filter: drop-shadow(0 6px 12px rgba(255, 255, 255, 0.2)); /* Subtle glow to match the theme */
 }
