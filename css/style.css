@@ -898,13 +898,32 @@ video:not(#ar-video):not(#bg-video) {
     display: none !important;
 }
 
+/* Increase Title Size */
+.tutorial-title {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 32px !important; /* Increased from 24px for better visibility */
+    font-weight: 800;
+    color: white;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Adds depth to the larger text */
+}
+
+/* Increase Image Size */
 .tutorial-img {
-    width: 80%;            /* Adjust size as needed */
-    max-height: 180px;     /* Keeps it from pushing the text off-screen */
-    object-fit: contain;   /* Prevents stretching */
-    margin: 15px 0;        /* Space above and below the image */
-    border-radius: 12px;   /* Matches your glass card corners */
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); /* Gives it some depth */
+    width: 95% !important;     /* Increased from 80% to fill more width */
+    max-height: 220px !important; /* Increased from 160px to make it taller */
+    object-fit: contain;
+    margin: 10px 0;
+    border-radius: 12px;
+    filter: drop-shadow(0 6px 12px rgba(255, 255, 255, 0.2));
+}
+
+/* Adjusting text to ensure it still fits */
+.tutorial-text {
+    font-size: 18px !important; /* Slightly larger text to match the bigger UI */
+    line-height: 1.5;
+    margin-top: 15px;
 }
 
 #debug {
