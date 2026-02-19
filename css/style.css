@@ -699,7 +699,7 @@ video:not(#ar-video):not(#bg-video) {
     z-index: 30000;
     display: none; 
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 
     /* REVERTED: Remove the image and use a dark tint + blur */
     background: rgba(0, 0, 0, 0.4); /* Dark tint so the camera feed is visible but dim */
@@ -712,7 +712,7 @@ video:not(#ar-video):not(#bg-video) {
 
 /* The Glass Card */
 .tutorial-glass-card {
-    margin-top: 8vh !important; /* Kept your preferred 'up' position */
+    margin-top: 0 !important; /* Kept your preferred 'up' position */
     width: 85%;
     max-width: 400px;
     height: 60vh; /* Covers 60% of the screen height */
@@ -783,9 +783,12 @@ video:not(#ar-video):not(#bg-video) {
 /* Container for buttons outside the card */
 /* Container for buttons outside the card */
 .tutorial-nav {
-    position: absolute;
-    top: calc(8vh + 60vh + 40px);
+    position: fixed; /* ← CHANGED FROM absolute */
+    bottom: 50px; /* ← CHANGED FROM top: calc(...) */
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
