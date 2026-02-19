@@ -693,42 +693,40 @@ video:not(#ar-video):not(#bg-video) {
 }
 
 /* Add a blur effect to the background image only */
+/* The main container covering the whole screen */
 .tutorial-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0; /* Shortcut for top:0, left:0, right:0, bottom:0 */
+    width: 100%;
+    height: 100%;
+    z-index: 30000;
     display: none; 
-    flex-direction: column; /* Stacks card and button vertically */
-    align-items: center;    /* Centers everything horizontally */
-    justify-content: center; /* Centers the whole group vertically */
+    flex-direction: column;
+    justify-content: center; /* Vertically centers the whole group */
+    align-items: center;     /* Horizontally centers the whole group */
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    z-index: 30000;
 }
 
+/* The Glass Card */
 .tutorial-glass-card {
-    margin-top: 8vh !important;
     width: 85%;
     max-width: 400px;
-    height: 60vh;
-    position: relative;
-    
-    /* Glass UI */
+    height: auto;           /* Let height adjust to content */
+    min-height: 50vh;       /* But keep a minimum size */
     background: rgba(255, 255, 255, 0.32);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(4.4px);
-    -webkit-backdrop-filter: blur(4.4px);
-    border: 1px solid rgba(255, 255, 255, 0.38);
-    
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 30px 20px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    box-sizing: border-box; /* Ensures padding doesn't push the card to the side */
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 /* Page Control */
 /* This hides every page that isn't active */
@@ -779,33 +777,26 @@ video:not(#ar-video):not(#bg-video) {
 
 /* Container for buttons outside the card */
 .tutorial-nav {
-    position: relative;     /* Changed from absolute to relative */
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Perfectly centers the button inside the 100% width */
     align-items: center;
-    margin-top: 25px;       /* Controlled gap between card and button */
-    z-index: 30001;
+    margin-top: 25px;        /* Creates the gap between card and button */
 }
 
+/* The Next/Start Button */
 #nav-btn-next {
-    /* Keeping your exact Glass UI styles */
     background: rgba(255, 255, 255, 0.32) !important;
     border-radius: 16px !important;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 15px rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(4.4px);
-    -webkit-backdrop-filter: blur(4.4px);
     border: 1px solid rgba(255, 255, 255, 0.5) !important;
-
     padding: 12px 60px !important;
-    min-width: 180px; 
-    font-size: 18px !important;
-    font-weight: 700 !important;
+    min-width: 180px;
     color: white !important;
+    font-weight: 700 !important;
     text-transform: uppercase;
     letter-spacing: 2px;
+    backdrop-filter: blur(5px);
     cursor: pointer;
-    transition: all 0.3s ease;
 }
 
 /* Hover effect to make it feel interactive */
