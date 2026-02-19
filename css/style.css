@@ -757,9 +757,6 @@ video:not(#ar-video):not(#bg-video) {
     color: white; font-size: 24px; cursor: pointer;
 }
 
-.page-indicator { display: flex; gap: 8px; margin-top: 10px; }
-.dot { width: 8px; height: 8px; background: rgba(227, 78, 78, 0.24); border-radius: 50%; }
-.dot.active { background: white; width: 20px; border-radius: 10px; }
 
 .tutorial-nav {
     position: fixed;
@@ -776,7 +773,7 @@ video:not(#ar-video):not(#bg-video) {
 
 #nav-btn-next {
     background: rgba(255, 255, 255, 0) !important;
-    border-radius: 16px !important;
+    border-radius: 25px !important;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 15px rgba(255, 255, 255, 0);
     backdrop-filter: blur(4.4px);
     -webkit-backdrop-filter: blur(4.4px);
