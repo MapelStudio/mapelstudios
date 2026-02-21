@@ -929,3 +929,14 @@ video:not(#ar-video):not(#bg-video) {
 #debug {
     display: none !important; /* Temporarily hide this to check centering */
 }
+
+/* FORCE HIDE ALL MINDAR UI ELEMENTS */
+.mindar-ui-overlay,
+.mindar-ui-loading,
+.mindar-ui-scanning,
+.mindar-ui-compatibility,
+div[class*="mindar"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
