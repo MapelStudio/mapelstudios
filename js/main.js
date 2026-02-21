@@ -208,6 +208,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const arVideo2 = document.getElementById('ar-video-2');
     
     debugLog("Initialized");
+    // Hide loading screen when everything is ready
+const loadingScreen = document.getElementById('loading-screen');
+
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }
+    }, 2000); // Shows for 2 seconds minimum
+});
     
     // Tutorial button listeners
     const btnRight = document.getElementById('btn-right');
