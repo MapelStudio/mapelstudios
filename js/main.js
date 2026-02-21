@@ -24,39 +24,6 @@ AFRAME.registerComponent('kalman-smooth', {
   }
 });
 
-// Rotation hint animation component
-AFRAME.registerComponent('rotation-hint', {
-  init: function() {
-    this.isAnimating = false;
-  },
-  
-  play: function() {
-    if (this.isAnimating) return;
-    this.isAnimating = true;
-    
-    const el = this.el;
-    const originalRotation = el.object3D.rotation.y;
-    
-    // Wiggle left and right to show it's rotatable
-    let step = 0;
-    const wiggle = setInterval(() => {
-      if (step === 0) {
-        el.object3D.rotation.y = originalRotation + 0.3; // Rotate right
-      } else if (step === 1) {
-        el.object3D.rotation.y = originalRotation - 0.3; // Rotate left
-      } else if (step === 2) {
-        el.object3D.rotation.y = originalRotation + 0.2; // Smaller right
-      } else if (step === 3) {
-        el.object3D.rotation.y = originalRotation - 0.2; // Smaller left
-      } else {
-        el.object3D.rotation.y = originalRotation; // Back to center
-        clearInterval(wiggle);
-        this.isAnimating = false;
-      }
-      step++;
-    }, 300); // 300ms between each wiggle
-  }
-});
 
 AFRAME.registerComponent('touch-rotate', {
   init: function() {
