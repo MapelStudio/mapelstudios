@@ -19,23 +19,6 @@
     <img src="assets/logo.png" class="main-logo" alt="Mapel Studios Logo" draggable="false" oncontextmenu="return false;">
     <div class="logo-wrapper">
     <img src="assets/logo.png" id="main-logo" alt="Logo">
-    
-    <div id="logo-3d-container">
-        <a-scene embedded vr-mode-ui="enabled: false" style="height: 100%; width: 100%;">
-            <a-assets>
-                <a-asset-item id="loader-model" src="assets/apple.glb"></a-asset-item>
-            </a-assets>
-            
-            <a-entity position="0 0 0" scale="1.5 1.5 1.5" 
-                      gltf-model="#loader-model" 
-                      animation="property: rotation; to: 0 360 0; loop: true; dur: 3000">
-            </a-entity>
-            
-            <a-camera position="0 0 2" look-controls="enabled: false" wasd-controls="enabled: false"></a-camera>
-            <a-light type="ambient" intensity="1.5"></a-light>
-        </a-scene>
-    </div>
-</div>
     <button class="btn" id="start-btn">
     <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path
