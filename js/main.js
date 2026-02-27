@@ -222,7 +222,7 @@ window.addEventListener('load', () => {
                 loadingScreen.style.display = 'none';
             }, 500);
         }
-    }, 5000); // Shows for 2 seconds minimum
+    }, 3000); // Shows for 2 seconds minimum
 });
     
     // Tutorial button listeners
