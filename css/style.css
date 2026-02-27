@@ -940,3 +940,12 @@ div[class*="mindar"] {
     visibility: hidden !important;
     opacity: 0 !important;
 }
+
+/* Lock loading screen model in place during fade */
+#loading-screen model-viewer {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+}
