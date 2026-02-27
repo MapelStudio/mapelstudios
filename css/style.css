@@ -940,24 +940,3 @@ div[class*="mindar"] {
     visibility: hidden !important;
     opacity: 0 !important;
 }
-
-.logo-wrapper {
-    position: relative;
-    width: 200px; /* Match this to your desired logo size */
-    height: 200px;
-    margin: 0 auto;
-}
-
-
-
-#logo-3d-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    pointer-events: none; /* So you can still click things behind it */
-}
-
-
