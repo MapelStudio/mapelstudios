@@ -150,11 +150,15 @@ device-orientation-permission-ui="enabled: false">
 
     <!-- 3D Loading Screen -->
 <!-- 3D Loading Screen -->
+<!-- 3D Loading Screen -->
 <div id="loading-screen" style="
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: 99999;
-    background: transparent;
+    background-color: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -167,7 +171,6 @@ device-orientation-permission-ui="enabled: false">
         camera-orbit="-90deg 90deg auto"
         style="width: 110px; height: 110px; background: transparent; margin-bottom: 95px;"
     ></model-viewer>
-    
 </div>
 
     
