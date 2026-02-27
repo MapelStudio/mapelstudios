@@ -149,22 +149,24 @@ device-orientation-permission-ui="enabled: false">
     <script src="js/main.js"></script>
 
     <!-- 3D Loading Screen -->
+<!-- 3D Loading Screen -->
 <div id="loading-screen" style="
     position: fixed;
     inset: 0;
     z-index: 99999;
-    background: #000;
+    background: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 25px;
 ">
     <model-viewer
-    src="assets/ringanimation.glb"
-    autoplay
-    camera-orbit="-90deg 90deg auto"
-    style="width: 105px; height: 105px; background: transparent; margin-bottom: 80px; margin-left: 8px;"
-></model-viewer>
+        src="assets/ringanimation.glb"
+        autoplay
+        camera-orbit="-90deg 90deg auto"
+        style="width: 100px; height: 100px; background: transparent; margin-bottom: 0px;"
+    ></model-viewer>
     
 </div>
 
