@@ -355,12 +355,27 @@ a-scene {
 }
 
 /* Individual Button Logic */
+/* Individual Button Logic */
 .round-btn {
-    position: fixed; /* Locked to the screen */
-    width: 50px;     /* Size of your icons */
-    height: 50px;
-    pointer-events: auto; /* Makes them clickable */
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    pointer-events: auto;
     cursor: pointer;
+    
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(7.1px);
+    -webkit-backdrop-filter: blur(7.1px);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 4px 30px rgba(0, 0, 0, 0.1);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: all 0.3s ease;
 }
 
 #btn-left {
@@ -374,9 +389,10 @@ a-scene {
 }
 
 /* Ensure images fill the buttons */
+/* Ensure images fill the buttons */
 .round-btn img {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     object-fit: contain;
 }
 
