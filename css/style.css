@@ -365,8 +365,8 @@ a-scene {
     
     /* Glass Effect */
     background: rgba(255, 255, 255, 0);
-    backdrop-filter: blur(7.1px);
-    -webkit-backdrop-filter: blur(7.1px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 4px 30px rgba(0, 0, 0, 0.1);
