@@ -949,3 +949,12 @@ div[class*="mindar"] {
     transform: translate(-50%, -50%) !important;
     margin: 0 !important;
 }
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
