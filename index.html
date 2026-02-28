@@ -150,7 +150,6 @@ device-orientation-permission-ui="enabled: false">
 
     <!-- 3D Loading Screen -->
 <!-- 3D Loading Screen -->
-<!-- 3D Loading Screen -->
 <div id="loading-screen" style="
     position: fixed;
     top: 0;
@@ -163,14 +162,13 @@ device-orientation-permission-ui="enabled: false">
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 25px;
     overflow: hidden;
 ">
     <model-viewer
         src="assets/ringanimation.glb"
         autoplay
         camera-orbit="-90deg 90deg auto"
-        style="width: 105px; height: 105px; background: transparent; margin-bottom: 200px;"
+        style="width: 100px; height: 100px; background: transparent; position: absolute; top: calc(50% - 70px); left: 50%; transform: translateX(-50%);"
     ></model-viewer>
 </div>
 
