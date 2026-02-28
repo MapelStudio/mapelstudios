@@ -218,7 +218,7 @@ window.addEventListener('load', () => {
             // Instant hide - no fade, no jump
             loadingScreen.style.display = 'none';
         }
-    }, 5000);
+    }, 3000);
 });
     
     // Tutorial button listeners
