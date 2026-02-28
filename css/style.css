@@ -958,3 +958,14 @@ div[class*="mindar"] {
         opacity: 0;
     }
 }
+
+
+/* Hide landing page until loading is done */
+#ui {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#ui.loaded {
+    opacity: 1;
+}
