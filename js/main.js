@@ -215,8 +215,14 @@ const loadingScreen = document.getElementById('loading-screen');
 window.addEventListener('load', () => {
     setTimeout(() => {
         if (loadingScreen) {
-            // Instant hide - no fade, no jump
+            // Hide loading screen
             loadingScreen.style.display = 'none';
+            
+            // Show landing page
+            const uiLayer = document.getElementById('ui');
+            if (uiLayer) {
+                uiLayer.classList.add('loaded');
+            }
         }
     }, 3000);
 });
