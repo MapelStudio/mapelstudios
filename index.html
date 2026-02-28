@@ -158,18 +158,16 @@ device-orientation-permission-ui="enabled: false">
     height: 100vh;
     z-index: 99999;
     background-color: #000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
 ">
-    <model-viewer
-        src="assets/ringanimation.glb"
-        autoplay
-        camera-orbit="-90deg 90deg auto"
-        style="width: 100px; height: 100px; background: transparent; position: absolute; top: calc(50% - 70px); left: 50%; transform: translateX(-50%);"
-    ></model-viewer>
+    <div style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);">
+        <model-viewer
+            src="assets/ringanimation.glb"
+            autoplay
+            camera-orbit="-90deg 90deg auto"
+            style="width: 100px; height: 100px; background: transparent;"
+        ></model-viewer>
+    </div>
 </div>
 
     
