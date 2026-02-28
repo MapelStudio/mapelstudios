@@ -215,20 +215,10 @@ const loadingScreen = document.getElementById('loading-screen');
 window.addEventListener('load', () => {
     setTimeout(() => {
         if (loadingScreen) {
-            // Stop the model animation first
-            const modelViewer = loadingScreen.querySelector('model-viewer');
-            if (modelViewer) {
-                modelViewer.pause();
-            }
-            
-            // Then fade out
-            loadingScreen.style.transition = 'opacity 0.5s ease';
-            loadingScreen.style.opacity = '0';
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 100);
+            // Instant hide - no fade, no jump
+            loadingScreen.style.display = 'none';
         }
-    }, 3000);
+    }, 5000);
 });
     
     // Tutorial button listeners
