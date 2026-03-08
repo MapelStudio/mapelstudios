@@ -986,3 +986,8 @@ div[class*="mindar"] {
 #ui.loaded {
     opacity: 1;
 }
+
+/* Make models clickable */
+.switchable-model {
+    cursor: pointer;
+}
