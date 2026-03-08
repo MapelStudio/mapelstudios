@@ -57,6 +57,84 @@ AFRAME.registerComponent('touch-rotate', {
   }
 });
 
+// Model switching system
+AFRAME.registerComponent('switchable-model', {
+    init: function() {
+        this.el.addEventListener('click', (e) => {
+            const clickedModel = e.target;
+            const currentPosition = clickedModel.getAttribute('data-position');
+            
+            // Only switch if it's not already in middle
+            if (currentPosition !== 'middle') {
+                switchToMiddle(clickedModel);
+            }
+        });
+    }
+});
+
+function switchToMiddle(clickedModel) {
+    const targetId = clickedModel.getAttribute('data-target');
+    const clickedPosition = clickedModel.getAttribute('data-position');
+    
+    // Find all models in this target
+    const allModels = document.querySelectorAll(`[data-target="${targetId}"]`);
+    let currentMiddle = null;
+    
+    // Find current middle model
+    allModels.forEach(model => {
+        if (model.getAttribute('data-position') === 'middle') {
+            currentMiddle = model;
+        }
+    });
+    
+    if (!currentMiddle) return;
+    
+    // Get positions
+    const clickedPos = clickedModel.getAttribute('position');
+    const middlePos = currentMiddle.getAttribute('position');
+    
+    // Animate clicked model to middle
+    clickedModel.setAttribute('animation', {
+        property: 'position',
+        to: middlePos,
+        dur: 500,
+        easing: 'easeInOutQuad'
+    });
+    
+    clickedModel.setAttribute('animation__scale', {
+        property: 'scale',
+        to: '0.5 0.5 0.5',
+        dur: 500,
+        easing: 'easeInOutQuad'
+    });
+    
+    // Animate current middle to clicked position
+    currentMiddle.setAttribute('animation', {
+        property: 'position',
+        to: clickedPos,
+        dur: 500,
+        easing: 'easeInOutQuad'
+    });
+    
+    currentMiddle.setAttribute('animation__scale', {
+        property: 'scale',
+        to: '0.2 0.2 0.2',
+        dur: 500,
+        easing: 'easeInOutQuad'
+    });
+    
+    // Update data attributes after animation
+    setTimeout(() => {
+        const tempPos = clickedModel.getAttribute('data-position');
+        clickedModel.setAttribute('data-position', 'middle');
+        currentMiddle.setAttribute('data-position', tempPos);
+        
+        // Enable rotation only on middle
+        clickedModel.setAttribute('touch-rotate', '');
+        currentMiddle.removeAttribute('touch-rotate');
+    }, 500);
+}
+
 // Debug function
 function debugLog(msg) {
     console.log(msg);
