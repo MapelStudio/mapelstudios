@@ -142,22 +142,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // BUTTONS - SIMPLE onclick
-    document.body.addEventListener('click', (e) => {
-        if (e.target.classList.contains('model-btn')) {
-            const modelName = e.target.getAttribute('data-model');
-            const targetId = e.target.getAttribute('data-target');
-            
-            console.log('CLICKED:', modelName, targetId);
-            
-            window.switchModel(targetId, modelName);
-            
-            document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
-                b.classList.remove('active');
-            });
-            e.target.classList.add('active');
-        }
-    });
+  // BUTTONS - SIMPLE onclick with visual debug
+document.body.addEventListener('click', (e) => {
+    const debugDiv = document.getElementById('click-debug');
+    const debugText = document.getElementById('debug-text');
+    
+    // Show what was clicked
+    if (debugDiv && debugText) {
+        debugDiv.style.display = 'block';
+        debugText.innerText = e.target.className + ' - ' + e.target.tagName;
+        setTimeout(() => {
+            debugDiv.style.display = 'none';
+        }, 2000);
+    }
+    
+    if (e.target.classList.contains('model-btn')) {
+        const modelName = e.target.getAttribute('data-model');
+        const targetId = e.target.getAttribute('data-target');
+        
+        if (debugText) debugText.innerText = modelName + ' - ' + targetId;
+        
+        window.switchModel(targetId, modelName);
+        
+        document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
+            b.classList.remove('active');
+        });
+        e.target.classList.add('active');
+    }
+});
 
     // Target A
     const targetA = document.getElementById('target-a');
