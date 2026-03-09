@@ -164,21 +164,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // MODEL BUTTON CLICKS
     // MODEL BUTTON CLICKS
+// MODEL BUTTON CLICKS
 document.querySelectorAll('.model-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         const modelName = btn.getAttribute('data-model');
         const modelDisplay = document.getElementById('model-a-display');
         
         if (modelDisplay) {
-            // Remove old model
-            modelDisplay.removeAttribute('gltf-model');
-            modelDisplay.removeAttribute('src');
+            const parentEntity = modelDisplay.parentElement;
+            modelDisplay.remove();
             
-            // Add new model after a short delay
-            setTimeout(() => {
-                modelDisplay.setAttribute('src', `#${modelName}`);
-                modelDisplay.setAttribute('gltf-model', `#${modelName}`);
-            }, 100);
+            const newModel = document.createElement('a-gltf-model');
+            newModel.setAttribute('id', 'model-a-display');
+            newModel.setAttribute('src', `#${modelName}`);
+            newModel.setAttribute('position', '0 0 0');
+            newModel.setAttribute('scale', '3 3 3');
+            newModel.setAttribute('animation-mixer', '');
+            newModel.setAttribute('touch-rotate', '');
+            parentEntity.appendChild(newModel);
         }
 
         document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
