@@ -163,19 +163,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // MODEL BUTTON CLICKS
-    document.querySelectorAll('.model-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const modelName = btn.getAttribute('data-model');
-            const modelDisplay = document.getElementById('model-a-display');
+    // MODEL BUTTON CLICKS
+document.querySelectorAll('.model-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const modelName = btn.getAttribute('data-model');
+        const modelDisplay = document.getElementById('model-a-display');
+        
+        if (modelDisplay) {
+            // Remove old model
+            modelDisplay.removeAttribute('gltf-model');
+            modelDisplay.removeAttribute('src');
             
-            if (modelDisplay) {
+            // Add new model after a short delay
+            setTimeout(() => {
+                modelDisplay.setAttribute('src', `#${modelName}`);
                 modelDisplay.setAttribute('gltf-model', `#${modelName}`);
-            }
+            }, 100);
+        }
 
-            document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        });
+        document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
     });
+});
 
     // Target A events
     const targetA = document.getElementById('target-a');
