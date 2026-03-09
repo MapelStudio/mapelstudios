@@ -103,6 +103,39 @@ function toggleTutorial(show) {
     }
 }
 
+// Model scales configuration
+const MODEL_SCALES = {
+    // Target A
+    'apple': '3 3 3',
+    'aeroplane': '0.01 0.01 0.01',
+    'axe': '0.2 0.2 0.2',
+    // Target B
+    'bag': '0.8 0.8 0.8',
+    'ball': '1.5 1.5 1.5',
+    'banana': '2 2 2'
+};
+
+function switchModel(targetId, modelName) {
+    const modelDisplay = document.getElementById(`${targetId}-display`);
+    if (!modelDisplay) return;
+    
+    const parentEntity = modelDisplay.parentElement;
+    modelDisplay.remove();
+    
+    const scale = MODEL_SCALES[modelName] || '2 2 2';
+    
+    const newModel = document.createElement('a-gltf-model');
+    newModel.setAttribute('id', `${targetId}-display`);
+    newModel.setAttribute('src', `#${modelName}`);
+    newModel.setAttribute('position', '0 0 0');
+    newModel.setAttribute('scale', scale);
+    newModel.setAttribute('animation-mixer', '');
+    newModel.setAttribute('touch-rotate', '');
+    parentEntity.appendChild(newModel);
+    
+    console.log(`✅ Switched ${targetId} to ${modelName}`);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
@@ -111,30 +144,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const sceneEl = document.getElementById('sceneEl');
     const loadingScreen = document.getElementById('loading-screen');
 
-    // Hide loading screen
     window.addEventListener('load', () => {
         setTimeout(() => {
-            if (loadingScreen) {
-                loadingScreen.style.display = 'none';
-            }
-            if (uiLayer) {
-                uiLayer.classList.add('loaded');
-            }
+            if (loadingScreen) loadingScreen.style.display = 'none';
+            if (uiLayer) uiLayer.classList.add('loaded');
         }, 3000);
     });
 
-    // Tutorial buttons
     const btnRight = document.getElementById('btn-right');
-    if (btnRight) {
-        btnRight.addEventListener('click', () => toggleTutorial(true));
-    }
+    if (btnRight) btnRight.addEventListener('click', () => toggleTutorial(true));
 
     const closeBtn = document.getElementById('close-tutorial-btn');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => toggleTutorial(false));
-    }
+    if (closeBtn) closeBtn.addEventListener('click', () => toggleTutorial(false));
 
-    // Start AR button
     if (startBtn) {
         startBtn.addEventListener('click', () => {
             uiLayer.style.display = 'none';
@@ -162,80 +184,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-// MODEL BUTTON CLICKS - Works for A and B
-    document.querySelectorAll('.model-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const modelName = btn.getAttribute('data-model');
-            const targetId = btn.getAttribute('data-target');
-            const modelDisplay = document.getElementById(`${targetId}-display`);
-            
-            if (modelDisplay) {
-                const parentEntity = modelDisplay.parentElement;
-                modelDisplay.remove();
+    // MODEL BUTTON CLICKS - Universal for all targets
+    setTimeout(() => {
+        document.querySelectorAll('.model-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 
-                // Different scales for different models
-                let scale = '3 3 3'; // Default
+                const modelName = this.getAttribute('data-model');
+                const targetId = this.getAttribute('data-target');
                 
-                // Target A scales
-                if (modelName === 'apple') scale = '3 3 3';
-                if (modelName === 'aeroplane') scale = '0.01 0.01 0.01';
-                if (modelName === 'axe') scale = '0.2 0.2 0.2';
+                console.log(`🔘 Clicked: ${modelName} for ${targetId}`);
                 
-                // Target B scales
-                if (modelName === 'bag') scale = '2 2 2';
-                if (modelName === 'ball') scale = '1.5 1.5 1.5';
-                if (modelName === 'banana') scale = '2 2 2';
+                switchModel(targetId, modelName);
                 
-                const newModel = document.createElement('a-gltf-model');
-                newModel.setAttribute('id', `${targetId}-display`);
-                newModel.setAttribute('src', `#${modelName}`);
-                newModel.setAttribute('position', '0 0 0');
-                newModel.setAttribute('scale', scale);
-                newModel.setAttribute('animation-mixer', '');
-                newModel.setAttribute('touch-rotate', '');
-                parentEntity.appendChild(newModel);
-            }
-
-            // Update active button for this target only
-            document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+                document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
         });
-    });
+    }, 500);
 
-    // Target A events
+    // Target A
     const targetA = document.getElementById('target-a');
     if (targetA) {
         targetA.addEventListener("targetFound", () => {
             scannerLayer.style.display = 'none';
-            const modelSelector = document.getElementById('model-selector-a');
-            if (modelSelector) modelSelector.style.display = 'flex';
+            const selector = document.getElementById('model-selector-a');
+            if (selector) selector.style.display = 'flex';
         });
-
         targetA.addEventListener("targetLost", () => {
             scannerLayer.style.display = 'flex';
-            const modelSelector = document.getElementById('model-selector-a');
-            if (modelSelector) modelSelector.style.display = 'none';
+            const selector = document.getElementById('model-selector-a');
+            if (selector) selector.style.display = 'none';
         });
     }
 
-  // Target B events
+    // Target B
     const targetB = document.getElementById('target-b');
     if (targetB) {
         targetB.addEventListener("targetFound", () => {
             scannerLayer.style.display = 'none';
-            const modelSelector = document.getElementById('model-selector-b');
-            if (modelSelector) modelSelector.style.display = 'flex';
+            const selector = document.getElementById('model-selector-b');
+            if (selector) selector.style.display = 'flex';
         });
-
         targetB.addEventListener("targetLost", () => {
             scannerLayer.style.display = 'flex';
-            const modelSelector = document.getElementById('model-selector-b');
-            if (modelSelector) modelSelector.style.display = 'none';
+            const selector = document.getElementById('model-selector-b');
+            if (selector) selector.style.display = 'none';
         });
     }
 
-   // Target C (keep old behavior for now)
+    // Target C
     const targetC = document.getElementById('target-c');
     if (targetC) {
         targetC.addEventListener("targetFound", () => {
