@@ -162,37 +162,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // MODEL BUTTON CLICKS
-  // MODEL BUTTON CLICKS
-document.querySelectorAll('.model-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const modelName = btn.getAttribute('data-model');
-        const modelDisplay = document.getElementById('model-a-display');
-        
-        if (modelDisplay) {
-            const parentEntity = modelDisplay.parentElement;
-            modelDisplay.remove();
+// MODEL BUTTON CLICKS - Works for A and B
+    document.querySelectorAll('.model-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const modelName = btn.getAttribute('data-model');
+            const targetId = btn.getAttribute('data-target');
+            const modelDisplay = document.getElementById(`${targetId}-display`);
             
-            // Different scales for different models
-            let scale = '3 3 3'; // Default for apple
-            if (modelName === 'aeroplane') scale = '0.01 0.01 0.01';
-            if (modelName === 'axe') scale = '0.2 0.2 0.2';
-            
-            const newModel = document.createElement('a-gltf-model');
-            newModel.setAttribute('id', 'model-a-display');
-            newModel.setAttribute('src', `#${modelName}`);
-            newModel.setAttribute('position', '0 0 0');
-            newModel.setAttribute('scale', scale);
-            newModel.setAttribute('animation-mixer', '');
-            newModel.setAttribute('touch-rotate', '');
-            parentEntity.appendChild(newModel);
-        }
+            if (modelDisplay) {
+                const parentEntity = modelDisplay.parentElement;
+                modelDisplay.remove();
+                
+                // Different scales for different models
+                let scale = '3 3 3'; // Default
+                
+                // Target A scales
+                if (modelName === 'apple') scale = '3 3 3';
+                if (modelName === 'aeroplane') scale = '0.01 0.01 0.01';
+                if (modelName === 'axe') scale = '0.2 0.2 0.2';
+                
+                // Target B scales
+                if (modelName === 'bag') scale = '2 2 2';
+                if (modelName === 'ball') scale = '1.5 1.5 1.5';
+                if (modelName === 'banana') scale = '2 2 2';
+                
+                const newModel = document.createElement('a-gltf-model');
+                newModel.setAttribute('id', `${targetId}-display`);
+                newModel.setAttribute('src', `#${modelName}`);
+                newModel.setAttribute('position', '0 0 0');
+                newModel.setAttribute('scale', scale);
+                newModel.setAttribute('animation-mixer', '');
+                newModel.setAttribute('touch-rotate', '');
+                parentEntity.appendChild(newModel);
+            }
 
-        document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+            // Update active button for this target only
+            document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
     });
-});
 
     // Target A events
     const targetA = document.getElementById('target-a');
@@ -206,6 +215,22 @@ document.querySelectorAll('.model-btn').forEach(btn => {
         targetA.addEventListener("targetLost", () => {
             scannerLayer.style.display = 'flex';
             const modelSelector = document.getElementById('model-selector-a');
+            if (modelSelector) modelSelector.style.display = 'none';
+        });
+    }
+
+  // Target B events
+    const targetB = document.getElementById('target-b');
+    if (targetB) {
+        targetB.addEventListener("targetFound", () => {
+            scannerLayer.style.display = 'none';
+            const modelSelector = document.getElementById('model-selector-b');
+            if (modelSelector) modelSelector.style.display = 'flex';
+        });
+
+        targetB.addEventListener("targetLost", () => {
+            scannerLayer.style.display = 'flex';
+            const modelSelector = document.getElementById('model-selector-b');
             if (modelSelector) modelSelector.style.display = 'none';
         });
     }
