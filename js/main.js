@@ -315,17 +315,24 @@ window.addEventListener('load', () => {
         }
     });
     
-    function startAR() {
-        const arSystem = sceneEl.systems['mindar-image-system'];
-        if (arSystem) {
-            arSystem.start(); 
+    // Handle model button clicks - MUST BE INSIDE DOMContentLoaded
+    document.querySelectorAll('.model-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modelName = btn.getAttribute('data-model');
+            debugLog(`🔘 Button clicked: ${modelName}`);
             
-            window.dispatchEvent(new Event('resize'));
-            setTimeout(() => {
-                window.dispatchEvent(new Event('resize'));
-            }, 500);
-        }
-    }
+            // Switch model
+            const modelDisplay = document.getElementById('model-a-display');
+            if (modelDisplay) {
+                modelDisplay.setAttribute('gltf-model', `#${modelName}`);
+                debugLog(`✅ Switched to: ${modelName}`);
+            }
+            
+            // Update active button
+            document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
     
 // Target A - show model selector
     const targetA = document.getElementById('target-a');
