@@ -76,34 +76,41 @@ window.switchModel = function(targetId, modelName) {
     const debugDiv = document.getElementById('click-debug');
     const debugText = document.getElementById('debug-text');
     
-    if (debugText) debugText.innerText = 'Switching to: ' + modelName;
-    
-    const modelDisplay = document.getElementById(`${targetId}-display`);
-    if (!modelDisplay) {
-        if (debugText) debugText.innerText = 'ERROR: Model not found!';
-        return;
-    }
-    
-    const parentEntity = modelDisplay.parentElement;
-    const oldPosition = modelDisplay.getAttribute('position');
-    const oldRotation = parentEntity.getAttribute('rotation');
-    
-    modelDisplay.remove();
-    
-    const scale = MODEL_SCALES[modelName] || '2 2 2';
+    if (debugText) debugText.innerText = '1. Looking for: ' + targetId + '-display';
     
     setTimeout(() => {
-        const newModel = document.createElement('a-gltf-model');
-        newModel.setAttribute('id', `${targetId}-display`);
-        newModel.setAttribute('gltf-model', `#${modelName}`);
-        newModel.setAttribute('position', oldPosition || '0 0 0');
-        newModel.setAttribute('scale', scale);
-        newModel.setAttribute('animation-mixer', '');
-        newModel.setAttribute('touch-rotate', '');
-        parentEntity.appendChild(newModel);
+        const modelDisplay = document.getElementById(`${targetId}-display`);
         
-        if (debugText) debugText.innerText = 'SUCCESS: ' + modelName;
-    }, 100);
+        if (!modelDisplay) {
+            if (debugText) debugText.innerText = '2. ERROR: Not found!';
+            return;
+        }
+        
+        if (debugText) debugText.innerText = '3. Found! Removing old model...';
+        
+        setTimeout(() => {
+            const parentEntity = modelDisplay.parentElement;
+            modelDisplay.remove();
+            
+            if (debugText) debugText.innerText = '4. Creating new model: ' + modelName;
+            
+            setTimeout(() => {
+                const scale = MODEL_SCALES[modelName] || '2 2 2';
+                
+                const newModel = document.createElement('a-gltf-model');
+                newModel.setAttribute('id', `${targetId}-display`);
+                newModel.setAttribute('gltf-model', `#${modelName}`);
+                newModel.setAttribute('position', '0 0 0');
+                newModel.setAttribute('scale', scale);
+                newModel.setAttribute('animation-mixer', '');
+                newModel.setAttribute('touch-rotate', '');
+                
+                parentEntity.appendChild(newModel);
+                
+                if (debugText) debugText.innerText = '5. DONE! Model added: ' + modelName;
+            }, 200);
+        }, 200);
+    }, 200);
 };
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
