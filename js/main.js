@@ -235,14 +235,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Other targets
-    const otherTargets = document.querySelectorAll('.alphabet-target:not(#target-a)');
-    otherTargets.forEach(target => {
-        target.addEventListener("targetFound", () => {
+   // Target C (keep old behavior for now)
+    const targetC = document.getElementById('target-c');
+    if (targetC) {
+        targetC.addEventListener("targetFound", () => {
             scannerLayer.style.display = 'none';
         });
-        target.addEventListener("targetLost", () => {
+        targetC.addEventListener("targetLost", () => {
             scannerLayer.style.display = 'flex';
         });
-    });
+    }
 });
