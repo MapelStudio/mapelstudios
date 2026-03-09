@@ -1,90 +1,50 @@
-// Kalman filter component
-AFRAME.registerComponent('kalman-smooth', {
-  init: function() {
-    this.kalmanPos = {
-      x: { x: 0, p: 1, k: 0 },
-      y: { x: 0, p: 1, k: 0 },
-      z: { x: 0, p: 1, k: 0 }
-    };
-    this.Q = 0.01;
-    this.R = 0.01;
-  },
-  
-  tick: function() {
-    const pos = this.el.object3D.position;
-    
-    ['x', 'y', 'z'].forEach(axis => {
-      const k = this.kalmanPos[axis];
-      k.p = k.p + this.Q;
-      k.k = k.p / (k.p + this.R);
-      k.x = k.x + k.k * (pos[axis] - k.x);
-      k.p = (1 - k.k) * k.p;
-      pos[axis] = k.x;
-    });
-  }
-});
-
 AFRAME.registerComponent('touch-rotate', {
   init: function() {
     this.lastX = 0;
     this.isMoving = false;
+    const self = this;
     
     window.addEventListener('touchstart', (e) => {
-        if (e.target.tagName === 'BUTTON' || e.target.closest('.model-btn')) {
-            return; 
-        }
+        if (e.target.tagName === 'BUTTON') return;
         if (e.touches.length > 0) {
-            this.isMoving = true;
-            this.lastX = e.touches[0].clientX;
+            self.isMoving = true;
+            self.lastX = e.touches[0].clientX;
         }
     });
 
     window.addEventListener('touchmove', (e) => {
-        if (!this.isMoving || e.touches.length === 0) return;
-        
+        if (!self.isMoving || e.touches.length === 0) return;
         const touch = e.touches[0];
-        const deltaX = touch.clientX - this.lastX;
-        this.el.object3D.rotation.y += deltaX * 0.01;
-        this.lastX = touch.clientX;
+        const deltaX = touch.clientX - self.lastX;
+        self.el.object3D.rotation.y += deltaX * 0.01;
+        self.lastX = touch.clientX;
     });
 
     window.addEventListener('touchend', () => {
-        this.isMoving = false;
+        self.isMoving = false;
     });
   }
 });
-
-function debugLog(msg) {
-    console.log(msg);
-}
 
 let tutorialStep = 1;
 
 function nextPage(pageNumber) {
     tutorialStep = pageNumber;
-    const allPages = document.querySelectorAll('.tutorial-page');
-    allPages.forEach(page => page.classList.remove('active'));
+    document.querySelectorAll('.tutorial-page').forEach(page => page.classList.remove('active'));
     const targetPage = document.getElementById(`page-${pageNumber}`);
     if (targetPage) targetPage.classList.add('active');
     updateButtonText();
 }
 
 function handleNext() {
-    if (tutorialStep < 3) {
-        nextPage(tutorialStep + 1);
-    } else {
-        toggleTutorial(false);
-    }
+    if (tutorialStep < 3) nextPage(tutorialStep + 1);
+    else toggleTutorial(false);
 }
 
 function updateButtonText() {
     const btn = document.getElementById('nav-btn-next');
     if (!btn) return;
-    if (tutorialStep === 3) {
-        btn.innerText = "Start";
-    } else {
-        btn.innerText = "Next";
-    }
+    btn.innerText = tutorialStep === 3 ? "Start" : "Next";
 }
 
 function toggleTutorial(show) {
@@ -103,21 +63,22 @@ function toggleTutorial(show) {
     }
 }
 
-// Model scales configuration
 const MODEL_SCALES = {
-    // Target A
     'apple': '3 3 3',
-    'aeroplane': '0.01 0.01 0.01',
-    'axe': '0.2 0.2 0.2',
-    // Target B
-    'bag': '0.8 0.8 0.8',
+    'aeroplane': '0.5 0.5 0.5',
+    'axe': '1 1 1',
+    'bag': '2 2 2',
     'ball': '1.5 1.5 1.5',
     'banana': '2 2 2'
 };
 
-function switchModel(targetId, modelName) {
+window.switchModel = function(targetId, modelName) {
+    console.log('SWITCH:', targetId, modelName);
     const modelDisplay = document.getElementById(`${targetId}-display`);
-    if (!modelDisplay) return;
+    if (!modelDisplay) {
+        console.log('NO MODEL FOUND');
+        return;
+    }
     
     const parentEntity = modelDisplay.parentElement;
     modelDisplay.remove();
@@ -133,8 +94,8 @@ function switchModel(targetId, modelName) {
     newModel.setAttribute('touch-rotate', '');
     parentEntity.appendChild(newModel);
     
-    console.log(`✅ Switched ${targetId} to ${modelName}`);
-}
+    console.log('SWITCHED!');
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
@@ -168,11 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
             scannerLayer.style.display = 'flex';
             iconLayer.style.display = 'flex';
 
-            if (sceneEl.hasLoaded) {
-                startAR();
-            } else {
-                sceneEl.addEventListener('loaded', startAR);
-            }
+            if (sceneEl.hasLoaded) startAR();
+            else sceneEl.addEventListener('loaded', startAR);
         });
     }
 
@@ -184,28 +142,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-// Wait for everything to load, then attach button listeners
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            const allButtons = document.querySelectorAll('.model-btn');
-            console.log('Found buttons:', allButtons.length);
+    // BUTTONS - SIMPLE onclick
+    document.body.addEventListener('click', (e) => {
+        if (e.target.classList.contains('model-btn')) {
+            const modelName = e.target.getAttribute('data-model');
+            const targetId = e.target.getAttribute('data-target');
             
-            allButtons.forEach(btn => {
-                btn.onclick = function() {
-                    const modelName = this.getAttribute('data-model');
-                    const targetId = this.getAttribute('data-target');
-                    
-                    console.log('Button clicked:', modelName, targetId);
-                    
-                    switchModel(targetId, modelName);
-                    
-                    document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
-                        b.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                };
+            console.log('CLICKED:', modelName, targetId);
+            
+            window.switchModel(targetId, modelName);
+            
+            document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
+                b.classList.remove('active');
             });
-        }, 1000);
+            e.target.classList.add('active');
+        }
     });
 
     // Target A
@@ -241,11 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Target C
     const targetC = document.getElementById('target-c');
     if (targetC) {
-        targetC.addEventListener("targetFound", () => {
-            scannerLayer.style.display = 'none';
-        });
-        targetC.addEventListener("targetLost", () => {
-            scannerLayer.style.display = 'flex';
-        });
+        targetC.addEventListener("targetFound", () => scannerLayer.style.display = 'none');
+        targetC.addEventListener("targetLost", () => scannerLayer.style.display = 'flex');
     }
 });
