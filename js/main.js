@@ -346,23 +346,29 @@ window.addEventListener('load', () => {
     }
 
     // Handle model button clicks
-    document.querySelectorAll('.model-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const modelName = btn.getAttribute('data-model');
-            const targetId = btn.getAttribute('data-target');
-            
-            // Switch model
-            const modelDisplay = document.querySelector(`#${targetId}-display`);
-            if (modelDisplay) {
+document.querySelectorAll('.model-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const modelName = btn.getAttribute('data-model');
+        const targetId = btn.getAttribute('data-target');
+
+        const modelDisplay = document.querySelector(`#${targetId}-display`);
+        if (modelDisplay) {
+            // Remove the old model completely
+            modelDisplay.removeAttribute('gltf-model');
+
+            // Force a fresh load on next frame
+            setTimeout(() => {
+                modelDisplay.setAttribute('src', `#${modelName}`);
                 modelDisplay.setAttribute('gltf-model', `#${modelName}`);
                 debugLog(`✅ Switched to: ${modelName}`);
-            }
-            
-            // Update active button
-            document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        });
+            }, 50);
+        }
+
+        // Update active button
+        document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
     });
+});
 
     // Other targets (B, C)
     const otherTargets = document.querySelectorAll('.alphabet-target:not(#target-a)');
