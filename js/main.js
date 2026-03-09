@@ -184,27 +184,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // MODEL BUTTON CLICKS - Universal for all targets
-    setTimeout(() => {
-        document.querySelectorAll('.model-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const modelName = this.getAttribute('data-model');
-                const targetId = this.getAttribute('data-target');
-                
-                console.log(`🔘 Clicked: ${modelName} for ${targetId}`);
-                
-                switchModel(targetId, modelName);
-                
-                document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
-                    b.classList.remove('active');
-                });
-                this.classList.add('active');
+// Wait for everything to load, then attach button listeners
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const allButtons = document.querySelectorAll('.model-btn');
+            console.log('Found buttons:', allButtons.length);
+            
+            allButtons.forEach(btn => {
+                btn.onclick = function() {
+                    const modelName = this.getAttribute('data-model');
+                    const targetId = this.getAttribute('data-target');
+                    
+                    console.log('Button clicked:', modelName, targetId);
+                    
+                    switchModel(targetId, modelName);
+                    
+                    document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                };
             });
-        });
-    }, 500);
+        }, 1000);
+    });
 
     // Target A
     const targetA = document.getElementById('target-a');
