@@ -73,30 +73,38 @@ const MODEL_SCALES = {
 };
 
 window.switchModel = function(targetId, modelName) {
-    console.log('SWITCH:', targetId, modelName);
+    const debugDiv = document.getElementById('click-debug');
+    const debugText = document.getElementById('debug-text');
+    
+    if (debugText) debugText.innerText = 'Switching to: ' + modelName;
+    
     const modelDisplay = document.getElementById(`${targetId}-display`);
     if (!modelDisplay) {
-        console.log('NO MODEL FOUND');
+        if (debugText) debugText.innerText = 'ERROR: Model not found!';
         return;
     }
     
     const parentEntity = modelDisplay.parentElement;
+    const oldPosition = modelDisplay.getAttribute('position');
+    const oldRotation = parentEntity.getAttribute('rotation');
+    
     modelDisplay.remove();
     
     const scale = MODEL_SCALES[modelName] || '2 2 2';
     
-    const newModel = document.createElement('a-gltf-model');
-    newModel.setAttribute('id', `${targetId}-display`);
-    newModel.setAttribute('src', `#${modelName}`);
-    newModel.setAttribute('position', '0 0 0');
-    newModel.setAttribute('scale', scale);
-    newModel.setAttribute('animation-mixer', '');
-    newModel.setAttribute('touch-rotate', '');
-    parentEntity.appendChild(newModel);
-    
-    console.log('SWITCHED!');
+    setTimeout(() => {
+        const newModel = document.createElement('a-gltf-model');
+        newModel.setAttribute('id', `${targetId}-display`);
+        newModel.setAttribute('gltf-model', `#${modelName}`);
+        newModel.setAttribute('position', oldPosition || '0 0 0');
+        newModel.setAttribute('scale', scale);
+        newModel.setAttribute('animation-mixer', '');
+        newModel.setAttribute('touch-rotate', '');
+        parentEntity.appendChild(newModel);
+        
+        if (debugText) debugText.innerText = 'SUCCESS: ' + modelName;
+    }, 100);
 };
-
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
