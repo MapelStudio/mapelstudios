@@ -163,8 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // MODEL BUTTON CLICKS
-    // MODEL BUTTON CLICKS
-// MODEL BUTTON CLICKS
+  // MODEL BUTTON CLICKS
 document.querySelectorAll('.model-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -175,11 +174,16 @@ document.querySelectorAll('.model-btn').forEach(btn => {
             const parentEntity = modelDisplay.parentElement;
             modelDisplay.remove();
             
+            // Different scales for different models
+            let scale = '3 3 3'; // Default for apple
+            if (modelName === 'aeroplane') scale = '0.5 0.5 0.5';
+            if (modelName === 'axe') scale = '1 1 1';
+            
             const newModel = document.createElement('a-gltf-model');
             newModel.setAttribute('id', 'model-a-display');
             newModel.setAttribute('src', `#${modelName}`);
             newModel.setAttribute('position', '0 0 0');
-            newModel.setAttribute('scale', '3 3 3');
+            newModel.setAttribute('scale', scale);
             newModel.setAttribute('animation-mixer', '');
             newModel.setAttribute('touch-rotate', '');
             parentEntity.appendChild(newModel);
