@@ -327,44 +327,53 @@ window.addEventListener('load', () => {
         }
     }
     
-    // Target 1 - 3D Model
-    // This loop handles A, B, and C automatically
 // Target A - show model selector
-const targetA = document.getElementById('target-a');
-if (targetA) {
-    targetA.addEventListener("targetFound", () => {
-        debugLog("🎯 Found: Letter A");
-        scannerLayer.style.display = 'none';
-        document.getElementById('model-selector-a').style.display = 'flex';
+    const targetA = document.getElementById('target-a');
+    if (targetA) {
+        targetA.addEventListener("targetFound", () => {
+            debugLog("🎯 Found: Letter A");
+            scannerLayer.style.display = 'none';
+            const modelSelector = document.getElementById('model-selector-a');
+            if (modelSelector) modelSelector.style.display = 'flex';
+        });
+
+        targetA.addEventListener("targetLost", () => {
+            debugLog("❌ Lost: Letter A");
+            scannerLayer.style.display = 'flex';
+            const modelSelector = document.getElementById('model-selector-a');
+            if (modelSelector) modelSelector.style.display = 'none';
+        });
+    }
+
+    // Handle model button clicks
+    document.querySelectorAll('.model-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modelName = btn.getAttribute('data-model');
+            const targetId = btn.getAttribute('data-target');
+            
+            // Switch model
+            const modelDisplay = document.querySelector(`#${targetId}-display`);
+            if (modelDisplay) {
+                modelDisplay.setAttribute('gltf-model', `#${modelName}`);
+                debugLog(`✅ Switched to: ${modelName}`);
+            }
+            
+            // Update active button
+            document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
     });
 
-    targetA.addEventListener("targetLost", () => {
-        debugLog("❌ Lost: Letter A");
-        scannerLayer.style.display = 'flex';
-        document.getElementById('model-selector-a').style.display = 'none';
+    // Other targets (B, C)
+    const otherTargets = document.querySelectorAll('.alphabet-target:not(#target-a)');
+    otherTargets.forEach(target => {
+        target.addEventListener("targetFound", () => {
+            debugLog("🎯 Found: " + target.id);
+            scannerLayer.style.display = 'none';
+        });
+        target.addEventListener("targetLost", () => {
+            debugLog("❌ Lost: " + target.id);
+            scannerLayer.style.display = 'flex';
+        });
     });
-}
-
-// Handle model button clicks
-document.querySelectorAll('.model-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const modelName = btn.getAttribute('data-model');
-        const targetId = btn.getAttribute('data-target');
-        switchModel(targetId, modelName);
-    });
-});
-
-// Other targets (B, C) - keep old behavior for now
-const otherTargets = document.querySelectorAll('.alphabet-target:not(#target-a)');
-otherTargets.forEach(target => {
-    target.addEventListener("targetFound", () => {
-        debugLog("🎯 Found: " + target.id);
-        scannerLayer.style.display = 'none';
-    });
-
-    target.addEventListener("targetLost", () => {
-        debugLog("❌ Lost: " + target.id);
-        scannerLayer.style.display = 'flex';
-    });
-});
 });
