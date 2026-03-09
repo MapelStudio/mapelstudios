@@ -73,66 +73,6 @@ AFRAME.registerComponent('switchable-model', {
 });
 
 function switchToMiddle(clickedModel) {
-    const targetId = clickedModel.getAttribute('data-target');
-    const clickedPosition = clickedModel.getAttribute('data-position');
-    
-    // Find all models in this target
-    const allModels = document.querySelectorAll(`[data-target="${targetId}"]`);
-    let currentMiddle = null;
-    
-    // Find current middle model
-    allModels.forEach(model => {
-        if (model.getAttribute('data-position') === 'middle') {
-            currentMiddle = model;
-        }
-    });
-    
-    if (!currentMiddle) return;
-    
-    // Get positions
-    const clickedPos = clickedModel.getAttribute('position');
-    const middlePos = currentMiddle.getAttribute('position');
-    
-    // Animate clicked model to middle
-    clickedModel.setAttribute('animation', {
-        property: 'position',
-        to: middlePos,
-        dur: 500,
-        easing: 'easeInOutQuad'
-    });
-    
-    clickedModel.setAttribute('animation__scale', {
-        property: 'scale',
-        to: '0.5 0.5 0.5',
-        dur: 500,
-        easing: 'easeInOutQuad'
-    });
-    
-    // Animate current middle to clicked position
-    currentMiddle.setAttribute('animation', {
-        property: 'position',
-        to: clickedPos,
-        dur: 500,
-        easing: 'easeInOutQuad'
-    });
-    
-    currentMiddle.setAttribute('animation__scale', {
-        property: 'scale',
-        to: '0.2 0.2 0.2',
-        dur: 500,
-        easing: 'easeInOutQuad'
-    });
-    
-    // Update data attributes after animation
-    setTimeout(() => {
-        const tempPos = clickedModel.getAttribute('data-position');
-        clickedModel.setAttribute('data-position', 'middle');
-        currentMiddle.setAttribute('data-position', tempPos);
-        
-        // Enable rotation only on middle
-        clickedModel.setAttribute('touch-rotate', '');
-        currentMiddle.removeAttribute('touch-rotate');
-    }, 500);
 }
 
 // Debug function
@@ -163,6 +103,30 @@ function playAnim(type) {
         debugLog("✅ SUCCESS: " + type + " loaded");
         horse.setAttribute('animation-mixer', {clip: '*', loop: 'repeat'});
     }, { once: true });
+}
+
+// Model switching function
+function switchModel(targetId, modelName) {
+    const modelDisplay = document.querySelector(`#${targetId}-display`);
+    if (!modelDisplay) return;
+    
+    debugLog(`🔄 Switching to model: ${modelName}`);
+    
+    // Change the model source
+    modelDisplay.setAttribute('gltf-model', `#${modelName}`);
+    
+    // Update active button
+    const buttons = document.querySelectorAll(`[data-target="${targetId}"] .model-btn`);
+    buttons.forEach(btn => {
+        if (btn.getAttribute('data-model') === modelName) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+    
+    // TODO: Show/hide animation controls based on model
+    // We'll add this later when you tell me which models have animations
 }
 
 // 1. New variable to track the current page globally
@@ -365,20 +329,42 @@ window.addEventListener('load', () => {
     
     // Target 1 - 3D Model
     // This loop handles A, B, and C automatically
-const alphabetTargets = document.querySelectorAll('.alphabet-target');
+// Target A - show model selector
+const targetA = document.getElementById('target-a');
+if (targetA) {
+    targetA.addEventListener("targetFound", () => {
+        debugLog("🎯 Found: Letter A");
+        scannerLayer.style.display = 'none';
+        document.getElementById('model-selector-a').style.display = 'flex';
+    });
 
-alphabetTargets.forEach(target => {
+    targetA.addEventListener("targetLost", () => {
+        debugLog("❌ Lost: Letter A");
+        scannerLayer.style.display = 'flex';
+        document.getElementById('model-selector-a').style.display = 'none';
+    });
+}
+
+// Handle model button clicks
+document.querySelectorAll('.model-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const modelName = btn.getAttribute('data-model');
+        const targetId = btn.getAttribute('data-target');
+        switchModel(targetId, modelName);
+    });
+});
+
+// Other targets (B, C) - keep old behavior for now
+const otherTargets = document.querySelectorAll('.alphabet-target:not(#target-a)');
+otherTargets.forEach(target => {
     target.addEventListener("targetFound", () => {
         debugLog("🎯 Found: " + target.id);
         scannerLayer.style.display = 'none';
-        document.getElementById('horse-menu').style.display = 'flex';
     });
 
     target.addEventListener("targetLost", () => {
         debugLog("❌ Lost: " + target.id);
         scannerLayer.style.display = 'flex';
-        document.getElementById('horse-menu').style.display = 'none';
-        document.getElementById('anim-drawer').style.display = 'none';
     });
 });
 });
