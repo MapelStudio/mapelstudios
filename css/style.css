@@ -1065,6 +1065,7 @@ div[class*="mindar"] {
 
 .model-buttons {
     display: flex;
+    flex-direction: row; /* HORIZONTAL */
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
