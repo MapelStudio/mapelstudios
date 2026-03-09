@@ -89,35 +89,36 @@
         </div>
     </div>
 
-    <a-scene id="sceneEl" mindar-image="imageTargetSrc: ./data/targets.mind; autoStart: false; uiScanning: no; ui: no; filterMinCF: 0.001; filterBeta: 0.01;" embedded color-space="sRGB" renderer="colorManagement: true;" xr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-        
-        <a-assets>
-            <a-asset-item id="aeroplane" src="assets/aeroplane.glb"></a-asset-item>
-            <a-asset-item id="apple" src="assets/apple.glb"></a-asset-item>
-            <a-asset-item id="axe" src="assets/axe.glb"></a-asset-item>
-            <a-asset-item id="bag" src="assets/bag.glb"></a-asset-item>
-            <a-asset-item id="banana" src="assets/banana.glb"></a-asset-item>
-            <a-asset-item id="ball" src="assets/ball.glb"></a-asset-item>
-        </a-assets>
+   <a-scene id="sceneEl" mindar-image="imageTargetSrc: ./data/targets.mind; autoStart: false; uiScanning: no; ui: no; filterMinCF: 0.001; filterBeta: 0.01;" embedded color-space="sRGB" renderer="colorManagement: true;" xr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    
+    <a-assets>
+        <a-asset-item id="aeroplane" src="assets/aeroplane.glb"></a-asset-item>
+        <a-asset-item id="apple" src="assets/apple.glb"></a-asset-item>
+        <a-asset-item id="axe" src="assets/axe.glb"></a-asset-item>
+        <a-asset-item id="bag" src="assets/bag.glb"></a-asset-item>
+        <a-asset-item id="banana" src="assets/banana.glb"></a-asset-item>
+        <a-asset-item id="ball" src="assets/ball.glb"></a-asset-item>
+        <a-asset-item id="model-c" src="assets/cat.gltf"></a-asset-item>
+    </a-assets>
 
-        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-        <a-entity id="target-a" class="alphabet-target" mindar-image-target="targetIndex: 0">
-            <a-entity rotation="90 0 0">
-                <a-gltf-model id="model-a-display" src="#apple" position="0 0 0" scale="3 3 3" animation-mixer touch-rotate></a-gltf-model>
-            </a-entity>
+    <a-entity id="target-a" class="alphabet-target" mindar-image-target="targetIndex: 0">
+        <a-entity rotation="90 0 0">
+            <a-gltf-model id="target-a-display" src="#apple" position="0 0 0" scale="3 3 3" animation-mixer touch-rotate></a-gltf-model>
         </a-entity>
-
-        <a-entity id="target-b" class="alphabet-target" mindar-image-target="targetIndex: 1">
-    <a-entity rotation="90 0 0">
-        <a-gltf-model id="model-b-display" src="#bag" position="0 0 0" scale="2 2 2" animation-mixer touch-rotate></a-gltf-model>
     </a-entity>
-</a-entity>
 
-        <a-entity id="target-c" class="alphabet-target" mindar-image-target="targetIndex: 2">
-            <a-gltf-model src="#model-c" rotation="90 0 0" position="0 0 0" scale="0.05 0.05 0.05" animation-mixer touch-rotate></a-gltf-model>
+    <a-entity id="target-b" class="alphabet-target" mindar-image-target="targetIndex: 1">
+        <a-entity rotation="90 0 0">
+            <a-gltf-model id="target-b-display" src="#bag" position="0 0 0" scale="2 2 2" animation-mixer touch-rotate></a-gltf-model>
         </a-entity>
-    </a-scene>
+    </a-entity>
+
+    <a-entity id="target-c" class="alphabet-target" mindar-image-target="targetIndex: 2">
+        <a-gltf-model src="#model-c" rotation="90 0 0" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-scene>
 
     <video autoplay muted loop playsinline id="bg-video" oncontextmenu="return false;" disablePictureInPicture>
         <source src="assets/landing-bg.mp4" type="video/mp4">
