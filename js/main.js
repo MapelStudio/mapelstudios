@@ -176,8 +176,8 @@ document.querySelectorAll('.model-btn').forEach(btn => {
             
             // Different scales for different models
             let scale = '3 3 3'; // Default for apple
-            if (modelName === 'aeroplane') scale = '0.5 0.5 0.5';
-            if (modelName === 'axe') scale = '1 1 1';
+            if (modelName === 'aeroplane') scale = '0.15 0.15 0.15';
+            if (modelName === 'axe') scale = '0.2 0.2 0.2';
             
             const newModel = document.createElement('a-gltf-model');
             newModel.setAttribute('id', 'model-a-display');
