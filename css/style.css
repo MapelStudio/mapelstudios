@@ -1103,3 +1103,17 @@ div[class*="mindar"] {
     display: flex;
     gap: 10px;
 }
+
+/* FORCE BUTTONS TO BE CLICKABLE */
+.model-btn {
+    pointer-events: auto !important;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
+}
+
+.model-buttons {
+    pointer-events: auto !important;
+}
+
+.model-selector-ui {
+    pointer-events: auto !important;
+}
