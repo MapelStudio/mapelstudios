@@ -1,3 +1,4 @@
+// ===== TOUCH ROTATION COMPONENT =====
 AFRAME.registerComponent('touch-rotate', {
   init: function() {
     this.lastX = 0;
@@ -26,6 +27,38 @@ AFRAME.registerComponent('touch-rotate', {
   }
 });
 
+// ===== LETTER CONFIGURATION =====
+// Add all 26 letters here - ONE place for everything!
+const LETTER_CONFIG = {
+    'a': {
+        targetIndex: 0,
+        models: {
+            'apple': { file: 'apple.glb', scale: '3 3 3', label: 'Apple', default: true },
+            'aeroplane': { file: 'aeroplane.glb', scale: '0.1 0.1 0.1', label: 'Aeroplane' },
+            'axe': { file: 'axe.glb', scale: '0.2 0.2 0.2', label: 'Axe' }
+        }
+    },
+    'b': {
+        targetIndex: 1,
+        models: {
+            'bag': { file: 'bag.glb', scale: '0.5 0.5 0.5', label: 'Bag', default: true },
+            'ball': { file: 'ball.glb', scale: '0.2 0.2 0.2', label: 'Ball' },
+            'banana': { file: 'banana.glb', scale: '0.3 0.3 0.3', label: 'Banana' }
+        }
+    }
+    // ADD MORE LETTERS HERE (C, D, E... Z)
+    // Just copy the pattern above!
+};
+
+// ===== AUTO-GENERATE MODEL SCALES =====
+const MODEL_SCALES = {};
+Object.keys(LETTER_CONFIG).forEach(letter => {
+    Object.keys(LETTER_CONFIG[letter].models).forEach(modelName => {
+        MODEL_SCALES[modelName] = LETTER_CONFIG[letter].models[modelName].scale;
+    });
+});
+
+// ===== TUTORIAL FUNCTIONS =====
 let tutorialStep = 1;
 
 function nextPage(pageNumber) {
@@ -63,55 +96,34 @@ function toggleTutorial(show) {
     }
 }
 
-const MODEL_SCALES = {
-    'apple': '3 3 3',
-    'aeroplane': '0.1 0.1 0.1',
-    'axe': '0.2 0.2 0.2',
-    'bag': '0.5 0.5 0.5',
-    'ball': '0.2 0.2 0.2',
-    'banana': '0.3 0.3 0.3'
-};
-
+// ===== MODEL SWITCHING FUNCTION =====
 window.switchModel = function(targetId, modelName) {
-    const debugDiv = document.getElementById('click-debug');
-    const debugText = document.getElementById('debug-text');
+    const modelDisplay = document.getElementById(`${targetId}-display`);
+    if (!modelDisplay) {
+        console.error('Model display not found:', targetId);
+        return;
+    }
     
-    if (debugText) debugText.innerText = '1. Looking for: ' + targetId + '-display';
+    const parentEntity = modelDisplay.parentElement;
+    modelDisplay.remove();
     
     setTimeout(() => {
-        const modelDisplay = document.getElementById(`${targetId}-display`);
+        const scale = MODEL_SCALES[modelName] || '2 2 2';
         
-        if (!modelDisplay) {
-            if (debugText) debugText.innerText = '2. ERROR: Not found!';
-            return;
-        }
+        const newModel = document.createElement('a-gltf-model');
+        newModel.setAttribute('id', `${targetId}-display`);
+        newModel.setAttribute('gltf-model', `#${modelName}`);
+        newModel.setAttribute('position', '0 0 0');
+        newModel.setAttribute('scale', scale);
+        newModel.setAttribute('animation-mixer', '');
+        newModel.setAttribute('touch-rotate', '');
         
-        if (debugText) debugText.innerText = '3. Found! Removing old model...';
-        
-        setTimeout(() => {
-            const parentEntity = modelDisplay.parentElement;
-            modelDisplay.remove();
-            
-            if (debugText) debugText.innerText = '4. Creating new model: ' + modelName;
-            
-            setTimeout(() => {
-                const scale = MODEL_SCALES[modelName] || '2 2 2';
-                
-                const newModel = document.createElement('a-gltf-model');
-                newModel.setAttribute('id', `${targetId}-display`);
-                newModel.setAttribute('gltf-model', `#${modelName}`);
-                newModel.setAttribute('position', '0 0 0');
-                newModel.setAttribute('scale', scale);
-                newModel.setAttribute('animation-mixer', '');
-                newModel.setAttribute('touch-rotate', '');
-                
-                parentEntity.appendChild(newModel);
-                
-                if (debugText) debugText.innerText = '5. DONE! Model added: ' + modelName;
-            }, 200);
-        }, 200);
-    }, 200);
+        parentEntity.appendChild(newModel);
+        console.log('✅ Switched to:', modelName);
+    }, 100);
 };
+
+// ===== MAIN INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
@@ -120,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sceneEl = document.getElementById('sceneEl');
     const loadingScreen = document.getElementById('loading-screen');
 
+    // Hide loading screen
     window.addEventListener('load', () => {
         setTimeout(() => {
             if (loadingScreen) loadingScreen.style.display = 'none';
@@ -127,12 +140,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     });
 
+    // Tutorial buttons
     const btnRight = document.getElementById('btn-right');
     if (btnRight) btnRight.addEventListener('click', () => toggleTutorial(true));
 
     const closeBtn = document.getElementById('close-tutorial-btn');
     if (closeBtn) closeBtn.addEventListener('click', () => toggleTutorial(false));
 
+    // Start AR button
     if (startBtn) {
         startBtn.addEventListener('click', () => {
             uiLayer.style.display = 'none';
@@ -157,69 +172,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-  // BUTTONS - SIMPLE onclick with visual debug
-document.body.addEventListener('click', (e) => {
-    const debugDiv = document.getElementById('click-debug');
-    const debugText = document.getElementById('debug-text');
-    
-    // Show what was clicked
-    if (debugDiv && debugText) {
-        debugDiv.style.display = 'block';
-        debugText.innerText = e.target.className + ' - ' + e.target.tagName;
-        setTimeout(() => {
-            debugDiv.style.display = 'none';
-        }, 2000);
-    }
-    
-    if (e.target.classList.contains('model-btn')) {
-        const modelName = e.target.getAttribute('data-model');
-        const targetId = e.target.getAttribute('data-target');
-        
-        if (debugText) debugText.innerText = modelName + ' - ' + targetId;
-        
-        window.switchModel(targetId, modelName);
-        
-        document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
-            b.classList.remove('active');
-        });
-        e.target.classList.add('active');
-    }
-});
+    // ===== UNIVERSAL BUTTON CLICK HANDLER =====
+    document.body.addEventListener('click', (e) => {
+        if (e.target.classList.contains('model-btn')) {
+            const modelName = e.target.getAttribute('data-model');
+            const targetId = e.target.getAttribute('data-target');
+            
+            window.switchModel(targetId, modelName);
+            
+            // Update active button
+            document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
+                b.classList.remove('active');
+            });
+            e.target.classList.add('active');
+        }
+    });
 
-    // Target A
-    const targetA = document.getElementById('target-a');
-    if (targetA) {
-        targetA.addEventListener("targetFound", () => {
-            scannerLayer.style.display = 'none';
-            const selector = document.getElementById('model-selector-a');
-            if (selector) selector.style.display = 'flex';
-        });
-        targetA.addEventListener("targetLost", () => {
-            scannerLayer.style.display = 'flex';
-            const selector = document.getElementById('model-selector-a');
-            if (selector) selector.style.display = 'none';
-        });
-    }
+    // ===== AUTO-SETUP ALL TARGETS FROM CONFIG =====
+    Object.keys(LETTER_CONFIG).forEach(letter => {
+        const targetId = `target-${letter}`;
+        const targetEl = document.getElementById(targetId);
+        
+        if (targetEl) {
+            targetEl.addEventListener("targetFound", () => {
+                scannerLayer.style.display = 'none';
+                const selector = document.getElementById(`model-selector-${letter}`);
+                if (selector) selector.style.display = 'flex';
+            });
 
-    // Target B
-    const targetB = document.getElementById('target-b');
-    if (targetB) {
-        targetB.addEventListener("targetFound", () => {
-            scannerLayer.style.display = 'none';
-            const selector = document.getElementById('model-selector-b');
-            if (selector) selector.style.display = 'flex';
-        });
-        targetB.addEventListener("targetLost", () => {
-            scannerLayer.style.display = 'flex';
-            const selector = document.getElementById('model-selector-b');
-            if (selector) selector.style.display = 'none';
-        });
-    }
-
-    // Target C
-    const targetC = document.getElementById('target-c');
-    if (targetC) {
-        targetC.addEventListener("targetFound", () => scannerLayer.style.display = 'none');
-        targetC.addEventListener("targetLost", () => scannerLayer.style.display = 'flex');
-    }
+            targetEl.addEventListener("targetLost", () => {
+                scannerLayer.style.display = 'flex';
+                const selector = document.getElementById(`model-selector-${letter}`);
+                if (selector) selector.style.display = 'none';
+            });
+        }
+    });
 });
