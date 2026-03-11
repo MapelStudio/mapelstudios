@@ -43,7 +43,7 @@ const LETTER_CONFIG = {
         models: {
             'bag': { file: 'bag.glb', scale: '0.5 0.5 0.5', label: 'Bag', default: true },
             'ball': { file: 'ball.glb', scale: '0.3 0.3 0.3', label: 'Ball' },
-            'banana': { file: 'banana.glb', scale: '0.009 0.009 0.009', label: 'Banana' }
+            'banana': { file: 'banana.glb', scale: '0.01 0.01 0.01', label: 'Banana' }
         }
     }
     // ADD MORE LETTERS HERE (C, D, E... Z)
