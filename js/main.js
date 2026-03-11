@@ -65,11 +65,11 @@ function toggleTutorial(show) {
 
 const MODEL_SCALES = {
     'apple': '3 3 3',
-    'aeroplane': '0.5 0.5 0.5',
-    'axe': '1 1 1',
-    'bag': '2 2 2',
-    'ball': '1.5 1.5 1.5',
-    'banana': '2 2 2'
+    'aeroplane': '0.1 0.1 0.1',
+    'axe': '0.2 0.2 0.2',
+    'bag': '0.5 0.5 0.5',
+    'ball': '0.2 0.2 0.2',
+    'banana': '0.3 0.3 0.3'
 };
 
 window.switchModel = function(targetId, modelName) {
