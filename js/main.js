@@ -34,16 +34,16 @@ const LETTER_CONFIG = {
         targetIndex: 0,
         models: {
             'apple': { file: 'apple.glb', scale: '3 3 3', label: 'Apple', default: true },
-            'aeroplane': { file: 'aeroplane.glb', scale: '0.1 0.1 0.1', label: 'Aeroplane' },
-            'axe': { file: 'axe.glb', scale: '0.2 0.2 0.2', label: 'Axe' }
+            'aeroplane': { file: 'aeroplane.glb', scale: '0.02 0.02 0.02', label: 'Aeroplane' },
+            'axe': { file: 'axe.glb', scale: '0.5 0.5 0.5', label: 'Axe' }
         }
     },
     'b': {
         targetIndex: 1,
         models: {
-            'bag': { file: 'bag.glb', scale: '0.5 0.5 0.5', label: 'Bag', default: true },
-            'ball': { file: 'ball.glb', scale: '0.2 0.2 0.2', label: 'Ball' },
-            'banana': { file: 'banana.glb', scale: '0.3 0.3 0.3', label: 'Banana' }
+            'bag': { file: 'bag.glb', scale: '0.1 0.1 0.1', label: 'Bag', default: true },
+            'ball': { file: 'ball.glb', scale: '0.3 0.3 0.3', label: 'Ball' },
+            'banana': { file: 'banana.glb', scale: '0.05 0.05 0.05', label: 'Banana' }
         }
     }
     // ADD MORE LETTERS HERE (C, D, E... Z)
