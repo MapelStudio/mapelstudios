@@ -1034,12 +1034,7 @@ div[class*="mindar"] {
 .model-btn.active {
     background: rgba(255, 255, 255, 0.3);
     border: 2px solid white;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-}
-
-.model-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
+    box-shadow: 0 0 0px rgba(255, 255, 255, 0.8);
 }
 
 /* Animation controls (above model buttons) */
