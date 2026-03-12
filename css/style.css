@@ -1065,10 +1065,12 @@ div[class*="mindar"] {
 
 .model-buttons {
     display: flex;
-    flex-direction: row; /* HORIZONTAL */
+    flex-direction: row;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Keep all buttons in one row */
     justify-content: center;
+    width: 100%;
+    overflow-x: auto; /* Allow horizontal scroll if needed */
 }
 
 .model-btn {
@@ -1082,10 +1084,13 @@ div[class*="mindar"] {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 8px 15px;
-    font-size: 12px;
+    padding: 8px 12px; /* Smaller padding */
+    font-size: 11px; /* Smaller font */
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+    min-width: fit-content; /* Button only as wide as text */
+    flex-shrink: 0; /* Prevent buttons from shrinking */
 }
 
 .model-btn.active {
