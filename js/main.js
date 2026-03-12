@@ -105,22 +105,58 @@ window.switchModel = function(targetId, modelName) {
     }
     
     const parentEntity = modelDisplay.parentElement;
-    modelDisplay.remove();
+    
+    // Fade out old model
+    modelDisplay.setAttribute('animation', {
+        property: 'scale',
+        to: '0 0 0',
+        dur: 300,
+        easing: 'easeInQuad'
+    });
     
     setTimeout(() => {
+        modelDisplay.remove();
+        
         const scale = MODEL_SCALES[modelName] || '2 2 2';
         
         const newModel = document.createElement('a-gltf-model');
         newModel.setAttribute('id', `${targetId}-display`);
         newModel.setAttribute('gltf-model', `#${modelName}`);
-        newModel.setAttribute('position', '0 0 0');
-        newModel.setAttribute('scale', scale);
+        newModel.setAttribute('position', '0 0 -0.5'); // Start below target
+        newModel.setAttribute('scale', '0 0 0'); // Start invisible
         newModel.setAttribute('animation-mixer', '');
         newModel.setAttribute('touch-rotate', '');
         
+        // Pop-up animation (comes out of target)
+        newModel.setAttribute('animation__popup', {
+            property: 'position',
+            from: '0 0 -0.5',
+            to: '0 0 0',
+            dur: 800,
+            easing: 'easeOutBack'
+        });
+        
+        // Scale-up animation (grows from small to full size)
+        newModel.setAttribute('animation__scale', {
+            property: 'scale',
+            from: '0 0 0',
+            to: scale,
+            dur: 800,
+            easing: 'easeOutBack'
+        });
+        
+        // Full 360° rotation animation (spins once)
+        newModel.setAttribute('animation__rotate', {
+            property: 'rotation',
+            from: '0 0 0',
+            to: '0 360 0',
+            dur: 800,
+            easing: 'easeOutQuad'
+        });
+        
         parentEntity.appendChild(newModel);
         console.log('✅ Switched to:', modelName);
-    }, 100);
+    }, 300);
 };
 
 // ===== MAIN INITIALIZATION =====
