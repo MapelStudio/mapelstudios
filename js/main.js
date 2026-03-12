@@ -2,6 +2,7 @@
 AFRAME.registerComponent('touch-rotate', {
   init: function() {
     this.lastX = 0;
+    this.lastY = 0;
     this.isMoving = false;
     const self = this;
     
@@ -10,15 +11,25 @@ AFRAME.registerComponent('touch-rotate', {
         if (e.touches.length > 0) {
             self.isMoving = true;
             self.lastX = e.touches[0].clientX;
+            self.lastY = e.touches[0].clientY;
         }
     });
 
     window.addEventListener('touchmove', (e) => {
         if (!self.isMoving || e.touches.length === 0) return;
+        
         const touch = e.touches[0];
         const deltaX = touch.clientX - self.lastX;
+        const deltaY = touch.clientY - self.lastY;
+        
+        // Rotate around Y-axis (horizontal swipe)
         self.el.object3D.rotation.y += deltaX * 0.01;
+        
+        // Rotate around X-axis (vertical swipe)
+        self.el.object3D.rotation.x += deltaY * 0.01;
+        
         self.lastX = touch.clientX;
+        self.lastY = touch.clientY;
     });
 
     window.addEventListener('touchend', () => {
