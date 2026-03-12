@@ -1049,7 +1049,17 @@ div[class*="mindar"] {
 }
 
 
-/* Model Selector UI */
+.model-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 100%;
+    overflow-x: visible; /* Changed from auto */
+    overflow-y: visible; /* No vertical scroll */
+}
+
 .model-selector-ui {
     position: fixed;
     bottom: 30px;
@@ -1061,16 +1071,7 @@ div[class*="mindar"] {
     gap: 15px;
     z-index: 9999;
     pointer-events: auto;
-}
-
-.model-buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    flex-wrap: nowrap; /* Keep all buttons in one row */
-    justify-content: center;
-    width: 100%;
-    overflow-x: auto; /* Allow horizontal scroll if needed */
+    background: transparent; /* Remove any background */
 }
 
 .model-btn {
@@ -1084,25 +1085,18 @@ div[class*="mindar"] {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 8px 12px; /* Smaller padding */
-    font-size: 11px; /* Smaller font */
+    padding: 8px 12px;
+    font-size: 11px;
     cursor: pointer;
     transition: all 0.3s ease;
-    white-space: nowrap; /* Prevent text wrapping */
-    min-width: fit-content; /* Button only as wide as text */
-    flex-shrink: 0; /* Prevent buttons from shrinking */
+    white-space: nowrap;
+    min-width: fit-content;
+    flex-shrink: 0;
+    -webkit-overflow-scrolling: none; /* Disable iOS bounce scroll */
+    overscroll-behavior: none; /* Disable overscroll */
 }
 
-.model-btn.active {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid white;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-}
 
-.model-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
-}
 
 .anim-controls {
     display: flex;
