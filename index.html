@@ -56,6 +56,15 @@
         <button class="model-btn" data-model="banana" data-target="target-b">Banana</button>
     </div>
 </div>
+    <!-- Model Selector UI for Letter E - ADD THIS ENTIRE DIV -->
+<div id="model-selector-e" class="model-selector-ui" style="display: none;">
+    <div id="anim-controls-e" class="anim-controls" style="display: none;"></div>
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="emerald" data-target="target-e">Emerald</button>
+        <button class="model-btn" data-model="elephant" data-target="target-e">Elephant</button>
+        <button class="model-btn" data-model="egg" data-target="target-e">Egg</button>
+    </div>
+</div>
 
     <div id="scanner-container" style="display: none;">
         <div class="target-box">
@@ -116,10 +125,12 @@
             <a-gltf-model id="target-b-display" src="#bag" position="0 0 0" scale="2 2 2" animation-mixer touch-rotate></a-gltf-model>
         </a-entity>
     </a-entity>
-
-    <a-entity id="target-c" class="alphabet-target" mindar-image-target="targetIndex: 2">
-        <a-gltf-model src="#model-c" rotation="90 0 0" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    
+    <a-entity id="target-e" class="alphabet-target" mindar-image-target="targetIndex: 4">
+        <a-entity rotation="90 0 0">
+            <a-gltf-model id="target-e-display" src="#emerald" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
     </a-entity>
+</a-entity>
 </a-scene>
 
     <video autoplay muted loop playsinline id="bg-video" oncontextmenu="return false;" disablePictureInPicture>
