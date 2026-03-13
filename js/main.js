@@ -60,9 +60,9 @@ const LETTER_CONFIG = {
     'e': {
         targetIndex: 4,  // 5th target in targets.mind (0=A, 1=B, 2=C, 3=D, 4=E)
         models: {
-            'emerald': { file: 'emerald.glb', scale: '1 1 1', label: 'Emerald', default: true },
-            'elephant': { file: 'elephant.glb', scale: '1 1 1', label: 'Elephant' },
-            'egg': { file: 'egg.glb', scale: '1 1 1', label: 'Egg' }
+            'emerald': { file: 'emerald.glb', scale: '0.3 0.3 0.3', label: 'Emerald', default: true },
+            'elephant': { file: 'elephant.glb', scale: '0.1 0.1 0.1', label: 'Elephant' },
+            'egg': { file: 'egg.glb', scale: '0.3 0.3 0.3', label: 'Egg' }
         }
     }
     // ADD MORE LETTERS HERE (C, D, E... Z)
