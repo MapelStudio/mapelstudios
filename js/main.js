@@ -56,6 +56,14 @@ const LETTER_CONFIG = {
             'ball': { file: 'ball.glb', scale: '0.3 0.3 0.3', label: 'Ball' },
             'banana': { file: 'banana.glb', scale: '0.04 0.04 0.04', label: 'Banana' }
         }
+    },
+    'e': {
+        targetIndex: 4,  // 5th target in targets.mind (0=A, 1=B, 2=C, 3=D, 4=E)
+        models: {
+            'emerald': { file: 'emerald.glb', scale: '1 1 1', label: 'Emerald', default: true },
+            'elephant': { file: 'elephant.glb', scale: '1 1 1', label: 'Elephant' },
+            'egg': { file: 'egg.glb', scale: '1 1 1', label: 'Egg' }
+        }
     }
     // ADD MORE LETTERS HERE (C, D, E... Z)
     // Just copy the pattern above!
