@@ -65,7 +65,7 @@ const LETTER_CONFIG = {
             'egg': { file: 'egg.glb', scale: '0.3 0.3 0.3', label: 'Egg' }
         }
     },
-    'e': {
+    'f': {
         targetIndex: 5,  // 5th target in targets.mind (0=A, 1=B, 2=C, 3=D, 4=E)
         models: {
             'emerald': { file: 'flower.glb', scale: '1 1 1', label: 'Flower', default: true },
