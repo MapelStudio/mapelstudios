@@ -1057,7 +1057,7 @@ div[class*="mindar"] {
 
 .model-selector-ui {
     position: fixed;
-    bottom: 30px;
+    bottom: 60px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -1080,8 +1080,8 @@ div[class*="mindar"] {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 8px 12px;
-    font-size: 11px;
+    padding: 12px 18px;
+    font-size: 13px;
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
