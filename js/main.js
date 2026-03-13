@@ -69,8 +69,8 @@ const LETTER_CONFIG = {
         targetIndex: 5,  // 5th target in targets.mind (0=A, 1=B, 2=C, 3=D, 4=E)
         models: {
             'flower': { file: 'flower.glb', scale: '1 1 1', label: 'Flower', default: true },
-            'funnel': { file: 'funnel.glb', scale: '1 1 1', label: 'Funnel' },
-            'fan': { file: 'fan.glb', scale: '1 1 1', label: 'Fan' }
+            'funnel': { file: 'funnel.glb', scale: '0.1 0.1 0.1', label: 'Funnel' },
+            'fan': { file: 'fan.glb', scale: '0.1 0.1 0.1', label: 'Fan' }
         }
     }
     // ADD MORE LETTERS HERE (C, D, E... Z)
