@@ -52,7 +52,7 @@ const LETTER_CONFIG = {
     'b': {
         targetIndex: 1,
         models: {
-            'bag': { file: 'bag.glb', scale: '0.5 0.5 0.5', label: 'Bag', default: true },
+            'bag': { file: 'bag.glb', scale: '1 1 1', label: 'Bag', default: true },
             'ball': { file: 'ball.glb', scale: '0.3 0.3 0.3', label: 'Ball' },
             'banana': { file: 'banana.glb', scale: '0.04 0.04 0.04', label: 'Banana' }
         }
