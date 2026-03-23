@@ -54,7 +54,7 @@ const LETTER_CONFIG = {
         models: {
             'bag': { file: 'bag.glb', scale: '1 1 1', label: 'Bag', default: true },
             'ball': { file: 'ball.glb', scale: '0.3 0.3 0.3', label: 'Ball' },
-            'banana': { file: 'banana.glb', scale: '0.01 0.01 0.01', label: 'Banana' }
+            'banana': { file: 'banana.glb', scale: '0.02 0.02 0.02', label: 'Banana' }
         }
     },
     'e': {
