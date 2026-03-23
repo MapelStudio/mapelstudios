@@ -78,7 +78,7 @@ const LETTER_CONFIG = {
         models: {
             'gift': { file: 'gift.glb', scale: '4 4 4', label: 'Gift', default: true },
             'goat': { file: 'goat.glb', scale: '0.5 0.5 0.5', label: 'Goat' },
-            'grape': { file: 'grape.glb', scale: '0.1 0.1 0.1', label: 'Grape' }
+            'grape': { file: 'grape.glb', position: '5 0 0', scale: '0.1 0.1 0.1', label: 'Grape' }
         }
     }
 };
