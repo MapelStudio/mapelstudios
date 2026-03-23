@@ -73,8 +73,14 @@ const LETTER_CONFIG = {
             'fan': { file: 'fan.glb', scale: '0.1 0.1 0.1', label: 'Fan' }
         }
     }
-    // ADD MORE LETTERS HERE (C, D, E... Z)
-    // Just copy the pattern above!
+    'g': {
+        targetIndex: 6,  // 7th target in targets.mind (assuming you compiled A-J together)
+        models: {
+            'gift': { file: 'gift.glb', scale: '1 1 1', label: 'Gift', default: true },
+            'goat': { file: 'goat.glb', scale: '1 1 1', label: 'Goat' },
+            'grape': { file: 'grape.glb', scale: '1 1 1', label: 'Grape' }
+        }
+    }
 };
 
 // ===== AUTO-GENERATE MODEL SCALES =====
