@@ -76,9 +76,9 @@ const LETTER_CONFIG = {
     'g': {
         targetIndex: 6,  // 7th target in targets.mind (assuming you compiled A-J together)
         models: {
-            'gift': { file: 'gift.glb', scale: '1 1 1', label: 'Gift', default: true },
-            'goat': { file: 'goat.glb', scale: '1 1 1', label: 'Goat' },
-            'grape': { file: 'grape.glb', scale: '1 1 1', label: 'Grape' }
+            'gift': { file: 'gift.glb', scale: '4 4 4', label: 'Gift', default: true },
+            'goat': { file: 'goat.glb', scale: '0.4 0.4 0.4', label: 'Goat' },
+            'grape': { file: 'grape.glb', scale: '0.2 0.2 0.2', label: 'Grape' }
         }
     }
 };
