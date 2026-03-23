@@ -44,7 +44,7 @@ const LETTER_CONFIG = {
     'a': {
         targetIndex: 0,
         models: {
-            'apple': { file: 'apple.glb', scale: '6 6 6', label: 'Apple', default: true },
+            'apple': { file: 'apple.glb', scale: '4.5 4.5 4.5', label: 'Apple', default: true },
             'aeroplane': { file: 'aeroplane.glb', scale: '0.06 0.06 0.06', label: 'Aeroplane' },
             'axe': { file: 'axe.glb', scale: '0.4 0.4 0.4', label: 'Axe' }
         }
