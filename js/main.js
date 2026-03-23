@@ -72,7 +72,7 @@ const LETTER_CONFIG = {
             'funnel': { file: 'funnel.glb', scale: '0.09 0.09 0.09', label: 'Funnel' },
             'fan': { file: 'fan.glb', scale: '0.1 0.1 0.1', label: 'Fan' }
         }
-    }
+    },
     'g': {
         targetIndex: 6,  // 7th target in targets.mind (assuming you compiled A-J together)
         models: {
