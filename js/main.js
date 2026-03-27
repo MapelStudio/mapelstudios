@@ -120,12 +120,18 @@ window.nextPage = function(pageNumber) {
     updateButtonText();
 }
 
-window.handleNext = function() {
-    if (tutorialStep < 3) nextPage(tutorialStep + 1);
+window.handleNext = function() { // Added window.
+    if (tutorialStep < 3) window.nextPage(tutorialStep + 1);
     else toggleTutorial(false);
 }
 
-function updateButtonText() {
+window.nextPage = function(pageNumber) { // Added window.
+    tutorialStep = pageNumber;
+    document.querySelectorAll('.tutorial-page').forEach(page => page.classList.remove('active'));
+    const targetPage = document.getElementById(`page-${pageNumber}`);
+    if (targetPage) targetPage.classList.add('active');
+    
+    // Update button text
     const btn = document.getElementById('nav-btn-next');
     if (btn) btn.innerText = tutorialStep === 3 ? "Start" : "Next";
 }
