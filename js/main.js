@@ -296,3 +296,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 }); // <-- FIXED: This now properly closes the entire DOMContentLoaded block
+
+// Force the UI to hide if the engine takes too long
+setTimeout(() => {
+    const loader = document.getElementById('loading-screen');
+    if (loader) loader.style.display = 'none';
+    console.log("Forced loader hide");
+}, 5000); // 5 seconds safety net
