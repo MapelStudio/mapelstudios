@@ -1,3 +1,12 @@
+// Force the engine to resume after the loading screen
+window.addEventListener('xrloaded', () => {
+  XR8.addCameraPipelineModules([
+    XR8.GlTextureRenderer.pipelineModule(),
+    XR8.Threejs.pipelineModule(),
+    XR8.XrController.pipelineModule(),
+  ]);
+});
+
 // ===== 8TH WALL TARGET LOADER =====
 const load8thWallTargets = () => {
   fetch('./data/targets.json')
