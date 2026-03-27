@@ -240,17 +240,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start AR button
     if (startBtn) {
         startBtn.addEventListener('click', () => {
-            uiLayer.style.display = 'none';
-            const bgVideo = document.getElementById('bg-video');
-            if (bgVideo) {
-                bgVideo.pause();
-                bgVideo.style.display = 'none';
-            }
-            if (scannerLayer) scannerLayer.style.display = 'flex';
-            if (iconLayer) iconLayer.style.display = 'flex';
-            
-            // 8th Wall handles the camera start automatically!
-        });
+    // 1. Completely remove the landing video
+    const bgVideo = document.getElementById('bg-video');
+    if (bgVideo) {
+        bgVideo.pause();
+        bgVideo.remove(); // Use .remove() instead of .display='none' to free the camera
+    }
+
+    // 2. Hide the loading screen
+    const loader = document.getElementById('loading-screen');
+    if (loader) loader.remove();
+
+    // 3. Reveal the scanner
+    document.getElementById('scanner-container').style.display = 'flex';
+});
     } // <-- FIXED: Added this closing bracket to close the "if (startBtn)" block
 
     // ===== UNIVERSAL BUTTON CLICK HANDLER =====
