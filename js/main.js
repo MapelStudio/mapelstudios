@@ -189,33 +189,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2500);
     });
 
+    // Start Button Logic
     if (startBtn) {
-    startBtn.addEventListener('click', () => {
-        console.log("Button Clicked - Starting AR");
-
-        // 1. Hide the landing UI
-        if (uiLayer) uiLayer.style.display = 'none';
-        
-        // 2. Stop and remove the background video (Crucial!)
-        const bgVideo = document.getElementById('bg-video');
-        if (bgVideo) {
-            bgVideo.pause();
-            bgVideo.style.opacity = "0"; // Fade it out
-            setTimeout(() => bgVideo.remove(), 500); // Remove after fade
-        }
-
-        // 3. Show the scanner so the user knows it's working
-        if (scannerLayer) {
-            scannerLayer.style.display = 'flex';
-            scannerLayer.style.zIndex = '2000';
-        }
-
-        // 4. Tell 8th Wall to start the camera
-        if (window.XR8) {
-            XR8.run(); // or XR8.resume() depending on your xr.js version
-        }
-    });
-}
+        startBtn.addEventListener('click', () => {
+            const bgVideo = document.getElementById('bg-video');
+            if (bgVideo) {
+                bgVideo.pause();
+                bgVideo.remove(); // Remove to prevent camera conflict
+            }
+            if (uiLayer) uiLayer.style.display = 'none';
+            if (scannerLayer) scannerLayer.style.display = 'flex';
+            if (window.XR8) XR8.resume(); // Ensure engine wakes up
+        });
+    }
 
     // Tutorial Listeners
     document.getElementById('btn-right')?.addEventListener('click', () => toggleTutorial(true));
