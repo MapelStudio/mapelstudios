@@ -6,7 +6,8 @@
     <title>Mapel Studios AR</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    <script src="js/xr.js" data-preload-chunks="slam"></script>
+    <script src="js/xrextras.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/fcor/arjs-gestures@master/dist/gestures.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
@@ -116,7 +117,11 @@
         </div>
     </div>
 
-   <a-scene id="sceneEl" mindar-image="imageTargetSrc: ./data/targets.mind; autoStart: false; uiScanning: no; ui: no; filterMinCF: 0.001; filterBeta: 0.01;" embedded color-space="sRGB" renderer="colorManagement: true;" xr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+   <a-scene 
+  xrweb="disableWorldTracking: true" 
+  xrextras-loading 
+  xrextras-runtime-error 
+  renderer="colorManagement: true;">
     
     <a-assets>
         <a-asset-item id="aeroplane" src="assets/aeroplane.glb"></a-asset-item>
@@ -138,35 +143,35 @@
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-    <a-entity id="target-a" class="alphabet-target" mindar-image-target="targetIndex: 0">
-        <a-entity rotation="90 0 0">
+    <xrextras-named-image-target name="target-a">
+        <a-entity id="target-a-anchor">
             <a-gltf-model id="target-a-display" src="#apple" position="0 0 0" scale="4.5 4.5 4.5" animation-mixer touch-rotate></a-gltf-model>
         </a-entity>
-    </a-entity>
+    </xrextras-named-image-target>
 
-    <a-entity id="target-b" class="alphabet-target" mindar-image-target="targetIndex: 1">
-        <a-entity rotation="90 0 0">
+    <xrextras-named-image-target name="target-b">
+        <a-entity id="target-b-anchor">
             <a-gltf-model id="target-b-display" src="#bag" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
         </a-entity>
-    </a-entity>
-    
-    <a-entity id="target-e" class="alphabet-target" mindar-image-target="targetIndex: 4">
-        <a-entity rotation="90 0 0">
-            <a-gltf-model id="target-e-display" src="#emerald" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
-    </a-entity>
-</a-entity>
-       
-       <a-entity id="target-f" class="alphabet-target" mindar-image-target="targetIndex: 5">
-        <a-entity rotation="90 0 0">
-            <a-gltf-model id="target-f-display" src="#flower" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
-    </a-entity>
-</a-entity>
+    </xrextras-named-image-target>
 
-       <a-entity id="target-g" class="alphabet-target" mindar-image-target="targetIndex: 6">
-    <a-entity rotation="90 0 0">
-        <a-gltf-model id="target-g-display" src="#gift" position="0 0 0" scale="4 4 4" animation-mixer touch-rotate></a-gltf-model>
-    </a-entity>
-</a-entity>
+    <xrextras-named-image-target name="target-e">
+        <a-entity id="target-e-anchor">
+            <a-gltf-model id="target-e-display" src="#emerald" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
+        </a-entity>
+    </xrextras-named-image-target>
+
+    <xrextras-named-image-target name="target-f">
+        <a-entity id="target-f-anchor">
+            <a-gltf-model id="target-f-display" src="#flower" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
+        </a-entity>
+    </xrextras-named-image-target>
+
+    <xrextras-named-image-target name="target-g">
+        <a-entity id="target-g-anchor">
+            <a-gltf-model id="target-g-display" src="#gift" position="0 0 0" scale="4 4 4" animation-mixer touch-rotate></a-gltf-model>
+        </a-entity>
+    </xrextras-named-image-target>
 </a-scene>
 
     <video autoplay muted loop playsinline id="bg-video" oncontextmenu="return false;" disablePictureInPicture>
