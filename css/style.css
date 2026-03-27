@@ -1111,3 +1111,18 @@ div[class*="mindar"] {
 .model-selector-ui {
     pointer-events: auto !important;
 }
+
+
+/* Ensure the AR canvas is always at the back but visible */
+canvas.a-canvas {
+    z-index: 1 !important;
+}
+
+#ui, #scanner-container, #icon-layer {
+    z-index: 10 !important;
+}
+
+/* Hide the video background immediately when AR starts */
+.ar-active #bg-video {
+    display: none !important;
+}
