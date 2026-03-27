@@ -21,7 +21,7 @@ a-scene {
     color: white;
     /* This matches the 'Scanning' text exactly */
     font-family: Arial, sans-serif; 
-    font-size: 12px;           /* Adjusted to match the small techy look */
+    font-size: 12px;           /* Adjusted to match the small techy look */ 
     letter-spacing: 3px;      /* The 'Scanning' text uses wide spacing */
     font-weight: 700;         /* Bold weight */
     margin-bottom: 47px;
@@ -1124,5 +1124,20 @@ canvas.a-canvas {
 
 /* Hide the video background immediately when AR starts */
 .ar-active #bg-video {
+    display: none !important;
+}
+
+/* Force the camera feed to the top level */
+.a-canvas {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 0 !important;
+}
+
+/* Make sure the loading screen actually disappears */
+#loading-screen.hidden {
     display: none !important;
 }
