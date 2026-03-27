@@ -1157,3 +1157,30 @@ canvas.a-canvas {
 #ui *, #scanner-container *, #icon-layer * {
     pointer-events: auto; /* Re-enable clicks for buttons */
 }
+
+/* Force the UI to stay on top of the AR Scene */
+#ui, #icon-layer, .model-selector-ui, #tutorial-modal {
+    position: fixed !important;
+    z-index: 1000 !important;
+    display: flex; /* Ensure they aren't hidden by default if they need to be seen */
+}
+
+/* Fix the Experience AR Button layout */
+#start-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001 !important;
+    cursor: pointer;
+    pointer-events: auto !important;
+}
+
+/* Ensure the AR Canvas stays in the background */
+.a-canvas {
+    z-index: 1 !important;
+}
+
+/* If the screen goes blank, it might be the loading screen stuck at 100% opacity */
+#loading-screen {
+    pointer-events: none; /* Let clicks pass through if it hangs */
+}
