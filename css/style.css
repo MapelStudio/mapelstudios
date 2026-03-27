@@ -1141,3 +1141,19 @@ canvas.a-canvas {
 #loading-screen.hidden {
     display: none !important;
 }
+
+/* Force the 8th Wall Camera Canvas to the very front */
+.a-canvas.xr-camera-active {
+    z-index: 1 !important;
+    display: block !important;
+}
+
+/* Ensure UI is above the camera but doesn't block it */
+#ui, #scanner-container, #icon-layer {
+    z-index: 100 !important;
+    pointer-events: none; /* Allow clicks to pass through to the camera if needed */
+}
+
+#ui *, #scanner-container *, #icon-layer * {
+    pointer-events: auto; /* Re-enable clicks for buttons */
+}
