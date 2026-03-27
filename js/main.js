@@ -303,3 +303,21 @@ setTimeout(() => {
     if (loader) loader.style.display = 'none';
     console.log("Forced loader hide");
 }, 5000); // 5 seconds safety net
+
+// Add this at the very bottom of main.js
+const startARScale = () => {
+  const scene = document.querySelector('a-scene');
+  
+  if (scene.hasLoaded) {
+    run();
+  } else {
+    scene.addEventListener('loaded', run);
+  }
+
+  function run() {
+    // This tells 8th Wall to wait until the A-Frame scene is 100% ready
+    console.log("A-Frame Scene Loaded - Starting XR8");
+  }
+}
+
+startARScale();
