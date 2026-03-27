@@ -121,8 +121,7 @@
   id="sceneEl" 
   xrweb="disableWorldTracking: true" 
   xrextras-loading 
-  xrextras-runtime-error 
-  xrextras-gesture-detector
+  xrextras-runtime-error
   renderer="colorManagement: true;">
     
     <a-assets>
@@ -195,5 +194,16 @@
     </div>
 
     <script src="js/main.js"></script>
+    <script>
+  window.addEventListener('xrloaded', () => {
+    console.log("8th Wall Engine Loaded Successfully!");
+    alert("Engine Loaded!");
+  });
+  
+  window.addEventListener('xrerror', (event) => {
+    console.error("8th Wall Error:", event.detail);
+    alert("8th Wall Error: " + event.detail.type);
+  });
+</script>
 </body>
 </html>
