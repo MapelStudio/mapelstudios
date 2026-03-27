@@ -189,19 +189,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2500);
     });
 
-    // Start Button Logic
-    if (startBtn) {
-        startBtn.addEventListener('click', () => {
-            const bgVideo = document.getElementById('bg-video');
-            if (bgVideo) {
-                bgVideo.pause();
-                bgVideo.remove(); // Remove to prevent camera conflict
-            }
-            if (uiLayer) uiLayer.style.display = 'none';
-            if (scannerLayer) scannerLayer.style.display = 'flex';
-            if (window.XR8) XR8.resume(); // Ensure engine wakes up
-        });
-    }
+    // REPLACE your old startBtn listener with this:
+if (startBtn) {
+    startBtn.addEventListener('click', () => {
+        const bgVideo = document.getElementById('bg-video');
+        
+        // Fix: Hide it first, then remove it after AR starts
+        if (bgVideo) {
+            bgVideo.pause();
+            bgVideo.style.display = 'none'; 
+        }
+
+        if (uiLayer) uiLayer.style.display = 'none';
+        if (scannerLayer) scannerLayer.style.display = 'flex';
+
+        // Fix: Use run() if resume() fails
+        if (window.XR8) {
+            XR8.resume().catch(() => XR8.run());
+        }
+    });
+}
 
     // Tutorial Listeners
     document.getElementById('btn-right')?.addEventListener('click', () => toggleTutorial(true));
