@@ -4,13 +4,19 @@ body { background: #000; overflow: hidden; font-family: sans-serif; }
 /* Landing Overlay */
 #ui {
     position: fixed;
-    inset: 0;
-    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999; /* Keeps it above the AR scene */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+}
+
+#start-btn {
+    pointer-events: auto !important; /* Ensures the button is actually clickable */
 }
 
 /* This stays to make sure the A-Frame scene doesn't block the camera */
