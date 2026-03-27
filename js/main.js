@@ -1,3 +1,15 @@
+// ===== 8TH WALL TARGET LOADER =====
+const load8thWallTargets = () => {
+  fetch('./data/targets.json')
+    .then(response => response.json())
+    .then(data => {
+      XR8.XrController.configure({ 
+        imageTargetData: data.imageTargets || data 
+      })
+    })
+}
+window.XR8 ? load8thWallTargets() : window.addEventListener('xrloaded', load8thWallTargets)
+
 // ===== TOUCH ROTATION COMPONENT =====
 AFRAME.registerComponent('touch-rotate', {
   init: function() {
@@ -198,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const uiLayer = document.getElementById('ui');
     const scannerLayer = document.getElementById('scanner-container');
     const iconLayer = document.getElementById('icon-layer');
-    const sceneEl = document.getElementById('sceneEl');
+    const sceneEl = document.getElementById('sceneEl'); // Note: ensure your <a-scene> has id="sceneEl"
     const loadingScreen = document.getElementById('loading-screen');
 
     // Hide loading screen
@@ -225,21 +237,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 bgVideo.pause();
                 bgVideo.style.display = 'none';
             }
-            scannerLayer.style.display = 'flex';
-            iconLayer.style.display = 'flex';
-
-            if (sceneEl.hasLoaded) startAR();
-            else sceneEl.addEventListener('loaded', startAR);
+            if (scannerLayer) scannerLayer.style.display = 'flex';
+            if (iconLayer) iconLayer.style.display = 'flex';
+            
+            // 8th Wall handles the camera start automatically!
         });
-    }
-
-    function startAR() {
-        const arSystem = sceneEl.systems['mindar-image-system'];
-        if (arSystem) {
-            arSystem.start();
-            window.dispatchEvent(new Event('resize'));
-        }
-    }
+    } // <-- FIXED: Added this closing bracket to close the "if (startBtn)" block
 
     // ===== UNIVERSAL BUTTON CLICK HANDLER =====
     document.body.addEventListener('click', (e) => {
@@ -257,23 +260,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ===== AUTO-SETUP ALL TARGETS FROM CONFIG =====
-    Object.keys(LETTER_CONFIG).forEach(letter => {
-        const targetId = `target-${letter}`;
-        const targetEl = document.getElementById(targetId);
+    // ===== 8TH WALL TARGET EVENTS =====
+    // MOVED INSIDE: These must stay inside DOMContentLoaded to use scannerLayer
+    window.addEventListener('xrimagefound', (event) => {
+        const targetName = event.detail.name; 
+        const letter = targetName.split('-')[1]; 
         
-        if (targetEl) {
-            targetEl.addEventListener("targetFound", () => {
-                scannerLayer.style.display = 'none';
-                const selector = document.getElementById(`model-selector-${letter}`);
-                if (selector) selector.style.display = 'flex';
-            });
-
-            targetEl.addEventListener("targetLost", () => {
-                scannerLayer.style.display = 'flex';
-                const selector = document.getElementById(`model-selector-${letter}`);
-                if (selector) selector.style.display = 'none';
-            });
-        }
+        console.log("Found:", targetName);
+        
+        if (scannerLayer) scannerLayer.style.display = 'none';
+        
+        const selector = document.getElementById(`model-selector-${letter}`);
+        if (selector) selector.style.display = 'flex';
     });
-});
+
+    window.addEventListener('xrimagelost', (event) => {
+        const targetName = event.detail.name;
+        const letter = targetName.split('-')[1];
+
+        console.log("Lost:", targetName);
+        
+        if (scannerLayer) scannerLayer.style.display = 'flex';
+        
+        const selector = document.getElementById(`model-selector-${letter}`);
+        if (selector) selector.style.display = 'none';
+    });
+
+}); // <-- FIXED: This now properly closes the entire DOMContentLoaded block
