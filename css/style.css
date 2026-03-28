@@ -1252,3 +1252,23 @@ a-scene {
 .model-selector-ui, .model-btn {
     pointer-events: auto !important;
 }
+
+/* 1. Force the AR Camera to show through the white screen */
+.a-canvas {
+    background-color: transparent !important;
+}
+
+/* 2. Hide the A-Frame default white loading overlay */
+.a-loader-title {
+    display: none !important;
+}
+
+/* 3. Ensure the scene container isn't forcing a white background */
+a-scene {
+    background: none !important;
+}
+
+/* 4. Ensure the body doesn't hide the camera feed */
+body {
+    background-color: transparent !important;
+}
