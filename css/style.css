@@ -1229,3 +1229,12 @@ a-scene {
     pointer-events: none;
     background: none !important;
 }
+
+/* Hide the 'waiting for camera' white overlay */
+.a-loader-title {
+    display: none !important;
+}
+
+#loading-screen {
+    display: none !important;
+}
