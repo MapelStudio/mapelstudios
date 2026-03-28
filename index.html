@@ -136,10 +136,10 @@
 
    <a-scene 
   id="sceneEl" 
-  xrweb="disableWorldTracking: true; autoStart: false" 
+  xrweb="disableWorldTracking: true; allowedDevices: any" 
   xrextras-loading 
   xrextras-runtime-error 
-  renderer="colorManagement: true; antialias: true;"> 
+  renderer="colorManagement: true; antialias: true;">
     
     <a-assets>
         <a-asset-item id="aeroplane" src="assets/aeroplane.glb"></a-asset-item>
@@ -218,7 +218,8 @@
   });
   
   window.addEventListener('xrerror', (event) => {
-    console.error("8th Wall Error:", event.detail);
+    console.error("8th Wall Error:", event.detail)
+        ;
     alert("8th Wall Error: " + event.detail.type);
   });
 </script>
