@@ -206,25 +206,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // REPLACE your old startBtn listener with this:
 if (startBtn) {
     startBtn.addEventListener('click', () => {
-        const bgVideo = document.getElementById('bg-video');
+        console.log("AR Starting...");
         
-        // Fix: Hide it first, then remove it after AR starts
+        // 1. Clear the landing UI
+        const bgVideo = document.getElementById('bg-video');
         if (bgVideo) {
             bgVideo.pause();
-            bgVideo.style.display = 'none'; 
+            bgVideo.style.display = 'none';
         }
-
         if (uiLayer) uiLayer.style.display = 'none';
         if (scannerLayer) scannerLayer.style.display = 'flex';
 
-        if (loadingScreen) loadingScreen.style.display = 'none'; 
-        
-        // This ensures if the loading screen was stuck white, it vanishes
-        document.body.style.backgroundColor = 'transparent';
-
-        // Fix: Use run() if resume() fails
+        // 2. Start the Engine only NOW
         if (window.XR8) {
-            XR8.resume().catch(() => XR8.run());
+            // This triggers the permission prompt ONLY when clicked
+            XR8.run(); 
         }
     });
 }
