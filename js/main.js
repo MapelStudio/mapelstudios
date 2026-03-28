@@ -27,7 +27,7 @@ AFRAME.registerComponent('touch-rotate', {
     this.isMoving = false;
     const self = this;
     
-    window.addListener('touchstart', (e) => {
+    window.addEventListener('touchstart', (e) => {
         if (e.target.tagName === 'BUTTON') return;
         if (e.touches.length > 0) {
             self.isMoving = true;
@@ -36,7 +36,7 @@ AFRAME.registerComponent('touch-rotate', {
         }
     });
 
-    window.addListener('touchmove', (e) => {
+    window.addEventListener('touchmove', (e) => {
         if (!self.isMoving || e.touches.length === 0) return;
         
         const touch = e.touches[0];
@@ -53,7 +53,7 @@ AFRAME.registerComponent('touch-rotate', {
         self.lastY = touch.clientY;
     });
 
-    window.addListener('touchend', () => {
+    window.addEventListener('touchend', () => {
         self.isMoving = false;
     });
   }
@@ -214,7 +214,7 @@ window.switchModel = function(targetId, modelName) {
 };
 
 // ===== MAIN INITIALIZATION =====
-document.addListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
     const scannerLayer = document.getElementById('scanner-container');
@@ -223,7 +223,7 @@ document.addListener('DOMContentLoaded', () => {
     const loadingScreen = document.getElementById('loading-screen');
 
     // Hide loading screen
-    window.addListener('load', () => {
+    window.addEventListener('load', () => {
         setTimeout(() => {
             if (loadingScreen) loadingScreen.style.display = 'none';
             if (uiLayer) uiLayer.classList.add('loaded');
@@ -232,14 +232,14 @@ document.addListener('DOMContentLoaded', () => {
 
     // Tutorial buttons
     const btnRight = document.getElementById('btn-right');
-    if (btnRight) btnRight.addListener('click', () => toggleTutorial(true));
+    if (btnRight) btnRight.addEventListener('click', () => toggleTutorial(true));
 
     const closeBtn = document.getElementById('close-tutorial-btn');
-    if (closeBtn) closeBtn.addListener('click', () => toggleTutorial(false));
+    if (closeBtn) closeBtn.addEventListener('click', () => toggleTutorial(false));
 
     // Start AR button
     if (startBtn) {
-        startBtn.addListener('click', () => {
+        startBtn.addEventListener('click', () => {
 
     console.log("Start button clicked");
 
@@ -272,7 +272,7 @@ document.addListener('DOMContentLoaded', () => {
     } // <-- FIXED: Added this closing bracket to close the "if (startBtn)" block
 
     // ===== UNIVERSAL BUTTON CLICK HANDLER =====
-    document.body.addListener('click', (e) => {
+    document.body.addEventListener('click', (e) => {
         if (e.target.classList.contains('model-btn')) {
             const modelName = e.target.getAttribute('data-model');
             const targetId = e.target.getAttribute('data-target');
@@ -322,7 +322,7 @@ document.addListener('DOMContentLoaded', () => {
         const selector = document.getElementById(`model-selector-${letter}`);
         if (selector) selector.style.display = 'none';
     });
-// <-- FIXED: This now properly closes the entire DOMContentLoaded block
+});// <-- FIXED: This now properly closes the entire DOMContentLoaded block
 
 // Force the UI to hide if the engine takes too long
 setTimeout(() => {
