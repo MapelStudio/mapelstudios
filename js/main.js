@@ -209,6 +209,11 @@ if (startBtn) {
         if (uiLayer) uiLayer.style.display = 'none';
         if (scannerLayer) scannerLayer.style.display = 'flex';
 
+        if (loadingScreen) loadingScreen.style.display = 'none'; 
+        
+        // This ensures if the loading screen was stuck white, it vanishes
+        document.body.style.backgroundColor = 'transparent';
+
         // Fix: Use run() if resume() fails
         if (window.XR8) {
             XR8.resume().catch(() => XR8.run());
