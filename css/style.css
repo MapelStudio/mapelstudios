@@ -1157,3 +1157,28 @@ canvas.a-canvas {
 #ui *, #scanner-container *, #icon-layer * {
     pointer-events: auto; /* Re-enable clicks for buttons */
 }
+
+
+/* Force the AR Camera to show up */
+.a-canvas {
+    display: block !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    z-index: 1 !important; /* Keep it at the base */
+}
+
+/* Ensure the body or html isn't forcing a white background over the camera */
+body, html {
+    background-color: transparent !important;
+}
+
+/* If the loading screen is white and stuck, this hide it after start */
+#loading-screen.hidden {
+    display: none !important;
+}
+
+/* Ensure the scene container doesn't have a background */
+a-scene {
+    background: none !important;
+}
