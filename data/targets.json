@@ -24,7 +24,7 @@
       "material": null,
       "order": 1.0726212089091354,
       "imageTarget": {
-        "name": "target-a"
+        "": "target-a"
       },
       "parentId": "e6679df6-7fa2-4846-b3dc-8ea74a1f7f5b"
     },
@@ -49,7 +49,7 @@
       "geometry": null,
       "material": null,
       "components": {},
-      "name": "Ajpg.jpeg",
+      "": "Ajpg.jpeg",
       "order": 1.0726212089091354,
       "imageTarget": {
         "name": "target-a"
@@ -180,56 +180,6 @@
       "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
       "order": 0.6644431107322474
     },
-    "e6679df6-7fa2-4846-b3dc-8ea74a1f7f5b": {
-      "id": "e6679df6-7fa2-4846-b3dc-8ea74a1f7f5b",
-      "position": [
-        0,
-        0,
-        0
-      ],
-      "rotation": [
-        0,
-        0,
-        0,
-        1
-      ],
-      "scale": [
-        1,
-        1,
-        1
-      ],
-      "geometry": null,
-      "material": null,
-      "parentId": "88453035-dc0f-486d-868a-8ff7c2fda864",
-      "components": {},
-      "name": "Image Target",
-      "imageTarget": {
-        "name": ""
-      },
-      "order": 2.5050778737809245
-    },
-    "ef2fd6e5-f9d7-4159-a407-d3328c17f090": {
-      "id": "ef2fd6e5-f9d7-4159-a407-d3328c17f090",
-      "position": [
-        0,
-        0,
-        0
-      ],
-      "rotation": [
-        0,
-        0,
-        0,
-        1
-      ],
-      "scale": [
-        1,
-        1,
-        1
-      ],
-      "geometry": null,
-      "material": null,
-      "parentId": "e6679df6-7fa2-4846-b3dc-8ea74a1f7f5b",
-      "components": {},
       "name": "Bjpg.jpeg",
       "order": 2.3406279578445615,
       "imageTarget": {
