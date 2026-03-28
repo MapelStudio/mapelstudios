@@ -1238,3 +1238,17 @@ a-scene {
 #loading-screen {
     display: none !important;
 }
+
+#ui, #start-btn {
+    z-index: 999999 !important; /* Move to the absolute front */
+    position: relative;
+}
+
+#sceneEl, .a-canvas {
+    pointer-events: none !important; /* Stop the AR scene from 'stealing' clicks */
+}
+
+/* Re-enable clicks for AR buttons later */
+.model-selector-ui, .model-btn {
+    pointer-events: auto !important;
+}
