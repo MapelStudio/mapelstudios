@@ -205,26 +205,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // REPLACE your old startBtn listener with this:
 if (startBtn) {
-    startBtn.addEventListener('click', () => {
-        console.log("User clicked - Requesting Camera now.");
+    // Force the cursor to be a pointer so we know it's clickable
+    startBtn.style.cursor = "pointer";
+    startBtn.style.pointerEvents = "auto";
 
-        // 1. Hide the landing UI and Video
+    startBtn.onclick = (e) => {
+        e.preventDefault();
+        console.log("Button Clicked - Manual Trigger");
+
+        // 1. Hide the Landing UI immediately
         if (uiLayer) uiLayer.style.display = 'none';
+        
         const bgVideo = document.getElementById('bg-video');
         if (bgVideo) {
             bgVideo.pause();
             bgVideo.style.display = 'none';
         }
-        
-        // 2. Show the scanner
+
+        // 2. Show the Scanner
         if (scannerLayer) scannerLayer.style.display = 'flex';
 
-        // 3. FORCE START THE ENGINE
-        // This is where the permission prompt will finally appear
+        // 3. Trigger Camera Permission
         if (window.XR8) {
+            // We use .run() for the first start
             XR8.run(); 
+            console.log("XR8.run() executed");
+        } else {
+            console.error("XR8 not found on window");
         }
-    });
+    };
 }
 
     // Tutorial Listeners
