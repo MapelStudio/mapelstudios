@@ -4,19 +4,13 @@ body { background: #000; overflow: hidden; font-family: sans-serif; }
 /* Landing Overlay */
 #ui {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999; /* Keeps it above the AR scene */
+    inset: 0;
+    z-index: 1000;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-#start-btn {
-    pointer-events: auto !important; /* Ensures the button is actually clickable */
+    gap: 25px;
 }
 
 /* This stays to make sure the A-Frame scene doesn't block the camera */
@@ -1162,31 +1156,4 @@ canvas.a-canvas {
 
 #ui *, #scanner-container *, #icon-layer * {
     pointer-events: auto; /* Re-enable clicks for buttons */
-}
-
-/* Force the UI to stay on top of the AR Scene */
-#ui, #icon-layer, .model-selector-ui, #tutorial-modal {
-    position: fixed !important;
-    z-index: 1000 !important;
-    display: flex; /* Ensure they aren't hidden by default if they need to be seen */
-}
-
-/* Fix the Experience AR Button layout */
-#start-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1001 !important;
-    cursor: pointer;
-    pointer-events: auto !important;
-}
-
-/* Ensure the AR Canvas stays in the background */
-.a-canvas {
-    z-index: 1 !important;
-}
-
-/* If the screen goes blank, it might be the loading screen stuck at 100% opacity */
-#loading-screen {
-    pointer-events: none; /* Let clicks pass through if it hangs */
 }
