@@ -1,36 +1,28 @@
 // ==========================================
-// 1. 8TH WALL OPEN SOURCE ENGINE INIT (Safe Version)
+// 1. 8TH WALL OPEN SOURCE ENGINE INIT
 // ==========================================
-const onXrLoaded = () => {
-  // Check if sub-modules exist before calling them to avoid "Null" errors
-  if (window.XR8 && XR8.GlTextureRenderer) {
-    XR8.addCameraPipelineModules([
-      XR8.GlTextureRenderer.pipelineModule(),
-      XR8.Threejs.pipelineModule(),
-      XR8.XrController.pipelineModule(),
-    ]);
-    console.log("🚀 Engine Modules Ready");
-    load8thWallTargets();
-  } else {
-    // If not ready, wait 100ms and try again
-    setTimeout(onXrLoaded, 100);
-  }
-};
+// This is mandatory for the 2026 self-hosted version to talk to A-Frame
+window.addEventListener('xrloaded', () => {
+  XR8.addCameraPipelineModules([
+    XR8.GlTextureRenderer.pipelineModule(),
+    XR8.Threejs.pipelineModule(),
+    XR8.XrController.pipelineModule(),
+  ]);
+  console.log("🚀 8th Wall Engine Modules Loaded");
+});
 
 const load8thWallTargets = () => {
   fetch('./data/targets.json')
     .then(response => response.json())
     .then(data => {
-      // Use the open-source configuration method
       XR8.XrController.configure({ 
         imageTargetData: data.imageTargets || data 
       });
-      console.log("🎯 Targets Sync'd");
+      console.log("🎯 Image Targets Synchronized");
     })
-    .catch(err => console.error("Target Error:", err));
-};
-
-window.addEventListener('xrloaded', onXrLoaded);
+    .catch(err => console.error("Target Config Error:", err));
+}
+window.XR8 ? load8thWallTargets() : window.addEventListener('xrloaded', load8thWallTargets);
 
 // ==========================================
 // 2. A-FRAME COMPONENTS
@@ -216,11 +208,6 @@ if (startBtn) {
 
         if (uiLayer) uiLayer.style.display = 'none';
         if (scannerLayer) scannerLayer.style.display = 'flex';
-
-        if (loadingScreen) loadingScreen.style.display = 'none'; 
-        
-        // This ensures if the loading screen was stuck white, it vanishes
-        document.body.style.backgroundColor = 'transparent';
 
         // Fix: Use run() if resume() fails
         if (window.XR8) {
