@@ -4,13 +4,19 @@ body { background: #000; overflow: hidden; font-family: sans-serif; }
 /* Landing Overlay */
 #ui {
     position: fixed;
-    inset: 0;
-    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999; /* Keeps it above the AR scene */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+}
+
+#start-btn {
+    pointer-events: auto !important; /* Ensures the button is actually clickable */
 }
 
 /* This stays to make sure the A-Frame scene doesn't block the camera */
@@ -1158,97 +1164,29 @@ canvas.a-canvas {
     pointer-events: auto; /* Re-enable clicks for buttons */
 }
 
-
-/* Force the AR Camera to show up */
-.a-canvas {
-    display: block !important;
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    z-index: 1 !important; /* Keep it at the base */
-}
-
-/* Ensure the body or html isn't forcing a white background over the camera */
-body, html {
-    background-color: transparent !important;
-}
-
-/* If the loading screen is white and stuck, this hide it after start */
-#loading-screen.hidden {
-    display: none !important;
-}
-
-/* Ensure the scene container doesn't have a background */
-a-scene {
-    background: none !important;
-}
-
-/* --- FIX FOR WHITE BLANK SCREEN --- */
-
-/* 1. Force the AR Camera Canvas to be visible */
-.a-canvas {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 1 !important; /* Keep the camera at the very base layer */
-}
-
-/* 2. Remove A-Frame's default white loading overlays */
-.a-loader-title {
-    display: none !important;
-}
-
-/* 3. Ensure the UI container is actually on top of the camera */
-#ui {
+/* Force the UI to stay on top of the AR Scene */
+#ui, #icon-layer, .model-selector-ui, #tutorial-modal {
     position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999 !important; /* Force to front */
-    background: transparent !important; /* Ensure no solid colors block the cam */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    z-index: 1000 !important;
+    display: flex; /* Ensure they aren't hidden by default if they need to be seen */
 }
 
-/* 4. Fix the "Experience AR" button layout */
+/* Fix the Experience AR Button layout */
 #start-btn {
-    pointer-events: auto !important; /* Ensures the button is clickable */
-    z-index: 10000 !important;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-/* 5. Hide the loading screen properly once started */
-#loading-screen {
-    pointer-events: none;
-    background: none !important;
-}
-
-/* Hide the 'waiting for camera' white overlay */
-.a-loader-title {
-    display: none !important;
-}
-
-#loading-screen {
-    display: none !important;
-}
-
-#ui, #start-btn {
-    z-index: 999999 !important; /* Move to the absolute front */
-    position: relative;
-}
-
-#sceneEl, .a-canvas {
-    pointer-events: none !important; /* Stop the AR scene from 'stealing' clicks */
-}
-
-/* Re-enable clicks for AR buttons later */
-.model-selector-ui, .model-btn {
+    z-index: 1001 !important;
+    cursor: pointer;
     pointer-events: auto !important;
+}
+
+/* Ensure the AR Canvas stays in the background */
+.a-canvas {
+    z-index: 1 !important;
+}
+
+/* If the screen goes blank, it might be the loading screen stuck at 100% opacity */
+#loading-screen {
+    pointer-events: none; /* Let clicks pass through if it hangs */
 }
