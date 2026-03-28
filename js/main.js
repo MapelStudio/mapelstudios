@@ -206,20 +206,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // REPLACE your old startBtn listener with this:
 if (startBtn) {
     startBtn.addEventListener('click', () => {
-        console.log("AR Starting...");
-        
-        // 1. Clear the landing UI
+        console.log("User clicked - Requesting Camera now.");
+
+        // 1. Hide the landing UI and Video
+        if (uiLayer) uiLayer.style.display = 'none';
         const bgVideo = document.getElementById('bg-video');
         if (bgVideo) {
             bgVideo.pause();
             bgVideo.style.display = 'none';
         }
-        if (uiLayer) uiLayer.style.display = 'none';
+        
+        // 2. Show the scanner
         if (scannerLayer) scannerLayer.style.display = 'flex';
 
-        // 2. Start the Engine only NOW
+        // 3. FORCE START THE ENGINE
+        // This is where the permission prompt will finally appear
         if (window.XR8) {
-            // This triggers the permission prompt ONLY when clicked
             XR8.run(); 
         }
     });
