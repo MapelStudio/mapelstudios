@@ -240,17 +240,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start AR button
     if (startBtn) {
         startBtn.addEventListener('click', () => {
-            uiLayer.style.display = 'none';
-            const bgVideo = document.getElementById('bg-video');
-            if (bgVideo) {
-                bgVideo.pause();
-                bgVideo.style.display = 'none';
-            }
-            if (scannerLayer) scannerLayer.style.display = 'flex';
-            if (iconLayer) iconLayer.style.display = 'flex';
-            
-            // 8th Wall handles the camera start automatically!
-        });
+
+    console.log("Start button clicked");
+
+    // Hide landing UI
+    if (uiLayer) {
+        uiLayer.style.display = 'none';
+    }
+
+    // Hide background video completely
+    const bgVideo = document.getElementById('bg-video');
+    if (bgVideo) {
+        bgVideo.pause();
+        bgVideo.style.display = 'none';
+    }
+
+    // Show scanner
+    if (scannerLayer) {
+        scannerLayer.style.display = 'flex';
+    }
+
+    // Show top buttons
+    if (iconLayer) {
+        iconLayer.style.display = 'flex';
+    }
+
+    // IMPORTANT — mark AR as active
+    document.body.classList.add('ar-active');
+
+});
     } // <-- FIXED: Added this closing bracket to close the "if (startBtn)" block
 
     // ===== UNIVERSAL BUTTON CLICK HANDLER =====
