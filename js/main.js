@@ -27,7 +27,7 @@ AFRAME.registerComponent('touch-rotate', {
     this.isMoving = false;
     const self = this;
     
-    window.addEventListener('touchstart', (e) => {
+    window.addListener('touchstart', (e) => {
         if (e.target.tagName === 'BUTTON') return;
         if (e.touches.length > 0) {
             self.isMoving = true;
@@ -36,7 +36,7 @@ AFRAME.registerComponent('touch-rotate', {
         }
     });
 
-    window.addEventListener('touchmove', (e) => {
+    window.addListener('touchmove', (e) => {
         if (!self.isMoving || e.touches.length === 0) return;
         
         const touch = e.touches[0];
@@ -53,7 +53,7 @@ AFRAME.registerComponent('touch-rotate', {
         self.lastY = touch.clientY;
     });
 
-    window.addEventListener('touchend', () => {
+    window.addListener('touchend', () => {
         self.isMoving = false;
     });
   }
@@ -214,7 +214,7 @@ window.switchModel = function(targetId, modelName) {
 };
 
 // ===== MAIN INITIALIZATION =====
-document.addEventListener('DOMContentLoaded', () => {
+document.addListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
     const scannerLayer = document.getElementById('scanner-container');
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingScreen = document.getElementById('loading-screen');
 
     // Hide loading screen
-    window.addEventListener('load', () => {
+    window.addListener('load', () => {
         setTimeout(() => {
             if (loadingScreen) loadingScreen.style.display = 'none';
             if (uiLayer) uiLayer.classList.add('loaded');
@@ -232,14 +232,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Tutorial buttons
     const btnRight = document.getElementById('btn-right');
-    if (btnRight) btnRight.addEventListener('click', () => toggleTutorial(true));
+    if (btnRight) btnRight.addListener('click', () => toggleTutorial(true));
 
     const closeBtn = document.getElementById('close-tutorial-btn');
-    if (closeBtn) closeBtn.addEventListener('click', () => toggleTutorial(false));
+    if (closeBtn) closeBtn.addListener('click', () => toggleTutorial(false));
 
     // Start AR button
     if (startBtn) {
-        startBtn.addEventListener('click', () => {
+        startBtn.addListener('click', () => {
 
     console.log("Start button clicked");
 
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } // <-- FIXED: Added this closing bracket to close the "if (startBtn)" block
 
     // ===== UNIVERSAL BUTTON CLICK HANDLER =====
-    document.body.addEventListener('click', (e) => {
+    document.body.addListener('click', (e) => {
         if (e.target.classList.contains('model-btn')) {
             const modelName = e.target.getAttribute('data-model');
             const targetId = e.target.getAttribute('data-target');
@@ -287,19 +287,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ===== 8TH WALL TARGET EVENTS =====
+    // ===== 8TH WALL TARGET S =====
     // MOVED INSIDE: These must stay inside DOMContentLoaded to use scannerLayer
     window.addEventListener('xrimagefound', (event) => {
-        const targetName = event.detail.name; 
-        const letter = targetName.split('-')[1]; 
-        
-        console.log("Found:", targetName);
-        
-        if (scannerLayer) scannerLayer.style.display = 'none';
-        
-        const selector = document.getElementById(`model-selector-${letter}`);
-        if (selector) selector.style.display = 'flex';
-    });
+
+    console.log("TARGET DETECTED:", event.detail.name);
+
+    const targetName = event.detail.name;
+    const letter = targetName.split('-')[1];
+
+    if (scannerLayer) scannerLayer.style.display = 'none';
+
+    const selector = document.getElementById(`model-selector-${letter}`);
+    if (selector) selector.style.display = 'flex';
+
+});
 
     window.addEventListener('xrimagelost', (event) => {
         const targetName = event.detail.name;
