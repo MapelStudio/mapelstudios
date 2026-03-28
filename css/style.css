@@ -1252,20 +1252,3 @@ a-scene {
 .model-selector-ui, .model-btn {
     pointer-events: auto !important;
 }
-
-/* Ensure the camera canvas is not covered by white backgrounds */
-.a-canvas {
-    background-color: transparent !important;
-}
-
-/* Force the UI to be visible instantly */
-#ui {
-    opacity: 1 !important;
-    display: flex !important;
-    transition: none !important; /* Remove any slow fades */
-}
-
-/* Make sure the loading screen is on the very top layer */
-#loading-screen {
-    z-index: 100000 !important;
-}
