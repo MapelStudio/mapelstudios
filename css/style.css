@@ -1183,3 +1183,8 @@ video {
 body, html {
     background: transparent !important;
 }
+
+/* Always hide landing video when AR is running */
+body.ar-active #bg-video {
+    display: none !important;
+}
