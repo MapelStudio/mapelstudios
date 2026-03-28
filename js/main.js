@@ -205,35 +205,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // REPLACE your old startBtn listener with this:
 if (startBtn) {
-    // Force the cursor to be a pointer so we know it's clickable
-    startBtn.style.cursor = "pointer";
-    startBtn.style.pointerEvents = "auto";
-
-    startBtn.onclick = (e) => {
-        e.preventDefault();
-        console.log("Button Clicked - Manual Trigger");
-
-        // 1. Hide the Landing UI immediately
-        if (uiLayer) uiLayer.style.display = 'none';
-        
+    startBtn.addEventListener('click', () => {
         const bgVideo = document.getElementById('bg-video');
+        
+        // Fix: Hide it first, then remove it after AR starts
         if (bgVideo) {
             bgVideo.pause();
-            bgVideo.style.display = 'none';
+            bgVideo.style.display = 'none'; 
         }
 
-        // 2. Show the Scanner
+        if (uiLayer) uiLayer.style.display = 'none';
         if (scannerLayer) scannerLayer.style.display = 'flex';
 
-        // 3. Trigger Camera Permission
+        if (loadingScreen) loadingScreen.style.display = 'none'; 
+        
+        // This ensures if the loading screen was stuck white, it vanishes
+        document.body.style.backgroundColor = 'transparent';
+
+        // Fix: Use run() if resume() fails
         if (window.XR8) {
-            // We use .run() for the first start
-            XR8.run(); 
-            console.log("XR8.run() executed");
-        } else {
-            console.error("XR8 not found on window");
+            XR8.resume().catch(() => XR8.run());
         }
-    };
+    });
 }
 
     // Tutorial Listeners
