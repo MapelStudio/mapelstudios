@@ -1182,3 +1182,50 @@ body, html {
 a-scene {
     background: none !important;
 }
+
+/* --- FIX FOR WHITE BLANK SCREEN --- */
+
+/* 1. Force the AR Camera Canvas to be visible */
+.a-canvas {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1 !important; /* Keep the camera at the very base layer */
+}
+
+/* 2. Remove A-Frame's default white loading overlays */
+.a-loader-title {
+    display: none !important;
+}
+
+/* 3. Ensure the UI container is actually on top of the camera */
+#ui {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999 !important; /* Force to front */
+    background: transparent !important; /* Ensure no solid colors block the cam */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 4. Fix the "Experience AR" button layout */
+#start-btn {
+    pointer-events: auto !important; /* Ensures the button is clickable */
+    z-index: 10000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 5. Hide the loading screen properly once started */
+#loading-screen {
+    pointer-events: none;
+    background: none !important;
+}
