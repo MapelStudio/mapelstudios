@@ -296,10 +296,18 @@ document.addListener('DOMContentLoaded', () => {
     const targetName = event.detail.name;
     const letter = targetName.split('-')[1];
 
-    if (scannerLayer) scannerLayer.style.display = 'none';
+    if (scannerLayer) {
+        scannerLayer.style.display = 'none';
+    }
 
     const selector = document.getElementById(`model-selector-${letter}`);
-    if (selector) selector.style.display = 'flex';
+
+    if (selector) {
+        selector.style.display = 'flex';
+        console.log("UI shown for:", letter);
+    } else {
+        console.log("No selector found for:", letter);
+    }
 
 });
 
