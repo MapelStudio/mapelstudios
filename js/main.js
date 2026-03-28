@@ -1,28 +1,36 @@
 // ==========================================
-// 1. 8TH WALL OPEN SOURCE ENGINE INIT
+// 1. 8TH WALL OPEN SOURCE ENGINE INIT (Safe Version)
 // ==========================================
-// This is mandatory for the 2026 self-hosted version to talk to A-Frame
-window.addEventListener('xrloaded', () => {
-  XR8.addCameraPipelineModules([
-    XR8.GlTextureRenderer.pipelineModule(),
-    XR8.Threejs.pipelineModule(),
-    XR8.XrController.pipelineModule(),
-  ]);
-  console.log("🚀 8th Wall Engine Modules Loaded");
-});
+const onXrLoaded = () => {
+  // Check if sub-modules exist before calling them to avoid "Null" errors
+  if (window.XR8 && XR8.GlTextureRenderer) {
+    XR8.addCameraPipelineModules([
+      XR8.GlTextureRenderer.pipelineModule(),
+      XR8.Threejs.pipelineModule(),
+      XR8.XrController.pipelineModule(),
+    ]);
+    console.log("🚀 Engine Modules Ready");
+    load8thWallTargets();
+  } else {
+    // If not ready, wait 100ms and try again
+    setTimeout(onXrLoaded, 100);
+  }
+};
 
 const load8thWallTargets = () => {
   fetch('./data/targets.json')
     .then(response => response.json())
     .then(data => {
+      // Use the open-source configuration method
       XR8.XrController.configure({ 
         imageTargetData: data.imageTargets || data 
       });
-      console.log("🎯 Image Targets Synchronized");
+      console.log("🎯 Targets Sync'd");
     })
-    .catch(err => console.error("Target Config Error:", err));
-}
-window.XR8 ? load8thWallTargets() : window.addEventListener('xrloaded', load8thWallTargets);
+    .catch(err => console.error("Target Error:", err));
+};
+
+window.addEventListener('xrloaded', onXrLoaded);
 
 // ==========================================
 // 2. A-FRAME COMPONENTS
