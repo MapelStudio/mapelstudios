@@ -192,49 +192,38 @@ window.switchModel = function(targetId, modelName) {
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
-    const scannerLayer = document.getElementById('scanner-container');
     const loadingScreen = document.getElementById('loading-screen');
+    const scannerLayer = document.getElementById('scanner-container');
 
-    // Initial Loading Screen Fade
+    // 1. Show UI immediately (Remove the 2500ms timeout)
+    if (loadingScreen) loadingScreen.style.display = 'block'; 
+    if (uiLayer) uiLayer.style.opacity = "1"; 
+
+    // 2. Hide loading screen only when everything is truly ready
     window.addEventListener('load', () => {
-        setTimeout(() => {
-            if (loadingScreen) loadingScreen.style.display = 'none';
-            if (uiLayer) uiLayer.classList.add('loaded');
-        }, 2500);
+        if (loadingScreen) loadingScreen.style.display = 'none';
     });
 
-    // REPLACE your old startBtn listener with this:
-if (startBtn) {
-    // Force the cursor to be a pointer so we know it's clickable
-    startBtn.style.cursor = "pointer";
-    startBtn.style.pointerEvents = "auto";
+    if (startBtn) {
+        startBtn.onclick = () => {
+            console.log("Button Triggered");
+            
+            // Hide Landing Elements
+            const bgVideo = document.getElementById('bg-video');
+            if (bgVideo) {
+                bgVideo.pause();
+                bgVideo.style.display = 'none';
+            }
+            if (uiLayer) uiLayer.style.display = 'none';
+            if (scannerLayer) scannerLayer.style.display = 'flex';
 
-    startBtn.onclick = (e) => {
-        e.preventDefault();
-        console.log("Button Clicked - Manual Trigger");
-
-        // 1. Hide the Landing UI immediately
-        if (uiLayer) uiLayer.style.display = 'none';
-        
-        const bgVideo = document.getElementById('bg-video');
-        if (bgVideo) {
-            bgVideo.pause();
-            bgVideo.style.display = 'none';
-        }
-
-        // 2. Show the Scanner
-        if (scannerLayer) scannerLayer.style.display = 'flex';
-
-        // 3. Trigger Camera Permission
-        if (window.XR8) {
-            // We use .run() for the first start
-            XR8.run(); 
-            console.log("XR8.run() executed");
-        } else {
-            console.error("XR8 not found on window");
-        }
-    };
-}
+            // START CAMERA HERE
+            if (window.XR8) {
+                // Using .run() ensures the permission prompt triggers
+                XR8.run(); 
+            }
+        };
+    }
 
     // Tutorial Listeners
     document.getElementById('btn-right')?.addEventListener('click', () => toggleTutorial(true));
