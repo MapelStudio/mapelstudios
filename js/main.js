@@ -120,18 +120,12 @@ window.nextPage = function(pageNumber) {
     updateButtonText();
 }
 
-window.handleNext = function() { // Added window.
-    if (tutorialStep < 3) window.nextPage(tutorialStep + 1);
+window.handleNext = function() {
+    if (tutorialStep < 3) nextPage(tutorialStep + 1);
     else toggleTutorial(false);
 }
 
-window.nextPage = function(pageNumber) { // Added window.
-    tutorialStep = pageNumber;
-    document.querySelectorAll('.tutorial-page').forEach(page => page.classList.remove('active'));
-    const targetPage = document.getElementById(`page-${pageNumber}`);
-    if (targetPage) targetPage.classList.add('active');
-    
-    // Update button text
+function updateButtonText() {
     const btn = document.getElementById('nav-btn-next');
     if (btn) btn.innerText = tutorialStep === 3 ? "Start" : "Next";
 }
@@ -195,26 +189,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2500);
     });
 
-    // REPLACE your old startBtn listener with this:
-if (startBtn) {
-    startBtn.addEventListener('click', () => {
-        const bgVideo = document.getElementById('bg-video');
-        
-        // Fix: Hide it first, then remove it after AR starts
-        if (bgVideo) {
-            bgVideo.pause();
-            bgVideo.style.display = 'none'; 
-        }
-
-        if (uiLayer) uiLayer.style.display = 'none';
-        if (scannerLayer) scannerLayer.style.display = 'flex';
-
-        // Fix: Use run() if resume() fails
-        if (window.XR8) {
-            XR8.resume().catch(() => XR8.run());
-        }
-    });
-}
+    // Start Button Logic
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            const bgVideo = document.getElementById('bg-video');
+            if (bgVideo) {
+                bgVideo.pause();
+                bgVideo.remove(); // Remove to prevent camera conflict
+            }
+            if (uiLayer) uiLayer.style.display = 'none';
+            if (scannerLayer) scannerLayer.style.display = 'flex';
+            if (window.XR8) XR8.resume(); // Ensure engine wakes up
+        });
+    }
 
     // Tutorial Listeners
     document.getElementById('btn-right')?.addEventListener('click', () => toggleTutorial(true));
