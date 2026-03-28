@@ -314,8 +314,7 @@ document.addListener('DOMContentLoaded', () => {
         const selector = document.getElementById(`model-selector-${letter}`);
         if (selector) selector.style.display = 'none';
     });
-
-}); // <-- FIXED: This now properly closes the entire DOMContentLoaded block
+// <-- FIXED: This now properly closes the entire DOMContentLoaded block
 
 // Force the UI to hide if the engine takes too long
 setTimeout(() => {
