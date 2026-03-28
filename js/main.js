@@ -12,10 +12,14 @@ const load8thWallTargets = () => {
   fetch('./data/targets.json')
     .then(response => response.json())
     .then(data => {
-      XR8.XrController.configure({ 
-        imageTargetData: data.imageTargets || data 
-      })
-    })
+
+  alert("Targets loaded successfully");
+
+  XR8.XrController.configure({
+    imageTargetData: data.imageTargets || data
+  });
+
+})
 }
 window.XR8 ? load8thWallTargets() : window.addEventListener('xrloaded', load8thWallTargets)
 
