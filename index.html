@@ -136,9 +136,10 @@
 
    <a-scene 
   id="sceneEl" 
-  xrweb="disableWorldTracking: true;" 
+  xrweb="disableWorldTracking: true; autoStart: false" 
   xrextras-loading 
-  xrextras-runtime-error>
+  xrextras-runtime-error 
+  renderer="colorManagement: true; antialias: true;"> 
     
     <a-assets>
         <a-asset-item id="aeroplane" src="assets/aeroplane.glb"></a-asset-item>
