@@ -8,20 +8,42 @@ window.addEventListener('xrloaded', () => {
 });
 
 // ===== 8TH WALL TARGET LOADER =====
+
 const load8thWallTargets = () => {
+  console.log("Loading targets...");
+
   fetch('./data/targets.json')
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("HTTP error " + response.status);
+      }
+      return response.json();
+    })
     .then(data => {
 
-  alert("Targets loaded successfully");
+      console.log("Targets JSON received:", data);
 
-  XR8.XrController.configure({
-    imageTargetData: data.imageTargets || data
-  });
+      XR8.XrController.configure({
+        imageTargetData: data.imageTargets || data
+      });
 
-})
-}
-window.XR8 ? load8thWallTargets() : window.addEventListener('xrloaded', load8thWallTargets)
+      console.log("🎯 Recognition Engine Synced");
+
+      alert("Targets loaded successfully");
+
+    })
+    .catch(err => {
+      console.error("❌ Could not load targets:", err);
+      alert("Target load failed");
+    });
+};
+
+
+// Wait until XR engine is ready
+window.addEventListener('xrloaded', () => {
+  console.log("XR Engine Ready");
+  load8thWallTargets();
+});
 
 // ===== TOUCH ROTATION COMPONENT =====
 AFRAME.registerComponent('touch-rotate', {
