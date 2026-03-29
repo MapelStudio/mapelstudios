@@ -5,30 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Mapel Studios AR</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Mapel Studios AR</title>
 
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+```
+<link rel="stylesheet" href="css/style.css">
 
-    <script src="js/xr.js"></script>
+<!-- A-Frame -->
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-    <script src="js/xrextras.js"></script>
+<!-- 8th Wall engine from your external folder -->
+<script src="external/xrweb.js"></script>
+<script src="external/xrwebgl.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/fcor/arjs-gestures@master/dist/gestures.js"></script>
-    
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+<!-- Your existing scripts -->
+<script src="js/xr.js"></script>
+<script src="js/xrextras.js"></script>
 
-    <script>
-      window.addEventListener('xrloaded', () => {
-        console.log("✅ 8th Wall Engine detected!");
-        // This confirms the engine found your 'xr.js' file
-      });
+<!-- Extras -->
+<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fcor/arjs-gestures@master/dist/gestures.js"></script>
 
-      window.addEventListener('xrerror', (event) => {
-        console.error("❌ 8th Wall Error:", event.detail);
-      });
-    </script>
-</head>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+
+<script>
+  window.addEventListener('xrloaded', () => {
+    console.log("✅ 8th Wall Engine detected!");
+  });
+
+  window.addEventListener('xrerror', (event) => {
+    console.error("❌ 8th Wall Error:", event.detail);
+  });
+</script>
+
+    </head>
 <body>
 <div id="click-debug" style="position: fixed; top: 0; left: 0; width: 100%; background: red; color: white; padding: 10px; z-index: 99999; font-size: 20px; display: none;">
     BUTTON CLICKED: <span id="debug-text"></span>
