@@ -37,3 +37,8 @@ window.addEventListener('xrloaded', () => {
 window.addEventListener('xrerror', (event) => {
   console.error("XR error:", event.detail);
 });
+
+window.addEventListener('xrimagefound', (event) => {
+alert("TARGET DETECTED: " + event.detail.name);
+console.log("TARGET DETECTED:", event.detail.name);
+});
