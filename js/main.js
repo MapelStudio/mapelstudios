@@ -9,35 +9,6 @@ window.addEventListener('xrloaded', () => {
 
 // ===== 8TH WALL TARGET LOADER =====
 
-const load8thWallTargets = () => {
-  console.log("Loading targets...");
-
-  fetch('./data/targets.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("HTTP error " + response.status);
-      }
-      return response.json();
-    })
-    .then(data => {
-
-      console.log("Targets JSON received:", data);
-
-      XR8.XrController.configure({
-        imageTargetData: data.imageTargets || data
-      });
-
-      console.log("🎯 Recognition Engine Synced");
-
-      alert("Targets loaded successfully");
-
-    })
-    .catch(err => {
-      console.error("❌ Could not load targets:", err);
-      alert("Target load failed");
-    });
-};
-
 
 // Wait until XR engine is ready
 window.addEventListener('xrloaded', () => {
