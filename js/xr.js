@@ -7,22 +7,166 @@ window.addEventListener('xrloaded', () => {
 
   XR8.XrController.configure({
   imageTargetData: [
-    {
-      name: "A",
-      imagePath: "./data/Ajpg.jpeg",
-      type: "PLANAR",
-      metadata: {},
-      properties: {
-        left: 0,
-        top: 0,
-        width: 480,
-        height: 640,
-        originalWidth: 480,
-        originalHeight: 640,
-        isRotated: false
-      }
+  {
+    name: "A",
+    imagePath: "./data/Ajpg.jpeg",
+    type: "PLANAR",
+    metadata: {},
+    properties: {
+      left: 0,
+      top: 0,
+      width: 2157,
+      height: 1039,
+      originalWidth: 2157,
+      originalHeight: 1039,
+      isRotated: false
     }
-  ]
+  },
+
+  {
+    name: "B",
+    imagePath: "./data/Bjpg.jpeg",
+    type: "PLANAR",
+    metadata: {},
+    properties: {
+      left: 0,
+      top: 0,
+      width: 2157,
+      height: 999,
+      originalWidth: 2157,
+      originalHeight: 999,
+      isRotated: false
+    }
+  },
+
+  {
+    name: "C",
+    imagePath: "./data/Cjpg.jpeg",
+    type: "PLANAR",
+    metadata: {},
+    properties: {
+      left: 0,
+      top: 0,
+      width: 2157,
+      height: 1020,
+      originalWidth: 2157,
+      originalHeight: 1020,
+      isRotated: false
+    }
+  },
+
+  {
+    name: "D",
+    imagePath: "./data/Djpg.jpeg",
+    type: "PLANAR",
+    metadata: {},
+    properties: {
+      left: 0,
+      top: 0,
+      width: 2208,
+      height: 1000,
+      originalWidth: 2208,
+      originalHeight: 1000,
+      isRotated: false
+    }
+  },
+
+  {
+    name: "E",
+    imagePath: "./data/Ejpg.jpeg",
+    type: "PLANAR",
+    metadata: {},
+    properties: {
+      left: 0,
+      top: 0,
+      width: 2157,
+      height: 999,
+      originalWidth: 2157,
+      originalHeight: 999,
+      isRotated: false
+    }
+  },
+
+  {
+    name: "F",
+    imagePath: "./data/Fjpg.jpeg",
+    type: "PLANAR",
+    metadata: {},
+    properties: {
+      left: 0,
+      top: 0,
+      width: 2157,
+      height: 1000,
+      originalWidth: 2157,
+      originalHeight: 1000,
+      isRotated: false
+    }
+  },
+
+  {
+    name: "G",
+    imagePath: "./data/Gjpg.jpeg",
+    type: "PLANAR",
+    metadata: {},
+    properties: {
+      left: 0,
+      top: 0,
+      width: 2157,
+      height: 1000,
+      originalWidth: 2157,
+      originalHeight: 1000,
+      isRotated: false
+    }
+  },
+
+  {
+    name: "H",
+    imagePath: "./data/Hjpg.jpeg",
+    type: "PLANAR",
+    metadata: {},
+    properties: {
+      left: 0,
+      top: 0,
+      width: 2157,
+      height: 1000,
+      originalWidth: 2157,
+      originalHeight: 1000,
+      isRotated: false
+    }
+  },
+
+  {
+    name: "I",
+    imagePath: "./data/Ijpg.jpeg",
+    type: "PLANAR",
+    metadata: {},
+    properties: {
+      left: 0,
+      top: 0,
+      width: 2158,
+      height: 999,
+      originalWidth: 2158,
+      originalHeight: 999,
+      isRotated: false
+    }
+  },
+
+  {
+    name: "J",
+    imagePath: "./data/Jjpg.jpeg",
+    type: "PLANAR",
+    metadata: {},
+    properties: {
+      left: 0,
+      top: 0,
+      width: 2157,
+      height: 1000,
+      originalWidth: 2157,
+      originalHeight: 1000,
+      isRotated: false
+    }
+  }
+]
 });
 });
 
