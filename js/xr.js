@@ -4,7 +4,6 @@
 // Wait until XR engine is ready
 window.addEventListener('xrloaded', () => {
   console.log("XR engine ready");
-  load8thWallTargets();
 });
 
 
