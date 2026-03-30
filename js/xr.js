@@ -8,7 +8,7 @@ window.addEventListener('xrloaded', () => {
   XR8.XrController.configure({
   imageTargetData: [
   {
-    name: "target-A",
+    name: "target-a",
     imagePath: "./data/Ajpg.jpeg",
     type: "PLANAR",
     metadata: {},
@@ -24,7 +24,7 @@ window.addEventListener('xrloaded', () => {
   },
 
   {
-    name: "target-B",
+    name: "target-b",
     imagePath: "./data/Bjpg.jpeg",
     type: "PLANAR",
     metadata: {},
@@ -40,7 +40,7 @@ window.addEventListener('xrloaded', () => {
   },
 
   {
-    name: "target-C",
+    name: "target-c",
     imagePath: "./data/Cjpg.jpeg",
     type: "PLANAR",
     metadata: {},
@@ -56,7 +56,7 @@ window.addEventListener('xrloaded', () => {
   },
 
   {
-    name: "target-D",
+    name: "target-d",
     imagePath: "./data/Djpg.jpeg",
     type: "PLANAR",
     metadata: {},
@@ -72,7 +72,7 @@ window.addEventListener('xrloaded', () => {
   },
 
   {
-    name: "target-E",
+    name: "target-e",
     imagePath: "./data/Ejpg.jpeg",
     type: "PLANAR",
     metadata: {},
@@ -88,7 +88,7 @@ window.addEventListener('xrloaded', () => {
   },
 
   {
-    name: "target-F",
+    name: "target-f",
     imagePath: "./data/Fjpg.jpeg",
     type: "PLANAR",
     metadata: {},
@@ -104,7 +104,7 @@ window.addEventListener('xrloaded', () => {
   },
 
   {
-    name: "target-G",
+    name: "target-g",
     imagePath: "./data/Gjpg.jpeg",
     type: "PLANAR",
     metadata: {},
@@ -120,7 +120,7 @@ window.addEventListener('xrloaded', () => {
   },
 
   {
-    name: "target-H",
+    name: "target-h",
     imagePath: "./data/Hjpg.jpeg",
     type: "PLANAR",
     metadata: {},
@@ -136,7 +136,7 @@ window.addEventListener('xrloaded', () => {
   },
 
   {
-    name: "target-I",
+    name: "target-i",
     imagePath: "./data/Ijpg.jpeg",
     type: "PLANAR",
     metadata: {},
@@ -152,7 +152,7 @@ window.addEventListener('xrloaded', () => {
   },
 
   {
-    name: "target-J",
+    name: "target-j",
     imagePath: "./data/Jjpg.jpeg",
     type: "PLANAR",
     metadata: {},
