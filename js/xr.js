@@ -4,6 +4,26 @@
 // Wait until XR engine is ready
 window.addEventListener('xrloaded', () => {
   console.log("XR engine ready");
+
+  XR8.XrController.configure({
+  imageTargetData: [
+    {
+      name: "A",
+      imagePath: "./data/Ajpg.jpeg",
+      type: "PLANAR",
+      metadata: {},
+      properties: {
+        left: 0,
+        top: 0,
+        width: 480,
+        height: 640,
+        originalWidth: 480,
+        originalHeight: 640,
+        isRotated: false
+      }
+    }
+  ]
+});
 });
 
 
