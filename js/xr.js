@@ -177,8 +177,12 @@ window.addEventListener('xrerror', (event) => {
 });
 
 window.addEventListener('xrimagefound', (event) => {
-alert("TARGET DETECTED: " + event.detail.name);
-console.log("TARGET DETECTED:", event.detail.name);
+  alert("TARGET FOUND: " + event.detail.name);
+
+  // Try to force something visible
+  setTimeout(() => {
+    alert("Trying to show test object...");
+  }, 500);
 });
 
 window.addEventListener('xrimagelost', (event) => {
