@@ -36,3 +36,8 @@ window.addEventListener('xrimagefound', (event) => {
 alert("TARGET DETECTED: " + event.detail.name);
 console.log("TARGET DETECTED:", event.detail.name);
 });
+
+window.addEventListener('xrimagelost', (event) => {
+  alert("TARGET LOST: " + event.detail.name);
+  console.log("TARGET LOST:", event.detail.name);
+});
