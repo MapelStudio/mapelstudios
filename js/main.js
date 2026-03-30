@@ -238,11 +238,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Hide background video completely
-    const bgVideo = document.getElementById('bg-video');
-    if (bgVideo) {
-        bgVideo.pause();
-        bgVideo.style.display = 'none';
-    }
+   const bgVideo = document.getElementById('bg-video');
+
+if (bgVideo) {
+    bgVideo.pause();
+    bgVideo.style.display = 'none';
+    bgVideo.style.visibility = 'hidden';
+    bgVideo.style.zIndex = '-1';
+}
 
     // Show scanner
     if (scannerLayer) {
