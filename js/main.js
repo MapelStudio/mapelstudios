@@ -7,11 +7,6 @@ console.log("XR Engine Ready");
 // ===== 8TH WALL TARGET LOADER =====
 
 
-// Wait until XR engine is ready
-window.addEventListener('xrloaded', () => {
-  console.log("XR Engine Ready");
-  load8thWallTargets();
-});
 
 // ===== TOUCH ROTATION COMPONENT =====
 AFRAME.registerComponent('touch-rotate', {
