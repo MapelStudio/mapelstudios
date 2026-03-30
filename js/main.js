@@ -247,6 +247,12 @@ if (bgVideo) {
     bgVideo.style.zIndex = '-1';
 }
 
+    const loader = document.getElementById('loading-screen');
+
+if (loader) {
+    loader.style.display = 'none';
+}
+
     // Show scanner
     if (scannerLayer) {
         scannerLayer.style.display = 'flex';
