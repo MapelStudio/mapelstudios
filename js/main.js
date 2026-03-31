@@ -161,8 +161,9 @@ window.switchModel = function(targetId, modelName) {
 
     newModel.setAttribute('id', `${targetId}-display`);
     newModel.setAttribute('gltf-model', `#${modelName}`);
-    newModel.setAttribute('position', '0 0 0.5');
-    newModel.setAttribute('scale', '1 1 1');
+    newModel.setAttribute('position', '0 0 2');
+    newModel.setAttribute('scale', '100 100 100');
+    newModel.setAttribute('material', 'color: red');
     newModel.setAttribute('rotation', '0 0 0');
 
     newModel.addEventListener('model-loaded', () => {
