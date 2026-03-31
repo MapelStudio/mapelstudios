@@ -1,8 +1,3 @@
-// Force the engine to resume after the loading screen
-window.addEventListener('xrloaded', () => {
-  XR8.XrController.pause();
-});
-
 // ===== TOUCH ROTATION COMPONENT =====
 AFRAME.registerComponent('touch-rotate', {
   init: function() {
