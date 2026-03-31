@@ -96,8 +96,8 @@ let tutorialStep = 1;
 
 function nextPage(pageNumber) {
     tutorialStep = pageNumber;
-    document.querySelectorAll('.tutorial-page').forEach(page => page.classList.remove('active'));
-    const targetPage = document.getElementById(`page-${pageNumber}`);
+    .querySelectorAll('.tutorial-page').forEach(page => page.classList.remove('active'));
+    const targetPage = .getElementById(`page-${pageNumber}`);
     if (targetPage) targetPage.classList.add('active');
     updateButtonText();
 }
@@ -108,14 +108,14 @@ function handleNext() {
 }
 
 function updateButtonText() {
-    const btn = document.getElementById('nav-btn-next');
+    const btn = .getElementById('nav-btn-next');
     if (!btn) return;
     btn.innerText = tutorialStep === 3 ? "Start" : "Next";
 }
 
 function toggleTutorial(show) {
-    const modal = document.getElementById('tutorial-modal');
-    const scannerLayer = document.getElementById('scanner-container');
+    const modal = .getElementById('tutorial-modal');
+    const scannerLayer = .getElementById('scanner-container');
     if (!modal) return;
 
     if (show) {
@@ -131,7 +131,7 @@ function toggleTutorial(show) {
 
 // ===== MODEL SWITCHING FUNCTION =====
 window.switchModel = function(targetId, modelName) {
-    const modelDisplay = document.getElementById(`${targetId}-display`);
+    const modelDisplay = .getElementById(`${targetId}-display`);
     if (!modelDisplay) {
         console.error('Model display not found:', targetId);
         return;
@@ -152,7 +152,7 @@ window.switchModel = function(targetId, modelName) {
 
     const scale = MODEL_SCALES[modelName] || '2 2 2';
 
-    const newModel = document.createElement('a-gltf-model');
+    const newModel = .createElement('a-gltf-model');
 
     newModel.setAttribute('id', `${targetId}-display`);
     newModel.setAttribute('gltf-model', `#${modelName}`);
@@ -167,12 +167,12 @@ window.switchModel = function(targetId, modelName) {
 }, 300);
 };
 // ===== MAIN INITIALIZATION =====
-document.addEventListener('DOMContentLoaded', () => {
-    const startBtn = document.getElementById('start-btn');
-    const uiLayer = document.getElementById('ui');
-    const scannerLayer = document.getElementById('scanner-container');
-    const iconLayer = document.getElementById('icon-layer');
-    const sceneEl = document.getElementById('sceneEl'); // Note: ensure your <a-scene> has id="sceneEl"
+.addEventListener('DOMContentLoaded', () => {
+    const startBtn = .getElementById('start-btn');
+    const uiLayer = .getElementById('ui');
+    const scannerLayer = .getElementById('scanner-container');
+    const iconLayer = .getElementById('icon-layer');
+    const sceneEl = .getElementById('sceneEl'); // Note: ensure your <a-scene> has id="sceneEl"
     const loadingScreen = document.getElementById('loading-screen');
 
     // Hide loading screen
@@ -235,6 +235,8 @@ if (loader) {
 
     // ===== UNIVERSAL BUTTON CLICK HANDLER =====
     document.body.addEventListener('click', (e) => {
+        alert("Button clicked");
+        
         if (e.target.classList.contains('model-btn')) {
             const modelName = e.target.getAttribute('data-model');
             const targetId = e.target.getAttribute('data-target');
