@@ -148,29 +148,23 @@ window.switchModel = function(targetId, modelName) {
     });
     
     setTimeout(() => {
-        modelDisplay.remove();
-        
-        const scale = MODEL_SCALES[modelName] || '2 2 2';
-        
-        const newModel = document.createElement('a-gltf-model');
+    modelDisplay.remove();
 
-newModel.setAttribute('id', `${targetId}-display`);
-newModel.setAttribute('gltf-model', `#${modelName}`);
+    const scale = MODEL_SCALES[modelName] || '2 2 2';
 
-// Force visible position
-newModel.setAttribute('position', '0 0 0.5');
+    const newModel = document.createElement('a-gltf-model');
 
-// Force visible size
-newModel.setAttribute('scale', '1 1 1');
+    newModel.setAttribute('id', `${targetId}-display`);
+    newModel.setAttribute('gltf-model', `#${modelName}`);
+    newModel.setAttribute('position', '0 0 0.5');
+    newModel.setAttribute('scale', '1 1 1');
+    newModel.setAttribute('rotation', '0 0 0');
 
-// No animation for now
-newModel.setAttribute('rotation', '0 0 0');
+    parentEntity.appendChild(newModel);
 
-parentEntity.appendChild(newModel);
+    alert("MODEL ADDED SUCCESSFULLY");
 
-alert("MODEL ADDED SUCCESSFULLY");
-};
-
+}, 300);
 // ===== MAIN INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
