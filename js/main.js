@@ -131,27 +131,22 @@ function toggleTutorial(show) {
 
 // ===== MODEL SWITCHING FUNCTION =====
 window.switchModel = function(targetId, modelName) {
+
+    alert("switchModel running");
+
     const modelDisplay = document.getElementById(`${targetId}-display`);
+
     if (!modelDisplay) {
-        console.error('Model display not found:', targetId);
+        alert("Old model not found");
         return;
     }
-    
+
     const parentEntity = modelDisplay.parentElement;
-    
-    // Fade out old model
-    modelDisplay.setAttribute('animation', {
-        property: 'scale',
-        to: '0 0 0',
-        dur: 300,
-        easing: 'easeInQuad'
-    });
-    
-    setTimeout(() => {
+
+    // Remove old model immediately
     modelDisplay.remove();
 
-    const scale = MODEL_SCALES[modelName] || '2 2 2';
-
+    // Create new model
     const newModel = document.createElement('a-gltf-model');
 
     newModel.setAttribute('id', `${targetId}-display`);
@@ -161,18 +156,15 @@ window.switchModel = function(targetId, modelName) {
     newModel.setAttribute('rotation', '0 0 0');
 
     newModel.addEventListener('model-loaded', () => {
-  alert("MODEL FILE LOADED");
-});
+        alert("MODEL LOADED");
+    });
 
-newModel.addEventListener('model-error', () => {
-  alert("MODEL FAILED TO LOAD");
-});
+    newModel.addEventListener('model-error', () => {
+        alert("MODEL ERROR");
+    });
 
     parentEntity.appendChild(newModel);
 
-    alert("MODEL ADDED SUCCESSFULLY");
-
-}, 300);
 };
 // ===== MAIN INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
