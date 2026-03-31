@@ -155,7 +155,7 @@ window.switchModel = function(targetId, modelName) {
         const newModel = document.createElement('a-gltf-model');
         newModel.setAttribute('id', `${targetId}-display`);
         newModel.setAttribute('gltf-model', `#${modelName}`);
-        newModel.setAttribute('position: '0 0 0.5'); // Start below target
+        newModel.setAttribute('position': '0 0 0.5'); // Start below target
         newModel.setAttribute('scale', '0 0 0'); // Start invisible
         newModel.setAttribute('animation-mixer', '');
         newModel.setAttribute('touch-rotate', '');
