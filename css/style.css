@@ -541,7 +541,7 @@ video, canvas {
     z-index: 1 !important;
 }
 
-/* 3. The Landing Video (Floor 1 - Hidden after click) */
+/* 3. The Landing Video (Floor 1 -  after click) */
 #bg-video {
     position: fixed;
     inset: 0;
@@ -604,7 +604,7 @@ html, body {
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: ;
     background-color: transparent !important;
 }
 
@@ -828,7 +828,7 @@ video:not(#ar-video):not(#bg-video) {
 
 /* The Horizontal Drawer */
 .anim-drawer {
-    display: none; /* Hidden by default */
+    display: none; /*  by default */
     flex-direction: row; /* Horizontal row */
     gap: 10px;
     justify-content: center;
@@ -948,7 +948,7 @@ video:not(#ar-video):not(#bg-video) {
 }
 
 /* FORCE HIDE ALL MINDAR UI ELEMENTS */
-.mindar-ui-overlay,
+/*.mindar-ui-overlay,
 .mindar-ui-loading,
 .mindar-ui-scanning,
 .mindar-ui-compatibility,
@@ -956,7 +956,7 @@ div[class*="mindar"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
-}
+}*/
 
 /* Lock loading screen model in place during fade */
 #loading-screen model-viewer {
@@ -1187,4 +1187,14 @@ body, html {
 /* Always hide landing video when AR is running */
 body.ar-active #bg-video {
     display: none !important;
+}
+
+
+/* Force AR scene visible */
+a-scene,
+canvas {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 10 !important;
 }
