@@ -145,12 +145,10 @@
 
    <a-scene
   id="sceneEl"
-  xrconfig
-  xrweb="disableWorldTracking: true; allowedDevices: any; cameraDirection: back"
-  embedded
-  renderer="colorManagement: true; antialias: true;"
+  xrweb="disableWorldTracking: true"
   xrextras-loading
-  xrextras-runtime-error>
+  xrextras-runtime-error
+  renderer="colorManagement: true; antialias: true;">
        
     <a-assets>
         <a-asset-item id="aeroplane" src="assets/aeroplane.glb"></a-asset-item>
