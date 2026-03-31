@@ -167,12 +167,12 @@ window.switchModel = function(targetId, modelName) {
 }, 300);
 };
 // ===== MAIN INITIALIZATION =====
-.addEventListener('DOMContentLoaded', () => {
-    const startBtn = .getElementById('start-btn');
-    const uiLayer = .getElementById('ui');
-    const scannerLayer = .getElementById('scanner-container');
-    const iconLayer = .getElementById('icon-layer');
-    const sceneEl = .getElementById('sceneEl'); // Note: ensure your <a-scene> has id="sceneEl"
+document.addEventListener('DOMContentLoaded', () => {
+    const startBtn = document.getElementById('start-btn');
+    const uiLayer = document.getElementById('ui');
+    const scannerLayer = document.getElementById('scanner-container');
+    const iconLayer = document.getElementById('icon-layer');
+    const sceneEl = document.getElementById('sceneEl'); // Note: ensure your <a-scene> has id="sceneEl"
     const loadingScreen = document.getElementById('loading-screen');
 
     // Hide loading screen
