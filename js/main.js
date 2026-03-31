@@ -136,15 +136,25 @@ window.switchModel = function(targetId, modelName) {
 
     const modelDisplay = document.getElementById(`${targetId}-display`);
 
+    let parentEntity;
+
     if (!modelDisplay) {
-        alert("Old model not found");
-        return;
+
+        alert("No old model — creating new one");
+
+        parentEntity = document.getElementById(`${targetId}-anchor`);
+
+        if (!parentEntity) {
+            alert("Anchor not found");
+            return;
+        }
+
+    } else {
+
+        parentEntity = modelDisplay.parentElement;
+        modelDisplay.remove();
+
     }
-
-    const parentEntity = modelDisplay.parentElement;
-
-    // Remove old model immediately
-    modelDisplay.remove();
 
     // Create new model
     const newModel = document.createElement('a-gltf-model');
