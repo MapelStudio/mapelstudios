@@ -1,12 +1,7 @@
 // Force the engine to resume after the loading screen
 window.addEventListener('xrloaded', () => {
-console.log("XR Engine Ready");
+  XR8.XrController.pause();
 });
-
-
-// ===== 8TH WALL TARGET LOADER =====
-
-
 
 // ===== TOUCH ROTATION COMPONENT =====
 AFRAME.registerComponent('touch-rotate', {
@@ -265,6 +260,8 @@ if (loader) {
 
     // IMPORTANT — mark AR as active
     document.body.classList.add('ar-active');
+
+    XR8.XrController.resume();
 
 });
     } // <-- FIXED: Added this closing bracket to close the "if (startBtn)" block
