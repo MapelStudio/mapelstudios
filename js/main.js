@@ -132,28 +132,20 @@ function toggleTutorial(show) {
 // ===== MODEL SWITCHING FUNCTION =====
 window.switchModel = function(targetId, modelName) {
 
-    alert("switchModel running");
+    console.log("Switching model:", targetId, modelName);
 
-    const modelDisplay = document.getElementById(`${targetId}-display`);
+    // Find the anchor
+    const parentEntity = document.getElementById(`${targetId}-anchor`);
 
-    let parentEntity;
+    if (!parentEntity) {
+        console.error("Anchor not found:", targetId);
+        return;
+    }
 
-    if (!modelDisplay) {
-
-        alert("No old model — creating new one");
-
-        parentEntity = document.getElementById(`${targetId}-anchor`);
-
-        if (!parentEntity) {
-            alert("Anchor not found");
-            return;
-        }
-
-    } else {
-
-        parentEntity = modelDisplay.parentElement;
-        modelDisplay.remove();
-
+    // Remove existing model if present
+    const oldModel = document.getElementById(`${targetId}-display`);
+    if (oldModel) {
+        oldModel.remove();
     }
 
     // Create new model
@@ -161,17 +153,23 @@ window.switchModel = function(targetId, modelName) {
 
     newModel.setAttribute('id', `${targetId}-display`);
     newModel.setAttribute('gltf-model', `#${modelName}`);
-    newModel.setAttribute('position', '0 0 2');
-    newModel.setAttribute('scale', '100 100 100');
-    newModel.setAttribute('material', 'color: red');
-    newModel.setAttribute('rotation', '0 0 0');
 
+    // FORCE visibility
+    newModel.setAttribute('position', '0 0 1');
+    newModel.setAttribute('rotation', '0 0 0');
+    newModel.setAttribute('scale', '2 2 2');
+
+    newModel.setAttribute('visible', 'true');
+    newModel.setAttribute('animation-mixer', '');
+    newModel.setAttribute('touch-rotate', '');
+
+    // Confirm load
     newModel.addEventListener('model-loaded', () => {
-        alert("MODEL LOADED");
+        console.log("MODEL LOADED:", modelName);
     });
 
     newModel.addEventListener('model-error', () => {
-        alert("MODEL ERROR");
+        console.error("MODEL FAILED:", modelName);
     });
 
     parentEntity.appendChild(newModel);
