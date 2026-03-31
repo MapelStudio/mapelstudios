@@ -256,8 +256,6 @@ if (loader) {
     // IMPORTANT — mark AR as active
     document.body.classList.add('ar-active');
 
-    sceneEl.style.display = 'block';
-
 });
     } // <-- FIXED: Added this closing bracket to close the "if (startBtn)" block
 
