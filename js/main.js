@@ -160,6 +160,14 @@ window.switchModel = function(targetId, modelName) {
     newModel.setAttribute('scale', '1 1 1');
     newModel.setAttribute('rotation', '0 0 0');
 
+    newModel.addEventListener('model-loaded', () => {
+  alert("MODEL FILE LOADED");
+});
+
+newModel.addEventListener('model-error', () => {
+  alert("MODEL FAILED TO LOAD");
+});
+
     parentEntity.appendChild(newModel);
 
     alert("MODEL ADDED SUCCESSFULLY");
