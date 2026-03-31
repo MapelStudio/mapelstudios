@@ -165,6 +165,7 @@ window.switchModel = function(targetId, modelName) {
     alert("MODEL ADDED SUCCESSFULLY");
 
 }, 300);
+};
 // ===== MAIN INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
