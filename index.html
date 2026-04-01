@@ -143,7 +143,8 @@
         </div>
     </div>
 
-   <a-scene
+   <!-- Replace your <a-scene> section with this -->
+<a-scene
   id="sceneEl"
   xrweb="disableWorldTracking: true"
   xrextras-loading
@@ -170,44 +171,33 @@
 
     <a-camera></a-camera>
 
-       <a-box
-  color="blue"
-  position="0 0 2"
-  scale="1 1 1">
-</a-box>
-
+    <!-- FIXED: Models are now properly attached to image targets -->
     <xrextras-named-image-target name="target-a">
-    <a-entity id="target-a-anchor">
-
-        <a-box
-            id="target-a-display"
-            color="blue"
-            position="0 0 1"
-            scale="0.5 0.5 0.5">
-        </a-box>
-
-    </a-entity>
-</xrextras-named-image-target>
+        <a-entity id="target-a-anchor" position="0 0 0">
+            <a-gltf-model id="target-a-display" src="#apple" position="0 0 0" scale="0.045 0.045 0.045" animation-mixer touch-rotate></a-gltf-model>
+        </a-entity>
+    </xrextras-named-image-target>
+    
     <xrextras-named-image-target name="target-b">
-        <a-entity id="target-b-anchor">
+        <a-entity id="target-b-anchor" position="0 0 0">
             <a-gltf-model id="target-b-display" src="#bag" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
         </a-entity>
     </xrextras-named-image-target>
 
     <xrextras-named-image-target name="target-e">
-        <a-entity id="target-e-anchor">
-            <a-gltf-model id="target-e-display" src="#emerald" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
+        <a-entity id="target-e-anchor" position="0 0 0">
+            <a-gltf-model id="target-e-display" src="#emerald" position="0 0 0" scale="0.3 0.3 0.3" animation-mixer touch-rotate></a-gltf-model>
         </a-entity>
     </xrextras-named-image-target>
 
     <xrextras-named-image-target name="target-f">
-        <a-entity id="target-f-anchor">
+        <a-entity id="target-f-anchor" position="0 0 0">
             <a-gltf-model id="target-f-display" src="#flower" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
         </a-entity>
     </xrextras-named-image-target>
 
     <xrextras-named-image-target name="target-g">
-        <a-entity id="target-g-anchor">
+        <a-entity id="target-g-anchor" position="0 0 0">
             <a-gltf-model id="target-g-display" src="#gift" position="0 0 0" scale="4 4 4" animation-mixer touch-rotate></a-gltf-model>
         </a-entity>
     </xrextras-named-image-target>
