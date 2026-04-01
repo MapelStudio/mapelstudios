@@ -40,45 +40,46 @@ AFRAME.registerComponent('touch-rotate', {
 
 // ===== LETTER CONFIGURATION =====
 // Add all 26 letters here - ONE place for everything!
+// ===== LETTER CONFIGURATION WITH CORRECT SCALES =====
 const LETTER_CONFIG = {
     'a': {
         targetIndex: 0,
         models: {
-            'apple': { file: 'apple.glb', scale: '4.5 4.5 4.5', label: 'Apple', default: true },
-            'aeroplane': { file: 'aeroplane.glb', scale: '0.06 0.06 0.06', label: 'Aeroplane' },
-            'axe': { file: 'axe.glb', scale: '0.4 0.4 0.4', label: 'Axe' }
+            'apple': { file: 'apple.glb', scale: '0.045 0.045 0.045', position: '0 0 0', label: 'Apple', default: true },
+            'aeroplane': { file: 'aeroplane.glb', scale: '0.06 0.06 0.06', position: '0 0 0', label: 'Aeroplane' },
+            'axe': { file: 'axe.glb', scale: '0.4 0.4 0.4', position: '0 0 0', label: 'Axe' }
         }
     },
     'b': {
         targetIndex: 1,
         models: {
-            'bag': { file: 'bag.glb', scale: '1 1 1', label: 'Bag', default: true },
-            'ball': { file: 'ball.glb', scale: '0.3 0.3 0.3', label: 'Ball' },
-            'banana': { file: 'banana.glb', scale: '0.02 0.02 0.02', label: 'Banana' }
+            'bag': { file: 'bag.glb', scale: '1 1 1', position: '0 0 0', label: 'Bag', default: true },
+            'ball': { file: 'ball.glb', scale: '0.3 0.3 0.3', position: '0 0 0', label: 'Ball' },
+            'banana': { file: 'banana.glb', scale: '0.02 0.02 0.02', position: '0 0 0', label: 'Banana' }
         }
     },
     'e': {
-        targetIndex: 4,  // 5th target in targets.mind (0=A, 1=B, 2=C, 3=D, 4=E)
+        targetIndex: 4,
         models: {
-            'emerald': { file: 'emerald.glb', scale: '0.3 0.3 0.3', label: 'Emerald', default: true },
-            'elephant': { file: 'elephant.glb', scale: '0.1 0.1 0.1', label: 'Elephant' },
-            'egg': { file: 'egg.glb', scale: '0.3 0.3 0.3', label: 'Egg' }
+            'emerald': { file: 'emerald.glb', scale: '0.3 0.3 0.3', position: '0 0 0', label: 'Emerald', default: true },
+            'elephant': { file: 'elephant.glb', scale: '0.1 0.1 0.1', position: '0 0 0', label: 'Elephant' },
+            'egg': { file: 'egg.glb', scale: '0.3 0.3 0.3', position: '0 0 0', label: 'Egg' }
         }
     },
     'f': {
-        targetIndex: 5,  // 5th target in targets.mind (0=A, 1=B, 2=C, 3=D, 4=E)
+        targetIndex: 5,
         models: {
-            'flower': { file: 'flower.glb', scale: '1 1 1', label: 'Flower', default: true },
-            'funnel': { file: 'funnel.glb', scale: '0.09 0.09 0.09', label: 'Funnel' },
-            'fan': { file: 'fan.glb', scale: '0.1 0.1 0.1', label: 'Fan' }
+            'flower': { file: 'flower.glb', scale: '1 1 1', position: '0 0 0', label: 'Flower', default: true },
+            'funnel': { file: 'funnel.glb', scale: '0.09 0.09 0.09', position: '0 0 0', label: 'Funnel' },
+            'fan': { file: 'fan.glb', scale: '0.1 0.1 0.1', position: '0 0 0', label: 'Fan' }
         }
     },
     'g': {
-        targetIndex: 6,  // 7th target in targets.mind (assuming you compiled A-J together)
+        targetIndex: 6,
         models: {
-            'gift': { file: 'gift.glb', scale: '4 4 4', label: 'Gift', default: true },
-            'goat': { file: 'goat.glb',  position: '-40 0 0', scale: '0.5 0.5 0.5', label: 'Goat' },
-            'grape': { file: 'grape.glb', scale: '0.1 0.1 0.1', label: 'Grape' }
+            'gift': { file: 'gift.glb', scale: '4 4 4', position: '0 0 0', label: 'Gift', default: true },
+            'goat': { file: 'goat.glb', scale: '0.5 0.5 0.5', position: '0 0 0', label: 'Goat' },
+            'grape': { file: 'grape.glb', scale: '0.1 0.1 0.1', position: '0 0 0', label: 'Grape' }
         }
     }
 };
@@ -130,51 +131,95 @@ function toggleTutorial(show) {
 }
 
 // ===== MODEL SWITCHING FUNCTION =====
+// ===== MODEL SWITCHING FUNCTION (FIXED) =====
 window.switchModel = function(targetId, modelName) {
-
-    console.log("Switching model:", targetId, modelName);
-
-    // Find the anchor
+    console.log("Switching model for:", targetId, "to:", modelName);
+    
+    // Get the config for this model
+    let modelConfig = null;
+    let targetLetter = targetId.split('-')[1];
+    
+    // Find model configuration
+    if (LETTER_CONFIG[targetLetter] && LETTER_CONFIG[targetLetter].models[modelName]) {
+        modelConfig = LETTER_CONFIG[targetLetter].models[modelName];
+    }
+    
+    // Find the anchor entity
     const parentEntity = document.getElementById(`${targetId}-anchor`);
-
+    
     if (!parentEntity) {
-        console.error("Anchor not found:", targetId);
+        console.error("❌ Anchor not found:", targetId);
         return;
     }
-
+    
     // Remove existing model if present
     const oldModel = document.getElementById(`${targetId}-display`);
     if (oldModel) {
         oldModel.remove();
+        console.log("Removed old model");
     }
-
-    // Create new model
+    
+    // Create new model element
     const newModel = document.createElement('a-gltf-model');
-
     newModel.setAttribute('id', `${targetId}-display`);
-    newModel.setAttribute('gltf-model', `#${modelName}`);
-
-    // FORCE visibility
-    newModel.setAttribute('position', '0 0 1');
-    newModel.setAttribute('rotation', '0 0 0');
-    newModel.setAttribute('scale', '2 2 2');
-
-    newModel.setAttribute('visible', 'true');
+    newModel.setAttribute('src', `#${modelName}`);
+    
+    // Position directly on the image target (0,0,0 is on the surface)
+    newModel.setAttribute('position', modelConfig && modelConfig.position ? modelConfig.position : '0 0 0');
+    
+    // Apply scale from config or default
+    const scaleValue = modelConfig && modelConfig.scale ? modelConfig.scale : '1 1 1';
+    newModel.setAttribute('scale', scaleValue);
+    
+    // Add rotation
+    newModel.setAttribute('rotation', modelConfig && modelConfig.rotation ? modelConfig.rotation : '0 0 0');
+    
+    // Add components
     newModel.setAttribute('animation-mixer', '');
     newModel.setAttribute('touch-rotate', '');
-
-    // Confirm load
+    newModel.setAttribute('visible', 'true');
+    
+    // Add event listeners for debugging
     newModel.addEventListener('model-loaded', () => {
-        console.log("MODEL LOADED:", modelName);
+        console.log("✅ Model loaded successfully:", modelName, "for", targetId);
     });
-
-    newModel.addEventListener('model-error', () => {
-        console.error("MODEL FAILED:", modelName);
+    
+    newModel.addEventListener('model-error', (error) => {
+        console.error("❌ Model failed to load:", modelName, error);
     });
-
+    
+    // Add to scene
     parentEntity.appendChild(newModel);
-
+    console.log("Added new model:", modelName, "with scale:", scaleValue);
 };
+
+// Also fix the target detection to show proper UI
+window.addEventListener('xrimagefound', (event) => {
+    console.log("🎯 TARGET DETECTED:", event.detail.name);
+    
+    const targetName = event.detail.name;
+    const letter = targetName.split('-')[1];
+    
+    if (scannerLayer) {
+        scannerLayer.style.display = 'none';
+    }
+    
+    const selector = document.getElementById(`model-selector-${letter}`);
+    
+    if (selector) {
+        selector.style.display = 'flex';
+        console.log("📱 UI shown for:", letter);
+        
+        // Force visibility of the current model
+        const currentDisplay = document.getElementById(`${targetName}-display`);
+        if (currentDisplay) {
+            currentDisplay.setAttribute('visible', 'true');
+            console.log("Made model visible");
+        }
+    } else {
+        console.log("No selector found for:", letter);
+    }
+});
 // ===== MAIN INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
