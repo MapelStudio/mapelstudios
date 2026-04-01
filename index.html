@@ -95,10 +95,12 @@
 
     <!-- Image targets – each contains a model anchored to the target -->
     <xrextras-named-image-target name="target-a">
-  <a-entity>
-    <a-box color="red" position="0 0 0" scale="0.5 0.5 0.02"></a-box>
-  </a-entity>
-</xrextras-named-image-target>
+      <a-entity>
+        <a-box color="red" position="0 0 0.05" scale="0.2 0.2 0.02">
+          <a-animation attribute="rotation" dur="2000" repeat="indefinite" to="0 360 0" easing="linear"></a-animation>
+        </a-box>
+      </a-entity>
+    </xrextras-named-image-target>
 
     <xrextras-named-image-target name="target-b">
       <a-entity id="target-b-anchor">
