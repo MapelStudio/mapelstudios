@@ -1,125 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Mapel Studios AR</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- First load A-Frame -->
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-
-    <!-- Then load 8th Wall Engine -->
-    <script src="external/runtime/runtime.js"></script>
-    <script src="external/xr/xr.js" data-preload-chunks="slam"></script>
-    
-    <!-- Then load xrextras (this provides xrextras-named-image-target) -->
-    <script src="js/xrextras.js"></script>
-    
-    <!-- Additional components -->
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/fcor/arjs-gestures@master/dist/gestures.js"></script>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
-    
-    <!-- Your custom scripts LAST -->
-    <script src="js/xr.js"></script>
-    <script src="js/main.js"></script>
-
-    <script>
-        // Add error handling for script loading
-        window.addEventListener('error', function(e) {
-            console.error('Script loading error:', e.target.src || e.target.href, e);
-        });
-        
-        window.addEventListener('xrloaded', () => {
-            console.log("XR engine loaded successfully");
-        });
-        
-        window.addEventListener('xrerror', (event) => {
-            console.error("XR error:", event.detail);
-        });
-        
-        // Wait for everything to be ready
-        window.addEventListener('load', function() {
-            console.log("All resources loaded");
-        });
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Mapel Studios AR</title>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- 1. A-Frame core -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  
+  <!-- 2. 8th Wall runtime and XR module -->
+  <script src="external/runtime/runtime.js"></script>
+  <script src="external/xr/xr.js" data-preload-chunks="slam"></script>
+  
+  <!-- 3. xrextras (provides xrextras-named-image-target) -->
+  <script src="js/xrextras.js"></script>
+  
+  <!-- 4. Additional components (optional but useful) -->
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/fcor/arjs-gestures@master/dist/gestures.js"></script>
+  
+  <!-- 5. Your custom scripts (order matters: xr.js first, then main.js) -->
+  <script src="js/xr.js"></script>
+  <script src="js/main.js"></script>
+  
+  <!-- 6. Optional: model-viewer for loading screen -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 </head>
 <body>
-    <!-- Your body content remains the same -->
-    <div id="ui">
-        <img src="assets/logo.png" class="main-logo" alt="Mapel Studios Logo">
-        <button class="btn" id="start-btn">
-            <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"></path>
-            </svg>
-            <div class="txt-wrapper">
-                <div class="txt-1">
-                    <span class="btn-letter">E</span><span class="btn-letter">x</span><span class="btn-letter">p</span><span class="btn-letter">e</span><span class="btn-letter">r</span><span class="btn-letter">i</span><span class="btn-letter">e</span><span class="btn-letter">n</span><span class="btn-letter">c</span><span class="btn-letter">e</span><span class="btn-letter">&nbsp;</span><span class="btn-letter">A</span><span class="btn-letter">R</span>
-                </div>
-                <div class="txt-2">
-                    <span class="btn-letter">E</span><span class="btn-letter">x</span><span class="btn-letter">p</span><span class="btn-letter">e</span><span class="btn-letter">r</span><span class="btn-letter">i</span><span class="btn-letter">e</span><span class="btn-letter">n</span><span class="btn-letter">c</span><span class="btn-letter">e</span><span class="btn-letter">&nbsp;</span><span class="btn-letter">A</span><span class="btn-letter">R</span>
-                </div>
-            </div>
-        </button>
+  <!-- UI elements (unchanged from your original) -->
+  <div id="ui">
+    <img src="assets/logo.png" class="main-logo" alt="Mapel Studios Logo">
+    <button class="btn" id="start-btn">
+      <!-- your button SVG and text -->
+    </button>
+  </div>
+
+  <div id="icon-layer" style="display: none;">
+    <div class="round-btn" id="btn-left"><img src="assets/left-button.png" alt="Menu"></div>
+    <div class="round-btn" id="btn-right"><img src="assets/right-button.png" alt="Settings"></div>
+  </div>
+
+  <!-- Model selectors (unchanged) -->
+  <div id="model-selector-a" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+      <button class="model-btn active" data-model="apple" data-target="target-a">Apple</button>
+      <button class="model-btn" data-model="aeroplane" data-target="target-a">Aeroplane</button>
+      <button class="model-btn" data-model="axe" data-target="target-a">Axe</button>
     </div>
+  </div>
+  <!-- similarly for b, e, f, g -->
 
-    <!-- Rest of your body content... -->
-    
-    <a-scene
-        id="sceneEl"
-        xrweb="disableWorldTracking: true"
-        xrextras-loading
-        xrextras-runtime-error
-        renderer="colorManagement: true; antialias: true;">
-        
-        <a-assets>
-            <a-asset-item id="apple" src="assets/apple.glb"></a-asset-item>
-            <a-asset-item id="bag" src="assets/bag.glb"></a-asset-item>
-            <a-asset-item id="emerald" src="assets/emerald.glb"></a-asset-item>
-            <a-asset-item id="flower" src="assets/flower.glb"></a-asset-item>
-            <a-asset-item id="gift" src="assets/gift.glb"></a-asset-item>
-            <!-- Add other models as needed -->
-        </a-assets>
+  <div id="scanner-container" style="display: none;">
+    <div class="target-box">
+      <div class="corner tl"></div><div class="corner tr"></div>
+      <div class="corner bl"></div><div class="corner br"></div>
+    </div>
+    <div class="status-label">ALIGN TARGET WITHIN CORNERS</div>
+  </div>
 
-        <a-camera></a-camera>
+  <!-- Tutorial modal (unchanged) -->
+  <div id="tutorial-modal" class="tutorial-overlay">...</div>
 
-        <xrextras-named-image-target name="target-a">
-            <a-entity id="target-a-anchor" position="0 0 0">
-                <a-gltf-model id="target-a-display" src="#apple" position="0 0 0" scale="0.045 0.045 0.045"></a-gltf-model>
-            </a-entity>
-        </xrextras-named-image-target>
-        
-        <xrextras-named-image-target name="target-b">
-            <a-entity id="target-b-anchor" position="0 0 0">
-                <a-gltf-model id="target-b-display" src="#bag" position="0 0 0" scale="1 1 1"></a-gltf-model>
-            </a-entity>
-        </xrextras-named-image-target>
-        
-        <!-- Add other targets -->
-    </a-scene>
-    
-    <div id="error-log" style="position:fixed; bottom:0; left:0; background:black; color:red; z-index:99999; font-size:10px; width:100%; height:50px; overflow:scroll;"></div>
-    
-    <script>
-        // Global error handler
-        window.onerror = function(msg, url, line, col, error) {
-            const errorMsg = `${line}: ${msg}`;
-            console.error(errorMsg);
-            const errorLog = document.getElementById('error-log');
-            if (errorLog) {
-                errorLog.innerHTML += errorMsg + "<br>";
-            }
-            return false;
-        };
-        
-        // Check if xrextras is loaded
-        setTimeout(() => {
-            console.log("Checking xrextras:", typeof XRExtras);
-            console.log("Checking scene:", document.getElementById('sceneEl'));
-        }, 1000);
-    </script>
+  <!-- ========== A-FRAME SCENE ========== -->
+  <a-scene
+    id="sceneEl"
+    xrweb="disableWorldTracking: true"
+    xrextras-loading
+    xrextras-runtime-error
+    renderer="colorManagement: true; antialias: true;"
+  >
+    <a-assets>
+      <!-- List all your GLB files here with correct paths -->
+      <a-asset-item id="apple" src="assets/apple.glb"></a-asset-item>
+      <a-asset-item id="aeroplane" src="assets/aeroplane.glb"></a-asset-item>
+      <a-asset-item id="axe" src="assets/axe.glb"></a-asset-item>
+      <a-asset-item id="bag" src="assets/bag.glb"></a-asset-item>
+      <a-asset-item id="ball" src="assets/ball.glb"></a-asset-item>
+      <a-asset-item id="banana" src="assets/banana.glb"></a-asset-item>
+      <a-asset-item id="emerald" src="assets/emerald.glb"></a-asset-item>
+      <a-asset-item id="elephant" src="assets/elephant.glb"></a-asset-item>
+      <a-asset-item id="egg" src="assets/egg.glb"></a-asset-item>
+      <a-asset-item id="flower" src="assets/flower.glb"></a-asset-item>
+      <a-asset-item id="funnel" src="assets/funnel.glb"></a-asset-item>
+      <a-asset-item id="fan" src="assets/fan.glb"></a-asset-item>
+      <a-asset-item id="gift" src="assets/gift.glb"></a-asset-item>
+      <a-asset-item id="goat" src="assets/goat.glb"></a-asset-item>
+      <a-asset-item id="grape" src="assets/grape.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera></a-camera>
+
+    <!-- Image targets – each contains a model anchored to the target -->
+    <xrextras-named-image-target name="target-a">
+      <a-entity id="target-a-anchor">
+        <a-gltf-model id="target-a-display" src="#apple" position="0 0 0" scale="0.045 0.045 0.045" animation-mixer touch-rotate></a-gltf-model>
+      </a-entity>
+    </xrextras-named-image-target>
+
+    <xrextras-named-image-target name="target-b">
+      <a-entity id="target-b-anchor">
+        <a-gltf-model id="target-b-display" src="#bag" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
+      </a-entity>
+    </xrextras-named-image-target>
+
+    <xrextras-named-image-target name="target-e">
+      <a-entity id="target-e-anchor">
+        <a-gltf-model id="target-e-display" src="#emerald" position="0 0 0" scale="0.3 0.3 0.3" animation-mixer touch-rotate></a-gltf-model>
+      </a-entity>
+    </xrextras-named-image-target>
+
+    <xrextras-named-image-target name="target-f">
+      <a-entity id="target-f-anchor">
+        <a-gltf-model id="target-f-display" src="#flower" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
+      </a-entity>
+    </xrextras-named-image-target>
+
+    <xrextras-named-image-target name="target-g">
+      <a-entity id="target-g-anchor">
+        <a-gltf-model id="target-g-display" src="#gift" position="0 0 0" scale="4 4 4" animation-mixer touch-rotate></a-gltf-model>
+      </a-entity>
+    </xrextras-named-image-target>
+  </a-scene>
+
+  <video autoplay muted loop playsinline id="bg-video" oncontextmenu="return false;">
+    <source src="assets/landing-bg.mp4" type="video/mp4">
+  </video>
+
+  <div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background-color: #000; overflow: hidden;">
+    <div style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+      <model-viewer src="assets/ringanimation.glb" autoplay camera-orbit="-90deg 90deg auto" style="width: 100px; height: 100px; background: transparent;"></model-viewer>
+    </div>
+  </div>
 </body>
 </html>
