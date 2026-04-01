@@ -1,3 +1,45 @@
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM ready");
+    
+    // Check if scene exists
+    const scene = document.getElementById('sceneEl');
+    if (!scene) {
+        console.error("Scene element not found!");
+        return;
+    }
+    
+    // Wait for scene to be ready
+    scene.addEventListener('loaded', () => {
+        console.log("Scene loaded");
+        
+        // Check if xrextras components are registered
+        const components = AFRAME.components;
+        console.log("Available components:", Object.keys(components));
+        
+        if (components['xrextras-named-image-target']) {
+            console.log("✅ xrextras-named-image-target component found");
+        } else {
+            console.warn("⚠️ xrextras-named-image-target component not found");
+        }
+    });
+    
+    // Your existing DOMContentLoaded code will go here (but we'll merge it)
+});
+
+// Add this helper function to debug model loading
+window.debugModels = function() {
+    const models = document.querySelectorAll('a-gltf-model');
+    console.log(`Found ${models.length} models:`);
+    models.forEach((model, i) => {
+        console.log(`  ${i}: id=${model.id}, src=${model.getAttribute('src')}, visible=${model.getAttribute('visible')}`);
+    });
+};
+
+// Call this after 5 seconds to debug
+setTimeout(() => {
+    if (window.debugModels) window.debugModels();
+}, 5000);
+
 // ===== TOUCH ROTATION COMPONENT =====
 AFRAME.registerComponent('touch-rotate', {
   init: function() {
