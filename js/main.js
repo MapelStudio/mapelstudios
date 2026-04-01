@@ -154,6 +154,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const selector = document.getElementById(`model-selector-${letter}`);
     if (selector) selector.style.display = 'none';
   });
+
+  // Force canvas to top after everything loads
+setTimeout(() => {
+  const canvas = document.querySelector('.a-canvas');
+  if (canvas) {
+    canvas.style.zIndex = '10';
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.display = 'block';
+    console.log("✅ Canvas forced to top layer");
+  } else {
+    console.warn("⚠️ Canvas not found");
+  }
+}, 1000);
 });
 
 // ========== TUTORIAL FUNCTIONS ==========
