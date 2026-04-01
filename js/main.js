@@ -155,6 +155,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (selector) selector.style.display = 'none';
   });
 
+  window.addEventListener('xrimagefound', (e) => {
+  console.log("🎯 IMAGE DETECTED:", e.detail.name);
+  // Also show a visible message
+  const msg = document.createElement('div');
+  msg.textContent = `Target ${e.detail.name} found!`;
+  msg.style.position = 'fixed';
+  msg.style.bottom = '20px';
+  msg.style.left = '20px';
+  msg.style.background = 'green';
+  msg.style.color = 'white';
+  msg.style.padding = '10px';
+  msg.style.zIndex = '9999';
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 3000);
+});
+
+window.addEventListener('xrimagelost', (e) => {
+  console.log("👋 IMAGE LOST:", e.detail.name);
+});
+
   // Force canvas to top after everything loads
 setTimeout(() => {
   const canvas = document.querySelector('.a-canvas');
