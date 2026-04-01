@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>AR Test</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="external/runtime/runtime.js"></script>
+  <script src="external/xr/xr.js" data-preload-chunks="slam"></script>
+  <script src="js/xrextras.js"></script>
+  <script>
+    window.addEventListener('xrloaded', () => {
+      XR8.XrController.configure({
+        imageTargetData: [
+          {
+            name: "target-a",
+            imagePath: "./data/Ajpg.jpeg",
+            type: "PLANAR",
+            properties: { width: 2157, height: 1039, originalWidth: 2157, originalHeight: 1039 }
+          }
+        ]
+      });
+    });
+  </script>
+</head>
+<body>
+  <a-scene xrweb="disableWorldTracking: true" xrextras-loading>
+    <a-assets>
+      <a-asset-item id="apple" src="assets/apple.glb"></a-asset-item>
+    </a-assets>
+    <a-camera></a-camera>
+    <xrextras-named-image-target name="target-a">
+      <a-entity>
+        <!-- Simple red box first -->
+        <a-box color="red" position="0 0 0" scale="0.2 0.2 0.02"></a-box>
+        <!-- Then your model (will be on top) -->
+        <a-gltf-model src="#apple" position="0 0 0.03" scale="0.045 0.045 0.045"></a-gltf-model>
+      </a-entity>
+    </xrextras-named-image-target>
+  </a-scene>
+</body>
+</html>
