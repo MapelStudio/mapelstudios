@@ -30,59 +30,58 @@ AFRAME.registerComponent('touch-rotate', {
 
 // ========== MODEL CONFIGURATION ==========
 const MODEL_CONFIG = {
-  'apple':   { scale: '0.045 0.045 0.045', default: true, position: '0 0.1 0' },
-  'aeroplane':{ scale: '0.06 0.06 0.06', position: '0 0.1 0' },
-  'axe':     { scale: '0.4 0.4 0.4', position: '0 0.1 0' },
-  'bag':     { scale: '1 1 1', position: '0 0 0', default: true },
-  'ball':    { scale: '0.3 0.3 0.3', position: '0 0 0' },
-  'banana':  { scale: '0.02 0.02 0.02', position: '0 0 0' },
-  'emerald': { scale: '0.3 0.3 0.3', position: '0 0 0', default: true },
-  'elephant':{ scale: '0.1 0.1 0.1', position: '0 0 0' },
-  'egg':     { scale: '0.3 0.3 0.3', position: '0 0 0' },
-  'flower':  { scale: '1 1 1', position: '0 0 0', default: true },
-  'funnel':  { scale: '0.09 0.09 0.09', position: '0 0 0' },
-  'fan':     { scale: '0.1 0.1 0.1', position: '0 0 0' },
-  'gift':    { scale: '4 4 4', position: '0 0 0', default: true },
-  'goat':    { scale: '0.5 0.5 0.5', position: '0 0 0' },
-  'grape':   { scale: '0.1 0.1 0.1', position: '0 0 0' }
+  'apple':   { scale: '0.045 0.045 0.045', default: true },
+  'aeroplane':{ scale: '0.06 0.06 0.06' },
+  'axe':     { scale: '0.4 0.4 0.4' },
+  'bag':     { scale: '1 1 1', default: true },
+  'ball':    { scale: '0.3 0.3 0.3' },
+  'banana':  { scale: '0.02 0.02 0.02' },
+  'emerald': { scale: '0.3 0.3 0.3', default: true },
+  'elephant':{ scale: '0.1 0.1 0.1' },
+  'egg':     { scale: '0.3 0.3 0.3' },
+  'flower':  { scale: '1 1 1', default: true },
+  'funnel':  { scale: '0.09 0.09 0.09' },
+  'fan':     { scale: '0.1 0.1 0.1' },
+  'gift':    { scale: '4 4 4', default: true },
+  'goat':    { scale: '0.5 0.5 0.5' },
+  'grape':   { scale: '0.1 0.1 0.1' }
 };
 
 // ========== SWITCH MODEL FUNCTION ==========
 window.switchModel = function(targetId, modelName) {
-  debugLog(`Switching model on ${targetId} to ${modelName}`);
-  
   const anchor = document.getElementById(`${targetId}-anchor`);
   if (!anchor) {
-    debugLog(`ERROR: Anchor not found for ${targetId}`);
+    console.error(`Anchor not found: ${targetId}`);
     return;
   }
   
-  // Get the model display element and the test box
-  const modelDisplay = document.getElementById(`${targetId}-display`);
-  const testBox = document.getElementById(`${targetId}-testbox`);
+  // Remove existing model
+  const oldModel = document.getElementById(`${targetId}-display`);
+  if (oldModel) oldModel.remove();
   
-  if (!modelDisplay) {
-    debugLog(`ERROR: Model display element not found for ${targetId}`);
-    return;
-  }
+  // Create new model
+  const newModel = document.createElement('a-gltf-model');
+  newModel.id = `${targetId}-display`;
+  newModel.setAttribute('src', `#${modelName}`);
+  newModel.setAttribute('position', '0 0 0');
+  newModel.setAttribute('scale', MODEL_CONFIG[modelName]?.scale || '1 1 1');
+  newModel.setAttribute('animation-mixer', '');
+  newModel.setAttribute('touch-rotate', '');
   
-  // Update model source and attributes
-  modelDisplay.setAttribute('src', `#${modelName}`);
-  const config = MODEL_CONFIG[modelName] || { scale: '1 1 1', position: '0 0 0' };
-  modelDisplay.setAttribute('scale', config.scale);
-  modelDisplay.setAttribute('position', config.position);
+  // Event listeners for debugging
+  newModel.addEventListener('model-loaded', () => {
+    console.log(`✅ Model loaded: ${modelName} on ${targetId}`);
+  });
+  newModel.addEventListener('model-error', (e) => {
+    console.error(`❌ Model error: ${modelName}`, e);
+  });
   
-  // Hide test box, show model
-  if (testBox) testBox.setAttribute('visible', 'false');
-  modelDisplay.setAttribute('visible', 'true');
-  
-  debugLog(`Model switched to ${modelName}, scale=${config.scale}`);
+  anchor.appendChild(newModel);
+  console.log(`🔄 Switched to ${modelName} on ${targetId}`);
 };
 
 // ========== UI HANDLERS ==========
 document.addEventListener('DOMContentLoaded', () => {
-  debugLog("DOM ready, initializing UI");
-  
   const startBtn = document.getElementById('start-btn');
   const uiLayer = document.getElementById('ui');
   const scannerLayer = document.getElementById('scanner-container');
@@ -90,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadingScreen = document.getElementById('loading-screen');
   const bgVideo = document.getElementById('bg-video');
   
-  // Hide loading screen after a delay
+  // Hide loading screen after a delay (or when scene loads)
   window.addEventListener('load', () => {
     setTimeout(() => {
       if (loadingScreen) loadingScreen.style.display = 'none';
@@ -98,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2000);
   });
   
-  // Tutorial button
+  // Tutorial button (right icon)
   const btnRight = document.getElementById('btn-right');
   if (btnRight) btnRight.addEventListener('click', () => toggleTutorial(true));
   
@@ -108,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Start AR
   if (startBtn) {
     startBtn.addEventListener('click', () => {
-      debugLog("Start AR clicked");
+      console.log("Starting AR experience");
       if (uiLayer) uiLayer.style.display = 'none';
       if (bgVideo) {
         bgVideo.pause();
@@ -123,17 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Model selector buttons
   document.body.addEventListener('click', (e) => {
-    const btn = e.target.closest('.model-btn');
-    if (btn) {
-      const modelName = btn.getAttribute('data-model');
-      const targetId = btn.getAttribute('data-target');
+    if (e.target.classList && e.target.classList.contains('model-btn')) {
+      const modelName = e.target.getAttribute('data-model');
+      const targetId = e.target.getAttribute('data-target');
       if (modelName && targetId) {
         window.switchModel(targetId, modelName);
         // Update active button style
-        document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
-          b.classList.remove('active');
+        document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(btn => {
+          btn.classList.remove('active');
         });
-        btn.classList.add('active');
+        e.target.classList.add('active');
       }
     }
   });
@@ -142,44 +140,35 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('xrimagefound', (event) => {
     const targetName = event.detail.name;
     const letter = targetName.split('-')[1];
-    debugLog(`🎯 Target found: ${targetName} (letter ${letter})`);
+    console.log(`🔍 Target found: ${targetName} → showing selector for letter ${letter}`);
     
     if (scannerLayer) scannerLayer.style.display = 'none';
     const selector = document.getElementById(`model-selector-${letter}`);
     if (selector) selector.style.display = 'flex';
-    
-    // Ensure the test box is visible (in case it was hidden from previous model)
-    const testBox = document.getElementById(`${targetName}-testbox`);
-    const modelDisplay = document.getElementById(`${targetName}-display`);
-    if (testBox && modelDisplay) {
-      testBox.setAttribute('visible', 'true');
-      modelDisplay.setAttribute('visible', 'false');
-    }
   });
   
   window.addEventListener('xrimagelost', (event) => {
     const targetName = event.detail.name;
     const letter = targetName.split('-')[1];
-    debugLog(`👋 Target lost: ${targetName}`);
     if (scannerLayer) scannerLayer.style.display = 'flex';
     const selector = document.getElementById(`model-selector-${letter}`);
     if (selector) selector.style.display = 'none';
   });
-  
-  // Force canvas to top
-  setTimeout(() => {
-    const canvas = document.querySelector('.a-canvas');
-    if (canvas) {
-      canvas.style.zIndex = '10';
-      canvas.style.position = 'fixed';
-      canvas.style.top = '0';
-      canvas.style.left = '0';
-      canvas.style.display = 'block';
-      debugLog("Canvas forced to top");
-    } else {
-      debugLog("Canvas not found");
-    }
-  }, 1000);
+
+  // Force canvas to top after everything loads
+setTimeout(() => {
+  const canvas = document.querySelector('.a-canvas');
+  if (canvas) {
+    canvas.style.zIndex = '10';
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.display = 'block';
+    console.log("✅ Canvas forced to top layer");
+  } else {
+    console.warn("⚠️ Canvas not found");
+  }
+}, 1000);
 });
 
 // ========== TUTORIAL FUNCTIONS ==========
@@ -210,6 +199,3 @@ function toggleTutorial(show) {
     if (scanner) scanner.style.display = 'flex';
   }
 }
-
-// Expose debugLog globally
-window.debugLog = window.debugLog || console.log;
