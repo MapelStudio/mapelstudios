@@ -6,20 +6,34 @@
   <title>Mapel Studios AR</title>
   <link rel="stylesheet" href="css/style.css">
   
+  <!-- 1. A-Frame core -->
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  
+  <!-- 2. 8th Wall runtime and XR module -->
   <script src="external/runtime/runtime.js"></script>
   <script src="external/xr/xr.js" data-preload-chunks="slam"></script>
+  
+  <!-- 3. xrextras (provides xrextras-named-image-target) -->
   <script src="js/xrextras.js"></script>
+  
+  <!-- 4. Additional components (optional but useful) -->
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/fcor/arjs-gestures@master/dist/gestures.js"></script>
+  
+  <!-- 5. Your custom scripts (order matters: xr.js first, then main.js) -->
   <script src="js/xr.js"></script>
   <script src="js/main.js"></script>
+  
+  <!-- 6. Optional: model-viewer for loading screen -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 </head>
 <body>
+  <!-- UI elements (unchanged from your original) -->
   <div id="ui">
     <img src="assets/logo.png" class="main-logo" alt="Mapel Studios Logo">
-    <button class="btn" id="start-btn">Start AR</button>
+    <button class="btn" id="start-btn">
+      <!-- your button SVG and text -->
+    </button>
   </div>
 
   <div id="icon-layer" style="display: none;">
@@ -27,6 +41,7 @@
     <div class="round-btn" id="btn-right"><img src="assets/right-button.png" alt="Settings"></div>
   </div>
 
+  <!-- Model selectors (unchanged) -->
   <div id="model-selector-a" class="model-selector-ui" style="display: none;">
     <div class="model-buttons">
       <button class="model-btn active" data-model="apple" data-target="target-a">Apple</button>
@@ -34,7 +49,7 @@
       <button class="model-btn" data-model="axe" data-target="target-a">Axe</button>
     </div>
   </div>
-  <!-- Add other selectors similarly for b, e, f, g -->
+  <!-- similarly for b, e, f, g -->
 
   <div id="scanner-container" style="display: none;">
     <div class="target-box">
@@ -44,8 +59,10 @@
     <div class="status-label">ALIGN TARGET WITHIN CORNERS</div>
   </div>
 
-  <div id="tutorial-modal" class="tutorial-overlay"><!-- tutorial content --></div>
+  <!-- Tutorial modal (unchanged) -->
+  <div id="tutorial-modal" class="tutorial-overlay">...</div>
 
+  <!-- ========== A-FRAME SCENE ========== -->
   <a-scene
     id="sceneEl"
     xrweb="disableWorldTracking: true"
@@ -54,6 +71,7 @@
     renderer="colorManagement: true; antialias: true;"
   >
     <a-assets>
+      <!-- List all your GLB files here with correct paths -->
       <a-asset-item id="apple" src="assets/apple.glb"></a-asset-item>
       <a-asset-item id="aeroplane" src="assets/aeroplane.glb"></a-asset-item>
       <a-asset-item id="axe" src="assets/axe.glb"></a-asset-item>
@@ -73,19 +91,26 @@
 
     <a-camera></a-camera>
 
-    <!-- Target A: test box + model anchor -->
-    <xrextras-named-image-target name="target-a">
-      <a-entity id="target-a-anchor">
-        <!-- A highly visible red box that will be replaced by model on button click -->
-        <a-box id="target-a-testbox" color="red" position="0 0.1 0" scale="0.5 0.5 0.05" opacity="1">
-          <a-animation attribute="rotation" dur="2000" repeat="indefinite" to="0 360 0"></a-animation>
-        </a-box>
-        <!-- Initially hidden model placeholder – will be shown when switching -->
-        <a-gltf-model id="target-a-display" src="#apple" position="0 0.1 0" scale="0.045 0.045 0.045" visible="false" animation-mixer touch-rotate></a-gltf-model>
-      </a-entity>
-    </xrextras-named-image-target>
+    
 
-    <!-- Other targets (b, e, f, g) – keep as they were but ensure they have an anchor with model -->
+    <!-- Image targets – each contains a model anchored to the target -->
+    <xrextras-named-image-target name="target-a">
+
+  <a-entity id="target-a-anchor">
+
+    <a-gltf-model
+      id="target-a-display"
+      src="#apple"
+      position="0 0 0"
+      scale="0.045 0.045 0.045"
+      animation-mixer
+      touch-rotate>
+    </a-gltf-model>
+
+  </a-entity>
+
+</xrextras-named-image-target>
+
     <xrextras-named-image-target name="target-b">
       <a-entity id="target-b-anchor">
         <a-gltf-model id="target-b-display" src="#bag" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
@@ -111,30 +136,14 @@
     </xrextras-named-image-target>
   </a-scene>
 
-  <video autoplay muted loop playsinline id="bg-video" style="display: none;">
+  <video autoplay muted loop playsinline id="bg-video" oncontextmenu="return false;">
     <source src="assets/landing-bg.mp4" type="video/mp4">
   </video>
 
-  <div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background-color: #000; overflow: hidden; display: flex; justify-content: center; align-items: center;">
-    <model-viewer src="assets/ringanimation.glb" autoplay camera-orbit="-90deg 90deg auto" style="width: 100px; height: 100px; background: transparent;"></model-viewer>
+  <div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background-color: #000; overflow: hidden;">
+    <div style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+      <model-viewer src="assets/ringanimation.glb" autoplay camera-orbit="-90deg 90deg auto" style="width: 100px; height: 100px; background: transparent;"></model-viewer>
+    </div>
   </div>
-
-  <div id="debug-console" style="position: fixed; bottom: 0; left: 0; background: rgba(0,0,0,0.7); color: lime; font-size: 10px; width: 100%; max-height: 80px; overflow: auto; z-index: 9999; padding: 5px;"></div>
-
-  <script>
-    // Helper to log messages to the visible debug console
-    function debugLog(msg) {
-      const consoleDiv = document.getElementById('debug-console');
-      if (consoleDiv) {
-        const line = document.createElement('div');
-        line.textContent = new Date().toLocaleTimeString() + ': ' + msg;
-        consoleDiv.appendChild(line);
-        consoleDiv.scrollTop = consoleDiv.scrollHeight;
-        while(consoleDiv.children.length > 20) consoleDiv.removeChild(consoleDiv.firstChild);
-      }
-      console.log(msg);
-    }
-    window.debugLog = debugLog;
-  </script>
 </body>
 </html>
