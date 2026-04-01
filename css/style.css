@@ -1223,28 +1223,3 @@ video {
   height: 100vh !important;
   object-fit: cover !important;
 }
-
-/* Force canvas to be above camera feed */
-.a-canvas, canvas.a-canvas {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 10 !important;
-  background: transparent !important;
-}
-video {
-  z-index: 1 !important;
-}
-#debug-console {
-  font-family: monospace;
-  font-size: 10px;
-  background: rgba(0,0,0,0.7);
-  color: #0f0;
-  padding: 5px;
-  max-height: 80px;
-  overflow-y: auto;
-  z-index: 10000;
-  pointer-events: none;
-}
