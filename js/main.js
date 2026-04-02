@@ -1,3 +1,5 @@
+alert("main.js started");
+
 // ===============================
 // 1) XR TARGET CONFIGURATION
 // ===============================
@@ -174,26 +176,22 @@ AFRAME.registerComponent('touch-rotate', {
 // 4) MODEL SWITCH FUNCTION
 // ===============================
 
-window.switchModel = function (targetId, modelName) {
+window.switchModel = function(targetId, modelName) {
 
   console.log("Switching model:", targetId, modelName);
 
   const anchor = document.getElementById(`${targetId}-anchor`);
 
   if (!anchor) {
-
     console.error("Anchor not found:", targetId);
     return;
-
   }
 
   const oldModel =
     document.getElementById(`${targetId}-display`);
 
   if (oldModel) {
-
     oldModel.remove();
-
   }
 
   const newModel =
@@ -202,14 +200,15 @@ window.switchModel = function (targetId, modelName) {
   newModel.id =
     `${targetId}-display`;
 
+  // IMPORTANT — correct attribute
   newModel.setAttribute(
-    'src',
+    'gltf-model',
     `#${modelName}`
   );
 
   newModel.setAttribute(
     'position',
-    '0 0 0'
+    '0 0 0.1'
   );
 
   newModel.setAttribute(
@@ -230,31 +229,21 @@ window.switchModel = function (targetId, modelName) {
   newModel.addEventListener(
     'model-loaded',
     () => {
-
-      console.log(
-        "MODEL LOADED:",
-        modelName
-      );
-
+      alert("MODEL LOADED");
     }
   );
 
   newModel.addEventListener(
     'model-error',
     (e) => {
-
-      console.error(
-        "MODEL ERROR:",
-        e
-      );
-
+      alert("MODEL ERROR");
+      console.error(e);
     }
   );
 
   anchor.appendChild(newModel);
 
 };
-
 
 
 // ===============================
