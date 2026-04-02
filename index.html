@@ -18,10 +18,8 @@
 <script src="external/xr/xr-slam.js"></script>
 
 <!-- Your XR logic -->
-
+<script src="js/xr.js"></script>
 <script src="js/xrextras.js"></script>
-
-<script src="js/main.js"></script>
 
 <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/fcor/arjs-gestures@master/dist/gestures.js"></script>
@@ -179,18 +177,16 @@
 </a-box>
 
     <xrextras-named-image-target name="target-a">
+    <a-entity id="target-a-anchor">
 
-  <a-entity id="target-a-anchor">
+        <a-box
+            id="target-a-display"
+            color="blue"
+            position="0 0 1"
+            scale="0.5 0.5 0.5">
+        </a-box>
 
-    <a-gltf-model
-      id="target-a-display"
-      src="#apple"
-      position="0 0 0"
-      scale="1 1 1">
-    </a-gltf-model>
-
-  </a-entity>
-
+    </a-entity>
 </xrextras-named-image-target>
     <xrextras-named-image-target name="target-b">
         <a-entity id="target-b-anchor">
