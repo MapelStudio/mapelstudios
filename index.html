@@ -1,149 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Mapel Studios AR</title>
-  <link rel="stylesheet" href="css/style.css">
-  
-  <!-- 1. A-Frame core -->
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-  
-  <!-- 2. 8th Wall runtime and XR module -->
-  <script src="external/runtime/runtime.js"></script>
-  <script src="external/xr/xr.js" data-preload-chunks="slam"></script>
-  
-  <!-- 3. xrextras (provides xrextras-named-image-target) -->
-  <script src="js/xrextras.js"></script>
-  
-  <!-- 4. Additional components (optional but useful) -->
-  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/fcor/arjs-gestures@master/dist/gestures.js"></script>
-  
-  <!-- 5. Your custom scripts (order matters: xr.js first, then main.js) -->
-  <script src="js/xr.js"></script>
-  <script src="js/main.js"></script>
-  
-  <!-- 6. Optional: model-viewer for loading screen -->
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+<title>Mapel Studios AR</title>
+
+<!-- CSS -->
+<link rel="stylesheet" href="css/style.css">
+
+<!-- A-Frame -->
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+<!-- 8th Wall Engine -->
+<script src="external/runtime/runtime.js"></script>
+<script src="external/xr/xr.js" data-preload-chunks="slam"></script>
+<script src="external/xr/xr-slam.js"></script>
+
+<!-- Your XR logic -->
+<script src="js/xr.js"></script>
+<script src="js/xrextras.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fcor/arjs-gestures@master/dist/gestures.js"></script>
+
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+
+<script>
+  window.addEventListener('xrloaded', () => {
+    console.log("XR engine loaded successfully");
+  });
+
+  window.addEventListener('xrerror', (event) => {
+    console.error("XR error:", event.detail);
+  });
+</script>
+
 </head>
+
 <body>
-  <!-- UI elements (unchanged from your original) -->
-  <div id="ui">
-    <img src="assets/logo.png" class="main-logo" alt="Mapel Studios Logo">
-    <button class="btn" id="start-btn">
-      <!-- your button SVG and text -->
-    </button>
-  </div>
+<div id="click-debug" style="position: fixed; top: 0; left: 0; width: 100%; background: red; color: white; padding: 10px; z-index: 99999; font-size: 20px; display: none;">
+    BUTTON CLICKED: <span id="debug-text"></span>
+</div>
+    <div id="ui">
+        <img src="assets/logo.png" class="main-logo" alt="Mapel Studios Logo" draggable="false" oncontextmenu="return false;">
+        <button class="btn" id="start-btn">
+            <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"></path>
+            </svg>
+            <div class="txt-wrapper">
+                <div class="txt-1">
+                    <span class="btn-letter">E</span><span class="btn-letter">x</span><span class="btn-letter">p</span><span class="btn-letter">e</span><span class="btn-letter">r</span><span class="btn-letter">i</span><span class="btn-letter">e</span><span class="btn-letter">n</span><span class="btn-letter">c</span><span class="btn-letter">e</span><span class="btn-letter">&nbsp;</span><span class="btn-letter">A</span><span class="btn-letter">R</span>
+                </div>
+                <div class="txt-2">
+                    <span class="btn-letter">E</span><span class="btn-letter">x</span><span class="btn-letter">p</span><span class="btn-letter">e</span><span class="btn-letter">r</span><span class="btn-letter">i</span><span class="btn-letter">e</span><span class="btn-letter">n</span><span class="btn-letter">c</span><span class="btn-letter">e</span><span class="btn-letter">&nbsp;</span><span class="btn-letter">A</span><span class="btn-letter">R</span>
+                </div>
+            </div>
+        </button>
+    </div>
 
-  <div id="icon-layer" style="display: none;">
-    <div class="round-btn" id="btn-left"><img src="assets/left-button.png" alt="Menu"></div>
-    <div class="round-btn" id="btn-right"><img src="assets/right-button.png" alt="Settings"></div>
-  </div>
+    <div id="icon-layer" style="display: none;">
+        <div class="round-btn" id="btn-left"><img src="assets/left-button.png" alt="Menu"></div>
+        <div class="round-btn" id="btn-right"><img src="assets/right-button.png" alt="Settings"></div>
+    </div>
 
-  <!-- Model selectors (unchanged) -->
-  <div id="model-selector-a" class="model-selector-ui" style="display: none;">
+    <!--  Selector UI for Letter A -->
+    <div id="model-selector-a" class="model-selector-ui" style="display: none;">
+        <div id="anim-controls-a" class="anim-controls" style="display: none;"></div>
+        <div class="model-buttons">
+            <button class="model-btn active" data-model="apple" data-target="target-a">Apple</button>
+            <button class="model-btn" data-model="aeroplane" data-target="target-a">Aeroplane</button>
+            <button class="model-btn" data-model="axe" data-target="target-a">Axe</button>
+        </div>
+    </div>
+
+    <!-- Model Selector UI for Letter B -->
+<div id="model-selector-b" class="model-selector-ui" style="display: none;">
+    <div id="anim-controls-b" class="anim-controls" style="display: none;"></div>
     <div class="model-buttons">
-      <button class="model-btn active" data-model="apple" data-target="target-a">Apple</button>
-      <button class="model-btn" data-model="aeroplane" data-target="target-a">Aeroplane</button>
-      <button class="model-btn" data-model="axe" data-target="target-a">Axe</button>
+        <button class="model-btn active" data-model="bag" data-target="target-b">Bag</button>
+        <button class="model-btn" data-model="ball" data-target="target-b">Ball</button>
+        <button class="model-btn" data-model="banana" data-target="target-b">Banana</button>
     </div>
-  </div>
-  <!-- similarly for b, e, f, g -->
-
-  <div id="scanner-container" style="display: none;">
-    <div class="target-box">
-      <div class="corner tl"></div><div class="corner tr"></div>
-      <div class="corner bl"></div><div class="corner br"></div>
+</div>
+    <!-- Model Selector UI for Letter E - ADD THIS ENTIRE DIV -->
+<div id="model-selector-e" class="model-selector-ui" style="display: none;">
+    <div id="anim-controls-e" class="anim-controls" style="display: none;"></div>
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="emerald" data-target="target-e">Emerald</button>
+        <button class="model-btn" data-model="elephant" data-target="target-e">Elephant</button>
+        <button class="model-btn" data-model="egg" data-target="target-e">Egg</button>
     </div>
-    <div class="status-label">ALIGN TARGET WITHIN CORNERS</div>
-  </div>
+</div>
+        <!-- Model Selector UI for Letter F -->
+<div id="model-selector-f" class="model-selector-ui" style="display: none;">
+    <div id="anim-controls-f" class="anim-controls" style="display: none;"></div>
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="flower" data-target="target-f">Flower</button>
+        <button class="model-btn" data-model="funnel" data-target="target-f">Funnel</button>
+        <button class="model-btn" data-model="fan" data-target="target-f">Fan</button>
+    </div>
+</div>
+    
+<div id="model-selector-g" class="model-selector-ui" style="display: none;">
+    <div id="anim-controls-g" class="anim-controls" style="display: none;"></div>
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="gift" data-target="target-g">Gift</button>
+        <button class="model-btn" data-model="goat" data-target="target-g">Goat</button>
+        <button class="model-btn" data-model="grape" data-target="target-g">Grape</button>
+    </div>
+</div>
 
-  <!-- Tutorial modal (unchanged) -->
-  <div id="tutorial-modal" class="tutorial-overlay">...</div>
+    <div id="scanner-container" style="display: none;">
+        <div class="target-box">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
+        </div>
+        <div class="status-label">ALIGN TARGET WITHIN CORNERS</div>
+    </div>
 
-  <!-- ========== A-FRAME SCENE ========== -->
-  <a-scene
-    id="sceneEl"
-    xrweb="disableWorldTracking: true"
-    xrextras-loading
-    xrextras-runtime-error
-    renderer="colorManagement: true; antialias: true;"
-  >
+    <div id="tutorial-modal" class="tutorial-overlay">
+        <div class="tutorial-glass-card">
+            <button class="close-x" id="close-tutorial-btn">&times;</button>
+            <div class="tutorial-page active" id="page-1">
+                <h2 class="tutorial-title">Welcome</h2>
+                <div class="tutorial-art"><img src="assets/tutorial-welcome.png" class="tutorial-img" alt="Welcome Image"></div>
+                <p class="tutorial-text">How to start your ar experience?</p>
+            </div>
+            <div class="tutorial-page" id="page-2">
+                <h2 class="tutorial-title">Scan the QR</h2>
+                <div class="tutorial-art"><img src="assets/qr-illustration.png" class="tutorial-img" alt="QR Code Illustration"></div>
+                <p class="tutorial-text">Scan the QR code to start your fun <br> learning adventure!</p>
+            </div>
+            <div class="tutorial-page" id="page-3">
+                <h2 class="tutorial-title">Start Experiencing</h2>
+                <div class="tutorial-art"><img src="assets/scan-guide.png" class="tutorial-img" alt="Scanning the Book"></div>
+                <p class="tutorial-text">Scan the image to experience it in AR</p>
+            </div>
+        </div>
+        <div class="tutorial-nav">
+            <button class="tutorial-btn" id="nav-btn-next" onclick="handleNext()">Next</button>
+        </div>
+    </div>
+
+   <a-scene
+  id="sceneEl"
+  xrweb="disableWorldTracking: true"
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement: true; antialias: true;">
+       
     <a-assets>
-      <!-- List all your GLB files here with correct paths -->
-      <a-asset-item id="apple" src="assets/apple.glb"></a-asset-item>
-      <a-asset-item id="aeroplane" src="assets/aeroplane.glb"></a-asset-item>
-      <a-asset-item id="axe" src="assets/axe.glb"></a-asset-item>
-      <a-asset-item id="bag" src="assets/bag.glb"></a-asset-item>
-      <a-asset-item id="ball" src="assets/ball.glb"></a-asset-item>
-      <a-asset-item id="banana" src="assets/banana.glb"></a-asset-item>
-      <a-asset-item id="emerald" src="assets/emerald.glb"></a-asset-item>
-      <a-asset-item id="elephant" src="assets/elephant.glb"></a-asset-item>
-      <a-asset-item id="egg" src="assets/egg.glb"></a-asset-item>
-      <a-asset-item id="flower" src="assets/flower.glb"></a-asset-item>
-      <a-asset-item id="funnel" src="assets/funnel.glb"></a-asset-item>
-      <a-asset-item id="fan" src="assets/fan.glb"></a-asset-item>
-      <a-asset-item id="gift" src="assets/gift.glb"></a-asset-item>
-      <a-asset-item id="goat" src="assets/goat.glb"></a-asset-item>
-      <a-asset-item id="grape" src="assets/grape.glb"></a-asset-item>
+        <a-asset-item id="aeroplane" src="assets/aeroplane.glb"></a-asset-item>
+        <a-asset-item id="apple" src="assets/apple.glb"></a-asset-item>
+        <a-asset-item id="axe" src="assets/axe.glb"></a-asset-item>
+        <a-asset-item id="bag" src="assets/bag.glb"></a-asset-item>
+        <a-asset-item id="banana" src="assets/banana.glb"></a-asset-item>
+        <a-asset-item id="ball" src="assets/ball.glb"></a-asset-item>
+        <a-asset-item id="emerald" src="assets/emerald.glb"></a-asset-item>
+        <a-asset-item id="elephant" src="assets/elephant.glb"></a-asset-item>
+        <a-asset-item id="egg" src="assets/egg.glb"></a-asset-item>
+        <a-asset-item id="flower" src="assets/flower.glb"></a-asset-item>
+        <a-asset-item id="funnel" src="assets/funnel.glb"></a-asset-item>
+        <a-asset-item id="fan" src="assets/fan.glb"></a-asset-item>
+        <a-asset-item id="gift" src="assets/gift.glb"></a-asset-item>
+        <a-asset-item id="goat" src="assets/goat.glb"></a-asset-item>
+        <a-asset-item id="grape" src="assets/grape.glb"></a-asset-item>
     </a-assets>
 
     <a-camera></a-camera>
 
-    <a-box color="blue" position="0 1 -2" scale="1 1 1"></a-box>
+       <a-box
+  color="blue"
+  position="0 0 2"
+  scale="1 1 1">
+</a-box>
 
-    <!-- Image targets – each contains a model anchored to the target -->
     <xrextras-named-image-target name="target-a">
+    <a-entity id="target-a-anchor">
 
-  <a-entity id="target-a-anchor">
+        <a-box
+            id="target-a-display"
+            color="blue"
+            position="0 0 1"
+            scale="0.5 0.5 0.5">
+        </a-box>
 
-    <a-gltf-model
-      id="target-a-display"
-      src="#apple"
-      position="0 0 0"
-      scale="0.045 0.045 0.045"
-      animation-mixer
-      touch-rotate>
-    </a-gltf-model>
-
-  </a-entity>
-
+    </a-entity>
 </xrextras-named-image-target>
-
     <xrextras-named-image-target name="target-b">
-      <a-entity id="target-b-anchor">
-        <a-gltf-model id="target-b-display" src="#bag" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
-      </a-entity>
+        <a-entity id="target-b-anchor">
+            <a-gltf-model id="target-b-display" src="#bag" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
+        </a-entity>
     </xrextras-named-image-target>
 
     <xrextras-named-image-target name="target-e">
-      <a-entity id="target-e-anchor">
-        <a-gltf-model id="target-e-display" src="#emerald" position="0 0 0" scale="0.3 0.3 0.3" animation-mixer touch-rotate></a-gltf-model>
-      </a-entity>
+        <a-entity id="target-e-anchor">
+            <a-gltf-model id="target-e-display" src="#emerald" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
+        </a-entity>
     </xrextras-named-image-target>
 
     <xrextras-named-image-target name="target-f">
-      <a-entity id="target-f-anchor">
-        <a-gltf-model id="target-f-display" src="#flower" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
-      </a-entity>
+        <a-entity id="target-f-anchor">
+            <a-gltf-model id="target-f-display" src="#flower" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
+        </a-entity>
     </xrextras-named-image-target>
 
     <xrextras-named-image-target name="target-g">
-      <a-entity id="target-g-anchor">
-        <a-gltf-model id="target-g-display" src="#gift" position="0 0 0" scale="4 4 4" animation-mixer touch-rotate></a-gltf-model>
-      </a-entity>
+        <a-entity id="target-g-anchor">
+            <a-gltf-model id="target-g-display" src="#gift" position="0 0 0" scale="4 4 4" animation-mixer touch-rotate></a-gltf-model>
+        </a-entity>
     </xrextras-named-image-target>
-  </a-scene>
+</a-scene>
 
-  <video autoplay muted loop playsinline id="bg-video" oncontextmenu="return false;">
-    <source src="assets/landing-bg.mp4" type="video/mp4">
-  </video>
+    <video autoplay muted loop playsinline id="bg-video" oncontextmenu="return false;" disablePictureInPicture>
+        <source src="assets/landing-bg.mp4" type="video/mp4">
+    </video>
 
-  <div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background-color: #000; overflow: hidden;">
-    <div style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
-      <model-viewer src="assets/ringanimation.glb" autoplay camera-orbit="-90deg 90deg auto" style="width: 100px; height: 100px; background: transparent;"></model-viewer>
+    <div id="debug" style="position:fixed; top:70px; left:10px; background:rgba(0,0,0,0.8); color:lime; padding:10px; z-index:99999; font-size:11px; max-width:90%; overflow:auto; max-height:200px;"></div>
+
+    <div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background-color: #000; overflow: hidden;">
+        <div style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+            <model-viewer src="assets/ringanimation.glb" autoplay camera-orbit="-90deg 90deg auto" style="width: 100px; height: 100px; background: transparent;"></model-viewer>
+        </div>
     </div>
-  </div>
+
+    <script src="js/main.js"></script>
+    <script>
+  window.addEventListener('xrloaded', () => {
+    console.log("8th Wall Engine Loaded Successfully!");
+    alert("Engine Loaded!");
+  });
+  
+  window.addEventListener('xrerror', (event) => {
+    console.error("8th Wall Error:", event.detail);
+    alert("8th Wall Error: " + event.detail.type);
+  });
+</script>
+    
+    <div id="error-log" style="position:fixed; bottom:0; left:0; background:black; color:red; z-index:99999; font-size:10px; width:100%; height:50px; overflow:scroll;"></div>
+<script>
+  window.onerror = function(msg, url, line) {
+    document.getElementById('error-log').innerHTML += line + ": " + msg + "<br>";
+  };
+</script>
 </body>
 </html>
