@@ -72,15 +72,9 @@ const LETTER_CONFIG = {
             'funnel': { file: 'funnel.glb', scale: '0.09 0.09 0.09', label: 'Funnel' },
             'fan': { file: 'fan.glb', scale: '0.1 0.1 0.1', label: 'Fan' }
         }
-    },
-    'g': {
-        targetIndex: 6,  // 7th target in targets.mind (assuming you compiled A-J together)
-        models: {
-            'gift': { file: 'gift.glb', scale: '4 4 4', label: 'Gift', default: true },
-            'goat': { file: 'goat.glb',  position: '-40 0 0', scale: '0.5 0.5 0.5', label: 'Goat' },
-            'grape': { file: 'grape.glb', scale: '0.1 0.1 0.1', label: 'Grape' }
-        }
     }
+    // ADD MORE LETTERS HERE (C, D, E... Z)
+    // Just copy the pattern above!
 };
 
 // ===== AUTO-GENERATE MODEL SCALES =====
@@ -131,57 +125,74 @@ function toggleTutorial(show) {
 
 // ===== MODEL SWITCHING FUNCTION =====
 window.switchModel = function(targetId, modelName) {
-
-    console.log("Switching model:", targetId, modelName);
-
-    // Find the anchor
-    const parentEntity = document.getElementById(`${targetId}-anchor`);
-
-    if (!parentEntity) {
-        console.error("Anchor not found:", targetId);
+    const modelDisplay = document.getElementById(`${targetId}-display`);
+    if (!modelDisplay) {
+        console.error('Model display not found:', targetId);
         return;
     }
-
-    // Remove existing model if present
-    const oldModel = document.getElementById(`${targetId}-display`);
-    if (oldModel) {
-        oldModel.remove();
-    }
-
-    // Create new model
-    const newModel = document.createElement('a-gltf-model');
-
-    newModel.setAttribute('id', `${targetId}-display`);
-    newModel.setAttribute('gltf-model', `#${modelName}`);
-
-    // FORCE visibility
-    newModel.setAttribute('position', '0 0 1');
-    newModel.setAttribute('rotation', '0 0 0');
-    newModel.setAttribute('scale', '2 2 2');
-
-    newModel.setAttribute('visible', 'true');
-    newModel.setAttribute('animation-mixer', '');
-    newModel.setAttribute('touch-rotate', '');
-
-    // Confirm load
-    newModel.addEventListener('model-loaded', () => {
-        console.log("MODEL LOADED:", modelName);
+    
+    const parentEntity = modelDisplay.parentElement;
+    
+    // Fade out old model
+    modelDisplay.setAttribute('animation', {
+        property: 'scale',
+        to: '0 0 0',
+        dur: 300,
+        easing: 'easeInQuad'
     });
-
-    newModel.addEventListener('model-error', () => {
-        console.error("MODEL FAILED:", modelName);
-    });
-
-    parentEntity.appendChild(newModel);
-
+    
+    setTimeout(() => {
+        modelDisplay.remove();
+        
+        const scale = MODEL_SCALES[modelName] || '2 2 2';
+        
+        const newModel = document.createElement('a-gltf-model');
+        newModel.setAttribute('id', `${targetId}-display`);
+        newModel.setAttribute('gltf-model', `#${modelName}`);
+        newModel.setAttribute('position', '0 0 -0.5'); // Start below target
+        newModel.setAttribute('scale', '0 0 0'); // Start invisible
+        newModel.setAttribute('animation-mixer', '');
+        newModel.setAttribute('touch-rotate', '');
+        
+        // Pop-up animation (comes out of target)
+        newModel.setAttribute('animation__popup', {
+            property: 'position',
+            from: '0 0 -0.5',
+            to: '0 0 0',
+            dur: 800,
+            easing: 'easeOutBack'
+        });
+        
+        // Scale-up animation (grows from small to full size)
+        newModel.setAttribute('animation__scale', {
+            property: 'scale',
+            from: '0 0 0',
+            to: scale,
+            dur: 800,
+            easing: 'easeOutBack'
+        });
+        
+        // Full 360° rotation animation (spins once)
+        newModel.setAttribute('animation__rotate', {
+            property: 'rotation',
+            from: '0 0 0',
+            to: '0 360 0',
+            dur: 800,
+            easing: 'easeOutQuad'
+        });
+        
+        parentEntity.appendChild(newModel);
+        console.log('✅ Switched to:', modelName);
+    }, 300);
 };
+
 // ===== MAIN INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
     const scannerLayer = document.getElementById('scanner-container');
     const iconLayer = document.getElementById('icon-layer');
-    const sceneEl = document.getElementById('sceneEl'); // Note: ensure your <a-scene> has id="sceneEl"
+    const sceneEl = document.getElementById('sceneEl');
     const loadingScreen = document.getElementById('loading-screen');
 
     // Hide loading screen
@@ -202,49 +213,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start AR button
     if (startBtn) {
         startBtn.addEventListener('click', () => {
+            uiLayer.style.display = 'none';
+            const bgVideo = document.getElementById('bg-video');
+            if (bgVideo) {
+                bgVideo.pause();
+                bgVideo.style.display = 'none';
+            }
+            scannerLayer.style.display = 'flex';
+            iconLayer.style.display = 'flex';
 
-    console.log("Start button clicked");
-
-    // Hide landing UI
-    if (uiLayer) {
-        uiLayer.style.display = 'none';
+            if (sceneEl.hasLoaded) startAR();
+            else sceneEl.addEventListener('loaded', startAR);
+        });
     }
 
-    // Hide background video completely
-   const bgVideo = document.getElementById('bg-video');
-
-if (bgVideo) {
-    bgVideo.pause();
-    bgVideo.style.display = 'none';
-    bgVideo.style.visibility = 'hidden';
-    bgVideo.style.zIndex = '-1';
-}
-
-    const loader = document.getElementById('loading-screen');
-
-if (loader) {
-    loader.style.display = 'none';
-}
-
-    // Show scanner
-    if (scannerLayer) {
-        scannerLayer.style.display = 'flex';
+    function startAR() {
+        const arSystem = sceneEl.systems['mindar-image-system'];
+        if (arSystem) {
+            arSystem.start();
+            window.dispatchEvent(new Event('resize'));
+        }
     }
-
-    // Show top buttons
-    if (iconLayer) {
-        iconLayer.style.display = 'flex';
-    }
-
-    // IMPORTANT — mark AR as active
-    document.body.classList.add('ar-active');
-
-});
-    } // <-- FIXED: Added this closing bracket to close the "if (startBtn)" block
 
     // ===== UNIVERSAL BUTTON CLICK HANDLER =====
     document.body.addEventListener('click', (e) => {
-        alert("Button clicked");
         if (e.target.classList.contains('model-btn')) {
             const modelName = e.target.getAttribute('data-model');
             const targetId = e.target.getAttribute('data-target');
@@ -259,46 +251,23 @@ if (loader) {
         }
     });
 
-    // ===== 8TH WALL TARGET S =====
-    // MOVED INSIDE: These must stay inside DOMContentLoaded to use scannerLayer
-    window.addEventListener('xrimagefound', (event) => {
-
-    console.log("TARGET DETECTED:", event.detail.name);
-
-    const targetName = event.detail.name;
-    const letter = targetName.split('-')[1];
-
-    if (scannerLayer) {
-        scannerLayer.style.display = 'none';
-    }
-
-    const selector = document.getElementById(`model-selector-${letter}`);
-
-    if (selector) {
-        selector.style.display = 'flex';
-        console.log("UI shown for:", letter);
-    } else {
-        console.log("No selector found for:", letter);
-    }
-
-});
-
-    window.addEventListener('xrimagelost', (event) => {
-        const targetName = event.detail.name;
-        const letter = targetName.split('-')[1];
-
-        console.log("Lost:", targetName);
+    // ===== AUTO-SETUP ALL TARGETS FROM CONFIG =====
+    Object.keys(LETTER_CONFIG).forEach(letter => {
+        const targetId = `target-${letter}`;
+        const targetEl = document.getElementById(targetId);
         
-        if (scannerLayer) scannerLayer.style.display = 'flex';
-        
-        const selector = document.getElementById(`model-selector-${letter}`);
-        if (selector) selector.style.display = 'none';
+        if (targetEl) {
+            targetEl.addEventListener("targetFound", () => {
+                scannerLayer.style.display = 'none';
+                const selector = document.getElementById(`model-selector-${letter}`);
+                if (selector) selector.style.display = 'flex';
+            });
+
+            targetEl.addEventListener("targetLost", () => {
+                scannerLayer.style.display = 'flex';
+                const selector = document.getElementById(`model-selector-${letter}`);
+                if (selector) selector.style.display = 'none';
+            });
+        }
     });
-});// <-- FIXED: This now properly closes the entire DOMContentLoaded block
-
-// Force the UI to hide if the engine takes too long
-setTimeout(() => {
-    const loader = document.getElementById('loading-screen');
-    if (loader) loader.style.display = 'none';
-    console.log("Forced loader hide");
-}, 5000); // 5 seconds safety net
+});
