@@ -84,8 +84,8 @@ const LETTER_CONFIG = {
   'i': {
     targetIndex: 8,   // Adjust if your compilation order differs (A=0, B=1, C=2, D=3, E=4, F=5, G=6, H=7, I=8)
     models: {
-        'insect': { file: 'insect.glb', scale: '0.09 0.09 0.09', label: 'Insect', default: true },
-        'ironbox': { file: 'ironbox.glb', scale: '0.03 0.03 0.03', label: 'Iron Box' },
+        'insect': { file: 'insect.glb', scale: '0.05 0.05 0.05', label: 'Insect', default: true },
+        'ironbox': { file: 'ironbox.glb', scale: '0.01 0.01 0.01', label: 'Iron Box' },
         'icecube': { file: 'icecube.glb', scale: '0.1 0.1 0.1', label: 'Ice Cube' }
     }
 }
