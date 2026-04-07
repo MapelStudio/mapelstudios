@@ -83,6 +83,14 @@
     </div>
 </div>
 
+<div id="model-selector-i" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="insect" data-target="target-i">Insect</button>
+        <button class="model-btn" data-model="ironbox" data-target="target-i">Iron Box</button>
+        <button class="model-btn" data-model="icecube" data-target="target-i">Ice Cube</button>
+    </div>
+</div>
+
     <div id="scanner-container" style="display: none;">
         <div class="target-box">
             <div class="corner tl"></div><div class="corner tr"></div>
@@ -133,6 +141,9 @@
         <a-asset-item id="hat" src="assets/hat.glb"></a-asset-item>
         <a-asset-item id="horse" src="assets/horse.glb"></a-asset-item>
         <a-asset-item id="hammer" src="assets/hammer.glb"></a-asset-item>
+        <a-asset-item id="insect" src="assets/insect.glb"></a-asset-item>
+        <a-asset-item id="ironbox" src="assets/ironbox.glb"></a-asset-item>
+        <a-asset-item id="icecube" src="assets/icecube.glb"></a-asset-item>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -164,6 +175,11 @@
        <a-entity id="target-h" class="alphabet-target" mindar-image-target="targetIndex: 7">
     <a-entity rotation="90 0 0">
         <a-gltf-model id="target-h-display" src="#hat" position="0 0 0" scale="0.01 0.01 0.01" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+       <a-entity id="target-i" class="alphabet-target" mindar-image-target="targetIndex: 8">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-i-display" src="#insect" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
     </a-entity>
 </a-entity>
 </a-scene>
