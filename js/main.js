@@ -76,9 +76,9 @@ const LETTER_CONFIG = {
     'h': {
     targetIndex: 7,   // ⚠️ Change this number to match the index of your H image in targets.mind
     models: {
-        'hat': { file: 'hat.glb', scale: '1 1 1', label: 'Hat', default: true },
+        'hat': { file: 'hat.glb', scale: '0.1 0.1 0.1', label: 'Hat', default: true },
         'horse': { file: 'horse.glb', scale: '0.5 0.5 0.5', label: 'Horse' },
-        'hammer': { file: 'hammer.glb', scale: '0.3 0.3 0.3', label: 'Hammer' }
+        'hammer': { file: 'hammer.glb', scale: '0.15 0.15 0.15', label: 'Hammer' }
     }
 }
     // ADD MORE LETTERS HERE (C, D, E... Z)
