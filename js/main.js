@@ -72,7 +72,15 @@ const LETTER_CONFIG = {
             'funnel': { file: 'funnel.glb', scale: '0.09 0.09 0.09', label: 'Funnel' },
             'fan': { file: 'fan.glb', scale: '0.1 0.1 0.1', label: 'Fan' }
         }
+    },
+    'h': {
+    targetIndex: 7,   // ⚠️ Change this number to match the index of your H image in targets.mind
+    models: {
+        'hat': { file: 'hat.glb', scale: '1 1 1', label: 'Hat', default: true },
+        'horse': { file: 'horse.glb', scale: '0.5 0.5 0.5', label: 'Horse' },
+        'hammer': { file: 'hammer.glb', scale: '0.3 0.3 0.3', label: 'Hammer' }
     }
+}
     // ADD MORE LETTERS HERE (C, D, E... Z)
     // Just copy the pattern above!
 };
