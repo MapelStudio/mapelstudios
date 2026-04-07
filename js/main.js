@@ -78,7 +78,7 @@ const LETTER_CONFIG = {
     models: {
         'hat': { file: 'hat.glb', scale: '0.05 0.05 0.05', label: 'Hat', default: true },
         'horse': { file: 'horse.glb', scale: '0.5 0.5 0.5', label: 'Horse' },
-        'hammer': { file: 'hammer.glb', scale: '0.15 0.15 0.15', position: '90 0 0' label: 'Hammer' }
+        'hammer': { file: 'hammer.glb', scale: '0.15 0.15 0.15', position: '90 0 0', label: 'Hammer' }
     }
 }
     // ADD MORE LETTERS HERE (C, D, E... Z)
