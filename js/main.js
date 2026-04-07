@@ -88,6 +88,14 @@ const LETTER_CONFIG = {
         'ironbox': { file: 'ironbox.glb', scale: '0.01 0.01 0.01', label: 'Iron Box' },
         'icecube': { file: 'icecube.glb', scale: '0.1 0.1 0.1', label: 'Ice Cube' }
     }
+},
+  'j': {
+    targetIndex: 9,   // Adjust to match the index of your J image in targets.mind (A=0, B=1, ..., I=8, J=9)
+    models: {
+        'jacket': { file: 'jacket.glb', scale: '0.6 0.6 0.6', label: 'Jacket', default: true },
+        'joker': { file: 'joker.glb', scale: '0.5 0.5 0.5', label: 'Joker' },
+        'jar': { file: 'jar.glb', scale: '0.4 0.4 0.4', label: 'Jar' }
+    }
 }
     // ADD MORE LETTERS HERE (C, D, E... Z)
     // Just copy the pattern above!
