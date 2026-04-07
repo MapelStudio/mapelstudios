@@ -92,9 +92,9 @@ const LETTER_CONFIG = {
   'j': {
     targetIndex: 9,   // Adjust to match the index of your J image in targets.mind (A=0, B=1, ..., I=8, J=9)
     models: {
-        'jacket': { file: 'jacket.glb', scale: '0.6 0.6 0.6', label: 'Jacket', default: true },
-        'joker': { file: 'joker.glb', scale: '0.5 0.5 0.5', label: 'Joker' },
-        'jar': { file: 'jar.glb', scale: '0.4 0.4 0.4', label: 'Jar' }
+        'jacket': { file: 'jacket.glb', scale: '0.1 0.1 0.1', label: 'Jacket', default: true },
+        'joker': { file: 'joker.glb', scale: '0.1 0.1 0.1', label: 'Joker' },
+        'jar': { file: 'jar.glb', scale: '0.15 0.15 0.15', label: 'Jar' }
     }
 }
     // ADD MORE LETTERS HERE (C, D, E... Z)
