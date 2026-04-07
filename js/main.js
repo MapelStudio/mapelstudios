@@ -80,6 +80,14 @@ const LETTER_CONFIG = {
         'horse': { file: 'horse.glb', scale: '0.5 0.5 0.5', label: 'Horse' },
         'hammer': { file: 'hammer.glb', scale: '0.15 0.15 0.15', position: '0 90 0', label: 'Hammer' }
     }
+},
+  'i': {
+    targetIndex: 8,   // Adjust if your compilation order differs (A=0, B=1, C=2, D=3, E=4, F=5, G=6, H=7, I=8)
+    models: {
+        'insect': { file: 'insect.glb', scale: '0.5 0.5 0.5', label: 'Insect', default: true },
+        'ironbox': { file: 'ironbox.glb', scale: '0.4 0.4 0.4', label: 'Iron Box' },
+        'icecube': { file: 'icecube.glb', scale: '0.3 0.3 0.3', label: 'Ice Cube' }
+    }
 }
     // ADD MORE LETTERS HERE (C, D, E... Z)
     // Just copy the pattern above!
