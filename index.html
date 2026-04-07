@@ -91,6 +91,14 @@
     </div>
 </div>
 
+<div id="model-selector-j" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="jacket" data-target="target-j">Jacket</button>
+        <button class="model-btn" data-model="joker" data-target="target-j">Joker</button>
+        <button class="model-btn" data-model="jar" data-target="target-j">Jar</button>
+    </div>
+</div>
+
     <div id="scanner-container" style="display: none;">
         <div class="target-box">
             <div class="corner tl"></div><div class="corner tr"></div>
@@ -144,6 +152,9 @@
         <a-asset-item id="insect" src="assets/insect.glb"></a-asset-item>
         <a-asset-item id="ironbox" src="assets/ironbox.glb"></a-asset-item>
         <a-asset-item id="icecube" src="assets/icecube.glb"></a-asset-item>
+        <a-asset-item id="jacket" src="assets/jacket.glb"></a-asset-item>
+        <a-asset-item id="joker" src="assets/joker.glb"></a-asset-item>
+        <a-asset-item id="jar" src="assets/jar.glb"></a-asset-item>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -177,9 +188,16 @@
         <a-gltf-model id="target-h-display" src="#hat" position="0 0 0" scale="0.01 0.01 0.01" animation-mixer touch-rotate></a-gltf-model>
     </a-entity>
 </a-entity>
+       
        <a-entity id="target-i" class="alphabet-target" mindar-image-target="targetIndex: 8">
     <a-entity rotation="90 0 0">
         <a-gltf-model id="target-i-display" src="#insect" position="0 0 0" scale="0.05 0.05 0.05" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+       
+<a-entity id="target-j" class="alphabet-target" mindar-image-target="targetIndex: 9">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-j-display" src="#jacket" position="0 0 0" scale="0.6 0.6 0.6" animation-mixer touch-rotate></a-gltf-model>
     </a-entity>
 </a-entity>
 </a-scene>
