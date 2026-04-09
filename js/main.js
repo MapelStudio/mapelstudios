@@ -128,6 +128,30 @@ const LETTER_CONFIG = {
         'notebook': { file: 'notebook.glb', scale: '0.4 0.4 0.4', label: 'Notebook' },
         'nose': { file: 'nose.glb', scale: '0.3 0.3 0.3', label: 'Nose' }
     }
+},
+  'o': {
+    targetIndex: 14,   // A=0, B=1, ..., N=13, O=14 (adjust if your compilation order differs)
+    models: {
+        'oven': { file: 'oven.glb', scale: '0.5 0.5 0.5', label: 'Oven', default: true },
+        'owl': { file: 'owl.glb', scale: '0.4 0.4 0.4', label: 'Owl' },
+        'onion': { file: 'onion.glb', scale: '0.4 0.4 0.4', label: 'Onion' }
+    }
+},
+  'p': {
+    targetIndex: 15,   // A=0, B=1, ..., O=14, P=15 (adjust if your compilation order differs)
+    models: {
+        'purse': { file: 'purse.glb', scale: '0.5 0.5 0.5', label: 'Purse', default: true },
+        'pumpkin': { file: 'pumpkin.glb', scale: '0.6 0.6 0.6', label: 'Pumpkin' },
+        'pizza': { file: 'pizza.glb', scale: '0.5 0.5 0.5', label: 'Pizza' }
+    }
+},
+  'q': {
+    targetIndex: 16,   // A=0, B=1, ..., P=15, Q=16 (adjust if your compilation order differs)
+    models: {
+        'queen': { file: 'queen.glb', scale: '0.5 0.5 0.5', label: 'Queen', default: true },
+        'quokka': { file: 'quokka.glb', scale: '0.4 0.4 0.4', label: 'Quokka' },
+        'quadbike': { file: 'quadbike.glb', scale: '0.3 0.3 0.3', label: 'Quad Bike' }
+    }
 }
     // ADD MORE LETTERS HERE (C, D, E... Z)
     // Just copy the pattern above!
