@@ -107,6 +107,30 @@
     </div>
 </div>
 
+<div id="model-selector-l" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="lipstick" data-target="target-l">Lipstick</button>
+        <button class="model-btn" data-model="lemon" data-target="target-l">Lemon</button>
+        <button class="model-btn" data-model="leaf" data-target="target-l">Leaf</button>
+    </div>
+</div>
+
+<div id="model-selector-m" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="mushroom" data-target="target-m">Mushroom</button>
+        <button class="model-btn" data-model="mouse" data-target="target-m">Mouse</button>
+        <button class="model-btn" data-model="mango" data-target="target-m">Mango</button>
+    </div>
+</div>
+
+<div id="model-selector-n" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="nest" data-target="target-n">Nest</button>
+        <button class="model-btn" data-model="notebook" data-target="target-n">Notebook</button>
+        <button class="model-btn" data-model="nose" data-target="target-n">Nose</button>
+    </div>
+</div>
+
     <div id="scanner-container" style="display: none;">
         <div class="target-box">
             <div class="corner tl"></div><div class="corner tr"></div>
@@ -166,6 +190,15 @@
         <a-asset-item id="kite" src="assets/kite.glb"></a-asset-item>
         <a-asset-item id="ketchup" src="assets/ketchup.glb"></a-asset-item>
         <a-asset-item id="kangaroo" src="assets/kangaroo.glb"></a-asset-item>
+        <a-asset-item id="lipstick" src="assets/lipstick.glb"></a-asset-item>
+        <a-asset-item id="lemon" src="assets/lemon.glb"></a-asset-item>
+        <a-asset-item id="leaf" src="assets/leaf.glb"></a-asset-item>
+        <a-asset-item id="mushroom" src="assets/mushroom.glb"></a-asset-item>
+        <a-asset-item id="mouse" src="assets/mouse.glb"></a-asset-item>
+        <a-asset-item id="mango" src="assets/mango.glb"></a-asset-item>
+        <a-asset-item id="nest" src="assets/nest.glb"></a-asset-item>
+        <a-asset-item id="notebook" src="assets/notebook.glb"></a-asset-item>
+        <a-asset-item id="nose" src="assets/nose.glb"></a-asset-item>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -215,6 +248,24 @@
 <a-entity id="target-k" class="alphabet-target" mindar-image-target="targetIndex: 10">
     <a-entity rotation="90 0 0">
         <a-gltf-model id="target-k-display" src="#kite" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-l" class="alphabet-target" mindar-image-target="targetIndex: 11">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-l-display" src="#lipstick" position="0 0 0" scale="0.4 0.4 0.4" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-m" class="alphabet-target" mindar-image-target="targetIndex: 12">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-m-display" src="#mushroom" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-n" class="alphabet-target" mindar-image-target="targetIndex: 13">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-n-display" src="#nest" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
     </a-entity>
 </a-entity>
 </a-scene>
