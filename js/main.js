@@ -96,6 +96,14 @@ const LETTER_CONFIG = {
         'joker': { file: 'joker.glb', scale: '0.1 0.1 0.1', label: 'Joker' },
         'jar': { file: 'jar.glb', scale: '0.15 0.15 0.15', label: 'Jar' }
     }
+},
+  'k': {
+    targetIndex: 10,   // A=0, B=1, ..., J=9, K=10 (adjust if your compilation order differs)
+    models: {
+        'kite': { file: 'kite.glb', scale: '0.5 0.5 0.5', label: 'Kite', default: true },
+        'ketchup': { file: 'ketchup.glb', scale: '0.4 0.4 0.4', label: 'Ketchup' },
+        'kangaroo': { file: 'kangaroo.glb', scale: '0.6 0.6 0.6', label: 'Kangaroo' }
+    }
 }
     // ADD MORE LETTERS HERE (C, D, E... Z)
     // Just copy the pattern above!
