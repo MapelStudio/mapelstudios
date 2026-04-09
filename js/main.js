@@ -152,6 +152,38 @@ const LETTER_CONFIG = {
         'quokka': { file: 'quokka.glb', scale: '0.4 0.4 0.4', label: 'Quokka' },
         'quadbike': { file: 'quadbike.glb', scale: '0.3 0.3 0.3', label: 'Quad Bike' }
     }
+},
+  'r': {
+    targetIndex: 17,   // A=0, B=1, ..., Q=16, R=17 (adjust if your compilation order differs)
+    models: {
+        'robot': { file: 'robot.glb', scale: '0.5 0.5 0.5', label: 'Robot', default: true },
+        'ring': { file: 'ring.glb', scale: '0.4 0.4 0.4', label: 'Ring' },
+        'rope': { file: 'rope.glb', scale: '0.6 0.6 0.6', label: 'Rope' }
+    }
+},
+  's': {
+    targetIndex: 18,   // A=0, B=1, ..., R=17, S=18 (adjust if your compilation order differs)
+    models: {
+        'scarf': { file: 'scarf.glb', scale: '0.5 0.5 0.5', label: 'Scarf', default: true },
+        'spoon': { file: 'spoon.glb', scale: '0.4 0.4 0.4', label: 'Spoon' },
+        'sun': { file: 'sun.glb', scale: '0.5 0.5 0.5', label: 'Sun' }
+    }
+},
+  't': {
+    targetIndex: 19,   // A=0, B=1, ..., S=18, T=19 (adjust if your compilation order differs)
+    models: {
+        'tortoise': { file: 'tortoise.glb', scale: '0.5 0.5 0.5', label: 'Tortoise', default: true },
+        'tiger': { file: 'tiger.glb', scale: '0.6 0.6 0.6', label: 'Tiger' },
+        'taxi': { file: 'taxi.glb', scale: '0.4 0.4 0.4', label: 'Taxi' }
+    }
+},
+  'u': {
+    targetIndex: 20,   // A=0, B=1, ..., T=19, U=20 (adjust if your compilation order differs)
+    models: {
+        'umbrella': { file: 'umbrella.glb', scale: '0.5 0.5 0.5', label: 'Umbrella', default: true },
+        'unicorn': { file: 'unicorn.glb', scale: '0.5 0.5 0.5', label: 'Unicorn' },
+        'ufo': { file: 'ufo.glb', scale: '0.4 0.4 0.4', label: 'UFO' }
+    }
 }
     // ADD MORE LETTERS HERE (C, D, E... Z)
     // Just copy the pattern above!
