@@ -155,6 +155,38 @@
     </div>
 </div>
 
+<div id="model-selector-r" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="robot" data-target="target-r">Robot</button>
+        <button class="model-btn" data-model="ring" data-target="target-r">Ring</button>
+        <button class="model-btn" data-model="rope" data-target="target-r">Rope</button>
+    </div>
+</div>
+
+<div id="model-selector-s" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="scarf" data-target="target-s">Scarf</button>
+        <button class="model-btn" data-model="spoon" data-target="target-s">Spoon</button>
+        <button class="model-btn" data-model="sun" data-target="target-s">Sun</button>
+    </div>
+</div>
+
+<div id="model-selector-t" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="tortoise" data-target="target-t">Tortoise</button>
+        <button class="model-btn" data-model="tiger" data-target="target-t">Tiger</button>
+        <button class="model-btn" data-model="taxi" data-target="target-t">Taxi</button>
+    </div>
+</div>
+
+<div id="model-selector-u" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="umbrella" data-target="target-u">Umbrella</button>
+        <button class="model-btn" data-model="unicorn" data-target="target-u">Unicorn</button>
+        <button class="model-btn" data-model="ufo" data-target="target-u">UFO</button>
+    </div>
+</div>
+
     <div id="scanner-container" style="display: none;">
         <div class="target-box">
             <div class="corner tl"></div><div class="corner tr"></div>
@@ -232,6 +264,18 @@
         <a-asset-item id="queen" src="assets/queen.glb"></a-asset-item>
         <a-asset-item id="quokka" src="assets/quokka.glb"></a-asset-item>
         <a-asset-item id="quadbike" src="assets/quadbike.glb"></a-asset-item>
+        <a-asset-item id="robot" src="assets/robot.glb"></a-asset-item>
+        <a-asset-item id="ring" src="assets/ring.glb"></a-asset-item>
+        <a-asset-item id="rope" src="assets/rope.glb"></a-asset-item>
+        <a-asset-item id="scarf" src="assets/scarf.glb"></a-asset-item>
+        <a-asset-item id="spoon" src="assets/spoon.glb"></a-asset-item>
+        <a-asset-item id="sun" src="assets/sun.glb"></a-asset-item>
+        <a-asset-item id="tortoise" src="assets/tortoise.glb"></a-asset-item>
+        <a-asset-item id="tiger" src="assets/tiger.glb"></a-asset-item>
+        <a-asset-item id="taxi" src="assets/taxi.glb"></a-asset-item>
+        <a-asset-item id="umbrella" src="assets/umbrella.glb"></a-asset-item>
+        <a-asset-item id="unicorn" src="assets/unicorn.glb"></a-asset-item>
+        <a-asset-item id="ufo" src="assets/ufo.glb"></a-asset-item>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -317,6 +361,30 @@
 <a-entity id="target-q" class="alphabet-target" mindar-image-target="targetIndex: 16">
     <a-entity rotation="90 0 0">
         <a-gltf-model id="target-q-display" src="#queen" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-r" class="alphabet-target" mindar-image-target="targetIndex: 17">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-r-display" src="#robot" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-s" class="alphabet-target" mindar-image-target="targetIndex: 18">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-s-display" src="#scarf" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-t" class="alphabet-target" mindar-image-target="targetIndex: 19">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-t-display" src="#tortoise" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-u" class="alphabet-target" mindar-image-target="targetIndex: 20">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-u-display" src="#umbrella" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
     </a-entity>
 </a-entity>
 </a-scene>
