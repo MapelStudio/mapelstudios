@@ -104,6 +104,30 @@ const LETTER_CONFIG = {
         'ketchup': { file: 'ketchup.glb', scale: '0.4 0.4 0.4', label: 'Ketchup' },
         'kangaroo': { file: 'kangaroo.glb', scale: '0.6 0.6 0.6', label: 'Kangaroo' }
     }
+},
+  'l': {
+    targetIndex: 11,   // A=0, B=1, ..., K=10, L=11 (adjust if your compilation order differs)
+    models: {
+        'lipstick': { file: 'lipstick.glb', scale: '0.4 0.4 0.4', label: 'Lipstick', default: true },
+        'lemon': { file: 'lemon.glb', scale: '0.5 0.5 0.5', label: 'Lemon' },
+        'leaf': { file: 'leaf.glb', scale: '0.6 0.6 0.6', label: 'Leaf' }
+    }
+},
+  'm': {
+    targetIndex: 12,   // A=0, B=1, ..., L=11, M=12 (adjust if your compilation order differs)
+    models: {
+        'mushroom': { file: 'mushroom.glb', scale: '0.5 0.5 0.5', label: 'Mushroom', default: true },
+        'mouse': { file: 'mouse.glb', scale: '0.4 0.4 0.4', label: 'Mouse' },
+        'mango': { file: 'mango.glb', scale: '0.6 0.6 0.6', label: 'Mango' }
+    }
+},
+  'n': {
+    targetIndex: 13,   // A=0, B=1, ..., M=12, N=13 (adjust if your compilation order differs)
+    models: {
+        'nest': { file: 'nest.glb', scale: '0.5 0.5 0.5', label: 'Nest', default: true },
+        'notebook': { file: 'notebook.glb', scale: '0.4 0.4 0.4', label: 'Notebook' },
+        'nose': { file: 'nose.glb', scale: '0.3 0.3 0.3', label: 'Nose' }
+    }
 }
     // ADD MORE LETTERS HERE (C, D, E... Z)
     // Just copy the pattern above!
