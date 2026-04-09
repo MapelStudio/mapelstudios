@@ -131,6 +131,30 @@
     </div>
 </div>
 
+<div id="model-selector-o" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="oven" data-target="target-o">Oven</button>
+        <button class="model-btn" data-model="owl" data-target="target-o">Owl</button>
+        <button class="model-btn" data-model="onion" data-target="target-o">Onion</button>
+    </div>
+</div>
+
+<div id="model-selector-p" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="purse" data-target="target-p">Purse</button>
+        <button class="model-btn" data-model="pumpkin" data-target="target-p">Pumpkin</button>
+        <button class="model-btn" data-model="pizza" data-target="target-p">Pizza</button>
+    </div>
+</div>
+
+<div id="model-selector-q" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="queen" data-target="target-q">Queen</button>
+        <button class="model-btn" data-model="quokka" data-target="target-q">Quokka</button>
+        <button class="model-btn" data-model="quadbike" data-target="target-q">Quad Bike</button>
+    </div>
+</div>
+
     <div id="scanner-container" style="display: none;">
         <div class="target-box">
             <div class="corner tl"></div><div class="corner tr"></div>
@@ -199,6 +223,15 @@
         <a-asset-item id="nest" src="assets/nest.glb"></a-asset-item>
         <a-asset-item id="notebook" src="assets/notebook.glb"></a-asset-item>
         <a-asset-item id="nose" src="assets/nose.glb"></a-asset-item>
+        <a-asset-item id="oven" src="assets/oven.glb"></a-asset-item>
+        <a-asset-item id="owl" src="assets/owl.glb"></a-asset-item>
+        <a-asset-item id="onion" src="assets/onion.glb"></a-asset-item>
+        <a-asset-item id="purse" src="assets/purse.glb"></a-asset-item>
+        <a-asset-item id="pumpkin" src="assets/pumpkin.glb"></a-asset-item>
+        <a-asset-item id="pizza" src="assets/pizza.glb"></a-asset-item>
+        <a-asset-item id="queen" src="assets/queen.glb"></a-asset-item>
+        <a-asset-item id="quokka" src="assets/quokka.glb"></a-asset-item>
+        <a-asset-item id="quadbike" src="assets/quadbike.glb"></a-asset-item>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -266,6 +299,24 @@
 <a-entity id="target-n" class="alphabet-target" mindar-image-target="targetIndex: 13">
     <a-entity rotation="90 0 0">
         <a-gltf-model id="target-n-display" src="#nest" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-o" class="alphabet-target" mindar-image-target="targetIndex: 14">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-o-display" src="#oven" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-p" class="alphabet-target" mindar-image-target="targetIndex: 15">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-p-display" src="#purse" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-q" class="alphabet-target" mindar-image-target="targetIndex: 16">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-q-display" src="#queen" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
     </a-entity>
 </a-entity>
 </a-scene>
