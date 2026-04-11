@@ -187,6 +187,46 @@
     </div>
 </div>
 
+<div id="model-selector-v" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="van" data-target="target-v">Van</button>
+        <button class="model-btn" data-model="viking" data-target="target-v">Viking</button>
+        <button class="model-btn" data-model="vulture" data-target="target-v">Vulture</button>
+    </div>
+</div>
+
+<div id="model-selector-w" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="watch" data-target="target-w">Watch</button>
+        <button class="model-btn" data-model="whale" data-target="target-w">Whale</button>
+        <button class="model-btn" data-model="walrus" data-target="target-w">Walrus</button>
+    </div>
+</div>
+
+<div id="model-selector-x" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="xylophone" data-target="target-x">Xylophone</button>
+        <button class="model-btn" data-model="xmas-tree" data-target="target-x">X-mas Tree</button>
+        <button class="model-btn" data-model="xebec" data-target="target-x">Xebec</button>
+    </div>
+</div>
+
+<div id="model-selector-y" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="yoyo" data-target="target-y">Yoyo</button>
+        <button class="model-btn" data-model="yacht" data-target="target-y">Yacht</button>
+        <button class="model-btn" data-model="yawn" data-target="target-y">Yawn</button>
+    </div>
+</div>
+
+<div id="model-selector-z" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="zebra" data-target="target-z">Zebra</button>
+        <button class="model-btn" data-model="zipper" data-target="target-z">Zipper</button>
+        <button class="model-btn" data-model="zeppelin" data-target="target-z">Zeppelin</button>
+    </div>
+</div>
+
     <div id="scanner-container" style="display: none;">
         <div class="target-box">
             <div class="corner tl"></div><div class="corner tr"></div>
@@ -276,6 +316,21 @@
         <a-asset-item id="umbrella" src="assets/umbrella.glb"></a-asset-item>
         <a-asset-item id="unicorn" src="assets/unicorn.glb"></a-asset-item>
         <a-asset-item id="ufo" src="assets/ufo.glb"></a-asset-item>
+        <a-asset-item id="van" src="assets/van.glb"></a-asset-item>
+        <a-asset-item id="viking" src="assets/viking.glb"></a-asset-item>
+        <a-asset-item id="vulture" src="assets/vulture.glb"></a-asset-item>
+        <a-asset-item id="watch" src="assets/watch.glb"></a-asset-item>
+        <a-asset-item id="whale" src="assets/whale.glb"></a-asset-item>
+        <a-asset-item id="walrus" src="assets/walrus.glb"></a-asset-item>
+        <a-asset-item id="xylophone" src="assets/xylophone.glb"></a-asset-item>
+        <a-asset-item id="xmas-tree" src="assets/xmas-tree.glb"></a-asset-item>
+        <a-asset-item id="xebec" src="assets/xebec.glb"></a-asset-item>
+        <a-asset-item id="yoyo" src="assets/yoyo.glb"></a-asset-item>
+        <a-asset-item id="yacht" src="assets/yacht.glb"></a-asset-item>
+        <a-asset-item id="yawn" src="assets/yawn.glb"></a-asset-item>
+        <a-asset-item id="zebra" src="assets/zebra.glb"></a-asset-item>
+        <a-asset-item id="zipper" src="assets/zipper.glb"></a-asset-item>
+        <a-asset-item id="zeppelin" src="assets/zeppelin.glb"></a-asset-item>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -385,6 +440,36 @@
 <a-entity id="target-u" class="alphabet-target" mindar-image-target="targetIndex: 20">
     <a-entity rotation="90 0 0">
         <a-gltf-model id="target-u-display" src="#umbrella" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-v" class="alphabet-target" mindar-image-target="targetIndex: 21">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-v-display" src="#van" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-w" class="alphabet-target" mindar-image-target="targetIndex: 22">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-w-display" src="#watch" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-x" class="alphabet-target" mindar-image-target="targetIndex: 23">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-x-display" src="#xylophone" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-y" class="alphabet-target" mindar-image-target="targetIndex: 24">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-y-display" src="#yoyo" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+<a-entity id="target-z" class="alphabet-target" mindar-image-target="targetIndex: 25">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-z-display" src="#zebra" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
     </a-entity>
 </a-entity>
 </a-scene>
