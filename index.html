@@ -56,6 +56,22 @@
         <button class="model-btn" data-model="banana" data-target="target-b">Banana</button>
     </div>
 </div>
+
+<div id="model-selector-c" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="can" data-target="target-c">Can</button>
+        <button class="model-btn" data-model="cup" data-target="target-c">Cup</button>
+        <button class="model-btn" data-model="cat" data-target="target-c">Cat</button>
+    </div>
+</div>
+
+<div id="model-selector-d" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="dino" data-target="target-d">Dino</button>
+        <button class="model-btn" data-model="drum" data-target="target-d">Drum</button>
+        <button class="model-btn" data-model="dolphin" data-target="target-d">Dolphin</button>
+    </div>
+</div>
     <!-- Model Selector UI for Letter E - ADD THIS ENTIRE DIV -->
 <div id="model-selector-e" class="model-selector-ui" style="display: none;">
     <div id="anim-controls-e" class="anim-controls" style="display: none;"></div>
@@ -72,6 +88,14 @@
         <button class="model-btn active" data-model="flower" data-target="target-f">Flower</button>
         <button class="model-btn" data-model="funnel" data-target="target-f">Funnel</button>
         <button class="model-btn" data-model="fan" data-target="target-f">Fan</button>
+    </div>
+</div>
+
+<div id="model-selector-g" class="model-selector-ui" style="display: none;">
+    <div class="model-buttons">
+        <button class="model-btn active" data-model="gift" data-target="target-g">Gift</button>
+        <button class="model-btn" data-model="goat" data-target="target-g">Goat</button>
+        <button class="model-btn" data-model="grape" data-target="target-g">Grape</button>
     </div>
 </div>
 
@@ -268,12 +292,21 @@
         <a-asset-item id="bag" src="assets/bag.glb"></a-asset-item>
         <a-asset-item id="banana" src="assets/banana.glb"></a-asset-item>
         <a-asset-item id="ball" src="assets/ball.glb"></a-asset-item>
+        <a-asset-item id="can" src="assets/can.glb"></a-asset-item>
+        <a-asset-item id="cup" src="assets/cup.glb"></a-asset-item>
+        <a-asset-item id="cat" src="assets/cat.glb"></a-asset-item>
+        <a-asset-item id="dino" src="assets/dino.glb"></a-asset-item>
+        <a-asset-item id="drum" src="assets/drum.glb"></a-asset-item>
+        <a-asset-item id="dolphin" src="assets/dolphin.glb"></a-asset-item>
         <a-asset-item id="emerald" src="assets/emerald.glb"></a-asset-item>
         <a-asset-item id="elephant" src="assets/elephant.glb"></a-asset-item>
         <a-asset-item id="egg" src="assets/egg.glb"></a-asset-item>
         <a-asset-item id="flower" src="assets/flower.glb"></a-asset-item>
         <a-asset-item id="funnel" src="assets/funnel.glb"></a-asset-item>
         <a-asset-item id="fan" src="assets/fan.glb"></a-asset-item>
+        <a-asset-item id="gift" src="assets/gift.glb"></a-asset-item>
+        <a-asset-item id="goat" src="assets/goat.glb"></a-asset-item>
+        <a-asset-item id="grape" src="assets/grape.glb"></a-asset-item>
         <a-asset-item id="hat" src="assets/hat.glb"></a-asset-item>
         <a-asset-item id="horse" src="assets/horse.glb"></a-asset-item>
         <a-asset-item id="hammer" src="assets/hammer.glb"></a-asset-item>
@@ -346,6 +379,18 @@
             <a-gltf-model id="target-b-display" src="#bag" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
         </a-entity>
     </a-entity>
+
+    <a-entity id="target-c" class="alphabet-target" mindar-image-target="targetIndex: 2">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-c-display" src="#can" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+    <a-entity id="target-d" class="alphabet-target" mindar-image-target="targetIndex: 3">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-d-display" src="#dino" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
     
     <a-entity id="target-e" class="alphabet-target" mindar-image-target="targetIndex: 4">
         <a-entity rotation="90 0 0">
@@ -356,6 +401,12 @@
        <a-entity id="target-f" class="alphabet-target" mindar-image-target="targetIndex: 5">
         <a-entity rotation="90 0 0">
             <a-gltf-model id="target-f-display" src="#flower" position="0 0 0" scale="1 1 1" animation-mixer touch-rotate></a-gltf-model>
+    </a-entity>
+</a-entity>
+
+    <a-entity id="target-g" class="alphabet-target" mindar-image-target="targetIndex: 6">
+    <a-entity rotation="90 0 0">
+        <a-gltf-model id="target-g-display" src="#gift" position="0 0 0" scale="0.5 0.5 0.5" animation-mixer touch-rotate></a-gltf-model>
     </a-entity>
 </a-entity>
 
