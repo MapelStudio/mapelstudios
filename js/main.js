@@ -57,6 +57,22 @@ const LETTER_CONFIG = {
             'banana': { file: 'banana.glb', scale: '0.02 0.02 0.02', label: 'Banana' }
         }
     },
+  'c': {
+    targetIndex: 2,   // A=0, B=1, C=2 (adjust if your compilation order differs)
+    models: {
+        'can': { file: 'can.glb', scale: '0.5 0.5 0.5', label: 'Can', default: true },
+        'cup': { file: 'cup.glb', scale: '0.4 0.4 0.4', label: 'Cup' },
+        'cat': { file: 'cat.glb', scale: '0.5 0.5 0.5', label: 'Cat' }
+    }
+},
+  'd': {
+    targetIndex: 3,   // A=0, B=1, C=2, D=3 (adjust if your compilation order differs)
+    models: {
+        'dino': { file: 'dino.glb', scale: '0.5 0.5 0.5', label: 'Dino', default: true },
+        'drum': { file: 'drum.glb', scale: '0.5 0.5 0.5', label: 'Drum' },
+        'dolphin': { file: 'dolphin.glb', scale: '0.5 0.5 0.5', label: 'Dolphin' }
+    }
+},
     'e': {
         targetIndex: 4,  // 5th target in targets.mind (0=A, 1=B, 2=C, 3=D, 4=E)
         models: {
@@ -73,6 +89,14 @@ const LETTER_CONFIG = {
             'fan': { file: 'fan.glb', scale: '0.1 0.1 0.1', label: 'Fan' }
         }
     },
+  'g': {
+    targetIndex: 6,   // A=0, B=1, C=2, D=3, E=4, F=5, G=6 (adjust if your compilation order differs)
+    models: {
+        'gift': { file: 'gift.glb', scale: '0.5 0.5 0.5', label: 'Gift', default: true },
+        'goat': { file: 'goat.glb', scale: '0.5 0.5 0.5', label: 'Goat' },
+        'grape': { file: 'grape.glb', scale: '0.4 0.4 0.4', label: 'Grape' }
+    }
+},
     'h': {
     targetIndex: 7,   // ⚠️ Change this number to match the index of your H image in targets.mind
     models: {
