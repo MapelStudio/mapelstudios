@@ -22,10 +22,7 @@ AFRAME.registerComponent('touch-rotate', {
         const deltaX = touch.clientX - self.lastX;
         const deltaY = touch.clientY - self.lastY;
         
-        // Rotate around Y-axis (horizontal swipe)
         self.el.object3D.rotation.y += deltaX * 0.01;
-        
-        // Rotate around X-axis (vertical swipe)
         self.el.object3D.rotation.x += deltaY * 0.01;
         
         self.lastX = touch.clientX;
@@ -39,7 +36,6 @@ AFRAME.registerComponent('touch-rotate', {
 });
 
 // ===== LETTER CONFIGURATION =====
-// Add all 26 letters here - ONE place for everything!
 const LETTER_CONFIG = {
     'a': {
         targetIndex: 0,
@@ -57,24 +53,24 @@ const LETTER_CONFIG = {
             'banana': { file: 'banana.glb', scale: '0.02 0.02 0.02', label: 'Banana' }
         }
     },
-  'c': {
-    targetIndex: 2,   // A=0, B=1, C=2 (adjust if your compilation order differs)
-    models: {
-        'can': { file: 'can.glb', scale: '0.5 0.5 0.5', label: 'Can', default: true },
-        'cup': { file: 'cup.glb', scale: '0.4 0.4 0.4', label: 'Cup' },
-        'cat': { file: 'cat.glb', scale: '0.5 0.5 0.5', label: 'Cat' }
-    }
-},
-  'd': {
-    targetIndex: 3,   // A=0, B=1, C=2, D=3 (adjust if your compilation order differs)
-    models: {
-        'dino': { file: 'dino.glb', scale: '0.5 0.5 0.5', label: 'Dino', default: true },
-        'drum': { file: 'drum.glb', scale: '0.5 0.5 0.5', label: 'Drum' },
-        'dolphin': { file: 'dolphin.glb', scale: '0.5 0.5 0.5', label: 'Dolphin' }
-    }
-},
+    'c': {
+        targetIndex: 2,
+        models: {
+            'can': { file: 'can.glb', scale: '0.5 0.5 0.5', label: 'Can', default: true },
+            'cup': { file: 'cup.glb', scale: '0.4 0.4 0.4', label: 'Cup' },
+            'cat': { file: 'cat.glb', scale: '0.5 0.5 0.5', label: 'Cat' }
+        }
+    },
+    'd': {
+        targetIndex: 3,
+        models: {
+            'dino': { file: 'dino.glb', scale: '0.5 0.5 0.5', label: 'Dino', default: true },
+            'drum': { file: 'drum.glb', scale: '0.5 0.5 0.5', label: 'Drum' },
+            'dolphin': { file: 'dolphin.glb', scale: '0.5 0.5 0.5', label: 'Dolphin' }
+        }
+    },
     'e': {
-        targetIndex: 4,  // 5th target in targets.mind (0=A, 1=B, 2=C, 3=D, 4=E)
+        targetIndex: 4,
         models: {
             'emerald': { file: 'emerald.glb', scale: '0.3 0.3 0.3', label: 'Emerald', default: true },
             'elephant': { file: 'elephant.glb', scale: '0.1 0.1 0.1', label: 'Elephant' },
@@ -82,175 +78,173 @@ const LETTER_CONFIG = {
         }
     },
     'f': {
-        targetIndex: 5,  // 5th target in targets.mind (0=A, 1=B, 2=C, 3=D, 4=E)
+        targetIndex: 5,
         models: {
             'flower': { file: 'flower.glb', scale: '1 1 1', label: 'Flower', default: true },
             'funnel': { file: 'funnel.glb', scale: '0.09 0.09 0.09', label: 'Funnel' },
             'fan': { file: 'fan.glb', scale: '0.1 0.1 0.1', label: 'Fan' }
         }
     },
-  'g': {
-    targetIndex: 6,   // A=0, B=1, C=2, D=3, E=4, F=5, G=6 (adjust if your compilation order differs)
-    models: {
-        'gift': { file: 'gift.glb', scale: '0.5 0.5 0.5', label: 'Gift', default: true },
-        'goat': { file: 'goat.glb', scale: '0.5 0.5 0.5', label: 'Goat' },
-        'grape': { file: 'grape.glb', scale: '0.4 0.4 0.4', label: 'Grape' }
-    }
-},
+    'g': {
+        targetIndex: 6,
+        models: {
+            'gift': { file: 'gift.glb', scale: '0.5 0.5 0.5', label: 'Gift', default: true },
+            'goat': { file: 'goat.glb', scale: '0.5 0.5 0.5', label: 'Goat' },
+            'grape': { file: 'grape.glb', scale: '0.4 0.4 0.4', label: 'Grape' }
+        }
+    },
     'h': {
-    targetIndex: 7,   // ⚠️ Change this number to match the index of your H image in targets.mind
-    models: {
-        'hat': { file: 'hat.glb', scale: '0.01 0.01 0.01', label: 'Hat', default: true },
-        'horse': { file: 'horse.glb', scale: '0.5 0.5 0.5', label: 'Horse' },
-        'hammer': { file: 'hammer.glb', scale: '0.15 0.15 0.15', position: '0 90 0', label: 'Hammer' }
+        targetIndex: 7,
+        models: {
+            'hat': { file: 'hat.glb', scale: '0.01 0.01 0.01', label: 'Hat', default: true },
+            'horse': { file: 'horse.glb', scale: '0.5 0.5 0.5', label: 'Horse' },
+            'hammer': { file: 'hammer.glb', scale: '0.15 0.15 0.15', label: 'Hammer' }
+        }
+    },
+    'i': {
+        targetIndex: 8,
+        models: {
+            'insect': { file: 'insect.glb', scale: '0.05 0.05 0.05', label: 'Insect', default: true },
+            'ironbox': { file: 'ironbox.glb', scale: '0.01 0.01 0.01', label: 'Iron Box' },
+            'icecube': { file: 'icecube.glb', scale: '0.1 0.1 0.1', label: 'Ice Cube' }
+        }
+    },
+    'j': {
+        targetIndex: 9,
+        models: {
+            'jacket': { file: 'jacket.glb', scale: '0.009 0.009 0.009', label: 'Jacket', default: true },
+            'joker': { file: 'joker.glb', scale: '0.1 0.1 0.1', label: 'Joker' },
+            'jar': { file: 'jar.glb', scale: '0.15 0.15 0.15', label: 'Jar' }
+        }
+    },
+    'k': {
+        targetIndex: 10,
+        models: {
+            'kite': { file: 'kite.glb', scale: '0.5 0.5 0.5', label: 'Kite', default: true },
+            'ketchup': { file: 'ketchup.glb', scale: '0.4 0.4 0.4', label: 'Ketchup' },
+            'kangaroo': { file: 'kangaroo.glb', scale: '0.6 0.6 0.6', label: 'Kangaroo' }
+        }
+    },
+    'l': {
+        targetIndex: 11,
+        models: {
+            'lipstick': { file: 'lipstick.glb', scale: '0.4 0.4 0.4', label: 'Lipstick', default: true },
+            'lemon': { file: 'lemon.glb', scale: '0.5 0.5 0.5', label: 'Lemon' },
+            'leaf': { file: 'leaf.glb', scale: '0.6 0.6 0.6', label: 'Leaf' }
+        }
+    },
+    'm': {
+        targetIndex: 12,
+        models: {
+            'mushroom': { file: 'mushroom.glb', scale: '0.5 0.5 0.5', label: 'Mushroom', default: true },
+            'mouse': { file: 'mouse.glb', scale: '0.4 0.4 0.4', label: 'Mouse' },
+            'mango': { file: 'mango.glb', scale: '0.6 0.6 0.6', label: 'Mango' }
+        }
+    },
+    'n': {
+        targetIndex: 13,
+        models: {
+            'nest': { file: 'nest.glb', scale: '0.5 0.5 0.5', label: 'Nest', default: true },
+            'notebook': { file: 'notebook.glb', scale: '0.4 0.4 0.4', label: 'Notebook' },
+            'nose': { file: 'nose.glb', scale: '0.3 0.3 0.3', label: 'Nose' }
+        }
+    },
+    'o': {
+        targetIndex: 14,
+        models: {
+            'oven': { file: 'oven.glb', scale: '0.5 0.5 0.5', label: 'Oven', default: true },
+            'owl': { file: 'owl.glb', scale: '0.4 0.4 0.4', label: 'Owl' },
+            'onion': { file: 'onion.glb', scale: '0.4 0.4 0.4', label: 'Onion' }
+        }
+    },
+    'p': {
+        targetIndex: 15,
+        models: {
+            'purse': { file: 'purse.glb', scale: '0.5 0.5 0.5', label: 'Purse', default: true },
+            'pumpkin': { file: 'pumpkin.glb', scale: '0.6 0.6 0.6', label: 'Pumpkin' },
+            'pizza': { file: 'pizza.glb', scale: '0.5 0.5 0.5', label: 'Pizza' }
+        }
+    },
+    'q': {
+        targetIndex: 16,
+        models: {
+            'queen': { file: 'queen.glb', scale: '0.5 0.5 0.5', label: 'Queen', default: true },
+            'quokka': { file: 'quokka.glb', scale: '0.4 0.4 0.4', label: 'Quokka' },
+            'quadbike': { file: 'quadbike.glb', scale: '0.3 0.3 0.3', label: 'Quad Bike' }
+        }
+    },
+    'r': {
+        targetIndex: 17,
+        models: {
+            'robot': { file: 'robot.glb', scale: '0.5 0.5 0.5', label: 'Robot', default: true },
+            'ring': { file: 'ring.glb', scale: '0.4 0.4 0.4', label: 'Ring' },
+            'rope': { file: 'rope.glb', scale: '0.6 0.6 0.6', label: 'Rope' }
+        }
+    },
+    's': {
+        targetIndex: 18,
+        models: {
+            'scarf': { file: 'scarf.glb', scale: '0.5 0.5 0.5', label: 'Scarf', default: true },
+            'spoon': { file: 'spoon.glb', scale: '0.4 0.4 0.4', label: 'Spoon' },
+            'sun': { file: 'sun.glb', scale: '0.5 0.5 0.5', label: 'Sun' }
+        }
+    },
+    't': {
+        targetIndex: 19,
+        models: {
+            'tortoise': { file: 'tortoise.glb', scale: '0.5 0.5 0.5', label: 'Tortoise', default: true },
+            'tiger': { file: 'tiger.glb', scale: '0.6 0.6 0.6', label: 'Tiger' },
+            'taxi': { file: 'taxi.glb', scale: '0.4 0.4 0.4', label: 'Taxi' }
+        }
+    },
+    'u': {
+        targetIndex: 20,
+        models: {
+            'umbrella': { file: 'umbrella.glb', scale: '0.5 0.5 0.5', label: 'Umbrella', default: true },
+            'unicorn': { file: 'unicorn.glb', scale: '0.5 0.5 0.5', label: 'Unicorn' },
+            'ufo': { file: 'ufo.glb', scale: '0.4 0.4 0.4', label: 'UFO' }
+        }
+    },
+    'v': {
+        targetIndex: 21,
+        models: {
+            'van': { file: 'van.glb', scale: '0.5 0.5 0.5', label: 'Van', default: true },
+            'viking': { file: 'viking.glb', scale: '0.5 0.5 0.5', label: 'Viking' },
+            'vulture': { file: 'vulture.glb', scale: '0.5 0.5 0.5', label: 'Vulture' }
+        }
+    },
+    'w': {
+        targetIndex: 22,
+        models: {
+            'watch': { file: 'watch.glb', scale: '0.5 0.5 0.5', label: 'Watch', default: true },
+            'whale': { file: 'whale.glb', scale: '0.6 0.6 0.6', label: 'Whale' },
+            'walrus': { file: 'walrus.glb', scale: '0.5 0.5 0.5', label: 'Walrus' }
+        }
+    },
+    'x': {
+        targetIndex: 23,
+        models: {
+            'xylophone': { file: 'xylophone.glb', scale: '0.5 0.5 0.5', label: 'Xylophone', default: true },
+            'xmas-tree': { file: 'xmas-tree.glb', scale: '0.6 0.6 0.6', label: 'X-mas Tree' },
+            'xebec': { file: 'xebec.glb', scale: '0.4 0.4 0.4', label: 'Xebec' }
+        }
+    },
+    'y': {
+        targetIndex: 24,
+        models: {
+            'yoyo': { file: 'yoyo.glb', scale: '0.5 0.5 0.5', label: 'Yoyo', default: true },
+            'yacht': { file: 'yacht.glb', scale: '0.5 0.5 0.5', label: 'Yacht' },
+            'yawn': { file: 'yawn.glb', scale: '0.5 0.5 0.5', label: 'Yawn' }
+        }
+    },
+    'z': {
+        targetIndex: 25,
+        models: {
+            'zebra': { file: 'zebra.glb', scale: '0.5 0.5 0.5', label: 'Zebra', default: true },
+            'zipper': { file: 'zipper.glb', scale: '0.4 0.4 0.4', label: 'Zipper' },
+            'zeppelin': { file: 'zeppelin.glb', scale: '0.5 0.5 0.5', label: 'Zeppelin' }
+        }
     }
-},
-  'i': {
-    targetIndex: 8,   // Adjust if your compilation order differs (A=0, B=1, C=2, D=3, E=4, F=5, G=6, H=7, I=8)
-    models: {
-        'insect': { file: 'insect.glb', scale: '0.05 0.05 0.05', label: 'Insect', default: true },
-        'ironbox': { file: 'ironbox.glb', scale: '0.01 0.01 0.01', label: 'Iron Box' },
-        'icecube': { file: 'icecube.glb', scale: '0.1 0.1 0.1', label: 'Ice Cube' }
-    }
-},
-  'j': {
-    targetIndex: 9,   // Adjust to match the index of your J image in targets.mind (A=0, B=1, ..., I=8, J=9)
-    models: {
-        'jacket': { file: 'jacket.glb', scale: '0.009 0.009 0.009', label: 'Jacket', default: true },
-        'joker': { file: 'joker.glb', scale: '0.1 0.1 0.1', label: 'Joker' },
-        'jar': { file: 'jar.glb', scale: '0.15 0.15 0.15', label: 'Jar' }
-    }
-},
-  'k': {
-    targetIndex: 10,   // A=0, B=1, ..., J=9, K=10 (adjust if your compilation order differs)
-    models: {
-        'kite': { file: 'kite.glb', scale: '0.5 0.5 0.5', label: 'Kite', default: true },
-        'ketchup': { file: 'ketchup.glb', scale: '0.4 0.4 0.4', label: 'Ketchup' },
-        'kangaroo': { file: 'kangaroo.glb', scale: '0.6 0.6 0.6', label: 'Kangaroo' }
-    }
-},
-  'l': {
-    targetIndex: 11,   // A=0, B=1, ..., K=10, L=11 (adjust if your compilation order differs)
-    models: {
-        'lipstick': { file: 'lipstick.glb', scale: '0.4 0.4 0.4', label: 'Lipstick', default: true },
-        'lemon': { file: 'lemon.glb', scale: '0.5 0.5 0.5', label: 'Lemon' },
-        'leaf': { file: 'leaf.glb', scale: '0.6 0.6 0.6', label: 'Leaf' }
-    }
-},
-  'm': {
-    targetIndex: 12,   // A=0, B=1, ..., L=11, M=12 (adjust if your compilation order differs)
-    models: {
-        'mushroom': { file: 'mushroom.glb', scale: '0.5 0.5 0.5', label: 'Mushroom', default: true },
-        'mouse': { file: 'mouse.glb', scale: '0.4 0.4 0.4', label: 'Mouse' },
-        'mango': { file: 'mango.glb', scale: '0.6 0.6 0.6', label: 'Mango' }
-    }
-},
-  'n': {
-    targetIndex: 13,   // A=0, B=1, ..., M=12, N=13 (adjust if your compilation order differs)
-    models: {
-        'nest': { file: 'nest.glb', scale: '0.5 0.5 0.5', label: 'Nest', default: true },
-        'notebook': { file: 'notebook.glb', scale: '0.4 0.4 0.4', label: 'Notebook' },
-        'nose': { file: 'nose.glb', scale: '0.3 0.3 0.3', label: 'Nose' }
-    }
-},
-  'o': {
-    targetIndex: 14,   // A=0, B=1, ..., N=13, O=14 (adjust if your compilation order differs)
-    models: {
-        'oven': { file: 'oven.glb', scale: '0.5 0.5 0.5', label: 'Oven', default: true },
-        'owl': { file: 'owl.glb', scale: '0.4 0.4 0.4', label: 'Owl' },
-        'onion': { file: 'onion.glb', scale: '0.4 0.4 0.4', label: 'Onion' }
-    }
-},
-  'p': {
-    targetIndex: 15,   // A=0, B=1, ..., O=14, P=15 (adjust if your compilation order differs)
-    models: {
-        'purse': { file: 'purse.glb', scale: '0.5 0.5 0.5', label: 'Purse', default: true },
-        'pumpkin': { file: 'pumpkin.glb', scale: '0.6 0.6 0.6', label: 'Pumpkin' },
-        'pizza': { file: 'pizza.glb', scale: '0.5 0.5 0.5', label: 'Pizza' }
-    }
-},
-  'q': {
-    targetIndex: 16,   // A=0, B=1, ..., P=15, Q=16 (adjust if your compilation order differs)
-    models: {
-        'queen': { file: 'queen.glb', scale: '0.5 0.5 0.5', label: 'Queen', default: true },
-        'quokka': { file: 'quokka.glb', scale: '0.4 0.4 0.4', label: 'Quokka' },
-        'quadbike': { file: 'quadbike.glb', scale: '0.3 0.3 0.3', label: 'Quad Bike' }
-    }
-},
-  'r': {
-    targetIndex: 17,   // A=0, B=1, ..., Q=16, R=17 (adjust if your compilation order differs)
-    models: {
-        'robot': { file: 'robot.glb', scale: '0.5 0.5 0.5', label: 'Robot', default: true },
-        'ring': { file: 'ring.glb', scale: '0.4 0.4 0.4', label: 'Ring' },
-        'rope': { file: 'rope.glb', scale: '0.6 0.6 0.6', label: 'Rope' }
-    }
-},
-  's': {
-    targetIndex: 18,   // A=0, B=1, ..., R=17, S=18 (adjust if your compilation order differs)
-    models: {
-        'scarf': { file: 'scarf.glb', scale: '0.5 0.5 0.5', label: 'Scarf', default: true },
-        'spoon': { file: 'spoon.glb', scale: '0.4 0.4 0.4', label: 'Spoon' },
-        'sun': { file: 'sun.glb', scale: '0.5 0.5 0.5', label: 'Sun' }
-    }
-},
-  't': {
-    targetIndex: 19,   // A=0, B=1, ..., S=18, T=19 (adjust if your compilation order differs)
-    models: {
-        'tortoise': { file: 'tortoise.glb', scale: '0.5 0.5 0.5', label: 'Tortoise', default: true },
-        'tiger': { file: 'tiger.glb', scale: '0.6 0.6 0.6', label: 'Tiger' },
-        'taxi': { file: 'taxi.glb', scale: '0.4 0.4 0.4', label: 'Taxi' }
-    }
-},
-  'u': {
-    targetIndex: 20,   // A=0, B=1, ..., T=19, U=20 (adjust if your compilation order differs)
-    models: {
-        'umbrella': { file: 'umbrella.glb', scale: '0.5 0.5 0.5', label: 'Umbrella', default: true },
-        'unicorn': { file: 'unicorn.glb', scale: '0.5 0.5 0.5', label: 'Unicorn' },
-        'ufo': { file: 'ufo.glb', scale: '0.4 0.4 0.4', label: 'UFO' }
-    }
-},
-  'v': {
-    targetIndex: 21,   // A=0, B=1, ..., U=20, V=21 (adjust if your compilation order differs)
-    models: {
-        'van': { file: 'van.glb', scale: '0.5 0.5 0.5', label: 'Van', default: true },
-        'viking': { file: 'viking.glb', scale: '0.5 0.5 0.5', label: 'Viking' },
-        'vulture': { file: 'vulture.glb', scale: '0.5 0.5 0.5', label: 'Vulture' }
-    }
-},
-  'w': {
-    targetIndex: 22,   // A=0, B=1, ..., V=21, W=22 (adjust if your compilation order differs)
-    models: {
-        'watch': { file: 'watch.glb', scale: '0.5 0.5 0.5', label: 'Watch', default: true },
-        'whale': { file: 'whale.glb', scale: '0.6 0.6 0.6', label: 'Whale' },
-        'walrus': { file: 'walrus.glb', scale: '0.5 0.5 0.5', label: 'Walrus' }
-    }
-},
-  'x': {
-    targetIndex: 23,   // A=0, B=1, ..., W=22, X=23 (adjust if your compilation order differs)
-    models: {
-        'xylophone': { file: 'xylophone.glb', scale: '0.5 0.5 0.5', label: 'Xylophone', default: true },
-        'xmas-tree': { file: 'xmas-tree.glb', scale: '0.6 0.6 0.6', label: 'X-mas Tree' },
-        'xebec': { file: 'xebec.glb', scale: '0.4 0.4 0.4', label: 'Xebec' }
-    }
-},
-  'y': {
-    targetIndex: 24,   // A=0, B=1, ..., X=23, Y=24 (adjust if your compilation order differs)
-    models: {
-        'yoyo': { file: 'yoyo.glb', scale: '0.5 0.5 0.5', label: 'Yoyo', default: true },
-        'yacht': { file: 'yacht.glb', scale: '0.5 0.5 0.5', label: 'Yacht' },
-        'yawn': { file: 'yawn.glb', scale: '0.5 0.5 0.5', label: 'Yawn' }
-    }
-},
-  'z': {
-    targetIndex: 25,   // A=0, B=1, ..., Y=24, Z=25 (adjust if your compilation order differs)
-    models: {
-        'zebra': { file: 'zebra.glb', scale: '0.5 0.5 0.5', label: 'Zebra', default: true },
-        'zipper': { file: 'zipper.glb', scale: '0.4 0.4 0.4', label: 'Zipper' },
-        'zeppelin': { file: 'zeppelin.glb', scale: '0.5 0.5 0.5', label: 'Zeppelin' }
-    }
-}
-    // ADD MORE LETTERS HERE (C, D, E... Z)
-    // Just copy the pattern above!
 };
 
 // ===== AUTO-GENERATE MODEL SCALES =====
@@ -325,12 +319,11 @@ window.switchModel = function(targetId, modelName) {
         const newModel = document.createElement('a-gltf-model');
         newModel.setAttribute('id', `${targetId}-display`);
         newModel.setAttribute('gltf-model', `#${modelName}`);
-        newModel.setAttribute('position', '0 0 -0.5'); // Start below target
-        newModel.setAttribute('scale', '0 0 0'); // Start invisible
+        newModel.setAttribute('position', '0 0 -0.5');
+        newModel.setAttribute('scale', '0 0 0');
         newModel.setAttribute('animation-mixer', '');
         newModel.setAttribute('touch-rotate', '');
         
-        // Pop-up animation (comes out of target)
         newModel.setAttribute('animation__popup', {
             property: 'position',
             from: '0 0 -0.5',
@@ -339,7 +332,6 @@ window.switchModel = function(targetId, modelName) {
             easing: 'easeOutBack'
         });
         
-        // Scale-up animation (grows from small to full size)
         newModel.setAttribute('animation__scale', {
             property: 'scale',
             from: '0 0 0',
@@ -348,7 +340,6 @@ window.switchModel = function(targetId, modelName) {
             easing: 'easeOutBack'
         });
         
-        // Full 360° rotation animation (spins once)
         newModel.setAttribute('animation__rotate', {
             property: 'rotation',
             from: '0 0 0',
@@ -364,6 +355,8 @@ window.switchModel = function(targetId, modelName) {
 
 // ===== MAIN INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOMContentLoaded fired");
+    
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
     const scannerLayer = document.getElementById('scanner-container');
@@ -371,12 +364,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const sceneEl = document.getElementById('sceneEl');
     const loadingScreen = document.getElementById('loading-screen');
 
-    // Hide loading screen
+    // Force hide loading screen after 5 seconds regardless (fallback)
+    setTimeout(() => {
+        if (loadingScreen) {
+            loadingScreen.style.display = 'none';
+            console.log("Loading screen hidden by fallback timer");
+        }
+        if (uiLayer) uiLayer.classList.add('loaded');
+    }, 5000);
+
+    // Hide loading screen when window loads
     window.addEventListener('load', () => {
+        console.log("Window load event fired");
         setTimeout(() => {
             if (loadingScreen) loadingScreen.style.display = 'none';
             if (uiLayer) uiLayer.classList.add('loaded');
-        }, 3000);
+            console.log("Loading screen hidden after load");
+        }, 1000);
     });
 
     // Tutorial buttons
@@ -389,6 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start AR button
     if (startBtn) {
         startBtn.addEventListener('click', () => {
+            console.log("Start AR button clicked");
             uiLayer.style.display = 'none';
             const bgVideo = document.getElementById('bg-video');
             if (bgVideo) {
@@ -398,32 +403,33 @@ document.addEventListener('DOMContentLoaded', () => {
             scannerLayer.style.display = 'flex';
             iconLayer.style.display = 'flex';
 
-            if (sceneEl.hasLoaded) startAR();
-            else sceneEl.addEventListener('loaded', startAR);
+            // Start MindAR system
+            const arSystem = sceneEl ? sceneEl.systems['mindar-image-system'] : null;
+            if (arSystem) {
+                arSystem.start();
+                window.dispatchEvent(new Event('resize'));
+                console.log("MindAR system started");
+            } else {
+                console.error("MindAR system not found");
+            }
         });
-    }
-
-    function startAR() {
-        const arSystem = sceneEl.systems['mindar-image-system'];
-        if (arSystem) {
-            arSystem.start();
-            window.dispatchEvent(new Event('resize'));
-        }
+    } else {
+        console.error("Start button not found");
     }
 
     // ===== UNIVERSAL BUTTON CLICK HANDLER =====
     document.body.addEventListener('click', (e) => {
-        if (e.target.classList.contains('model-btn')) {
+        if (e.target.classList && e.target.classList.contains('model-btn')) {
             const modelName = e.target.getAttribute('data-model');
             const targetId = e.target.getAttribute('data-target');
-            
-            window.switchModel(targetId, modelName);
-            
-            // Update active button
-            document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
-                b.classList.remove('active');
-            });
-            e.target.classList.add('active');
+            if (modelName && targetId) {
+                window.switchModel(targetId, modelName);
+                // Update active button
+                document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
+                    b.classList.remove('active');
+                });
+                e.target.classList.add('active');
+            }
         }
     });
 
@@ -434,16 +440,22 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (targetEl) {
             targetEl.addEventListener("targetFound", () => {
-                scannerLayer.style.display = 'none';
+                console.log(`Target found: ${targetId}`);
+                if (scannerLayer) scannerLayer.style.display = 'none';
                 const selector = document.getElementById(`model-selector-${letter}`);
                 if (selector) selector.style.display = 'flex';
             });
 
             targetEl.addEventListener("targetLost", () => {
-                scannerLayer.style.display = 'flex';
+                console.log(`Target lost: ${targetId}`);
+                if (scannerLayer) scannerLayer.style.display = 'flex';
                 const selector = document.getElementById(`model-selector-${letter}`);
                 if (selector) selector.style.display = 'none';
             });
+        } else {
+            console.warn(`Target element not found: ${targetId}`);
         }
     });
+    
+    console.log("Initialization complete");
 });
