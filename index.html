@@ -538,5 +538,31 @@
     </div>
 
     <script src="js/main.js"></script>
+    <script>
+  // Force hide loading screen after 3 seconds, no matter what
+  setTimeout(function() {
+    var loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+      loadingScreen.style.display = 'none';
+      document.getElementById('debug').innerHTML += '<br>⚠️ Loading screen forced hidden (timeout)';
+    }
+  }, 3000);
+</script>
+
+    <script>
+  // Catch all errors and show them in the #debug div
+  window.onerror = function(msg, url, line, col, error) {
+    var debugDiv = document.getElementById('debug');
+    if (debugDiv) {
+      debugDiv.innerHTML += '<br><span style="color:red">ERROR: ' + msg + ' at line ' + line + '</span>';
+    }
+    return false;
+  };
+  console.log = function(msg) {
+    var debugDiv = document.getElementById('debug');
+    if (debugDiv) debugDiv.innerHTML += '<br>' + msg;
+  };
+</script>
+    
 </body>
 </html>
