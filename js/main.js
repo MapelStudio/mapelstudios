@@ -184,6 +184,46 @@ const LETTER_CONFIG = {
         'unicorn': { file: 'unicorn.glb', scale: '0.5 0.5 0.5', label: 'Unicorn' },
         'ufo': { file: 'ufo.glb', scale: '0.4 0.4 0.4', label: 'UFO' }
     }
+},
+  'v': {
+    targetIndex: 21,   // A=0, B=1, ..., U=20, V=21 (adjust if your compilation order differs)
+    models: {
+        'van': { file: 'van.glb', scale: '0.5 0.5 0.5', label: 'Van', default: true },
+        'viking': { file: 'viking.glb', scale: '0.5 0.5 0.5', label: 'Viking' },
+        'vulture': { file: 'vulture.glb', scale: '0.5 0.5 0.5', label: 'Vulture' }
+    }
+},
+  'w': {
+    targetIndex: 22,   // A=0, B=1, ..., V=21, W=22 (adjust if your compilation order differs)
+    models: {
+        'watch': { file: 'watch.glb', scale: '0.5 0.5 0.5', label: 'Watch', default: true },
+        'whale': { file: 'whale.glb', scale: '0.6 0.6 0.6', label: 'Whale' },
+        'walrus': { file: 'walrus.glb', scale: '0.5 0.5 0.5', label: 'Walrus' }
+    }
+},
+  'x': {
+    targetIndex: 23,   // A=0, B=1, ..., W=22, X=23 (adjust if your compilation order differs)
+    models: {
+        'xylophone': { file: 'xylophone.glb', scale: '0.5 0.5 0.5', label: 'Xylophone', default: true },
+        'xmas-tree': { file: 'xmas-tree.glb', scale: '0.6 0.6 0.6', label: 'X-mas Tree' },
+        'xebec': { file: 'xebec.glb', scale: '0.4 0.4 0.4', label: 'Xebec' }
+    }
+},
+  'y': {
+    targetIndex: 24,   // A=0, B=1, ..., X=23, Y=24 (adjust if your compilation order differs)
+    models: {
+        'yoyo': { file: 'yoyo.glb', scale: '0.5 0.5 0.5', label: 'Yoyo', default: true },
+        'yacht': { file: 'yacht.glb', scale: '0.5 0.5 0.5', label: 'Yacht' },
+        'yawn': { file: 'yawn.glb', scale: '0.5 0.5 0.5', label: 'Yawn' }
+    }
+},
+  'z': {
+    targetIndex: 25,   // A=0, B=1, ..., Y=24, Z=25 (adjust if your compilation order differs)
+    models: {
+        'zebra': { file: 'zebra.glb', scale: '0.5 0.5 0.5', label: 'Zebra', default: true },
+        'zipper': { file: 'zipper.glb', scale: '0.4 0.4 0.4', label: 'Zipper' },
+        'zeppelin': { file: 'zeppelin.glb', scale: '0.5 0.5 0.5', label: 'Zeppelin' }
+    }
 }
     // ADD MORE LETTERS HERE (C, D, E... Z)
     // Just copy the pattern above!
