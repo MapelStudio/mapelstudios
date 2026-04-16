@@ -253,6 +253,9 @@ const ANIMATION_CONFIG = {
     'dino': {
         'Attack': 'dino-attack.glb',
         'Run': 'dino-run.glb'
+    },
+  'elephant': {
+        'Walk': 'elephant-walk.glb'
     }
     // Add more models as needed, e.g.:
     // 'tiger': { walk: 'walk', run: 'run', idle: 'idle' },
