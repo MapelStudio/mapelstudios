@@ -247,6 +247,18 @@ const LETTER_CONFIG = {
     }
 };
 
+// ===== ANIMATION CONFIGURATION =====
+// For models that have animations, define available animation clips
+const ANIMATION_CONFIG = {
+    'unicorn': {
+        walk: 'walk',   // animation clip name inside the GLB
+        run: 'run'
+    },
+    // Add more models as needed, e.g.:
+    // 'tiger': { walk: 'walk', run: 'run', idle: 'idle' },
+    // 'horse': { gallop: 'gallop', idle: 'idle' }
+};
+
 // ===== AUTO-GENERATE MODEL SCALES =====
 const MODEL_SCALES = {};
 Object.keys(LETTER_CONFIG).forEach(letter => {
@@ -294,6 +306,7 @@ function toggleTutorial(show) {
 }
 
 // ===== MODEL SWITCHING FUNCTION =====
+// ===== MODEL SWITCHING FUNCTION (with animation support) =====
 window.switchModel = function(targetId, modelName) {
     const modelDisplay = document.getElementById(`${targetId}-display`);
     if (!modelDisplay) {
@@ -302,6 +315,8 @@ window.switchModel = function(targetId, modelName) {
     }
     
     const parentEntity = modelDisplay.parentElement;
+    const letter = targetId.split('-')[1];
+    const animControlsDiv = document.getElementById(`anim-controls-${letter}`);
     
     // Fade out old model
     modelDisplay.setAttribute('animation', {
@@ -321,9 +336,18 @@ window.switchModel = function(targetId, modelName) {
         newModel.setAttribute('gltf-model', `#${modelName}`);
         newModel.setAttribute('position', '0 0 -0.5');
         newModel.setAttribute('scale', '0 0 0');
-        newModel.setAttribute('animation-mixer', '');
         newModel.setAttribute('touch-rotate', '');
         
+        // Add animation-mixer with default clip (first animation or 'idle')
+        if (ANIMATION_CONFIG[modelName]) {
+            // Get first animation clip name as default
+            const defaultAnim = Object.values(ANIMATION_CONFIG[modelName])[0];
+            newModel.setAttribute('animation-mixer', `clip: ${defaultAnim}; loop: repeat`);
+        } else {
+            newModel.setAttribute('animation-mixer', '');
+        }
+        
+        // Pop-up and scale animations
         newModel.setAttribute('animation__popup', {
             property: 'position',
             from: '0 0 -0.5',
@@ -350,6 +374,35 @@ window.switchModel = function(targetId, modelName) {
         
         parentEntity.appendChild(newModel);
         console.log('✅ Switched to:', modelName);
+        
+        // Handle animation buttons
+        if (animControlsDiv) {
+            if (ANIMATION_CONFIG[modelName]) {
+                // Clear previous buttons
+                animControlsDiv.innerHTML = '';
+                // Create new buttons for each animation
+                const animNames = Object.keys(ANIMATION_CONFIG[modelName]);
+                animNames.forEach(animKey => {
+                    const btn = document.createElement('button');
+                    btn.className = 'model-btn anim-btn'; // reuse model-btn style
+                    btn.textContent = animKey.charAt(0).toUpperCase() + animKey.slice(1);
+                    btn.setAttribute('data-animation', animKey);
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const currentModel = document.getElementById(`${targetId}-display`);
+                        if (currentModel && currentModel.components['animation-mixer']) {
+                            currentModel.setAttribute('animation-mixer', `clip: ${ANIMATION_CONFIG[modelName][animKey]}; loop: repeat`);
+                            console.log(`Animation changed to: ${animKey}`);
+                        }
+                    });
+                    animControlsDiv.appendChild(btn);
+                });
+                animControlsDiv.style.display = 'flex';
+            } else {
+                animControlsDiv.style.display = 'none';
+                animControlsDiv.innerHTML = '';
+            }
+        }
     }, 300);
 };
 
