@@ -256,6 +256,10 @@ const ANIMATION_CONFIG = {
     },
   'elephant': {
         'Walk': 'elephant-walk.glb'
+    },
+  'goat': {
+        'Walk': 'goat-walk.glb',
+        'Run': 'goat-run.glb'
     }
     // Add more models as needed, e.g.:
     // 'tiger': { walk: 'walk', run: 'run', idle: 'idle' },
