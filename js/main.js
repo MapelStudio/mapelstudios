@@ -250,10 +250,10 @@ const LETTER_CONFIG = {
 // ===== ANIMATION CONFIGURATION =====
 // For models that have animations, define available animation clips
 const ANIMATION_CONFIG = {
-    'unicorn': {
-        walk: 'walk',   // animation clip name inside the GLB
-        run: 'run'
-    },
+    'dino': {
+        'Attack': 'dino-attack.glb',
+        'Run': 'dino-run.glb'
+    }
     // Add more models as needed, e.g.:
     // 'tiger': { walk: 'walk', run: 'run', idle: 'idle' },
     // 'horse': { gallop: 'gallop', idle: 'idle' }
@@ -307,7 +307,8 @@ function toggleTutorial(show) {
 
 // ===== MODEL SWITCHING FUNCTION =====
 // ===== MODEL SWITCHING FUNCTION (with animation support) =====
-window.switchModel = function(targetId, modelName) {
+// ===== MODEL SWITCHING FUNCTION (with animation variants) =====
+window.switchModel = function(targetId, modelName, isAnimationVariant = false, variantFile = null) {
     const modelDisplay = document.getElementById(`${targetId}-display`);
     if (!modelDisplay) {
         console.error('Model display not found:', targetId);
@@ -317,6 +318,18 @@ window.switchModel = function(targetId, modelName) {
     const parentEntity = modelDisplay.parentElement;
     const letter = targetId.split('-')[1];
     const animControlsDiv = document.getElementById(`anim-controls-${letter}`);
+    
+    // Determine the actual GLB file to load
+    let actualModelName = modelName;
+    let glbFile = `#${modelName}`;
+    
+    if (isAnimationVariant && variantFile) {
+        // For animation variants, we need to ensure the asset exists in <a-assets>
+        // We'll use the variant file name as the asset ID
+        const variantId = variantFile.replace('.glb', '');
+        glbFile = `#${variantId}`;
+        actualModelName = variantId;
+    }
     
     // Fade out old model
     modelDisplay.setAttribute('animation', {
@@ -333,19 +346,11 @@ window.switchModel = function(targetId, modelName) {
         
         const newModel = document.createElement('a-gltf-model');
         newModel.setAttribute('id', `${targetId}-display`);
-        newModel.setAttribute('gltf-model', `#${modelName}`);
+        newModel.setAttribute('gltf-model', glbFile);
         newModel.setAttribute('position', '0 0 -0.5');
         newModel.setAttribute('scale', '0 0 0');
         newModel.setAttribute('touch-rotate', '');
-        
-        // Add animation-mixer with default clip (first animation or 'idle')
-        if (ANIMATION_CONFIG[modelName]) {
-            // Get first animation clip name as default
-            const defaultAnim = Object.values(ANIMATION_CONFIG[modelName])[0];
-            newModel.setAttribute('animation-mixer', `clip: ${defaultAnim}; loop: repeat`);
-        } else {
-            newModel.setAttribute('animation-mixer', '');
-        }
+        newModel.setAttribute('animation-mixer', ''); // Still add for any embedded animations
         
         // Pop-up and scale animations
         newModel.setAttribute('animation__popup', {
@@ -373,32 +378,29 @@ window.switchModel = function(targetId, modelName) {
         });
         
         parentEntity.appendChild(newModel);
-        console.log('✅ Switched to:', modelName);
+        console.log('✅ Switched to:', actualModelName);
         
-        // Handle animation buttons
+        // Handle animation buttons: show if the selected model has animation variants
         if (animControlsDiv) {
-            if (ANIMATION_CONFIG[modelName]) {
+            if (ANIMATION_CONFIG[modelName] && !isAnimationVariant) {
                 // Clear previous buttons
                 animControlsDiv.innerHTML = '';
-                // Create new buttons for each animation
+                // Create buttons for each animation variant
                 const animNames = Object.keys(ANIMATION_CONFIG[modelName]);
                 animNames.forEach(animKey => {
                     const btn = document.createElement('button');
-                    btn.className = 'model-btn anim-btn'; // reuse model-btn style
-                    btn.textContent = animKey.charAt(0).toUpperCase() + animKey.slice(1);
+                    btn.className = 'model-btn anim-btn';
+                    btn.textContent = animKey;
                     btn.setAttribute('data-animation', animKey);
                     btn.addEventListener('click', (e) => {
                         e.stopPropagation();
-                        const currentModel = document.getElementById(`${targetId}-display`);
-                        if (currentModel && currentModel.components['animation-mixer']) {
-                            currentModel.setAttribute('animation-mixer', `clip: ${ANIMATION_CONFIG[modelName][animKey]}; loop: repeat`);
-                            console.log(`Animation changed to: ${animKey}`);
-                        }
+                        const variantFile = ANIMATION_CONFIG[modelName][animKey];
+                        window.switchModel(targetId, modelName, true, variantFile);
                     });
                     animControlsDiv.appendChild(btn);
                 });
                 animControlsDiv.style.display = 'flex';
-            } else {
+            } else if (!ANIMATION_CONFIG[modelName]) {
                 animControlsDiv.style.display = 'none';
                 animControlsDiv.innerHTML = '';
             }
