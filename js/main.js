@@ -279,6 +279,10 @@ const ANIMATION_CONFIG = {
     'queen': {
         'Attack': 'queen-attack.glb',
         'Run': 'queen-run.glb'
+    },
+    'robot': {
+        'Attack': 'robot-attack.glb',
+        'Hop': 'robot-hop.glb'
     }
 
     // Add more models as needed, e.g.:
