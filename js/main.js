@@ -268,6 +268,10 @@ const ANIMATION_CONFIG = {
     'insect': {
         'Fly': 'insect-fly.glb',
         'Take Off': 'insect-takeoff.glb'
+    },
+    'kangaroo': {
+        'Walk': 'kangaroo-walk.glb',
+        'Run': 'kangaroo-run.glb'
     }
 
     // Add more models as needed, e.g.:
