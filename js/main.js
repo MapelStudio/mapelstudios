@@ -272,6 +272,9 @@ const ANIMATION_CONFIG = {
     'kangaroo': {
         'Walk': 'kangaroo-walk.glb',
         'Run': 'kangaroo-run.glb'
+    },
+    'mouse': {
+        'Run Cycle': 'mouse-runcycle.glb'
     }
 
     // Add more models as needed, e.g.:
