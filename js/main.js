@@ -264,7 +264,12 @@ const ANIMATION_CONFIG = {
   'horse': {
         'Walk': 'horse-walk.glb',
         'Run': 'horse-run.glb'
+    },
+    'insect': {
+        'Fly': 'insect-fly.glb',
+        'Take Off': 'insect-takeoff.glb'
     }
+
     // Add more models as needed, e.g.:
     // 'tiger': { walk: 'walk', run: 'run', idle: 'idle' },
     // 'horse': { gallop: 'gallop', idle: 'idle' }
