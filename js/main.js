@@ -283,6 +283,10 @@ const ANIMATION_CONFIG = {
     'robot': {
         'Attack': 'robot-attack.glb',
         'Hop': 'robot-hop.glb'
+    },
+    'vulture': {
+        'Attack': 'vulture-attack.glb',
+        'Flying': 'vulture-flying.glb'
     }
 
     // Add more models as needed, e.g.:
