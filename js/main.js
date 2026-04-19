@@ -291,6 +291,10 @@ const ANIMATION_CONFIG = {
     'walrus': {
         'Walk': 'walrus-walk.glb',
         'Swim': 'walrus-swim.glb'
+    },
+    'zebra': {
+        'Walk': 'zebra-walk.glb',
+        'Run': 'zebra-run.glb'
     }
 
     // Add more models as needed, e.g.:
