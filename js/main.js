@@ -260,6 +260,10 @@ const ANIMATION_CONFIG = {
   'goat': {
         'Walk': 'goat-walk.glb',
         'Run': 'goat-run.glb'
+    },
+  'horse': {
+        'Walk': 'horse-walk.glb',
+        'Run': 'horse-run.glb'
     }
     // Add more models as needed, e.g.:
     // 'tiger': { walk: 'walk', run: 'run', idle: 'idle' },
