@@ -287,6 +287,10 @@ const ANIMATION_CONFIG = {
     'vulture': {
         'Attack': 'vulture-attack.glb',
         'Flying': 'vulture-flying.glb'
+    },
+    'walrus': {
+        'Walk': 'walrus-walk.glb',
+        'Swim': 'walrus-swim.glb'
     }
 
     // Add more models as needed, e.g.:
