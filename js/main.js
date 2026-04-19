@@ -275,6 +275,10 @@ const ANIMATION_CONFIG = {
     },
     'mouse': {
         'Run Cycle': 'mouse-runcycle.glb'
+    },
+    'queen': {
+        'Attack': 'queen-attack.glb',
+        'Run': 'queen-run.glb'
     }
 
     // Add more models as needed, e.g.:
