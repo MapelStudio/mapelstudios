@@ -527,6 +527,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             scannerLayer.style.display = 'flex';
             iconLayer.style.display = 'flex';
+          // START 8TH WALL ENGINE
+            XR8.run({
+              canvas: document.getElementById("camerafeed")
+            });
 
             // Start MindAR system
             const arSystem = sceneEl ? sceneEl.systems['mindar-image-system'] : null;
