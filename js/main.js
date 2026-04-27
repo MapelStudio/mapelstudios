@@ -481,6 +481,11 @@ window.switchModel = function(targetId, modelName, isAnimationVariant = false, v
 // ===== MAIN INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOMContentLoaded fired");
+
+    const uiLayer = document.getElementById('ui');
+if (uiLayer) {
+  uiLayer.style.display = 'block';
+}
     
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
