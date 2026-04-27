@@ -532,6 +532,34 @@ document.addEventListener('DOMContentLoaded', () => {
               canvas: document.getElementById("camerafeed")
             });
 
+            // LISTEN FOR IMAGE TARGET DETECTION
+            XR8.XrController.pipelineModule().onAttach = () => {
+              console.log("Image target system attached");
+            };
+
+            XR8.addCameraPipelineModule({
+              name: "target-detection-listener",
+
+              onUpdate: ({processCpuResult}) => {
+                const targets = processCpuResult?.reality?.imageTargets;
+
+                if (!targets) return;
+
+                targets.forEach((target) => {
+                  if (target.name === "letter-a" && target.isTracked) {
+                    console.log("A detected");
+
+                    // SHOW YOUR EXISTING MODEL
+                    const targetEntity = document.getElementById("target-a");
+
+                    if (targetEntity) {
+                      targetEntity.object3D.visible = true;
+                    }
+                  }
+                });
+              }
+            });
+
             // Start MindAR system
             const arSystem = sceneEl ? sceneEl.systems['mindar-image-system'] : null;
             if (arSystem) {
