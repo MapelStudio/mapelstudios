@@ -13,6 +13,16 @@
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 </head>
 <body>
+
+<canvas id="camerafeed" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+"></canvas>
+    
 <div id="click-debug" style="position: fixed; top: 0; left: 0; width: 100%; background: red; color: white; padding: 10px; z-index: 99999; font-size: 20px; display: none;">
     BUTTON CLICKED: <span id="debug-text"></span>
 </div>
