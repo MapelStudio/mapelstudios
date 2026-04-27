@@ -528,9 +528,13 @@ document.addEventListener('DOMContentLoaded', () => {
             scannerLayer.style.display = 'flex';
             iconLayer.style.display = 'flex';
           // START 8TH WALL ENGINE
-            XR8.run({
-              canvas: document.getElementById("camerafeed")
-            });
+            const canvas = document.getElementById("camerafeed");
+
+canvas.style.zIndex = "0";
+
+XR8.run({
+  canvas: canvas
+});
 
             // LISTEN FOR IMAGE TARGET DETECTION
             XR8.XrController.pipelineModule().onAttach = () => {
