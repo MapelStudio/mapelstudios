@@ -481,11 +481,6 @@ window.switchModel = function(targetId, modelName, isAnimationVariant = false, v
 // ===== MAIN INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOMContentLoaded fired");
-
-    const uiLayer = document.getElementById('ui');
-if (uiLayer) {
-  uiLayer.style.display = 'block';
-}
     
     const startBtn = document.getElementById('start-btn');
     const uiLayer = document.getElementById('ui');
@@ -533,13 +528,9 @@ if (uiLayer) {
             scannerLayer.style.display = 'flex';
             iconLayer.style.display = 'flex';
           // START 8TH WALL ENGINE
-            const canvas = document.getElementById("camerafeed");
-
-canvas.style.zIndex = "0";
-
-XR8.run({
-  canvas: canvas
-});
+            XR8.run({
+              canvas: document.getElementById("camerafeed")
+            });
 
             // LISTEN FOR IMAGE TARGET DETECTION
             XR8.XrController.pipelineModule().onAttach = () => {
@@ -570,7 +561,7 @@ XR8.run({
             });
 
             // Start MindAR system
-            /*const arSystem = sceneEl ? sceneEl.systems['mindar-image-system'] : null;
+            const arSystem = sceneEl ? sceneEl.systems['mindar-image-system'] : null;
             if (arSystem) {
                 arSystem.start();
                 window.dispatchEvent(new Event('resize'));
@@ -581,7 +572,7 @@ XR8.run({
         });
     } else {
         console.error("Start button not found");
-    }*/
+    }
 
     // ===== UNIVERSAL BUTTON CLICK HANDLER =====
     document.body.addEventListener('click', (e) => {
