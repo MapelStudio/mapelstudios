@@ -1,3 +1,30 @@
+const imageTargetA = {
+  imagePath: "./targets/A.jpg",
+  name: "letter-a",
+  type: "PLANAR",
+  properties: {
+    left: 0,
+    top: 0,
+    width: 2157,
+    height: 1039,
+    originalWidth: 2157,
+    originalHeight: 1039,
+    isRotated: false
+  }
+}
+
+const onxrloaded = () => {
+  XR8.XrController.configure({
+    imageTargetData: [
+      imageTargetA
+    ]
+  })
+}
+
+window.XR8
+  ? onxrloaded()
+  : window.addEventListener("xrloaded", onxrloaded)
+
 // ===== TOUCH ROTATION COMPONENT =====
 AFRAME.registerComponent('touch-rotate', {
   init: function() {
