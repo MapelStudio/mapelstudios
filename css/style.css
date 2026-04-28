@@ -1112,7 +1112,31 @@ div[class*="mindar"] {
     pointer-events: auto !important;
 }
 
+#sceneEl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+#camerafeed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
 #ui {
-    position: relative;
+    position: fixed;
+    z-index: 1000;
+}
+
+#icon-layer {
+    position: fixed;
+    z-index: 1000;
+}
+
+#scanner-container {
+    position: fixed;
     z-index: 1000;
 }
