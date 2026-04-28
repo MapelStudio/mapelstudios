@@ -561,12 +561,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Start MindAR system
-            const arSystem = sceneEl ? sceneEl.systems['mindar-image-system'] : null;
+            /*const arSystem = sceneEl ? sceneEl.systems['mindar-image-system'] : null;
             if (arSystem) {
                 arSystem.start();
                 window.dispatchEvent(new Event('resize'));
                 console.log("MindAR system started");
-            } else {
+            } */
+            else {
                 console.error("MindAR system not found");
             }
         });
