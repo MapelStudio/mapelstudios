@@ -1140,3 +1140,9 @@ div[class*="mindar"] {
     position: fixed;
     z-index: 1000;
 }
+
+/* Disable scene before AR starts */
+#sceneEl {
+    pointer-events: none;
+    opacity: 0;
+}
