@@ -519,6 +519,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (startBtn) {
         startBtn.addEventListener('click', () => {
             console.log("Start AR button clicked");
+            document.getElementById("sceneEl").style.opacity = "1";
+            document.getElementById("sceneEl").style.pointerEvents = "auto";
             uiLayer.style.display = 'none';
             const bgVideo = document.getElementById('bg-video');
             if (bgVideo) {
