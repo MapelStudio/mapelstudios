@@ -1,29 +1,411 @@
-const imageTargetA = {
-  imagePath: "./targets/A.jpg",
-  name: "letter-a",
-  type: "PLANAR",
-  properties: {
-    left: 0,
-    top: 0,
-    width: 2157,
-    height: 1039,
-    originalWidth: 2157,
-    originalHeight: 1039,
-    isRotated: false
+// ===== 8TH WALL IMAGE TARGETS CONFIGURATION =====
+const imageTargets = [
+  {
+    imagePath: "./targets/A.jpg",
+    name: "letter-a",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/B.jpg",
+    name: "letter-b",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/C.jpg",
+    name: "letter-c",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/D.jpg",
+    name: "letter-d",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/E.jpg",
+    name: "letter-e",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/F.jpg",
+    name: "letter-f",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/G.jpg",
+    name: "letter-g",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/H.jpg",
+    name: "letter-h",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/I.jpg",
+    name: "letter-i",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/J.jpg",
+    name: "letter-j",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/K.jpg",
+    name: "letter-k",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/L.jpg",
+    name: "letter-l",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/M.jpg",
+    name: "letter-m",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/N.jpg",
+    name: "letter-n",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/O.jpg",
+    name: "letter-o",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/P.jpg",
+    name: "letter-p",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/Q.jpg",
+    name: "letter-q",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/R.jpg",
+    name: "letter-r",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/S.jpg",
+    name: "letter-s",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/T.jpg",
+    name: "letter-t",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/U.jpg",
+    name: "letter-u",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/V.jpg",
+    name: "letter-v",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/W.jpg",
+    name: "letter-w",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/X.jpg",
+    name: "letter-x",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/Y.jpg",
+    name: "letter-y",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
+  },
+  {
+    imagePath: "./targets/Z.jpg",
+    name: "letter-z",
+    type: "PLANAR",
+    properties: {
+      left: 0,
+      top: 0,
+      width: 480,
+      height: 640,
+      originalWidth: 480,
+      originalHeight: 640,
+      isRotated: false
+    }
   }
-}
+];
 
+// ===== 8TH WALL INITIALIZATION =====
 const onxrloaded = () => {
   XR8.XrController.configure({
-    imageTargetData: [
-      imageTargetA
-    ]
+    imageTargetData: imageTargets
   })
 }
 
 window.XR8
   ? onxrloaded()
   : window.addEventListener("xrloaded", onxrloaded)
+
+// ===== 8TH WALL IMAGE TARGET A-FRAME COMPONENT =====
+AFRAME.registerComponent('xrweb-image-target', {
+  schema: {
+    targetIndex: { type: 'number', default: 0 }
+  },
+  
+  init: function() {
+    const self = this;
+    const targetIndex = this.data.targetIndex;
+    const targetId = this.el.id;
+    
+    XR8.addCameraPipelineModule({
+      name: `target-detection-${targetId}`,
+      onUpdate: ({ processCpuResult }) => {
+        if (!processCpuResult?.reality?.imageTargets) return;
+        
+        processCpuResult.reality.imageTargets.forEach((target) => {
+          if (target.index === targetIndex) {
+            if (target.isTracked) {
+              self.el.object3D.visible = true;
+            } else {
+              self.el.object3D.visible = false;
+            }
+          }
+        });
+      }
+    });
+  }
+});
 
 // ===== TOUCH ROTATION COMPONENT =====
 AFRAME.registerComponent('touch-rotate', {
@@ -275,7 +657,6 @@ const LETTER_CONFIG = {
 };
 
 // ===== ANIMATION CONFIGURATION =====
-// For models that have animations, define available animation clips
 const ANIMATION_CONFIG = {
     'dino': {
         'Attack': 'dino-attack.glb',
@@ -323,10 +704,6 @@ const ANIMATION_CONFIG = {
         'Walk': 'zebra-walk.glb',
         'Run': 'zebra-run.glb'
     }
-
-    // Add more models as needed, e.g.:
-    // 'tiger': { walk: 'walk', run: 'run', idle: 'idle' },
-    // 'horse': { gallop: 'gallop', idle: 'idle' }
 };
 
 // ===== AUTO-GENERATE MODEL SCALES =====
@@ -376,8 +753,6 @@ function toggleTutorial(show) {
 }
 
 // ===== MODEL SWITCHING FUNCTION =====
-// ===== MODEL SWITCHING FUNCTION (with animation support) =====
-// ===== MODEL SWITCHING FUNCTION (with animation variants) =====
 window.switchModel = function(targetId, modelName, isAnimationVariant = false, variantFile = null) {
     const modelDisplay = document.getElementById(`${targetId}-display`);
     if (!modelDisplay) {
@@ -389,13 +764,10 @@ window.switchModel = function(targetId, modelName, isAnimationVariant = false, v
     const letter = targetId.split('-')[1];
     const animControlsDiv = document.getElementById(`anim-controls-${letter}`);
     
-    // Determine the actual GLB file to load
     let actualModelName = modelName;
     let glbFile = `#${modelName}`;
     
     if (isAnimationVariant && variantFile) {
-        // For animation variants, we need to ensure the asset exists in <a-assets>
-        // We'll use the variant file name as the asset ID
         const variantId = variantFile.replace('.glb', '');
         glbFile = `#${variantId}`;
         actualModelName = variantId;
@@ -420,9 +792,8 @@ window.switchModel = function(targetId, modelName, isAnimationVariant = false, v
         newModel.setAttribute('position', '0 0 -0.5');
         newModel.setAttribute('scale', '0 0 0');
         newModel.setAttribute('touch-rotate', '');
-        newModel.setAttribute('animation-mixer', ''); // Still add for any embedded animations
+        newModel.setAttribute('animation-mixer', '');
         
-        // Pop-up and scale animations
         newModel.setAttribute('animation__popup', {
             property: 'position',
             from: '0 0 -0.5',
@@ -450,12 +821,9 @@ window.switchModel = function(targetId, modelName, isAnimationVariant = false, v
         parentEntity.appendChild(newModel);
         console.log('✅ Switched to:', actualModelName);
         
-        // Handle animation buttons: show if the selected model has animation variants
         if (animControlsDiv) {
             if (ANIMATION_CONFIG[modelName] && !isAnimationVariant) {
-                // Clear previous buttons
                 animControlsDiv.innerHTML = '';
-                // Create buttons for each animation variant
                 const animNames = Object.keys(ANIMATION_CONFIG[modelName]);
                 animNames.forEach(animKey => {
                     const btn = document.createElement('button');
@@ -489,7 +857,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sceneEl = document.getElementById('sceneEl');
     const loadingScreen = document.getElementById('loading-screen');
 
-    // Force hide loading screen after 5 seconds regardless (fallback)
     setTimeout(() => {
         if (loadingScreen) {
             loadingScreen.style.display = 'none';
@@ -498,7 +865,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (uiLayer) uiLayer.classList.add('loaded');
     }, 5000);
 
-    // Hide loading screen when window loads
     window.addEventListener('load', () => {
         console.log("Window load event fired");
         setTimeout(() => {
@@ -508,14 +874,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     });
 
-    // Tutorial buttons
     const btnRight = document.getElementById('btn-right');
     if (btnRight) btnRight.addEventListener('click', () => toggleTutorial(true));
 
     const closeBtn = document.getElementById('close-tutorial-btn');
     if (closeBtn) closeBtn.addEventListener('click', () => toggleTutorial(false));
 
-    // Start AR button
+    // ===== START 8TH WALL ENGINE =====
     if (startBtn) {
         startBtn.addEventListener('click', () => {
             console.log("Start AR button clicked");
@@ -529,53 +894,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             scannerLayer.style.display = 'flex';
             iconLayer.style.display = 'flex';
-          // START 8TH WALL ENGINE
+            
+            // START 8TH WALL
             XR8.run({
               canvas: document.getElementById("camerafeed")
             });
-
-            // LISTEN FOR IMAGE TARGET DETECTION
-            XR8.XrController.pipelineModule().onAttach = () => {
-              console.log("Image target system attached");
-            };
-
-            XR8.addCameraPipelineModule({
-              name: "target-detection-listener",
-
-              onUpdate: ({processCpuResult}) => {
-                const targets = processCpuResult?.reality?.imageTargets;
-
-                if (!targets) return;
-
-                targets.forEach((target) => {
-                  if (target.name === "letter-a" && target.isTracked) {
-                    console.log("A detected");
-
-                    // SHOW YOUR EXISTING MODEL
-                    const targetEntity = document.getElementById("target-a");
-
-                    if (targetEntity) {
-                      targetEntity.object3D.visible = true;
-                    }
-                  }
-                });
-              }
-            });
-
-            // Start MindAR system
-            /*const arSystem = sceneEl ? sceneEl.systems['mindar-image-system'] : null;
-            if (arSystem) {
-                arSystem.start();
-                window.dispatchEvent(new Event('resize'));
-                console.log("MindAR system started");
-            } 
-            else {
-                console.error("MindAR system not found");
-            }
+            
+            console.log("8th Wall engine started");
         });
     } else {
         console.error("Start button not found");
-    }*/
+    }
 
     // ===== UNIVERSAL BUTTON CLICK HANDLER =====
     document.body.addEventListener('click', (e) => {
@@ -584,7 +913,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = e.target.getAttribute('data-target');
             if (modelName && targetId) {
                 window.switchModel(targetId, modelName);
-                // Update active button
                 document.querySelectorAll(`[data-target="${targetId}"] .model-btn`).forEach(b => {
                     b.classList.remove('active');
                 });
