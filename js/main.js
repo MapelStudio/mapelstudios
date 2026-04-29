@@ -568,14 +568,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 arSystem.start();
                 window.dispatchEvent(new Event('resize'));
                 console.log("MindAR system started");
-            } */
+            } 
             else {
                 console.error("MindAR system not found");
             }
         });
     } else {
         console.error("Start button not found");
-    }
+    }*/
 
     // ===== UNIVERSAL BUTTON CLICK HANDLER =====
     document.body.addEventListener('click', (e) => {
