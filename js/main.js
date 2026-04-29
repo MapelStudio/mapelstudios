@@ -383,29 +383,33 @@ AFRAME.registerComponent('xrweb-image-target', {
     targetIndex: { type: 'number', default: 0 }
   },
   
-  init: function() {
-    const self = this;
-    const targetIndex = this.data.targetIndex;
-    const targetId = this.el.id;
-    
+ init: function() {
+  const self = this;
+  const targetIndex = this.data.targetIndex;
+  const targetId = this.el.id;
+
+  const setupXR = () => {
     XR8.addCameraPipelineModule({
       name: `target-detection-${targetId}`,
+
       onUpdate: ({ processCpuResult }) => {
         if (!processCpuResult?.reality?.imageTargets) return;
-        
+
         processCpuResult.reality.imageTargets.forEach((target) => {
           if (target.index === targetIndex) {
-            if (target.isTracked) {
-              self.el.object3D.visible = true;
-            } else {
-              self.el.object3D.visible = false;
-            }
+            self.el.object3D.visible = target.isTracked;
           }
         });
       }
     });
+  };
+
+  if (window.XR8) {
+    setupXR();
+  } else {
+    window.addEventListener("xrloaded", setupXR);
   }
-});
+}
 
 // ===== TOUCH ROTATION COMPONENT =====
 AFRAME.registerComponent('touch-rotate', {
