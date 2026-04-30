@@ -891,25 +891,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== START 8TH WALL ENGINE =====
     if (startBtn) {
-        startBtn.addEventListener('click', () => {
-            console.log("Start AR button clicked");
-            document.getElementById("sceneEl").style.opacity = "1";
-            document.getElementById("sceneEl").style.pointerEvents = "auto";
-            uiLayer.style.display = 'none';
-            const bgVideo = document.getElementById('bg-video');
-            if (bgVideo) {
-                bgVideo.pause();
-                bgVideo.style.display = 'none';
-            }
-            scannerLayer.style.display = 'flex';
-            iconLayer.style.display = 'flex';
-            
-            // START 8TH WALL
-            XR8.run({
-              canvas: document.getElementById("camerafeed")
-            });
-            
-            console.log("8th Wall engine started");
+       startBtn.addEventListener('click', () => {
+
+    showDebug("Button clicked");
+
+    const canvas = document.getElementById("camerafeed");
+
+    if (!canvas) {
+        showDebug("Canvas NOT found");
+        return;
+    }
+
+    showDebug("Canvas found");
+
+    if (!window.XR8) {
+        showDebug("XR8 NOT loaded");
+        return;
+    }
+
+    showDebug("Starting XR8...");
+
+    XR8.run({
+        canvas: canvas
+    });
+
+    showDebug("XR8 started");
+
+    if (uiLayer) uiLayer.style.display = 'none';
+    if (scannerLayer) scannerLayer.style.display = 'flex';
+    if (iconLayer) iconLayer.style.display = 'flex';
+});
         });
     } else {
         console.error("Start button not found");
