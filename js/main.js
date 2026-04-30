@@ -366,6 +366,15 @@ const imageTargets = [
   }
 ];
 
+function showDebug(message) {
+  const debugBox = document.getElementById("click-debug");
+  const debugText = document.getElementById("debug-text");
+
+  if (debugBox && debugText) {
+    debugText.innerText = message;
+    debugBox.style.display = "block";
+  }
+}
 // ===== 8TH WALL INITIALIZATION =====
 const onxrloaded = () => {
   XR8.XrController.configure({
