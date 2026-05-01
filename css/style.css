@@ -1146,3 +1146,10 @@ div[class*="mindar"] {
     pointer-events: none;
     opacity: 0;
 }
+
+#ui,
+#icon-layer,
+#scanner-container {
+  position: fixed;
+  z-index: 10;
+}
