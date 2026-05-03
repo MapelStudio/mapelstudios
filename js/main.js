@@ -369,7 +369,7 @@ const imageTargets = [
 // ===== 8TH WALL INITIALIZATION =====
 const onxrloaded = () => {
   XR8.XrController.configure({
-    imageTargetData: imageTargets
+    imageTargets: { url: './data/targets.mind' }
   })
 }
 
