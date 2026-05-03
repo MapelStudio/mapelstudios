@@ -349,33 +349,106 @@ const imageTargets = [
       originalHeight: 640,
       isRotated: false
     }
-  },
-  {
-    imagePath: "./targets/Z.jpg",
-    name: "letter-z",
-    type: "PLANAR",
-    properties: {
-      left: 0,
-      top: 0,
-      width: 480,
-      height: 640,
-      originalWidth: 480,
-      originalHeight: 640,
-      isRotated: false
-    }
   }
 ];
 
-// ===== 8TH WALL INITIALIZATION =====
-const onxrloaded = () => {
-  XR8.XrController.configure({
-    imageTargets: { url: './data/targets.mind' }
-  })
+// ===== IMAGE TARGET PREPROCESSING =====
+// 8th Wall requires targets to be grayscale 480x640 PNGs.
+// This function loads any image and converts it on-the-fly using Canvas.
+function preprocessImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 480;
+      canvas.height = 640;
+      const ctx = canvas.getContext('2d');
+      // Fill white background first
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, 480, 640);
+      // Draw image scaled to fit 480x640
+      const scale = Math.min(480 / img.width, 640 / img.height);
+      const w = img.width * scale;
+      const h = img.height * scale;
+      const x = (480 - w) / 2;
+      const y = (640 - h) / 2;
+      ctx.drawImage(img, x, y, w, h);
+      // Convert to grayscale
+      const imageData = ctx.getImageData(0, 0, 480, 640);
+      const data = imageData.data;
+      for (let i = 0; i < data.length; i += 4) {
+        const gray = 0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2];
+        data[i] = data[i+1] = data[i+2] = gray;
+      }
+      ctx.putImageData(imageData, 0, 0);
+      resolve(canvas.toDataURL('image/png'));
+    };
+    img.onerror = () => reject(new Error('Failed to load: ' + src));
+    img.src = src;
+  });
 }
+
+// ===== 8TH WALL INITIALIZATION =====
+const rawTargets = [
+  { file: './targets/A.jpg',    name: 'letter-a',  index: 0  },
+  { file: './targets/B.jpg',    name: 'letter-b',  index: 1  },
+  { file: './targets/C.jpg',    name: 'letter-c',  index: 2  },
+  { file: './targets/D.jpg',    name: 'letter-d',  index: 3  },
+  { file: './targets/E.jpg',    name: 'letter-e',  index: 4  },
+  { file: './targets/F.jpg',    name: 'letter-f',  index: 5  },
+  { file: './targets/G.jpg',    name: 'letter-g',  index: 6  },
+  { file: './targets/H.jpg',    name: 'letter-h',  index: 7  },
+  { file: './targets/I.jpg',    name: 'letter-i',  index: 8  },
+  { file: './targets/J.jpg',    name: 'letter-j',  index: 9  },
+  { file: './targets/K.jpg',    name: 'letter-k',  index: 10 },
+  { file: './targets/L.jpg',    name: 'letter-l',  index: 11 },
+  { file: './targets/M.jpg',    name: 'letter-m',  index: 12 },
+  { file: './targets/N.jpg',    name: 'letter-n',  index: 13 },
+  { file: './targets/O.jpg',    name: 'letter-o',  index: 14 },
+  { file: './targets/P.jpg',    name: 'letter-p',  index: 15 },
+  { file: './targets/Q.jpg',    name: 'letter-q',  index: 16 },
+  { file: './targets/R.jpg',    name: 'letter-r',  index: 17 },
+  { file: './targets/S.jpg',    name: 'letter-s',  index: 18 },
+  { file: './targets/T.jpg',    name: 'letter-t',  index: 19 },
+  { file: './targets/U.jpg',    name: 'letter-u',  index: 20 },
+  { file: './targets/v.jpeg',   name: 'letter-v',  index: 21 },
+  { file: './targets/w.jpeg',   name: 'letter-w',  index: 22 },
+  { file: './targets/x.jpeg',   name: 'letter-x',  index: 23 },
+  { file: './targets/y.jpeg',   name: 'letter-y',  index: 24 },
+  { file: './targets/z.jpeg',   name: 'letter-z',  index: 25 },
+];
+
+const onxrloaded = () => {
+  console.log('XR8 loaded, preprocessing image targets...');
+  Promise.all(rawTargets.map(t =>
+    preprocessImage(t.file).then(dataUrl => ({
+      imagePath: dataUrl,
+      name: t.name,
+      type: 'PLANAR',
+      properties: {
+        left: 0,
+        top: 0,
+        width: 480,
+        height: 640,
+        originalWidth: 480,
+        originalHeight: 640,
+        isRotated: false
+      }
+    })).catch(err => {
+      console.error('Failed to preprocess: ' + t.file, err);
+      return null;
+    })
+  )).then(targets => {
+    const valid = targets.filter(Boolean);
+    console.log('Configuring XR8 with ' + valid.length + ' image targets...');
+    XR8.XrController.configure({ imageTargetData: valid });
+  });
+};
 
 window.XR8
   ? onxrloaded()
-  : window.addEventListener("xrloaded", onxrloaded)
+  : window.addEventListener('xrloaded', onxrloaded)
 
 // ===== 8TH WALL IMAGE TARGET A-FRAME COMPONENT =====
 AFRAME.registerComponent('xrweb-image-target', {
