@@ -423,10 +423,12 @@ let processedTargets = [];
 let targetsReady = false;
 
 const onxrloaded = () => {
-  console.log('XR8 loaded, preprocessing image targets...');
-  Promise.all(rawTargets.map(t =>
-    preprocessImage(t.file).then(dataUrl => ({
-      imagePath: dataUrl,
+  console.log('XR8 loaded, configuring image targets...');
+  
+  // Try passing the raw JPG/JPEG paths directly instead of Data URLs.
+  // If the images are already standard sizes, 8th Wall might prefer the direct URL.
+  processedTargets = rawTargets.map(t => ({
+      imagePath: t.file,  // Using the direct file path e.g., './targets/A.jpg'
       name: t.name,
       type: 'PLANAR',
       properties: {
@@ -438,23 +440,18 @@ const onxrloaded = () => {
         originalHeight: 640,
         isRotated: false
       }
-    })).catch(err => {
-      console.error('Failed to preprocess: ' + t.file, err);
-      return null;
-    })
-  )).then(targets => {
-    processedTargets = targets.filter(Boolean);
-    targetsReady = true;
-    console.log('Configuring XR8 with ' + processedTargets.length + ' image targets...');
-    XR8.XrController.configure({ imageTargetData: processedTargets });
-    
-    // Update start button text if it exists
-    const startBtn = document.getElementById('start-btn');
-    if (startBtn) {
-      startBtn.innerHTML = 'START AR';
-      startBtn.disabled = false;
-    }
-  });
+  }));
+
+  targetsReady = true;
+  console.log('Configuring XR8 with ' + processedTargets.length + ' image targets...');
+  XR8.XrController.configure({ imageTargetData: processedTargets });
+  
+  // Update start button text if it exists
+  const startBtn = document.getElementById('start-btn');
+  if (startBtn) {
+    startBtn.innerHTML = 'START AR';
+    startBtn.disabled = false;
+  }
 };
 
 window.XR8
@@ -1009,17 +1006,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // START 8TH WALL
       // Add a debug pipeline module to track what's happening
+      let lastDebugTime = 0;
       XR8.addCameraPipelineModule({
         name: 'debug-logger',
-        onStart: () => console.log('[XR8] Pipeline started'),
+        onStart: () => {
+          console.log('[XR8] Pipeline started');
+          document.getElementById('debug-overlay').innerHTML = 'PIPELINE STARTED. WAITING FOR TRACKING...';
+        },
         onAttach: () => console.log('[XR8] Pipeline attached'),
+        onUpdate: ({ processCpuResult }) => {
+          const now = Date.now();
+          if (now - lastDebugTime > 1000) {
+            lastDebugTime = now;
+            let overlay = document.getElementById('debug-overlay');
+            if (overlay && processCpuResult && processCpuResult.reality) {
+               let targets = processCpuResult.reality.imageTargets || [];
+               let tracked = targets.filter(t => t.isTracked);
+               let txt = `TIME: ${new Date().toLocaleTimeString()}<br>`;
+               txt += `XR8 STATE: RUNNING<br>`;
+               txt += `TOTAL TARGETS IN MEMORY: ${targets.length}<br>`;
+               txt += `CURRENTLY TRACKED: ${tracked.length}<br><br>`;
+               
+               if (tracked.length > 0) {
+                 txt += `<b>TRACKED NAMES:</b><br>`;
+                 tracked.forEach(t => { txt += `- ${t.name}<br>`; });
+               } else if (targets.length > 0) {
+                 txt += `(Looking for targets...)<br>`;
+                 txt += `Example target loaded: ${targets[0].name}<br>`;
+               } else {
+                 txt += `<span style="color:red">NO TARGETS LOADED INTO XR8</span><br>`;
+               }
+               
+               overlay.innerHTML = txt;
+            }
+          }
+        },
         onException: (error) => {
           console.error('[XR8] Pipeline error: ' + error);
+          document.getElementById('debug-overlay').innerHTML += `<br><span style="color:red">ERROR: ${error}</span>`;
           if (error.toString().includes('WebAssembly')) {
             alert("This device might not support WebAssembly, which is required for 8th Wall.");
           }
         },
-        onCameraStatusChange: ({status}) => console.log('[XR8] Camera status: ' + status)
+        onCameraStatusChange: ({status}) => {
+          console.log('[XR8] Camera status: ' + status);
+          document.getElementById('debug-overlay').innerHTML += `<br>CAMERA STATUS: ${status}`;
+        }
       });
 
       XR8.addCameraPipelineModules([
