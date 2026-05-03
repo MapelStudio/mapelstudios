@@ -353,8 +353,6 @@ const imageTargets = [
 ];
 
 // ===== IMAGE TARGET PREPROCESSING =====
-// 8th Wall requires targets to be grayscale 480x640 PNGs.
-// This function loads any image and converts it on-the-fly using Canvas.
 function preprocessImage(src) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -367,13 +365,14 @@ function preprocessImage(src) {
       // Fill white background first
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, 480, 640);
-      // Draw image scaled to fit 480x640
+      // Draw image scaled to fit
       const scale = Math.min(480 / img.width, 640 / img.height);
       const w = img.width * scale;
       const h = img.height * scale;
       const x = (480 - w) / 2;
       const y = (640 - h) / 2;
       ctx.drawImage(img, x, y, w, h);
+      
       // Convert to grayscale
       const imageData = ctx.getImageData(0, 0, 480, 640);
       const data = imageData.data;
@@ -382,12 +381,17 @@ function preprocessImage(src) {
         data[i] = data[i+1] = data[i+2] = gray;
       }
       ctx.putImageData(imageData, 0, 0);
-      resolve(canvas.toDataURL('image/png'));
+      
+      // Export as Blob URL (WebWorkers can fetch this safely!)
+      canvas.toBlob((blob) => {
+        resolve(URL.createObjectURL(blob));
+      }, 'image/jpeg', 0.9);
     };
     img.onerror = () => reject(new Error('Failed to load: ' + src));
     img.src = src;
   });
 }
+
 
 // ===== 8TH WALL INITIALIZATION =====
 const rawTargets = [
@@ -425,11 +429,10 @@ let targetsReady = false;
 const onxrloaded = () => {
   console.log('XR8 loaded, configuring image targets...');
   
-  // Use absolute URLs for image paths to prevent any relative path resolution issues inside 8th Wall
-  const baseUrl = window.location.href.split('?')[0].replace('index.html', '').replace(/\/$/, '') + '/';
-  
-  processedTargets = rawTargets.map(t => ({
-      imagePath: baseUrl + t.file.replace('./', ''),
+  // Create Blob URLs for the images ensuring exactly 480x640 dimensions
+  Promise.all(rawTargets.map(t => 
+    preprocessImage(t.file).then(blobUrl => ({
+      imagePath: blobUrl,
       name: t.name,
       type: 'PLANAR',
       properties: {
@@ -441,18 +444,23 @@ const onxrloaded = () => {
         originalHeight: 640,
         isRotated: false
       }
-  }));
-
-  targetsReady = true;
-  console.log('Configuring XR8 with ' + processedTargets.length + ' image targets...');
-  XR8.XrController.configure({ imageTargetData: processedTargets });
-  
-  // Update start button text if it exists
-  const startBtn = document.getElementById('start-btn');
-  if (startBtn) {
-    startBtn.innerHTML = 'START AR';
-    startBtn.disabled = false;
-  }
+    })).catch(err => {
+      console.error(err);
+      return null;
+    })
+  )).then(targets => {
+    processedTargets = targets.filter(Boolean);
+    targetsReady = true;
+    console.log('Configuring XR8 with ' + processedTargets.length + ' image targets...');
+    XR8.XrController.configure({ imageTargetData: processedTargets });
+    
+    // Update start button text if it exists
+    const startBtn = document.getElementById('start-btn');
+    if (startBtn) {
+      startBtn.innerHTML = 'START AR';
+      startBtn.disabled = false;
+    }
+  });
 };
 
 window.XR8
