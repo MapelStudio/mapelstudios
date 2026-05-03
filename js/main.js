@@ -419,6 +419,9 @@ const rawTargets = [
   { file: './targets/z.jpeg',   name: 'letter-z',  index: 25 },
 ];
 
+let processedTargets = [];
+let targetsReady = false;
+
 const onxrloaded = () => {
   console.log('XR8 loaded, preprocessing image targets...');
   Promise.all(rawTargets.map(t =>
@@ -440,9 +443,17 @@ const onxrloaded = () => {
       return null;
     })
   )).then(targets => {
-    const valid = targets.filter(Boolean);
-    console.log('Configuring XR8 with ' + valid.length + ' image targets...');
-    XR8.XrController.configure({ imageTargetData: valid });
+    processedTargets = targets.filter(Boolean);
+    targetsReady = true;
+    console.log('Configuring XR8 with ' + processedTargets.length + ' image targets...');
+    XR8.XrController.configure({ imageTargetData: processedTargets });
+    
+    // Update start button text if it exists
+    const startBtn = document.getElementById('start-btn');
+    if (startBtn) {
+      startBtn.innerHTML = 'START AR';
+      startBtn.disabled = false;
+    }
   });
 };
 
@@ -453,13 +464,14 @@ window.XR8
 // ===== 8TH WALL IMAGE TARGET A-FRAME COMPONENT =====
 AFRAME.registerComponent('xrweb-image-target', {
   schema: {
-    targetIndex: { type: 'number', default: 0 }
+    name: { type: 'string' }
   },
 
   init: function () {
     const self = this;
-    const targetIndex = this.data.targetIndex;
+    const targetName = this.data.name;
     const targetId = this.el.id;
+    console.log(`Component initialized for target: ${targetName}`);
 
     const registerPipelineModule = () => {
       if (typeof XR8 === 'undefined') {
@@ -470,19 +482,29 @@ AFRAME.registerComponent('xrweb-image-target', {
         name: `target-detection-${targetId}`,
         onUpdate: ({ processCpuResult }) => {
           if (!processCpuResult?.reality?.imageTargets) return;
-
+          
+          let foundThisTarget = false;
           processCpuResult.reality.imageTargets.forEach((target) => {
-            if (target.index === targetIndex) {
+            if (target.name === targetName) {
+              foundThisTarget = true;
               if (target.isTracked) {
+                if (!self.el.object3D.visible) {
+                  console.log(`[XR8] Target DETECTED: ${targetName}`);
+                  self.el.emit('targetFound');
+                }
                 self.el.object3D.visible = true;
                 self.el.object3D.position.set(target.position.x, target.position.y, target.position.z);
                 self.el.object3D.quaternion.set(target.rotation.x, target.rotation.y, target.rotation.z, target.rotation.w);
                 self.el.object3D.scale.set(target.scale, target.scale, target.scale);
-              } else {
-                self.el.object3D.visible = false;
               }
             }
           });
+
+          if (!foundThisTarget && self.el.object3D.visible) {
+            console.log(`[XR8] Target LOST: ${targetName}`);
+            self.el.object3D.visible = false;
+            self.el.emit('targetLost');
+          }
         }
       });
     };
@@ -991,7 +1013,12 @@ document.addEventListener('DOMContentLoaded', () => {
         name: 'debug-logger',
         onStart: () => console.log('[XR8] Pipeline started'),
         onAttach: () => console.log('[XR8] Pipeline attached'),
-        onException: (error) => console.error('[XR8] Pipeline error: ' + error),
+        onException: (error) => {
+          console.error('[XR8] Pipeline error: ' + error);
+          if (error.toString().includes('WebAssembly')) {
+            alert("This device might not support WebAssembly, which is required for 8th Wall.");
+          }
+        },
         onCameraStatusChange: ({status}) => console.log('[XR8] Camera status: ' + status)
       });
 
@@ -999,6 +1026,12 @@ document.addEventListener('DOMContentLoaded', () => {
         XR8.GlTextureRenderer.pipelineModule(),       // Draws the camera feed.
         XR8.XrController.pipelineModule()             // Enables SLAM/image tracking.
       ]);
+
+      if (!targetsReady) {
+        console.warn("Targets not yet preprocessed. Waiting...");
+        alert("Please wait for targets to load before starting AR.");
+        return;
+      }
 
       console.log("Requesting camera...");
       navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
