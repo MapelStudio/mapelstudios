@@ -200,15 +200,15 @@ const LETTER_CONFIG = {
     'u': {
         targetIndex: 20,
         models: {
-            'umbrella': { file: 'umbrella.glb', scale: '0.01 0.01 0.01', label: 'Umbrella', default: true },
-            'unicorn': { file: 'unicorn.glb', scale: '0.05 0.05 0.05', label: 'Unicorn' },
-            'ufo': { file: 'ufo.glb', scale: '0.1 0.1 0.1', label: 'UFO' }
+            'umbrella': { file: 'umbrella.glb', scale: '0.06 0.06 0.06', label: 'Umbrella', default: true },
+            'unicorn': { file: 'unicorn.glb', scale: '0.015 0.015 0.015', label: 'Unicorn' },
+            'ufo': { file: 'ufo.glb', scale: '0.18 0.18 0.18', label: 'UFO' }
         }
     },
     'v': {
         targetIndex: 21,
         models: {
-            'van': { file: 'van.glb', scale: '0.05 0.05 0.05', label: 'Van', default: true },
+            'van': { file: 'van.glb', scale: '0.1 0.01 0.1', label: 'Van', default: true },
             'viking': { file: 'viking.glb', scale: '0.5 0.5 0.5', label: 'Viking' },
             'vulture': { file: 'vulture.glb', scale: '1.2 1.2 1.2', label: 'Vulture' }
         }
