@@ -216,17 +216,17 @@ const LETTER_CONFIG = {
     'w': {
         targetIndex: 22,
         models: {
-            'watch': { file: 'watch.glb', scale: '0.05 0.05 0.05', label: 'Watch', default: true },
-            'whale': { file: 'whale.glb', scale: '0.2 0.2 0.2', label: 'Whale' },
-            'walrus': { file: 'walrus.glb', scale: '0.2 0.2 0.2', label: 'Walrus' }
+            'watch': { file: 'watch.glb', scale: '0.025 0.025 0.025', label: 'Watch', default: true },
+            'whale': { file: 'whale.glb', scale: '0.3 0.3 0.3', label: 'Whale' },
+            'walrus': { file: 'walrus.glb', scale: '0.3 0.3 0.3', label: 'Walrus' }
         }
     },
     'x': {
         targetIndex: 23,
         models: {
-            'xylophone': { file: 'xylophone.glb', scale: '0.01 0.01 0.01', label: 'Xylophone', default: true },
+            'xylophone': { file: 'xylophone.glb', scale: '0.005 0.005 0.005', label: 'Xylophone', default: true },
             'xmas-tree': { file: 'xmas-tree.glb', scale: '0.4 0.4 0.4', label: 'X-mas Tree' },
-            'xebec': { file: 'xebec.glb', scale: '0.01 0.01 0.01', label: 'Xebec' }
+            'xebec': { file: 'xebec.glb', scale: '0.005 0.005 0.005', label: 'Xebec' }
         }
     },
     'y': {
