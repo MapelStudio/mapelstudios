@@ -121,7 +121,7 @@ const LETTER_CONFIG = {
         targetIndex: 10,
         models: {
             'kite': { file: 'kite.glb', scale: '0.05 0.05 0.05', label: 'Kite', default: true },
-            'ketchup': { file: 'ketchup.glb', scale: '0.04 0.04 0.04', label: 'Ketchup' },
+            'ketchup': { file: 'ketchup.glb', scale: '0.008 0.008 0.008', label: 'Ketchup' },
             'kangaroo': { file: 'kangaroo.glb', scale: '0.45 0.45 0.45', label: 'Kangaroo' }
         }
     },
@@ -130,7 +130,7 @@ const LETTER_CONFIG = {
         models: {
             'lipstick': { file: 'lipstick.glb', scale: '0.2 0.2 0.2', label: 'Lipstick', default: true },
             'lemon': { file: 'lemon.glb', scale: '5 5 5', label: 'Lemon' },
-            'leaf': { file: 'leaf.glb', scale: '0.06 0.06 0.06', label: 'Leaf' }
+            'leaf': { file: 'leaf.glb', scale: '0.1 0.1 0.1', label: 'Leaf' }
         }
     },
     'm': {
