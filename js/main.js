@@ -152,9 +152,9 @@ const LETTER_CONFIG = {
     'o': {
         targetIndex: 14,
         models: {
-            'oven': { file: 'oven.glb', scale: '0.5 0.5 0.5', label: 'Oven', default: true },
-            'owl': { file: 'owl.glb', scale: '0.4 0.4 0.4', label: 'Owl' },
-            'onion': { file: 'onion.glb', scale: '0.4 0.4 0.4', label: 'Onion' }
+            'oven': { file: 'oven.glb', scale: '0.1 0.1 0.1', label: 'Oven', default: true },
+            'owl': { file: 'owl.glb', scale: '2 2 2', label: 'Owl' },
+            'onion': { file: 'onion.glb', scale: '4 4 4', label: 'Onion' }
         }
     },
     'p': {
