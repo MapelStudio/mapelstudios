@@ -224,16 +224,16 @@ const LETTER_CONFIG = {
     'x': {
         targetIndex: 23,
         models: {
-            'xylophone': { file: 'xylophone.glb', scale: '0.5 0.5 0.5', label: 'Xylophone', default: true },
-            'xmas-tree': { file: 'xmas-tree.glb', scale: '0.6 0.6 0.6', label: 'X-mas Tree' },
-            'xebec': { file: 'xebec.glb', scale: '0.4 0.4 0.4', label: 'Xebec' }
+            'xylophone': { file: 'xylophone.glb', scale: '0.07 0.07 0.07', label: 'Xylophone', default: true },
+            'xmas-tree': { file: 'xmas-tree.glb', scale: '0.4 0.4 0.4', label: 'X-mas Tree' },
+            'xebec': { file: 'xebec.glb', scale: '0.04 0.04 0.04', label: 'Xebec' }
         }
     },
     'y': {
         targetIndex: 24,
         models: {
-            'yoyo': { file: 'yoyo.glb', scale: '0.1 0.1 0.1', label: 'Yoyo', default: true },
-            'yacht': { file: 'yacht.glb', scale: '0.1 0.1 0.1', label: 'Yacht' },
+            'yoyo': { file: 'yoyo.glb', scale: '0.15 0.15 0.15', label: 'Yoyo', default: true },
+            'yacht': { file: 'yacht.glb', scale: '0.06 0.06 0.06', label: 'Yacht' },
             'yawn': { file: 'yawn.glb', scale: '0.5 0.5 0.5', label: 'Yawn' }
         }
     },
