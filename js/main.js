@@ -232,17 +232,17 @@ const LETTER_CONFIG = {
     'y': {
         targetIndex: 24,
         models: {
-            'yoyo': { file: 'yoyo.glb', scale: '0.5 0.5 0.5', label: 'Yoyo', default: true },
-            'yacht': { file: 'yacht.glb', scale: '0.5 0.5 0.5', label: 'Yacht' },
+            'yoyo': { file: 'yoyo.glb', scale: '0.1 0.1 0.1', label: 'Yoyo', default: true },
+            'yacht': { file: 'yacht.glb', scale: '0.1 0.1 0.1', label: 'Yacht' },
             'yawn': { file: 'yawn.glb', scale: '0.5 0.5 0.5', label: 'Yawn' }
         }
     },
     'z': {
         targetIndex: 25,
         models: {
-            'zebra': { file: 'zebra.glb', scale: '0.5 0.5 0.5', label: 'Zebra', default: true },
-            'zipper': { file: 'zipper.glb', scale: '0.4 0.4 0.4', label: 'Zipper' },
-            'zeppelin': { file: 'zeppelin.glb', scale: '0.5 0.5 0.5', label: 'Zeppelin' }
+            'zebra': { file: 'zebra.glb', scale: '0.25 0.25 0.25', label: 'Zebra', default: true },
+            'zipper': { file: 'zipper.glb', scale: '0.1 0.1 0.1', label: 'Zipper' },
+            'zeppelin': { file: 'zeppelin.glb', scale: '0.1 0.1 0.1', label: 'Zeppelin' }
         }
     }
 };
