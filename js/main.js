@@ -186,22 +186,22 @@ const LETTER_CONFIG = {
         models: {
             'scarf': { file: 'scarf.glb', scale: '0.5 0.5 0.5', label: 'Scarf', default: true },
             'spoon': { file: 'spoon.glb', scale: '0.4 0.4 0.4', label: 'Spoon' },
-            'sun': { file: 'sun.glb', scale: '0.5 0.5 0.5', label: 'Sun' }
+            'sun': { file: 'sun.glb', scale: '0.05 0.05 0.05', label: 'Sun' }
         }
     },
     't': {
         targetIndex: 19,
         models: {
-            'tortoise': { file: 'tortoise.glb', scale: '0.5 0.5 0.5', label: 'Tortoise', default: true },
+            'tortoise': { file: 'tortoise.glb', scale: '2 2 2', label: 'Tortoise', default: true },
             'tiger': { file: 'tiger.glb', scale: '0.6 0.6 0.6', label: 'Tiger' },
-            'taxi': { file: 'taxi.glb', scale: '0.4 0.4 0.4', label: 'Taxi' }
+            'taxi': { file: 'taxi.glb', scale: '0.1 0.1 0.1', label: 'Taxi' }
         }
     },
     'u': {
         targetIndex: 20,
         models: {
             'umbrella': { file: 'umbrella.glb', scale: '0.06 0.06 0.06', label: 'Umbrella', default: true },
-            'unicorn': { file: 'unicorn.glb', scale: '0.015 0.015 0.015', label: 'Unicorn' },
+            'unicorn': { file: 'unicorn.glb', scale: '0.01 0.01 0.01', label: 'Unicorn' },
             'ufo': { file: 'ufo.glb', scale: '0.18 0.18 0.18', label: 'UFO' }
         }
     },
