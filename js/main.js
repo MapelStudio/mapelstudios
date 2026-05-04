@@ -160,9 +160,9 @@ const LETTER_CONFIG = {
     'p': {
         targetIndex: 15,
         models: {
-            'purse': { file: 'purse.glb', scale: '0.05 0.05 0.05', label: 'Purse', default: true },
+            'purse': { file: 'purse.glb', scale: '0.01 0.01 0.01', label: 'Purse', default: true },
             'pumpkin': { file: 'pumpkin.glb', scale: '0.3 0.3 0.3', label: 'Pumpkin' },
-            'pizza': { file: 'pizza.glb', scale: '0.05 0.05 0.05', label: 'Pizza' }
+            'pizza': { file: 'pizza.glb', scale: '0.03 0.03 0.03', label: 'Pizza' }
         }
     },
     'q': {
@@ -170,7 +170,7 @@ const LETTER_CONFIG = {
         models: {
             'queen': { file: 'queen.glb', scale: '0.25 0.25 0.25', label: 'Queen', default: true },
             'quokka': { file: 'quokka.glb', scale: '1 1 1', label: 'Quokka' },
-            'quadbike': { file: 'quadbike.glb', scale: '0.1 0.1 0.1', label: 'Quad Bike' }
+            'quadbike': { file: 'quadbike.glb', scale: '0.2 0.2 0.2', label: 'Quad Bike' }
         }
     },
     'r': {
