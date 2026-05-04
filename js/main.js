@@ -64,8 +64,8 @@ const LETTER_CONFIG = {
     'd': {
         targetIndex: 3,
         models: {
-            'dino': { file: 'dino.glb', scale: '0.05 0.05 0.05', label: 'Dino', default: true },
-            'drum': { file: 'drum.glb', scale: '0.05 0.05 0.05', label: 'Drum' },
+            'dino': { file: 'dino.glb', scale: '0.1 0.1 0.1', label: 'Dino', default: true },
+            'drum': { file: 'drum.glb', scale: '0.1 0.1 0.1', label: 'Drum' },
             'dolphin': { file: 'dolphin.glb', scale: '0.7 0.7 0.7', label: 'Dolphin' }
         }
     },
