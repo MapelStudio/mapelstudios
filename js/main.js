@@ -200,17 +200,17 @@ const LETTER_CONFIG = {
     'u': {
         targetIndex: 20,
         models: {
-            'umbrella': { file: 'umbrella.glb', scale: '0.5 0.5 0.5', label: 'Umbrella', default: true },
-            'unicorn': { file: 'unicorn.glb', scale: '0.5 0.5 0.5', label: 'Unicorn' },
-            'ufo': { file: 'ufo.glb', scale: '0.4 0.4 0.4', label: 'UFO' }
+            'umbrella': { file: 'umbrella.glb', scale: '0.01 0.01 0.01', label: 'Umbrella', default: true },
+            'unicorn': { file: 'unicorn.glb', scale: '0.05 0.05 0.05', label: 'Unicorn' },
+            'ufo': { file: 'ufo.glb', scale: '0.1 0.1 0.1', label: 'UFO' }
         }
     },
     'v': {
         targetIndex: 21,
         models: {
-            'van': { file: 'van.glb', scale: '0.5 0.5 0.5', label: 'Van', default: true },
+            'van': { file: 'van.glb', scale: '0.05 0.05 0.05', label: 'Van', default: true },
             'viking': { file: 'viking.glb', scale: '0.5 0.5 0.5', label: 'Viking' },
-            'vulture': { file: 'vulture.glb', scale: '0.5 0.5 0.5', label: 'Vulture' }
+            'vulture': { file: 'vulture.glb', scale: '1.2 1.2 1.2', label: 'Vulture' }
         }
     },
     'w': {
@@ -224,9 +224,9 @@ const LETTER_CONFIG = {
     'x': {
         targetIndex: 23,
         models: {
-            'xylophone': { file: 'xylophone.glb', scale: '0.005 0.005 0.005', label: 'Xylophone', default: true },
+            'xylophone': { file: 'xylophone.glb', scale: '0.002 0.002 0.002', label: 'Xylophone', default: true },
             'xmas-tree': { file: 'xmas-tree.glb', scale: '0.4 0.4 0.4', label: 'X-mas Tree' },
-            'xebec': { file: 'xebec.glb', scale: '0.005 0.005 0.005', label: 'Xebec' }
+            'xebec': { file: 'xebec.glb', scale: '0.0005 0.0005 0.0005',  label: 'Xebec' }
         }
     },
     'y': {
