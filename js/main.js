@@ -80,7 +80,7 @@ const LETTER_CONFIG = {
     'f': {
         targetIndex: 5,
         models: {
-            'flower': { file: 'flower.glb', scale: '0.1 0.1 0.', label: 'Flower', default: true },
+            'flower': { file: 'flower.glb', scale: '0.1 0.1 0.1', label: 'Flower', default: true },
             'funnel': { file: 'funnel.glb', scale: '0.09 0.09 0.09', label: 'Funnel' },
             'fan': { file: 'fan.glb', scale: '0.1 0.1 0.1', label: 'Fan' }
         }
