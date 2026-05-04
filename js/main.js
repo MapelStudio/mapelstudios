@@ -120,25 +120,25 @@ const LETTER_CONFIG = {
     'k': {
         targetIndex: 10,
         models: {
-            'kite': { file: 'kite.glb', scale: '0.5 0.5 0.5', label: 'Kite', default: true },
-            'ketchup': { file: 'ketchup.glb', scale: '0.4 0.4 0.4', label: 'Ketchup' },
-            'kangaroo': { file: 'kangaroo.glb', scale: '0.6 0.6 0.6', label: 'Kangaroo' }
+            'kite': { file: 'kite.glb', scale: '0.05 0.05 0.05', label: 'Kite', default: true },
+            'ketchup': { file: 'ketchup.glb', scale: '0.04 0.04 0.04', label: 'Ketchup' },
+            'kangaroo': { file: 'kangaroo.glb', scale: '0.45 0.45 0.45', label: 'Kangaroo' }
         }
     },
     'l': {
         targetIndex: 11,
         models: {
-            'lipstick': { file: 'lipstick.glb', scale: '0.4 0.4 0.4', label: 'Lipstick', default: true },
-            'lemon': { file: 'lemon.glb', scale: '0.5 0.5 0.5', label: 'Lemon' },
-            'leaf': { file: 'leaf.glb', scale: '0.6 0.6 0.6', label: 'Leaf' }
+            'lipstick': { file: 'lipstick.glb', scale: '0.2 0.2 0.2', label: 'Lipstick', default: true },
+            'lemon': { file: 'lemon.glb', scale: '5 5 5', label: 'Lemon' },
+            'leaf': { file: 'leaf.glb', scale: '0.06 0.06 0.06', label: 'Leaf' }
         }
     },
     'm': {
         targetIndex: 12,
         models: {
-            'mushroom': { file: 'mushroom.glb', scale: '0.2 0.2 0.2', label: 'Mushroom', default: true },
-            'mouse': { file: 'mouse.glb', scale: '0.25 0.25 0.25', label: 'Mouse' },
-            'mango': { file: 'mango.glb', scale: '2 2 2', label: 'Mango' }
+            'mushroom': { file: 'mushroom.glb', scale: '0.1 0.1 0.1', label: 'Mushroom', default: true },
+            'mouse': { file: 'mouse.glb', scale: '0.2 0.2 0.2', label: 'Mouse' },
+            'mango': { file: 'mango.glb', scale: '2.3 2.3 2.3', label: 'Mango' }
         }
     },
     'n': {
