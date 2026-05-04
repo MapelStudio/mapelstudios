@@ -56,17 +56,17 @@ const LETTER_CONFIG = {
     'c': {
         targetIndex: 2,
         models: {
-            'can': { file: 'can.glb', scale: '0.5 0.5 0.5', label: 'Can', default: true },
-            'cup': { file: 'cup.glb', scale: '0.4 0.4 0.4', label: 'Cup' },
-            'cat': { file: 'cat.glb', scale: '0.5 0.5 0.5', label: 'Cat' }
+            'can': { file: 'can.glb', scale: '0.75 0.75 0.75', label: 'Can', default: true },
+            'cup': { file: 'cup.glb', scale: '0.3 0.3 0.3', label: 'Cup' },
+            'cat': { file: 'cat.glb', scale: '0.05 0.05 0.05', label: 'Cat' }
         }
     },
     'd': {
         targetIndex: 3,
         models: {
-            'dino': { file: 'dino.glb', scale: '0.5 0.5 0.5', label: 'Dino', default: true },
-            'drum': { file: 'drum.glb', scale: '0.5 0.5 0.5', label: 'Drum' },
-            'dolphin': { file: 'dolphin.glb', scale: '0.5 0.5 0.5', label: 'Dolphin' }
+            'dino': { file: 'dino.glb', scale: '0.05 0.05 0.05', label: 'Dino', default: true },
+            'drum': { file: 'drum.glb', scale: '0.05 0.05 0.05', label: 'Drum' },
+            'dolphin': { file: 'dolphin.glb', scale: '0.7 0.7 0.7', label: 'Dolphin' }
         }
     },
     'e': {
@@ -80,7 +80,7 @@ const LETTER_CONFIG = {
     'f': {
         targetIndex: 5,
         models: {
-            'flower': { file: 'flower.glb', scale: '1 1 1', label: 'Flower', default: true },
+            'flower': { file: 'flower.glb', scale: '0.1 0.1 0.', label: 'Flower', default: true },
             'funnel': { file: 'funnel.glb', scale: '0.09 0.09 0.09', label: 'Funnel' },
             'fan': { file: 'fan.glb', scale: '0.1 0.1 0.1', label: 'Fan' }
         }
