@@ -216,24 +216,24 @@ const LETTER_CONFIG = {
     'w': {
         targetIndex: 22,
         models: {
-            'watch': { file: 'watch.glb', scale: '0.5 0.5 0.5', label: 'Watch', default: true },
-            'whale': { file: 'whale.glb', scale: '0.6 0.6 0.6', label: 'Whale' },
-            'walrus': { file: 'walrus.glb', scale: '0.5 0.5 0.5', label: 'Walrus' }
+            'watch': { file: 'watch.glb', scale: '0.05 0.05 0.05', label: 'Watch', default: true },
+            'whale': { file: 'whale.glb', scale: '0.2 0.2 0.2', label: 'Whale' },
+            'walrus': { file: 'walrus.glb', scale: '0.2 0.2 0.2', label: 'Walrus' }
         }
     },
     'x': {
         targetIndex: 23,
         models: {
-            'xylophone': { file: 'xylophone.glb', scale: '0.07 0.07 0.07', label: 'Xylophone', default: true },
+            'xylophone': { file: 'xylophone.glb', scale: '0.01 0.01 0.01', label: 'Xylophone', default: true },
             'xmas-tree': { file: 'xmas-tree.glb', scale: '0.4 0.4 0.4', label: 'X-mas Tree' },
-            'xebec': { file: 'xebec.glb', scale: '0.04 0.04 0.04', label: 'Xebec' }
+            'xebec': { file: 'xebec.glb', scale: '0.01 0.01 0.01', label: 'Xebec' }
         }
     },
     'y': {
         targetIndex: 24,
         models: {
             'yoyo': { file: 'yoyo.glb', scale: '0.15 0.15 0.15', label: 'Yoyo', default: true },
-            'yacht': { file: 'yacht.glb', scale: '0.06 0.06 0.06', label: 'Yacht' },
+            'yacht': { file: 'yacht.glb', scale: '0.035 0.035 0.035', label: 'Yacht' },
             'yawn': { file: 'yawn.glb', scale: '0.5 0.5 0.5', label: 'Yawn' }
         }
     },
