@@ -274,7 +274,7 @@ const ANIMATION_CONFIG = {
         'Run': 'kangaroo-run.glb'
     },
     'mouse': {
-        'Run Cycle': 'mouse-runcycle.glb'
+        'Run': 'mouse-runcycle.glb'
     },
     'queen': {
         'Attack': 'queen-attack.glb',
