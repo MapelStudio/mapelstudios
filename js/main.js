@@ -176,9 +176,9 @@ const LETTER_CONFIG = {
     'r': {
         targetIndex: 17,
         models: {
-            'robot': { file: 'robot.glb', scale: '0.5 0.5 0.5', label: 'Robot', default: true },
-            'ring': { file: 'ring.glb', scale: '0.4 0.4 0.4', label: 'Ring' },
-            'rope': { file: 'rope.glb', scale: '0.6 0.6 0.6', label: 'Rope' }
+            'robot': { file: 'robot.glb', scale: '0.35 0.35 0.35', label: 'Robot', default: true },
+            'ring': { file: 'ring.glb', scale: '1 1 1', label: 'Ring' },
+            'rope': { file: 'rope.glb', scale: '0.3 0.3 0.3', label: 'Rope' }
         }
     },
     's': {
@@ -194,7 +194,7 @@ const LETTER_CONFIG = {
         models: {
             'tortoise': { file: 'tortoise.glb', scale: '2 2 2', label: 'Tortoise', default: true },
             'tiger': { file: 'tiger.glb', scale: '0.6 0.6 0.6', label: 'Tiger' },
-            'taxi': { file: 'taxi.glb', scale: '0.1 0.1 0.1', label: 'Taxi' }
+            'taxi': { file: 'taxi.glb', scale: '0.2 0.2 0.2', label: 'Taxi' }
         }
     },
     'u': {
