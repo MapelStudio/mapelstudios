@@ -136,24 +136,24 @@ const LETTER_CONFIG = {
     'm': {
         targetIndex: 12,
         models: {
-            'mushroom': { file: 'mushroom.glb', scale: '0.5 0.5 0.5', label: 'Mushroom', default: true },
-            'mouse': { file: 'mouse.glb', scale: '0.4 0.4 0.4', label: 'Mouse' },
-            'mango': { file: 'mango.glb', scale: '0.6 0.6 0.6', label: 'Mango' }
+            'mushroom': { file: 'mushroom.glb', scale: '0.2 0.2 0.2', label: 'Mushroom', default: true },
+            'mouse': { file: 'mouse.glb', scale: '0.25 0.25 0.25', label: 'Mouse' },
+            'mango': { file: 'mango.glb', scale: '2 2 2', label: 'Mango' }
         }
     },
     'n': {
         targetIndex: 13,
         models: {
-            'nest': { file: 'nest.glb', scale: '0.5 0.5 0.5', label: 'Nest', default: true },
-            'notebook': { file: 'notebook.glb', scale: '0.4 0.4 0.4', label: 'Notebook' },
-            'nose': { file: 'nose.glb', scale: '0.3 0.3 0.3', label: 'Nose' }
+            'nest': { file: 'nest.glb', scale: '1 1 1', label: 'Nest', default: true },
+            'notebook': { file: 'notebook.glb', scale: '0.15 0.15 0.15', label: 'Notebook' },
+            'nose': { file: 'nose.glb', scale: '0.6 0.6 0.6', label: 'Nose' }
         }
     },
     'o': {
         targetIndex: 14,
         models: {
-            'oven': { file: 'oven.glb', scale: '0.1 0.1 0.1', label: 'Oven', default: true },
-            'owl': { file: 'owl.glb', scale: '2 2 2', label: 'Owl' },
+            'oven': { file: 'oven.glb', scale: '0.25 0.25 0.25', label: 'Oven', default: true },
+            'owl': { file: 'owl.glb', scale: '1.6 1.6 1.6', label: 'Owl' },
             'onion': { file: 'onion.glb', scale: '4 4 4', label: 'Onion' }
         }
     },
