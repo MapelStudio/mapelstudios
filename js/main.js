@@ -15,12 +15,10 @@ AFRAME.registerComponent('touch-rotate', {
         }
     });
 
-    
-
     window.addEventListener('touchmove', (e) => {
         if (!self.isMoving || e.touches.length === 0) return;
         
-        const touch = e.touches0];
+        const touch = e.touches[0];
         const deltaX = touch.clientX - self.lastX;
         const deltaY = touch.clientY - self.lastY;
         
@@ -33,40 +31,6 @@ AFRAME.registerComponent('touch-rotate', {
 
     window.addEventListener('touchend', () => {
         self.isMoving = false;
-    });
-  }
-});
-
-// ===== SIDEWAYS ROTATION FOR ANIMATED MODELS =====
-AFRAME.registerComponent('touch-rotate-yonly', {
-  init: function() {
-    this.lastX = 0;
-    this.isMoving = false;
-    const self = this;
-
-    window.addEventListener('touchstart', (e) => {
-      if (e.target.tagName === 'BUTTON') return;
-
-      if (e.touches.length > 0) {
-        self.isMoving = true;
-        self.lastX = e.touches[0].clientX;
-      }
-    });
-
-    window.addEventListener('touchmove', (e) => {
-      if (!self.isMoving || e.touches.length === 0) return;
-
-      const touch = e.touches[0];
-      const deltaX = touch.clientX - self.lastX;
-
-      // ONLY SIDEWAYS ROTATION
-      self.el.object3D.rotation.y += deltaX * 0.01;
-
-      self.lastX = touch.clientX;
-    });
-
-    window.addEventListener('touchend', () => {
-      self.isMoving = false;
     });
   }
 });
@@ -338,21 +302,6 @@ const ANIMATION_CONFIG = {
     // 'horse': { gallop: 'gallop', idle: 'idle' }
 };
 
-const SIDEWAYS_ONLY_MODELS = [
-  'dino',
-  'elephant',
-  'goat',
-  'horse',
-  'insect',
-  'kangaroo',
-  'mouse',
-  'queen',
-  'robot',
-  'vulture',
-  'walrus',
-  'zebra'
-];
-
 // ===== AUTO-GENERATE MODEL SCALES =====
 const MODEL_SCALES = {};
 Object.keys(LETTER_CONFIG).forEach(letter => {
@@ -443,11 +392,7 @@ window.switchModel = function(targetId, modelName, isAnimationVariant = false, v
         newModel.setAttribute('gltf-model', glbFile);
         newModel.setAttribute('position', '0 0 -0.5');
         newModel.setAttribute('scale', '0 0 0');
-        if (SIDEWAYS_ONLY_MODELS.includes(modelName)) {
-    newModel.setAttribute('touch-rotate-yonly', '');
-} else {
-    newModel.setAttribute('touch-rotate', '');
-}
+        newModel.setAttribute('touch-rotate', '');
         newModel.setAttribute('animation-mixer', ''); // Still add for any embedded animations
         
         // Pop-up and scale animations
