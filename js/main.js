@@ -342,7 +342,19 @@ const SIDEWAYS_ONLY_MODELS = [
   'robot',
   'vulture',
   'walrus',
-  'zebra'
+  'zebra',
+  'dolphin',
+  'kite',
+  'owl',
+  'tortoise',
+  'tiger',
+  'van',
+  'unicorn',
+  'whale',
+  'xylophone',
+  'yawn'
+  
+  
 ];
 
 // ===== AUTO-GENERATE MODEL SCALES =====
