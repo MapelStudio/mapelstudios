@@ -323,7 +323,14 @@ const ANIMATION_CONFIG = {
     'zebra': {
         'Walk': 'zebra-walk.glb',
         'Run': 'zebra-run.glb'
-    }
+    },
+  'dolphin': {},
+    'owl': {},
+    'tiger': {},
+    'unicorn': {},
+    'whale': {},
+    'yawn': {}
+  
 
     // Add more models as needed, e.g.:
     // 'tiger': { walk: 'walk', run: 'run', idle: 'idle' },
@@ -343,18 +350,6 @@ const SIDEWAYS_ONLY_MODELS = [
   'vulture',
   'walrus',
   'zebra',
-  'dolphin',
-  'kite',
-  'owl',
-  'tortoise',
-  'tiger',
-  'van',
-  'unicorn',
-  'whale',
-  'xylophone',
-  'yawn'
-  
-  
 ];
 
 // ===== AUTO-GENERATE MODEL SCALES =====
